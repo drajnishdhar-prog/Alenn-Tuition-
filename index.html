@@ -133,6 +133,7 @@
       --gold: #f59e0b;
       --phonepe: #5f259f;
       --paytm: #002970;
+      --gpay: #0f9d58;
       --navy: #0f172a;
       --navy-soft: #1e293b;
       --text-main: #0f172a;
@@ -1448,7 +1449,7 @@
       background: #fee2e2;
     }
 
-    /* ================= 3-IN-1 PAYMENT SECTION ================= */
+    /* ================= 4-IN-1 PAYMENT SECTION ================= */
     .payment-section {
       background: linear-gradient(180deg, #0b132b 0%, #172554 100%);
       color: #ffffff;
@@ -1510,7 +1511,7 @@
     }
 
     .payment-card {
-      max-width: 610px;
+      max-width: 620px;
       margin: 0 auto;
       background: #ffffff;
       color: var(--navy);
@@ -1527,19 +1528,19 @@
 
     .pay-tabs-3 {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 22px;
     }
 
-    @media (min-width: 500px) {
+    @media (min-width: 560px) {
       .pay-tabs-3 {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
     .pay-tab-btn {
-      padding: 12px 10px;
+      padding: 12px 8px;
       min-height: 48px;
       border-radius: 11px;
       border: 1.5px solid #cbd5e1;
@@ -1547,13 +1548,14 @@
       color: var(--navy);
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       cursor: pointer;
       transition: all 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
+      white-space: nowrap;
     }
 
     .pay-tab-btn.active-rzp {
@@ -1575,6 +1577,13 @@
       color: #ffffff;
       border-color: var(--paytm);
       box-shadow: 0 6px 14px rgba(0, 41, 112, 0.28);
+    }
+
+    .pay-tab-btn.active-gpay {
+      background: var(--gpay);
+      color: #ffffff;
+      border-color: var(--gpay);
+      box-shadow: 0 6px 14px rgba(15, 157, 88, 0.28);
     }
 
     .rzp-option-card {
@@ -1641,6 +1650,7 @@
     .btn-rzp-secondary { background: #0f172a; }
     .btn-phonepe { background: linear-gradient(135deg, #5f259f, #7c3aed); }
     .btn-paytm { background: linear-gradient(90deg, #002970 0%, #0077b6 100%); }
+    .btn-gpay { background: linear-gradient(135deg, #1a73e8 0%, #0f9d58 100%); }
 
     .quick-amounts {
       display: flex;
@@ -1681,6 +1691,7 @@
 
     .banner-phonepe { background: linear-gradient(135deg, #5f259f, #7c3aed); }
     .banner-paytm { background: linear-gradient(135deg, #002970, #009fe3); }
+    .banner-gpay { background: linear-gradient(135deg, #1a73e8, #0f9d58); }
 
     .upi-card-wrap {
       border: 1.5px solid #e2e8f0;
@@ -2751,19 +2762,19 @@
       </div>
     </section>
 
-    <!-- ================= 3-IN-1 PAYMENT SECTION ================= -->
+    <!-- ================= 4-IN-1 PAYMENT SECTION ================= -->
     <section class="payment-section" id="payment">
       <div class="container">
         <div class="section-header">
-          <span class="payment-badge">🔒 100% SECURE PAYMENTS • RAZORPAY • PHONEPE • PAYTM</span>
+          <span class="payment-badge">🔒 100% SECURE PAYMENTS • RAZORPAY • PHONEPE • PAYTM • GPAY</span>
           <h2>Pay Tuition or Registration Fee Online</h2>
-          <p>Choose your preferred payment method below: instant Razorpay checkout, PhonePe Business QR, or Paytm Business QR.</p>
+          <p>Choose your preferred payment method below: instant Razorpay checkout, PhonePe UPI QR, Paytm UPI QR, or Google Pay UPI QR.</p>
         </div>
 
         <div class="payment-steps">
           <div class="payment-step">
             <span class="step-num">1</span>
-            <span>Choose <strong>Razorpay</strong> (recommended for Cards, NetBanking & all UPI apps without web limits), or use <strong>PhonePe Business / Paytm Business QR</strong> (0% fee).</span>
+            <span>Choose <strong>Razorpay</strong> (recommended for Cards, NetBanking & all UPI apps without web limits), or use <strong>PhonePe / Paytm / Google Pay UPI QR</strong> (0% fee).</span>
           </div>
           <div class="payment-step">
             <span class="step-num">2</span>
@@ -2781,10 +2792,13 @@
               💳 Razorpay
             </button>
             <button type="button" role="tab" aria-selected="false" aria-controls="payPanelPhonePe" class="pay-tab-btn" id="payTabPhonePe" onclick="switchPayTab('phonepe')">
-              🟣 PhonePe UPI
+              🟣 PhonePe
             </button>
             <button type="button" role="tab" aria-selected="false" aria-controls="payPanelPaytm" class="pay-tab-btn" id="payTabPaytm" onclick="switchPayTab('paytm')">
-              🔵 Paytm UPI
+              🔵 Paytm
+            </button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="payPanelGPay" class="pay-tab-btn" id="payTabGPay" onclick="switchPayTab('gpay')">
+              🟢 GPay
             </button>
           </div>
 
@@ -2817,7 +2831,7 @@
             </a>
           </div>
 
-          <!-- ========== TAB 2: PHONEPE BUSINESS UPI & QR ========== -->
+          <!-- ========== TAB 2: PHONEPE UPI & QR ========== -->
           <div id="payPanelPhonePe" class="hidden" role="tabpanel" aria-labelledby="payTabPhonePe">
             <div class="form-grid" style="gap: 12px;">
               <div class="field-group">
@@ -2842,16 +2856,16 @@
 
             <div class="upi-card-wrap">
               <div class="upi-brand-banner banner-phonepe">
-                <span>PhonePe Business</span>
+                <span>PhonePe UPI</span>
                 <span>0% Fee UPI</span>
               </div>
               <div class="qr-box">
-                <img id="phonepeQrImg" src="" alt="PhonePe Business UPI QR Code for HOME TUITION BUREAU" loading="lazy" />
+                <img id="phonepeQrImg" src="" alt="PhonePe UPI QR Code for RAJNISH DHAR DWIVEDI" loading="lazy" />
                 <div class="qr-amount-display" id="phonepeAmtText">Pay ₹400</div>
-                <div class="qr-merchant">Merchant: HOME TUITION BUREAU (Terminal 1-Q21573561)</div>
+                <div class="qr-merchant">Account: RAJNISH DHAR DWIVEDI (PhonePe UPI)</div>
                 <div class="upi-id-pill">
-                  <span>Q21573561@ybl</span>
-                  <button type="button" class="copy-mini-btn" onclick="copyText('Q21573561@ybl', this)">Copy UPI ID</button>
+                  <span>8953969739-2@ybl</span>
+                  <button type="button" class="copy-mini-btn" onclick="copyText('8953969739-2@ybl', this)">Copy UPI ID</button>
                 </div>
               </div>
             </div>
@@ -2864,12 +2878,12 @@
               <strong>Note:</strong> For amounts above ₹2,000, some UPI apps block direct browser redirects. If you see a limit message, simply <strong>Copy the UPI ID</strong> above and pay inside your UPI app, or switch to the <strong>Razorpay</strong> tab.
             </div>
 
-            <a href="https://wa.me/919919991185?text=Hello%20Alenn%20Tuition%20Bureau%2C%20I%20have%20completed%20my%20PhonePe%20Business%20UPI%20payment.%20Sharing%20the%20screenshot%20for%20my%20receipt." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-receipt">
+            <a href="https://wa.me/919919991185?text=Hello%20Alenn%20Tuition%20Bureau%2C%20I%20have%20completed%20my%20PhonePe%20UPI%20payment.%20Sharing%20the%20screenshot%20for%20my%20receipt." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-receipt">
               💬 Send Payment Screenshot (+91 99199 91185)
             </a>
           </div>
 
-          <!-- ========== TAB 3: PAYTM BUSINESS UPI & QR ========== -->
+          <!-- ========== TAB 3: PAYTM UPI & QR ========== -->
           <div id="payPanelPaytm" class="hidden" role="tabpanel" aria-labelledby="payTabPaytm">
             <div class="form-grid" style="gap: 12px;">
               <div class="field-group">
@@ -2894,16 +2908,16 @@
 
             <div class="upi-card-wrap">
               <div class="upi-brand-banner banner-paytm">
-                <span>Paytm Business</span>
+                <span>Paytm UPI</span>
                 <span>UPI • UPI Lite</span>
               </div>
               <div class="qr-box">
-                <img id="paytmQrImg" src="" alt="Paytm Business UPI QR Code for RAJNISH DHAR DWIVEDI" loading="lazy" />
+                <img id="paytmQrImg" src="" alt="Paytm UPI QR Code for RAJNISH DHAR DWIVEDI" loading="lazy" />
                 <div class="qr-amount-display" id="paytmAmtText">Pay ₹400</div>
-                <div class="qr-merchant">Merchant: RAJNISH DHAR DWIVEDI (Paytm Business)</div>
+                <div class="qr-merchant">Account: RAJNISH DHAR DWIVEDI (Paytm UPI)</div>
                 <div class="upi-id-pill">
-                  <span>paytmqr5f9ysi@ptys</span>
-                  <button type="button" class="copy-mini-btn" onclick="copyText('paytmqr5f9ysi@ptys', this)">Copy UPI ID</button>
+                  <span>8953969739@ptsbi</span>
+                  <button type="button" class="copy-mini-btn" onclick="copyText('8953969739@ptsbi', this)">Copy UPI ID</button>
                 </div>
               </div>
             </div>
@@ -2916,7 +2930,59 @@
               <strong>Note:</strong> For amounts above ₹2,000, some UPI apps restrict direct browser links. Simply <strong>Copy the Paytm UPI ID</strong> above and pay inside Paytm/GPay/PhonePe, or use the <strong>Razorpay</strong> tab for instant checkout.
             </div>
 
-            <a href="https://wa.me/919919991185?text=Hello%20Alenn%20Tuition%20Bureau%2C%20I%20have%20completed%20my%20Paytm%20Business%20UPI%20payment.%20Sharing%20the%20screenshot%20for%20my%20receipt." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-receipt">
+            <a href="https://wa.me/919919991185?text=Hello%20Alenn%20Tuition%20Bureau%2C%20I%20have%20completed%20my%20Paytm%20UPI%20payment.%20Sharing%20the%20screenshot%20for%20my%20receipt." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-receipt">
+              💬 Send Payment Screenshot (+91 99199 91185)
+            </a>
+          </div>
+
+          <!-- ========== TAB 4: GOOGLE PAY UPI & QR ========== -->
+          <div id="payPanelGPay" class="hidden" role="tabpanel" aria-labelledby="payTabGPay">
+            <div class="form-grid" style="gap: 12px;">
+              <div class="field-group">
+                <label for="gpayPurpose">Payment Purpose</label>
+                <select id="gpayPurpose" onchange="handlePurposeChange('gpay')">
+                  <option value="registration">Tutor Registration (₹400)</option>
+                  <option value="tuition">Monthly Tuition Fee (Custom)</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="gpayAmount">Amount (₹)</label>
+                <input type="number" id="gpayAmount" value="400" min="1" step="1" oninput="updateUpiCard('gpay')" />
+                <div class="quick-amounts" aria-label="Quick amount presets">
+                  <button type="button" class="amt-chip" onclick="setQuickAmount('gpay', 400, 'registration')">₹400 (Reg)</button>
+                  <button type="button" class="amt-chip" onclick="setQuickAmount('gpay', 2500, 'tuition')">₹2,500</button>
+                  <button type="button" class="amt-chip" onclick="setQuickAmount('gpay', 3500, 'tuition')">₹3,500</button>
+                  <button type="button" class="amt-chip" onclick="setQuickAmount('gpay', 5000, 'tuition')">₹5,000</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="upi-card-wrap">
+              <div class="upi-brand-banner banner-gpay">
+                <span>Google Pay (GPay)</span>
+                <span>0% Fee UPI</span>
+              </div>
+              <div class="qr-box">
+                <img id="gpayQrImg" src="" alt="Google Pay UPI QR Code for RAJNISH DHAR DWIVEDI" loading="lazy" />
+                <div class="qr-amount-display" id="gpayAmtText">Pay ₹400</div>
+                <div class="qr-merchant">Account: RAJNISH DHAR DWIVEDI (Google Pay UPI)</div>
+                <div class="upi-id-pill">
+                  <span>drajnishdhar-2@okhdfcbank</span>
+                  <button type="button" class="copy-mini-btn" onclick="copyText('drajnishdhar-2@okhdfcbank', this)">Copy UPI ID</button>
+                </div>
+              </div>
+            </div>
+
+            <a id="gpayDeepLink" href="#" class="btn-pay btn-gpay">
+              ⚡ Pay Now via Google Pay / UPI App
+            </a>
+
+            <div class="upi-notice">
+              <strong>Note:</strong> For amounts above ₹2,000, some UPI apps block direct browser redirects. If you see a limit message, simply <strong>Copy the Google Pay UPI ID</strong> above and pay inside GPay/PhonePe/Paytm, or switch to the <strong>Razorpay</strong> tab.
+            </div>
+
+            <a href="https://wa.me/919919991185?text=Hello%20Alenn%20Tuition%20Bureau%2C%20I%20have%20completed%20my%20Google%20Pay%20UPI%20payment.%20Sharing%20the%20screenshot%20for%20my%20receipt." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-receipt">
               💬 Send Payment Screenshot (+91 99199 91185)
             </a>
           </div>
@@ -3054,7 +3120,7 @@
               <span class="faq-toggle-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
-              Tutors fill out the Tutor Registration form on this page, tap "Open Pre-Filled Email & Attach Documents" to email their verification documents (Aadhaar, selfie, marksheets, and local address proof) to <strong>hometuition34@gmail.com</strong>, and pay the ₹400 registration fee using Razorpay, PhonePe Business, or Paytm Business above.
+              Tutors fill out the Tutor Registration form on this page, tap "Open Pre-Filled Email & Attach Documents" to email their verification documents (Aadhaar, selfie, marksheets, and local address proof) to <strong>hometuition34@gmail.com</strong>, and pay the ₹400 registration fee using Razorpay, PhonePe, Paytm, or Google Pay above.
             </div>
           </div>
         </div>
@@ -3374,11 +3440,11 @@
       copyText(latestTutorEmailBody, btn);
     }
 
-    /* ================= 3-IN-1 PAYMENT TABS & DYNAMIC QR ================= */
+    /* ================= 4-IN-1 PAYMENT TABS & DYNAMIC QR ================= */
     const UPI_CONFIG = {
       phonepe: {
-        vpa: "Q21573561@ybl",
-        name: "HOME TUITION BUREAU",
+        vpa: "8953969739-2@ybl",
+        name: "RAJNISH DHAR DWIVEDI",
         purposeId: "phonepePurpose",
         amountId: "phonepeAmount",
         qrImgId: "phonepeQrImg",
@@ -3386,13 +3452,22 @@
         deepLinkId: "phonepeDeepLink"
       },
       paytm: {
-        vpa: "paytmqr5f9ysi@ptys",
+        vpa: "8953969739@ptsbi",
         name: "RAJNISH DHAR DWIVEDI",
         purposeId: "paytmPurpose",
         amountId: "paytmAmount",
         qrImgId: "paytmQrImg",
         amtTextId: "paytmAmtText",
         deepLinkId: "paytmDeepLink"
+      },
+      gpay: {
+        vpa: "drajnishdhar-2@okhdfcbank",
+        name: "RAJNISH DHAR DWIVEDI",
+        purposeId: "gpayPurpose",
+        amountId: "gpayAmount",
+        qrImgId: "gpayQrImg",
+        amtTextId: "gpayAmtText",
+        deepLinkId: "gpayDeepLink"
       }
     };
 
@@ -3400,23 +3475,25 @@
       const panels = {
         razorpay: document.getElementById("payPanelRazorpay"),
         phonepe: document.getElementById("payPanelPhonePe"),
-        paytm: document.getElementById("payPanelPaytm")
+        paytm: document.getElementById("payPanelPaytm"),
+        gpay: document.getElementById("payPanelGPay")
       };
       const buttons = {
         razorpay: { el: document.getElementById("payTabRzp"), activeClass: "active-rzp" },
         phonepe: { el: document.getElementById("payTabPhonePe"), activeClass: "active-phonepe" },
-        paytm: { el: document.getElementById("payTabPaytm"), activeClass: "active-paytm" }
+        paytm: { el: document.getElementById("payTabPaytm"), activeClass: "active-paytm" },
+        gpay: { el: document.getElementById("payTabGPay"), activeClass: "active-gpay" }
       };
 
       Object.keys(panels).forEach((key) => {
         const isActive = key === tab;
         panels[key].classList.toggle("hidden", !isActive);
-        buttons[key].el.classList.remove("active-rzp", "active-phonepe", "active-paytm");
+        buttons[key].el.classList.remove("active-rzp", "active-phonepe", "active-paytm", "active-gpay");
         if (isActive) buttons[key].el.classList.add(buttons[key].activeClass);
         buttons[key].el.setAttribute("aria-selected", String(isActive));
       });
 
-      if (tab === "phonepe" || tab === "paytm") {
+      if (tab === "phonepe" || tab === "paytm" || tab === "gpay") {
         updateUpiCard(tab);
       }
     }
@@ -3460,7 +3537,7 @@
       closeModal();
       switchPayTab("razorpay");
       document.getElementById("payment").scrollIntoView({ behavior: "smooth" });
-      showToast("Choose Razorpay, PhonePe, or Paytm for ₹400 fee");
+      showToast("Choose Razorpay, PhonePe, Paytm, or GPay for ₹400 fee");
     }
 
     /* ================= TOAST & COPY HELPER (WITH WEBVIEW FALLBACK) ================= */
@@ -3679,6 +3756,7 @@
     updateTutorMailLink();
     updateUpiCard("phonepe");
     updateUpiCard("paytm");
+    updateUpiCard("gpay");
   </script>
 </body>
 </html>
