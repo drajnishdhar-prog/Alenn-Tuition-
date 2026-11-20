@@ -111,7 +111,7 @@
     }
     </script>
 
-    <!-- Structured Data: FAQPage Schema (AI Search & Google Rich Results) -->
+    <!-- Structured Data: FAQPage Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -162,7 +162,7 @@
           "name": "What payment methods are accepted for tuition fees and tutor registration?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can pay securely via PhonePe/Paytm Business UPI QR code, one-tap UPI app payment, or Credit Card, Debit Card, and NetBanking through Razorpay."
+            "text": "You can pay securely via PhonePe/Paytm Business UPI QR code, one-tap UPI app payment, or Credit Card, Debit Card, UPI, and NetBanking through Razorpay."
           }
         }
       ]
@@ -991,7 +991,7 @@
             </div>
         </section>
 
-        <!-- Unified, Modern Payment Portal (Clean Tabs: UPI QR + Direct App | Razorpay Cards/NetBanking) -->
+        <!-- Unified, Modern Payment Portal (Clean Tabs: UPI QR + Direct App | Razorpay Cards/UPI/NetBanking) -->
         <section id="payment" class="py-16 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-10 items-center">
@@ -1001,17 +1001,17 @@
                         </span>
                         <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">Pay Tuition or Registration Fee Online</h2>
                         <p class="text-blue-100 text-sm sm:text-base leading-relaxed mb-6">
-                            Choose what works best for you: instant 0% fee payment via <strong>UPI QR / PhonePe / Paytm App</strong>, or pay using <strong>Credit Card, Debit Card, NetBanking &amp; Wallets</strong> via <strong>Razorpay</strong>.
+                            Choose what works best for you: scan our official <strong>PhonePe Business / Paytm Business QR</strong> (0% fee), tap to pay via UPI app, or use <strong>Razorpay</strong> for <strong>Credit Cards, Debit Cards, NetBanking, Wallets &amp; Instant UPI</strong>.
                         </p>
 
                         <ol class="space-y-3 text-sm text-blue-100 mb-6">
                             <li class="flex items-start gap-3">
                                 <span class="w-6 h-6 rounded-full bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
-                                <span>Select <strong>UPI / QR</strong> (PhonePe or Paytm) or switch to the <strong>Cards / Razorpay</strong> tab for Credit/Debit Cards &amp; NetBanking.</span>
+                                <span>Select <strong>UPI &amp; QR</strong> (PhonePe / Paytm) or switch to <strong>Cards / Razorpay</strong> for Credit/Debit Cards, NetBanking &amp; hassle-free mobile UPI.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="w-6 h-6 rounded-full bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
-                                <span>Choose <strong>Tutor Reg. (₹400)</strong> or <strong>Tuition Fee</strong>, then tap Pay Now or scan the QR code.</span>
+                                <span>Choose <strong>Tutor Reg. (₹400)</strong> or <strong>Tuition Fee</strong>, then scan the QR code or tap Pay Now.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="w-6 h-6 rounded-full bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
@@ -1027,7 +1027,7 @@
                                 <i class="fa-solid fa-mobile-screen-button text-purple-300"></i> Direct UPI App Pay
                             </div>
                             <div class="bg-white/10 border border-white/15 rounded-xl p-3 flex items-center gap-2">
-                                <i class="fa-solid fa-credit-card text-sky-400"></i> Razorpay Cards &amp; Banks
+                                <i class="fa-solid fa-credit-card text-sky-400"></i> Razorpay Cards &amp; UPI
                             </div>
                             <div class="bg-white/10 border border-white/15 rounded-xl p-3 flex items-center gap-2">
                                 <i class="fa-brands fa-whatsapp text-emerald-400"></i> Instant Receipt
@@ -1042,7 +1042,7 @@
                             <h3 class="text-xl font-extrabold text-slate-900">Alenn Tuition Bureau</h3>
                         </div>
 
-                        <!-- Top-Level Payment Method Tabs (Keeps UI Clean & Clutter-Free) -->
+                        <!-- Top-Level Payment Method Tabs -->
                         <div class="grid grid-cols-2 bg-slate-100 p-1 rounded-xl mb-4">
                             <button id="tabMethodUpi" type="button" onclick="switchPaymentMethod('upi')" class="py-2 px-3 rounded-lg text-xs font-extrabold bg-white text-blue-800 shadow-sm transition flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-qrcode"></i> UPI &amp; QR (0% Fee)
@@ -1102,29 +1102,29 @@
                                 <span id="directUpiBtnText">Pay via PhonePe / UPI App (₹400)</span>
                             </a>
                             <p class="text-[11px] text-center text-slate-500 mb-3">
-                                If your browser blocks app redirect, simply scan the QR above or copy the UPI ID.
+                                Browser blocked direct UPI app? Scan the QR above, copy the UPI ID, or <button type="button" onclick="switchPaymentMethod('razorpay')" class="text-blue-700 font-bold underline">Pay via Razorpay</button>.
                             </p>
                         </div>
 
-                        <!-- PANEL B: Razorpay (Credit Cards, Debit Cards, NetBanking, Wallets) -->
+                        <!-- PANEL B: Razorpay (Credit Cards, Debit Cards, NetBanking, Wallets, UPI) -->
                         <div id="razorpayPaymentPanel" class="hidden space-y-4 mb-4">
                             <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
                                 <div class="inline-flex items-center gap-1.5 text-blue-800 font-extrabold text-sm mb-1">
                                     <i class="fa-solid fa-lock text-xs"></i> Powered by Razorpay Gateway
                                 </div>
                                 <p class="text-xs text-slate-600 leading-relaxed">
-                                    Ideal for <strong>Credit Cards (Visa, Mastercard, RuPay)</strong>, Debit Cards, NetBanking, and EMI / Wallets.
+                                    Supports <strong>Credit Cards (Visa, Mastercard, RuPay)</strong>, Debit Cards, NetBanking, Wallets &amp; Instant UPI on any browser.
                                 </p>
                             </div>
 
-                            <!-- Option 1: Fixed Tutor Registration via Razorpay -->
+                            <!-- Option 1: Fixed ₹400 Tutor Registration via Razorpay -->
                             <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
                                 <div class="flex items-center justify-between mb-2">
                                     <span class="text-xs font-extrabold text-slate-900">Tutor Registration Fee</span>
                                     <span class="text-xs font-extrabold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">₹400 Fixed</span>
                                 </div>
                                 <p class="text-[11px] text-slate-500 mb-3">One-time verification &amp; tutor placement registration fee.</p>
-                                <a id="rzpTutorRegLink" href="#" target="_blank" rel="noopener" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-extrabold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm shadow-sm">
+                                <a id="rzpTutorRegLink" href="https://rzp.io/rzp/p2sxIIE" target="_blank" rel="noopener" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-extrabold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm shadow-sm">
                                     <i class="fa-solid fa-credit-card"></i> Pay ₹400 via Razorpay
                                 </a>
                             </div>
@@ -1135,8 +1135,8 @@
                                     <span class="text-xs font-extrabold text-slate-900">Monthly Tuition Fee</span>
                                     <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Custom Amount</span>
                                 </div>
-                                <p class="text-[11px] text-slate-500 mb-3">Pay any agreed monthly home or online tuition fee using Cards or NetBanking.</p>
-                                <a id="rzpTuitionFeeLink" href="#" target="_blank" rel="noopener" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm shadow-sm">
+                                <p class="text-[11px] text-slate-500 mb-3">Pay any agreed monthly home or online tuition fee using Cards, UPI, or NetBanking.</p>
+                                <a id="rzpTuitionFeeLink" href="https://razorpay.me/@rajnishdhardwivedi" target="_blank" rel="noopener" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm shadow-sm">
                                     <i class="fa-solid fa-building-columns"></i> Pay Tuition Fee via Razorpay
                                 </a>
                             </div>
@@ -1206,7 +1206,7 @@
                             <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
                         </button>
                         <div class="faq-answer hidden px-5 pb-4 text-sm text-slate-600 leading-relaxed">
-                            Monthly home tuition fees depend on class level, subjects, and locality (generally starting from ₹2,500/month). Tutor registration is a one-time ₹400 fee. You can pay via PhonePe/Paytm Business UPI QR code, one-tap UPI app payment, or Credit/Debit Cards and NetBanking through Razorpay.
+                            Monthly home tuition fees depend on class level, subjects, and locality (generally starting from ₹2,500/month). Tutor registration is a one-time ₹400 fee. You can pay via PhonePe/Paytm Business UPI QR code, direct UPI app payment, or Credit/Debit Cards, UPI, and NetBanking through Razorpay.
                         </div>
                     </div>
                 </div>
@@ -1314,22 +1314,22 @@
     <!-- Interactive Logic Script -->
     <script>
         // ============================================================
-        // 1. VERIFY YOUR OFFICIAL PAYMENT & EMAIL SETTINGS HERE
+        // 1. VERIFIED OFFICIAL PAYMENT & EMAIL CONFIGURATION
         // ============================================================
         const OFFICIAL_EMAIL = "hometuition34@gmail.com";
 
         const UPI_CONFIG = {
             phonepe: {
-                id: "Q121727141@ybl", // Verify your exact PhonePe Business UPI ID
-                name: "Alenn Tuition Bureau",
+                id: "Q21573561@ybl",
+                name: "HOME TUITION BUREAU",
                 label: "PHONEPE BUSINESS • ALL UPI APPS",
                 btnText: "Pay via PhonePe / UPI App",
                 btnBg: "bg-purple-700 hover:bg-purple-800",
                 accentClass: "text-purple-700"
             },
             paytm: {
-                id: "9919991185@paytm", // Verify your exact Paytm Business UPI ID
-                name: "Alenn Tuition Bureau",
+                id: "paytmqr5f9ysi@ptys",
+                name: "RAJNISH DHAR DWIVEDI",
                 label: "PAYTM BUSINESS • ALL UPI APPS",
                 btnText: "Pay via Paytm / UPI App",
                 btnBg: "bg-sky-600 hover:bg-sky-700",
@@ -1338,8 +1338,8 @@
         };
 
         const RAZORPAY_CONFIG = {
-            tutorRegUrl: "https://rzp.io/l/YOUR_TUTOR_REG_LINK",     // Paste your exact ₹400 Razorpay link
-            tuitionFeeUrl: "https://rzp.io/l/YOUR_TUITION_FEE_LINK"  // Paste your exact Tuition Fee Razorpay link
+            tutorRegUrl: "https://rzp.io/rzp/p2sxIIE",
+            tuitionFeeUrl: "https://razorpay.me/@rajnishdhardwivedi"
         };
 
         // ============================================================
