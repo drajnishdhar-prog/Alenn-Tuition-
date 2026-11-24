@@ -234,6 +234,12 @@
       background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 18px; margin-bottom: 14px; box-shadow: 0 3px 12px rgba(15,23,42,.04);
     }
+    .card-flagged {
+      border: 1.5px solid #fca5a5; background: #fffbfb;
+    }
+    .card-hidden {
+      border: 1.5px dashed #94a3b8; background: #f8fafc; opacity: 0.88;
+    }
     .stat-box {
       background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
       border-radius: 14px; padding: 12px 10px; text-align: left;
@@ -346,6 +352,7 @@
     .b-red { background: #fee2e2; color: #991b1b; }
     .b-purple { background: #f3e8ff; color: #6b21a8; }
     .b-gray { background: #f1f5f9; color: #334155; }
+    .b-dark { background: #1e293b; color: #fff; }
 
     .crm-hero {
       background: linear-gradient(135deg,#0f172a,#1e3a8a); color: #fff; border-radius: 20px;
@@ -362,6 +369,21 @@
       font-weight: 800; font-size: 13px; white-space: nowrap; cursor: pointer;
     }
     .crm-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Director Danger / Flag Boxes inside Modals */
+    .flag-section-box {
+      background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 12px;
+      padding: 12px; margin-bottom: 13px;
+    }
+    .director-danger-box {
+      margin-top: 14px; padding-top: 12px; border-top: 1.5px dashed #fca5a5;
+      background: #fef2f2; border-radius: 12px; padding: 12px;
+    }
+    .toggle-inline {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700;
+      color: var(--navy); cursor: pointer; padding: 6px 10px; border-radius: 10px;
+      background: #f8fafc; border: 1px solid var(--border);
+    }
 
     /* Modal */
     .modal-bg {
@@ -1149,7 +1171,7 @@
     </form>
   </section>
 
-  <!-- ==================== VIEW: INQUIRY SUCCESS PAGE (NEW DEDICATED PAGE) ==================== -->
+  <!-- ==================== VIEW: INQUIRY SUCCESS PAGE ==================== -->
   <section id="view-inquiry-success" class="view">
     <div class="success-banner">
       <div style="font-size:40px;margin-bottom:6px;">✅</div>
@@ -1296,7 +1318,7 @@
     </form>
   </section>
 
-  <!-- ==================== VIEW: TUTOR SUCCESS PAGE (NEW DEDICATED PAGE WITH PAYMENT + DOCS) ==================== -->
+  <!-- ==================== VIEW: TUTOR SUCCESS PAGE ==================== -->
   <section id="view-tutor-success" class="view">
     <div class="success-banner">
       <div style="font-size:40px;margin-bottom:6px;">🎉</div>
@@ -1421,6 +1443,9 @@
         </div>
       </div>
 
+      <!-- FLAGGED / SUSPICIOUS ALERT BANNER -->
+      <div id="flaggedAlertBanner" style="display:none;background:#fef2f2;border:1.5px solid #f87171;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#991b1b;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('flagged')"></div>
+
       <!-- 5-DAY ADVANCE COMMISSION ALERT BANNER -->
       <div id="commissionAlertBanner" style="display:none;background:#fefce8;border:1.5px solid #facc15;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#854d0e;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('commissions')"></div>
 
@@ -1445,6 +1470,7 @@
       <div class="crm-tabs">
         <button class="crm-tab active" id="ctab-tutors" onclick="switchCrmTab('tutors')">🎓 Tutors Directory</button>
         <button class="crm-tab" id="ctab-leads" onclick="switchCrmTab('leads')">👨‍👩‍👧 <span id="leadsTabText">My Assigned Tuitions</span></button>
+        <button class="crm-tab" id="ctab-flagged" onclick="switchCrmTab('flagged')">🚩 <span id="flaggedTabText">Flagged Alerts</span></button>
         <button class="crm-tab" id="ctab-commissions" onclick="switchCrmTab('commissions')">💰 50% Commission Reminders</button>
         <button class="crm-tab" id="ctab-renewals" onclick="switchCrmTab('renewals')">⏰ 365d Renewal Alerts</button>
         <button class="crm-tab" id="ctab-settings" style="display:none;" onclick="switchCrmTab('settings')">⚙️ Director Settings</button>
@@ -1457,7 +1483,7 @@
             <input id="fSearch" class="input" placeholder="🔍 Search name, subject, phone, area..." oninput="renderTutors()" />
             <input id="fArea" class="input" placeholder="📍 Filter Varanasi Area (Lanka, Sigra...)" oninput="renderTutors()" />
           </div>
-          <div class="grid-4">
+          <div class="grid-4" style="margin-bottom:8px;">
             <select id="fGender" class="input" onchange="renderTutors()">
               <option value="">Any Gender</option><option>Male</option><option>Female</option>
             </select>
@@ -1477,7 +1503,21 @@
               <option value="Expired">Expired</option>
             </select>
           </div>
-          <button class="btn btn-outline btn-sm" style="margin-top:8px;" onclick="resetTutorFilters()">✕ Reset Filters</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <select id="fFlag" class="input" style="width:auto;min-width:170px;" onchange="renderTutors()">
+              <option value="">🚩 All Flags</option>
+              <option value="ANY_FLAG">⚠️ Any Flagged Only</option>
+              <option value="Payment Due">💸 Payment Due</option>
+              <option value="Suspicious">⚠️ Suspicious</option>
+              <option value="Fraud">🚫 Fraud / Blacklisted</option>
+              <option value="Unresponsive">📵 Unresponsive</option>
+              <option value="None">✅ Clean (No Flag)</option>
+            </select>
+            <label id="fShowHiddenWrap" class="toggle-inline" style="display:none;">
+              <input id="fShowHidden" type="checkbox" onchange="renderTutors()" /> 👁️ Show Hidden Tutors
+            </label>
+            <button class="btn btn-outline btn-sm" onclick="resetTutorFilters()">✕ Reset Filters</button>
+          </div>
         </div>
         <div id="tutorsList"></div>
       </div>
@@ -1486,6 +1526,15 @@
       <div id="panel-leads" style="display:none;">
         <div class="card" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
           <input id="leadSearch" class="input" style="flex:1;min-width:180px;" placeholder="🔍 Search parent, class, subject, area..." oninput="renderLeads()" />
+          <select id="leadFlagFilter" class="input" style="width:auto;" onchange="renderLeads()">
+            <option value="">🚩 All Flags</option>
+            <option value="ANY_FLAG">⚠️ Any Flagged</option>
+            <option value="Payment Due">💸 Payment Due</option>
+            <option value="Suspicious">⚠️ Suspicious</option>
+            <option value="Fraud">🚫 Fraud / Blacklisted</option>
+            <option value="Unresponsive">📵 Unresponsive</option>
+            <option value="None">✅ Clean (No Flag)</option>
+          </select>
           <select id="leadStaffFilter" class="input" style="width:auto;display:none;" onchange="renderLeads()">
             <option value="">All Coordinators</option>
             <option value="Rahul Sir">Rahul Sir</option>
@@ -1494,8 +1543,43 @@
             <option value="Rishikesh Pandey">Rishikesh Pandey</option>
             <option value="Unassigned">Unassigned</option>
           </select>
+          <label id="leadShowHiddenWrap" class="toggle-inline" style="display:none;">
+            <input id="leadShowHidden" type="checkbox" onchange="renderLeads()" /> 👁️ Show Hidden Leads
+          </label>
         </div>
         <div id="leadsList"></div>
+      </div>
+
+      <!-- TAB: FLAGGED ALERTS & DIRECTOR HIDDEN RECORDS -->
+      <div id="panel-flagged" style="display:none;">
+        <div class="card" style="background:#fef2f2;border-color:#fca5a5;">
+          <h4>🚩 Flagged Tutors & Parents Watchlist (Payment Due • Suspicious • Fraud)</h4>
+          <p style="font-size:13px;color:#991b1b;">All coordinators (Vaibhav, Amar, Rishikesh) and Rahul Sir can flag tutors or parents from the <b>Manage / Assign</b> button. Only <b>Director Rahul Sir</b> can Hide/Unhide or Permanently Delete records.</p>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <select id="flaggedTypeFilter" class="input" style="width:auto;" onchange="renderFlaggedSection()">
+              <option value="">All Flag Types</option>
+              <option value="Payment Due">💸 Payment Due</option>
+              <option value="Suspicious">⚠️ Suspicious</option>
+              <option value="Fraud">🚫 Fraud / Blacklisted</option>
+              <option value="Unresponsive">📵 Unresponsive</option>
+            </select>
+          </div>
+        </div>
+
+        <h4 style="margin:12px 0 8px;color:var(--navy);">🎓 Flagged Tutors</h4>
+        <div id="flaggedTutorsList"></div>
+
+        <h4 style="margin:16px 0 8px;color:var(--navy);">👨‍👩‍👧 Flagged Parent Leads</h4>
+        <div id="flaggedLeadsList"></div>
+
+        <!-- DIRECTOR-ONLY HIDDEN RECORDS SECTION -->
+        <div id="directorHiddenSection" style="display:none;margin-top:18px;">
+          <div class="card" style="background:#f8fafc;border:1.5px dashed #64748b;">
+            <h4>👑 Director Vault — Hidden Tutors & Parent Leads</h4>
+            <p style="font-size:12.5px;color:var(--muted);">Hidden records are invisible to all staff coordinators. You can Unhide or Permanently Delete them anytime.</p>
+          </div>
+          <div id="hiddenRecordsList"></div>
+        </div>
       </div>
 
       <!-- TAB: 50% COMMISSION REMINDERS (5-DAY ADVANCE COORDINATOR TRACKER) -->
@@ -1594,6 +1678,25 @@
         <option value="Rishikesh Pandey">Rishikesh Pandey</option>
       </select>
     </div>
+
+    <!-- RISK & ALERT FLAG SECTION (DIRECTOR + ALL STAFF) -->
+    <div class="flag-section-box">
+      <div class="field" style="margin-bottom:8px;">
+        <label>🚩 Risk / Alert Flag (Visible to All Staff)</label>
+        <select id="tmFlag" class="input">
+          <option value="None">✅ None (Clean / Normal)</option>
+          <option value="Payment Due">💸 Payment Due</option>
+          <option value="Suspicious">⚠️ Suspicious</option>
+          <option value="Fraud">🚫 Fraud / Blacklisted</option>
+          <option value="Unresponsive">📵 Unresponsive</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>Flag Reason / Remark (Optional)</label>
+        <input id="tmFlagReason" class="input" placeholder="e.g., 50% commission unpaid, fake docs, misbehavior..." />
+      </div>
+    </div>
+
     <div class="field">
       <label>Coordinator Notes</label>
       <textarea id="tmNotes" class="input" rows="2"></textarea>
@@ -1601,6 +1704,15 @@
     <div class="grid-2">
       <button class="btn" style="background:#f59e0b;color:#fff;" onclick="renewTutor365()">🔄 Renew +365 Days</button>
       <button class="btn btn-primary" onclick="saveTutorChanges()">💾 Save Changes</button>
+    </div>
+
+    <!-- DIRECTOR-ONLY CONTROLS (HIDE / DELETE) -->
+    <div id="tmDirectorControls" class="director-danger-box" style="display:none;">
+      <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only)</p>
+      <div class="grid-2">
+        <button type="button" id="tmHideBtn" class="btn btn-navy btn-sm" style="width:100%" onclick="toggleHideCurrentTutor()">🙈 Hide Tutor</button>
+        <button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="deleteCurrentTutor()">🗑️ Delete Permanently</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1654,11 +1766,39 @@
         <option value="Collected">Collected (50% Settled)</option>
       </select>
     </div>
+
+    <!-- RISK & ALERT FLAG SECTION (DIRECTOR + ALL STAFF) -->
+    <div class="flag-section-box">
+      <div class="field" style="margin-bottom:8px;">
+        <label>🚩 Parent / Lead Flag (Visible to All Staff)</label>
+        <select id="lmFlag" class="input">
+          <option value="None">✅ None (Clean / Normal)</option>
+          <option value="Payment Due">💸 Payment Due</option>
+          <option value="Suspicious">⚠️ Suspicious</option>
+          <option value="Fraud">🚫 Fraud / Blacklisted</option>
+          <option value="Unresponsive">📵 Unresponsive</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>Flag Reason / Remark (Optional)</label>
+        <input id="lmFlagReason" class="input" placeholder="e.g., Refused fee payment, fake inquiry, suspicious behavior..." />
+      </div>
+    </div>
+
     <div class="field">
       <label>Follow-up Notes</label>
       <textarea id="lmNotes" class="input" rows="2"></textarea>
     </div>
     <button class="btn btn-primary" onclick="saveLeadChanges()">💾 Save Tuition Assignment</button>
+
+    <!-- DIRECTOR-ONLY CONTROLS (HIDE / DELETE) -->
+    <div id="lmDirectorControls" class="director-danger-box" style="display:none;">
+      <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only)</p>
+      <div class="grid-2">
+        <button type="button" id="lmHideBtn" class="btn btn-navy btn-sm" style="width:100%" onclick="toggleHideCurrentLead()">🙈 Hide Lead</button>
+        <button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="deleteCurrentLead()">🗑️ Delete Permanently</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1838,6 +1978,39 @@ function getCommissionMeta(l) {
   return { state: "Upcoming", daysLeft, dueDate, reminderDate, commAmt, cls: "b-blue", label: `📅 50% Comm Due ${dueDate} (Alert ${reminderDate})` };
 }
 function esc(s) { return String(s || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+/* --- FLAG & HIDDEN HELPERS --- */
+function isHiddenRecord(rec) {
+  if (!rec) return false;
+  if (rec.hidden === true) return true;
+  const s = String(rec.hidden || "").trim().toLowerCase();
+  return s === "true" || s === "yes" || s === "hidden" || s === "1";
+}
+function getNormalizedFlag(rec) {
+  const f = String(rec?.flag || "None").trim();
+  return f || "None";
+}
+function hasActiveFlag(rec) {
+  const f = getNormalizedFlag(rec);
+  return f !== "None" && f !== "";
+}
+function flagBadgeHtml(rec) {
+  const f = getNormalizedFlag(rec);
+  let out = "";
+  if (f === "Fraud") out += `<span class="badge b-red">🚫 Fraud / Blacklisted</span>`;
+  else if (f === "Suspicious") out += `<span class="badge b-red">⚠️ Suspicious</span>`;
+  else if (f === "Payment Due") out += `<span class="badge b-amber">💸 Payment Due</span>`;
+  else if (f === "Unresponsive") out += `<span class="badge b-gray">📵 Unresponsive</span>`;
+  else if (f !== "None") out += `<span class="badge b-red">🚩 ${esc(f)}</span>`;
+  if (isHiddenRecord(rec)) out += ` <span class="badge b-dark">🙈 Hidden</span>`;
+  return out;
+}
+function flagNoteHtml(rec) {
+  if (!hasActiveFlag(rec)) return "";
+  const by = rec.flaggedBy ? ` by ${esc(rec.flaggedBy)}` : "";
+  const reason = rec.flagReason ? `: ${esc(rec.flagReason)}` : "";
+  return `<div style="font-size:12px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:5px 8px;margin-top:5px;"><b>🚩 Flagged (${esc(getNormalizedFlag(rec))}${by})</b>${reason}</div>`;
+}
 
 /* ================= NAVIGATION & HASH ROUTING ================= */
 function toggleDrawer(open) { document.getElementById("drawerOverlay").classList.toggle("open", open); }
@@ -2034,7 +2207,11 @@ async function submitInquiry(e) {
     status: "New Lead",
     confirmedDate: "",
     monthlyFee: "",
-    commissionStatus: "Pending"
+    commissionStatus: "Pending",
+    flag: "None",
+    flagReason: "",
+    flaggedBy: "",
+    hidden: false
   };
 
   lastSubmittedLead = lead;
@@ -2131,7 +2308,11 @@ async function submitTutor(e) {
     docFiles: "",
     status: "New",
     assignedStaff: "Unassigned",
-    notes: ""
+    notes: "",
+    flag: "None",
+    flagReason: "",
+    flaggedBy: "",
+    hidden: false
   };
 
   lastSubmittedTutor = tutor;
@@ -2216,6 +2397,10 @@ function checkCrmSession() {
   document.getElementById("ctab-settings").style.display = isDir ? "inline-block" : "none";
   document.getElementById("leadStaffFilter").style.display = isDir ? "block" : "none";
   document.getElementById("leadsTabText").textContent = isDir ? "All Parent Leads" : "My Assigned Tuitions";
+  document.getElementById("flaggedTabText").textContent = isDir ? "Flagged & Hidden" : "Flagged Alerts";
+  document.getElementById("fShowHiddenWrap").style.display = isDir ? "inline-flex" : "none";
+  document.getElementById("leadShowHiddenWrap").style.display = isDir ? "inline-flex" : "none";
+  document.getElementById("directorHiddenSection").style.display = isDir ? "block" : "none";
 
   loadLocalCrm();
   switchCrmTab("tutors");
@@ -2232,10 +2417,24 @@ async function syncFromSheet() {
     if (json && Array.isArray(json.tutors)) {
       crmData.tutors = json.tutors
         .filter(t => t && (String(t.name || "").trim() || String(t.phone || "").trim()))
-        .map((t, idx) => ({ ...t, id: String(t.id || ("TUT-ROW-" + idx)) }));
+        .map((t, idx) => ({
+          ...t,
+          id: String(t.id || ("TUT-ROW-" + idx)),
+          flag: t.flag || "None",
+          flagReason: t.flagReason || "",
+          flaggedBy: t.flaggedBy || "",
+          hidden: isHiddenRecord(t)
+        }));
       crmData.leads = (json.leads || [])
         .filter(l => l && (String(l.name || "").trim() || String(l.phone || "").trim()))
-        .map((l, idx) => ({ ...l, id: String(l.id || ("LD-ROW-" + idx)) }));
+        .map((l, idx) => ({
+          ...l,
+          id: String(l.id || ("LD-ROW-" + idx)),
+          flag: l.flag || "None",
+          flagReason: l.flagReason || "",
+          flaggedBy: l.flaggedBy || "",
+          hidden: isHiddenRecord(l)
+        }));
       saveLocalCrm();
       statusEl.textContent = `✔ Live synced with Google Sheets (${crmData.tutors.length} Tutors, ${crmData.leads.length} Leads)`;
       refreshCrmUI();
@@ -2249,26 +2448,42 @@ async function syncFromSheet() {
 
 function switchCrmTab(tab) {
   if (tab === "settings" && currentUser?.role !== "director") tab = "tutors";
-  ["tutors","leads","commissions","renewals","settings"].forEach(t => {
+  ["tutors","leads","flagged","commissions","renewals","settings"].forEach(t => {
     document.getElementById("ctab-" + t)?.classList.toggle("active", t === tab);
-    document.getElementById("panel-" + t).style.display = (t === tab) ? "block" : "none";
+    const panel = document.getElementById("panel-" + t);
+    if (panel) panel.style.display = (t === tab) ? "block" : "none";
   });
 }
 
 function refreshCrmUI() {
   const isDir = currentUser?.role === "director";
-  const myLeads = isDir ? crmData.leads : crmData.leads.filter(l => l.assignedStaff === currentUser.name || l.assignedStaff === "Unassigned" || !l.assignedStaff);
-  const verifiedCount = crmData.tutors.filter(t => String(t.docStatus || "").includes("Verified")).length;
-  const renewList = crmData.tutors.filter(t => ["RenewSoon","Expired"].includes(getValidityMeta(t).state));
+  const activeTutors = crmData.tutors.filter(t => !isHiddenRecord(t));
+  const activeLeads = crmData.leads.filter(l => !isHiddenRecord(l));
+
+  const myLeads = isDir ? activeLeads : activeLeads.filter(l => l.assignedStaff === currentUser.name || l.assignedStaff === "Unassigned" || !l.assignedStaff);
+  const verifiedCount = activeTutors.filter(t => String(t.docStatus || "").includes("Verified")).length;
+  const renewList = activeTutors.filter(t => ["RenewSoon","Expired"].includes(getValidityMeta(t).state));
   const dueCommList = myLeads.filter(l => {
     const cm = getCommissionMeta(l);
     return cm && (cm.state === "DueSoon" || cm.state === "Overdue");
   });
 
-  document.getElementById("kpiTutors").textContent = crmData.tutors.length;
+  const flaggedTutorsCount = activeTutors.filter(t => hasActiveFlag(t)).length;
+  const flaggedLeadsCount = myLeads.filter(l => hasActiveFlag(l)).length;
+  const totalFlagged = flaggedTutorsCount + flaggedLeadsCount;
+
+  document.getElementById("kpiTutors").textContent = activeTutors.length;
   document.getElementById("kpiVerified").textContent = verifiedCount;
   document.getElementById("kpiCommDue").textContent = dueCommList.length;
   document.getElementById("kpiLeads").textContent = myLeads.length;
+
+  const flagBanner = document.getElementById("flaggedAlertBanner");
+  if (totalFlagged > 0) {
+    flagBanner.style.display = "block";
+    flagBanner.textContent = `🚩 Watchlist Alert: ${flaggedTutorsCount} Flagged Tutor(s) & ${flaggedLeadsCount} Flagged Parent(s) marked (Payment Due / Suspicious / Fraud). Tap to review →`;
+  } else {
+    flagBanner.style.display = "none";
+  }
 
   const commBanner = document.getElementById("commissionAlertBanner");
   if (dueCommList.length > 0) {
@@ -2289,20 +2504,26 @@ function refreshCrmUI() {
   if (isDir) {
     const names = ["Rahul Sir","Vaibhav Mishra","Amar Srivastava","Rishikesh Pandey"];
     document.getElementById("staffSummaryGrid").innerHTML = names.map(n => {
-      const cnt = crmData.leads.filter(l => l.assignedStaff === n).length;
-      const confirmed = crmData.leads.filter(l => l.assignedStaff === n && l.status === "Tuition Confirmed").length;
+      const cnt = activeLeads.filter(l => l.assignedStaff === n).length;
+      const confirmed = activeLeads.filter(l => l.assignedStaff === n && l.status === "Tuition Confirmed").length;
       return `<div class="kpi-card" style="padding:10px;"><div style="font-weight:800;font-size:13px;">${esc(n)}</div><div style="font-size:12px;color:var(--muted);">${cnt} Leads • <b style="color:var(--green)">${confirmed} Confirmed</b></div></div>`;
     }).join("");
   }
 
   renderTutors();
   renderLeads();
+  renderFlaggedSection();
   renderCommissions();
   renderRenewals();
 }
 
 function resetTutorFilters() {
-  ["fSearch","fArea","fGender","fPay","fDoc","fValidity"].forEach(id => document.getElementById(id).value = "");
+  ["fSearch","fArea","fGender","fPay","fDoc","fValidity","fFlag"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  const chk = document.getElementById("fShowHidden");
+  if (chk) chk.checked = false;
   renderTutors();
 }
 
@@ -2314,23 +2535,68 @@ function docBadgeHtml(t) {
   return `<span class="badge b-amber">📄 Docs: Pending</span>`;
 }
 
+function tutorCardHtml(t) {
+  const vm = getValidityMeta(t);
+  const payCls = t.payment === "Paid" ? "b-green" : "b-red";
+  const safePhone = cleanWaPhone(t.phone);
+  const extraCls = isHiddenRecord(t) ? "card-hidden" : (hasActiveFlag(t) ? "card-flagged" : "");
+  return `
+    <div class="card ${extraCls}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+        <div>
+          <h3 style="font-size:17px;text-transform:uppercase;">${esc(t.name || "Unnamed Tutor")}</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin:6px 0;">
+            ${flagBadgeHtml(t)}
+            <span class="badge ${payCls}">${t.payment === "Paid" ? "✔ Paid (₹400)" : "⏳ Unpaid"}</span>
+            ${docBadgeHtml(t)}
+            <span class="badge ${vm.cls}">📅 ${esc(vm.label)}</span>
+            <span class="badge b-blue">Status: ${esc(t.status || "New")}</span>
+            ${t.assignedStaff && t.assignedStaff !== "Unassigned" ? `<span class="badge b-purple">👤 ${esc(t.assignedStaff)}</span>` : ""}
+          </div>
+        </div>
+        <span class="badge b-gray">${esc(t.gender || "")} • ${esc(t.area || "")}</span>
+      </div>
+      <div style="font-size:13px;color:#334155;margin:8px 0 12px;">
+        <div><b>Subjects:</b> ${esc(t.subjects)} | <b>Classes:</b> ${esc(t.classes)}</div>
+        <div><b>Qualification:</b> ${esc(t.qualification)} (${esc(t.experience)})</div>
+        <div><b>Conveyance:</b> ${esc(t.vehicle)} | <b>Slots:</b> ${esc(t.slots)}</div>
+        <div><b>Phone:</b> ${esc(t.phone)} ${t.email ? `| <b>Email:</b> ${esc(t.email)}` : ""}</div>
+        ${t.docFiles ? `<div style="font-size:12px;color:#15803d;margin-top:3px;">📎 Auto-Scanned Attachments: ${esc(t.docFiles)}</div>` : ""}
+        ${flagNoteHtml(t)}
+        ${t.notes ? `<div style="font-size:12px;color:#64748b;margin-top:3px;">📝 ${esc(t.notes)}</div>` : ""}
+      </div>
+      <div class="grid-4">
+        <a class="btn btn-outline btn-sm" href="${safePhone ? 'tel:+91' + safePhone : 'javascript:toast(\"No phone number\")'}" style="width:100%">📞 Call</a>
+        <button type="button" class="btn btn-outline btn-sm" onclick="openWaChat('${esc(t.phone)}')" style="width:100%;color:var(--green)">💬 WhatsApp</button>
+        <button type="button" class="btn btn-outline btn-sm" style="width:100%" onclick="copyText('${esc(t.name)} | ${esc(t.phone)} | ${esc(t.subjects)} | ${esc(t.area)}','Tutor info copied!')">📋 Copy</button>
+        <button type="button" class="btn btn-navy btn-sm" style="width:100%" onclick="openTutorModal('${esc(t.id)}')">⚙ Manage</button>
+      </div>
+    </div>`;
+}
+
 function renderTutors() {
+  const isDir = currentUser?.role === "director";
+  const showHidden = isDir && document.getElementById("fShowHidden")?.checked;
   const q = document.getElementById("fSearch").value.trim().toLowerCase();
   const area = document.getElementById("fArea").value.trim().toLowerCase();
   const gender = document.getElementById("fGender").value;
   const pay = document.getElementById("fPay").value;
   const doc = document.getElementById("fDoc").value;
   const val = document.getElementById("fValidity").value;
+  const flagF = document.getElementById("fFlag")?.value || "";
 
   const list = crmData.tutors.filter(t => {
+    if (isHiddenRecord(t) && !showHidden) return false;
     const vm = getValidityMeta(t);
-    const hay = `${t.name} ${t.subjects} ${t.classes} ${t.area} ${t.phone} ${t.qualification}`.toLowerCase();
+    const hay = `${t.name} ${t.subjects} ${t.classes} ${t.area} ${t.phone} ${t.qualification} ${t.flag} ${t.flagReason}`.toLowerCase();
     if (q && !hay.includes(q)) return false;
     if (area && !String(t.area || "").toLowerCase().includes(area)) return false;
     if (gender && t.gender !== gender) return false;
     if (pay && (t.payment || "Unpaid") !== pay) return false;
     if (doc && !String(t.docStatus || "Pending").includes(doc)) return false;
     if (val && vm.state !== val) return false;
+    if (flagF === "ANY_FLAG" && !hasActiveFlag(t)) return false;
+    else if (flagF && flagF !== "ANY_FLAG" && getNormalizedFlag(t) !== flagF) return false;
     return true;
   });
 
@@ -2340,53 +2606,58 @@ function renderTutors() {
     return;
   }
 
-  container.innerHTML = list.map(t => {
-    const vm = getValidityMeta(t);
-    const payCls = t.payment === "Paid" ? "b-green" : "b-red";
-    const safePhone = cleanWaPhone(t.phone);
-    return `
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
-          <div>
-            <h3 style="font-size:17px;text-transform:uppercase;">${esc(t.name || "Unnamed Tutor")}</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:5px;margin:6px 0;">
-              <span class="badge ${payCls}">${t.payment === "Paid" ? "✔ Paid (₹400)" : "⏳ Unpaid"}</span>
-              ${docBadgeHtml(t)}
-              <span class="badge ${vm.cls}">📅 ${esc(vm.label)}</span>
-              <span class="badge b-blue">Status: ${esc(t.status || "New")}</span>
-              ${t.assignedStaff && t.assignedStaff !== "Unassigned" ? `<span class="badge b-purple">👤 ${esc(t.assignedStaff)}</span>` : ""}
-            </div>
+  container.innerHTML = list.map(tutorCardHtml).join("");
+}
+
+function leadCardHtml(l) {
+  const cm = getCommissionMeta(l);
+  const safePhone = cleanWaPhone(l.phone);
+  const extraCls = isHiddenRecord(l) ? "card-hidden" : (hasActiveFlag(l) ? "card-flagged" : "");
+  return `
+    <div class="card ${extraCls}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+        <div>
+          <h3 style="font-size:16px;">${esc(l.name)} <span style="font-weight:500;font-size:12px;color:var(--muted);">(${esc(l.createdAt)})</span></h3>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin:5px 0;">
+            ${flagBadgeHtml(l)}
+            <span class="badge b-blue">${esc(l.status || "New Lead")}</span>
+            <span class="badge b-purple">👤 Coordinator: ${esc(l.assignedStaff || "Unassigned")}</span>
+            ${l.assignedTutor ? `<span class="badge b-green">🎓 Tutor: ${esc(l.assignedTutor)}</span>` : `<span class="badge b-amber">🎓 Tutor Not Assigned</span>`}
+            ${cm ? `<span class="badge ${cm.cls}">${esc(cm.label)}</span>` : ""}
           </div>
-          <span class="badge b-gray">${esc(t.gender || "")} • ${esc(t.area || "")}</span>
         </div>
-        <div style="font-size:13px;color:#334155;margin:8px 0 12px;">
-          <div><b>Subjects:</b> ${esc(t.subjects)} | <b>Classes:</b> ${esc(t.classes)}</div>
-          <div><b>Qualification:</b> ${esc(t.qualification)} (${esc(t.experience)})</div>
-          <div><b>Conveyance:</b> ${esc(t.vehicle)} | <b>Slots:</b> ${esc(t.slots)}</div>
-          <div><b>Phone:</b> ${esc(t.phone)} ${t.email ? `| <b>Email:</b> ${esc(t.email)}` : ""}</div>
-          ${t.docFiles ? `<div style="font-size:12px;color:#15803d;margin-top:3px;">📎 Auto-Scanned Attachments: ${esc(t.docFiles)}</div>` : ""}
-          ${t.notes ? `<div style="font-size:12px;color:#64748b;margin-top:3px;">📝 ${esc(t.notes)}</div>` : ""}
-        </div>
-        <div class="grid-4">
-          <a class="btn btn-outline btn-sm" href="${safePhone ? 'tel:+91' + safePhone : 'javascript:toast(\"No phone number\")'}" style="width:100%">📞 Call</a>
-          <button type="button" class="btn btn-outline btn-sm" onclick="openWaChat('${esc(t.phone)}')" style="width:100%;color:var(--green)">💬 WhatsApp</button>
-          <button type="button" class="btn btn-outline btn-sm" style="width:100%" onclick="copyText('${esc(t.name)} | ${esc(t.phone)} | ${esc(t.subjects)} | ${esc(t.area)}','Tutor info copied!')">📋 Copy</button>
-          <button type="button" class="btn btn-navy btn-sm" style="width:100%" onclick="openTutorModal('${esc(t.id)}')">⚙ Manage</button>
-        </div>
-      </div>`;
-  }).join("");
+        <span class="badge b-gray">📍 ${esc(l.area)}</span>
+      </div>
+      <div style="font-size:13px;color:#334155;margin:6px 0 10px;">
+        <div><b>Exam/Class:</b> ${esc(l.classExam)} (${esc(l.board)})</div>
+        <div><b>Subjects:</b> ${esc(l.subjects)} | <b>Mode:</b> ${esc(l.mode)} | <b>Pref:</b> ${esc(l.genderPref)}</div>
+        <div><b>Phone:</b> ${esc(l.phone)} | <b>Timing:</b> ${esc(l.timing)} ${l.monthlyFee ? `| <b>Fee:</b> ₹${esc(l.monthlyFee)}/mo (50% Comm: ₹${Math.round(Number(l.monthlyFee)*0.5)})` : ""}</div>
+        ${flagNoteHtml(l)}
+        ${l.notes ? `<div style="font-size:12px;color:#64748b;margin-top:3px;">📝 ${esc(l.notes)}</div>` : ""}
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px;">
+        <a class="btn btn-outline btn-sm" href="${safePhone ? 'tel:+91' + safePhone : 'javascript:toast(\"No phone number\")'}" style="width:100%">📞 Call</a>
+        <button type="button" class="btn btn-outline btn-sm" onclick="openWaChat('${esc(l.phone)}')" style="width:100%;color:var(--green)">💬 WhatsApp</button>
+        <button type="button" class="btn btn-primary btn-sm" style="width:100%" onclick="openLeadModal('${esc(l.id)}')">🎯 Assign / Update</button>
+      </div>
+    </div>`;
 }
 
 function renderLeads() {
   const isDir = currentUser?.role === "director";
+  const showHidden = isDir && document.getElementById("leadShowHidden")?.checked;
   const q = document.getElementById("leadSearch").value.trim().toLowerCase();
   const sf = document.getElementById("leadStaffFilter").value;
+  const flagF = document.getElementById("leadFlagFilter")?.value || "";
 
   const list = crmData.leads.filter(l => {
+    if (isHiddenRecord(l) && !showHidden) return false;
     const owner = l.assignedStaff || "Unassigned";
     if (!isDir && owner !== currentUser.name && owner !== "Unassigned") return false;
     if (isDir && sf && owner !== sf) return false;
-    const hay = `${l.name} ${l.classExam} ${l.subjects} ${l.area} ${l.phone} ${l.assignedTutor}`.toLowerCase();
+    if (flagF === "ANY_FLAG" && !hasActiveFlag(l)) return false;
+    else if (flagF && flagF !== "ANY_FLAG" && getNormalizedFlag(l) !== flagF) return false;
+    const hay = `${l.name} ${l.classExam} ${l.subjects} ${l.area} ${l.phone} ${l.assignedTutor} ${l.flag} ${l.flagReason}`.toLowerCase();
     return !q || hay.includes(q);
   });
 
@@ -2396,41 +2667,83 @@ function renderLeads() {
     return;
   }
 
-  el.innerHTML = list.map(l => {
-    const cm = getCommissionMeta(l);
-    const safePhone = cleanWaPhone(l.phone);
-    return `
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
-          <div>
-            <h3 style="font-size:16px;">${esc(l.name)} <span style="font-weight:500;font-size:12px;color:var(--muted);">(${esc(l.createdAt)})</span></h3>
-            <div style="display:flex;flex-wrap:wrap;gap:5px;margin:5px 0;">
-              <span class="badge b-blue">${esc(l.status || "New Lead")}</span>
-              <span class="badge b-purple">👤 Coordinator: ${esc(l.assignedStaff || "Unassigned")}</span>
-              ${l.assignedTutor ? `<span class="badge b-green">🎓 Tutor: ${esc(l.assignedTutor)}</span>` : `<span class="badge b-amber">🎓 Tutor Not Assigned</span>`}
-              ${cm ? `<span class="badge ${cm.cls}">${esc(cm.label)}</span>` : ""}
-            </div>
+  el.innerHTML = list.map(leadCardHtml).join("");
+}
+
+function renderFlaggedSection() {
+  const isDir = currentUser?.role === "director";
+  const fType = document.getElementById("flaggedTypeFilter")?.value || "";
+
+  const flaggedTutors = crmData.tutors.filter(t => {
+    if (isHiddenRecord(t) && !isDir) return false;
+    if (!hasActiveFlag(t)) return false;
+    if (fType && getNormalizedFlag(t) !== fType) return false;
+    return true;
+  });
+
+  const flaggedLeads = crmData.leads.filter(l => {
+    if (isHiddenRecord(l) && !isDir) return false;
+    const owner = l.assignedStaff || "Unassigned";
+    if (!isDir && owner !== currentUser.name && owner !== "Unassigned") return false;
+    if (!hasActiveFlag(l)) return false;
+    if (fType && getNormalizedFlag(l) !== fType) return false;
+    return true;
+  });
+
+  const tutBox = document.getElementById("flaggedTutorsList");
+  tutBox.innerHTML = flaggedTutors.length
+    ? flaggedTutors.map(tutorCardHtml).join("")
+    : `<div class="card" style="text-align:center;color:var(--green);font-weight:700;">✔ No flagged tutors right now.</div>`;
+
+  const leadBox = document.getElementById("flaggedLeadsList");
+  leadBox.innerHTML = flaggedLeads.length
+    ? flaggedLeads.map(leadCardHtml).join("")
+    : `<div class="card" style="text-align:center;color:var(--green);font-weight:700;">✔ No flagged parent leads right now.</div>`;
+
+  if (isDir) {
+    const hiddenTutors = crmData.tutors.filter(isHiddenRecord);
+    const hiddenLeads = crmData.leads.filter(isHiddenRecord);
+    const hiddenBox = document.getElementById("hiddenRecordsList");
+    if (!hiddenTutors.length && !hiddenLeads.length) {
+      hiddenBox.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);">No hidden tutors or parent leads.</div>`;
+    } else {
+      const tCards = hiddenTutors.map(t => `
+        <div class="card card-hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div><span class="badge b-dark">🙈 Hidden Tutor</span> <b>${esc(t.name)}</b> (${esc(t.area)})</div>
+            <div>${flagBadgeHtml(t)}</div>
           </div>
-          <span class="badge b-gray">📍 ${esc(l.area)}</span>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 10px;">Phone: ${esc(t.phone)} | Subjects: ${esc(t.subjects)}</p>
+          <div class="grid-2">
+            <button type="button" class="btn btn-primary btn-sm" style="width:100%" onclick="quickUnhide('tutor','${esc(t.id)}')">👁️ Unhide Tutor</button>
+            <button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="quickDelete('tutor','${esc(t.id)}')">🗑️ Delete Permanently</button>
+          </div>
         </div>
-        <div style="font-size:13px;color:#334155;margin:6px 0 10px;">
-          <div><b>Exam/Class:</b> ${esc(l.classExam)} (${esc(l.board)})</div>
-          <div><b>Subjects:</b> ${esc(l.subjects)} | <b>Mode:</b> ${esc(l.mode)} | <b>Pref:</b> ${esc(l.genderPref)}</div>
-          <div><b>Phone:</b> ${esc(l.phone)} | <b>Timing:</b> ${esc(l.timing)} ${l.monthlyFee ? `| <b>Fee:</b> ₹${esc(l.monthlyFee)}/mo (50% Comm: ₹${Math.round(Number(l.monthlyFee)*0.5)})` : ""}</div>
-          ${l.notes ? `<div style="font-size:12px;color:#64748b;">📝 ${esc(l.notes)}</div>` : ""}
+      `).join("");
+
+      const lCards = hiddenLeads.map(l => `
+        <div class="card card-hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div><span class="badge b-dark">🙈 Hidden Parent Lead</span> <b>${esc(l.name)}</b> (${esc(l.area)})</div>
+            <div>${flagBadgeHtml(l)}</div>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 10px;">Phone: ${esc(l.phone)} | Class: ${esc(l.classExam)}</p>
+          <div class="grid-2">
+            <button type="button" class="btn btn-primary btn-sm" style="width:100%" onclick="quickUnhide('lead','${esc(l.id)}')">👁️ Unhide Lead</button>
+            <button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="quickDelete('lead','${esc(l.id)}')">🗑️ Delete Permanently</button>
+          </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px;">
-          <a class="btn btn-outline btn-sm" href="${safePhone ? 'tel:+91' + safePhone : 'javascript:toast(\"No phone number\")'}" style="width:100%">📞 Call</a>
-          <button type="button" class="btn btn-outline btn-sm" onclick="openWaChat('${esc(l.phone)}')" style="width:100%;color:var(--green)">💬 WhatsApp</button>
-          <button type="button" class="btn btn-primary btn-sm" style="width:100%" onclick="openLeadModal('${esc(l.id)}')">🎯 Assign / Update</button>
-        </div>
-      </div>`;
-  }).join("");
+      `).join("");
+
+      hiddenBox.innerHTML = tCards + lCards;
+    }
+  }
 }
 
 function renderCommissions() {
   const isDir = currentUser?.role === "director";
   const confirmedLeads = crmData.leads.filter(l => {
+    if (isHiddenRecord(l)) return false;
     const owner = l.assignedStaff || "Unassigned";
     if (!isDir && owner !== currentUser.name) return false;
     return l.status === "Tuition Confirmed";
@@ -2487,7 +2800,7 @@ async function markCommissionCollected(id) {
 }
 
 function renderRenewals() {
-  const list = crmData.tutors.filter(t => ["RenewSoon","Expired"].includes(getValidityMeta(t).state));
+  const list = crmData.tutors.filter(t => !isHiddenRecord(t) && ["RenewSoon","Expired"].includes(getValidityMeta(t).state));
   const el = document.getElementById("renewalsList");
   if (!list.length) {
     el.innerHTML = `<div class="card" style="text-align:center;color:var(--green);font-weight:700;">✔ All registered tutors have more than 30 days of validity remaining.</div>`;
@@ -2511,10 +2824,11 @@ function renderRenewals() {
   }).join("");
 }
 
-/* ================= MODALS (TUTOR & LEAD MANAGEMENT) ================= */
+/* ================= MODALS (TUTOR & LEAD MANAGEMENT + FLAGS + DIRECTOR CONTROLS) ================= */
 function openTutorModal(id) {
   const t = crmData.tutors.find(x => String(x.id) === String(id));
   if (!t) { toast("Tutor record not found"); return; }
+  const isDir = currentUser?.role === "director";
   const vm = getValidityMeta(t);
   document.getElementById("tmId").value = t.id;
   document.getElementById("tmTitle").textContent = "Manage: " + (t.name || "Tutor");
@@ -2524,7 +2838,15 @@ function openTutorModal(id) {
   document.getElementById("tmStatus").value = t.status || "New";
   document.getElementById("tmValidUntil").value = vm.date;
   document.getElementById("tmStaff").value = t.assignedStaff || "Unassigned";
+  document.getElementById("tmFlag").value = getNormalizedFlag(t);
+  document.getElementById("tmFlagReason").value = t.flagReason || "";
   document.getElementById("tmNotes").value = t.notes || "";
+
+  const dirBox = document.getElementById("tmDirectorControls");
+  dirBox.style.display = isDir ? "block" : "none";
+  if (isDir) {
+    document.getElementById("tmHideBtn").textContent = isHiddenRecord(t) ? "👁️ Unhide Tutor" : "🙈 Hide Tutor";
+  }
   document.getElementById("tutorModal").classList.add("open");
 }
 function renewTutor365() {
@@ -2535,11 +2857,15 @@ async function saveTutorChanges() {
   const id = document.getElementById("tmId").value;
   const t = crmData.tutors.find(x => String(x.id) === String(id));
   if (!t) return;
+  const newFlag = document.getElementById("tmFlag").value;
   t.payment = document.getElementById("tmPay").value;
   t.docStatus = document.getElementById("tmDoc").value;
   t.status = document.getElementById("tmStatus").value;
   t.validUntil = document.getElementById("tmValidUntil").value;
   t.assignedStaff = document.getElementById("tmStaff").value;
+  t.flag = newFlag;
+  t.flagReason = newFlag === "None" ? "" : document.getElementById("tmFlagReason").value.trim();
+  t.flaggedBy = newFlag === "None" ? "" : (currentUser?.name || "");
   t.notes = document.getElementById("tmNotes").value.trim();
   t.verifiedBy = currentUser.name;
   saveLocalCrm();
@@ -2547,6 +2873,33 @@ async function saveTutorChanges() {
   refreshCrmUI();
   await postToBackend({ action: "updateTutor", data: t });
   toast("✅ Tutor updated & synced!");
+}
+
+async function toggleHideCurrentTutor() {
+  if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can hide tutors."); return; }
+  const id = document.getElementById("tmId").value;
+  const t = crmData.tutors.find(x => String(x.id) === String(id));
+  if (!t) return;
+  t.hidden = !isHiddenRecord(t);
+  saveLocalCrm();
+  closeModal("tutorModal");
+  refreshCrmUI();
+  await postToBackend({ action: "updateTutor", data: t });
+  toast(t.hidden ? "🙈 Tutor hidden from staff directory" : "👁️ Tutor restored to active directory");
+}
+
+async function deleteCurrentTutor() {
+  if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can delete tutors."); return; }
+  const id = document.getElementById("tmId").value;
+  const t = crmData.tutors.find(x => String(x.id) === String(id));
+  if (!t) return;
+  if (!confirm(`Permanently DELETE tutor "${t.name}" (${t.phone})? This cannot be undone.`)) return;
+  crmData.tutors = crmData.tutors.filter(x => String(x.id) !== String(id));
+  saveLocalCrm();
+  closeModal("tutorModal");
+  refreshCrmUI();
+  await postToBackend({ action: "deleteTutor", id: t.id, deletedBy: currentUser.name });
+  toast("🗑️ Tutor permanently deleted!");
 }
 
 function onLeadStatusChange() {
@@ -2571,16 +2924,25 @@ function openLeadModal(id) {
 
   const tutSel = document.getElementById("lmTutor");
   tutSel.innerHTML = `<option value="">-- Select Registered Tutor --</option>` +
-    crmData.tutors.map(t => {
+    crmData.tutors.filter(t => !isHiddenRecord(t)).map(t => {
       const label = `${t.name} (${t.subjects} • ${t.area})`;
-      return `<option value="${esc(label)}" ${l.assignedTutor === label ? "selected" : ""}>${esc(label)}</option>`;
+      const flagWarn = hasActiveFlag(t) ? ` [🚩 ${getNormalizedFlag(t)}]` : "";
+      return `<option value="${esc(label)}" ${l.assignedTutor === label ? "selected" : ""}>${esc(label + flagWarn)}</option>`;
     }).join("");
 
   document.getElementById("lmStatus").value = l.status || "New Lead";
   document.getElementById("lmConfirmedDate").value = l.confirmedDate || (l.status === "Tuition Confirmed" ? (l.createdAt || new Date().toISOString().slice(0,10)) : "");
   document.getElementById("lmMonthlyFee").value = l.monthlyFee || "";
   document.getElementById("lmCommStatus").value = l.commissionStatus || "Pending";
+  document.getElementById("lmFlag").value = getNormalizedFlag(l);
+  document.getElementById("lmFlagReason").value = l.flagReason || "";
   document.getElementById("lmNotes").value = l.notes || "";
+
+  const dirBox = document.getElementById("lmDirectorControls");
+  dirBox.style.display = isDir ? "block" : "none";
+  if (isDir) {
+    document.getElementById("lmHideBtn").textContent = isHiddenRecord(l) ? "👁️ Unhide Lead" : "🙈 Hide Lead";
+  }
   document.getElementById("leadModal").classList.add("open");
 }
 
@@ -2589,18 +2951,87 @@ async function saveLeadChanges() {
   const l = crmData.leads.find(x => String(x.id) === String(id));
   if (!l) return;
   const isDir = currentUser.role === "director";
+  const newFlag = document.getElementById("lmFlag").value;
   l.assignedStaff = isDir ? document.getElementById("lmStaff").value : (l.assignedStaff && l.assignedStaff !== "Unassigned" ? l.assignedStaff : currentUser.name);
   l.assignedTutor = document.getElementById("lmTutor").value;
   l.status = document.getElementById("lmStatus").value;
   l.confirmedDate = document.getElementById("lmConfirmedDate").value || (l.status === "Tuition Confirmed" ? new Date().toISOString().slice(0, 10) : "");
   l.monthlyFee = document.getElementById("lmMonthlyFee").value.trim();
   l.commissionStatus = document.getElementById("lmCommStatus").value;
+  l.flag = newFlag;
+  l.flagReason = newFlag === "None" ? "" : document.getElementById("lmFlagReason").value.trim();
+  l.flaggedBy = newFlag === "None" ? "" : (currentUser?.name || "");
   l.notes = document.getElementById("lmNotes").value.trim();
   saveLocalCrm();
   closeModal("leadModal");
   refreshCrmUI();
   await postToBackend({ action: "updateLead", data: l });
-  toast("✅ Tuition assignment & commission schedule saved!");
+  toast("✅ Tuition assignment & flag saved!");
+}
+
+async function toggleHideCurrentLead() {
+  if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can hide leads."); return; }
+  const id = document.getElementById("lmId").value;
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  if (!l) return;
+  l.hidden = !isHiddenRecord(l);
+  saveLocalCrm();
+  closeModal("leadModal");
+  refreshCrmUI();
+  await postToBackend({ action: "updateLead", data: l });
+  toast(l.hidden ? "🙈 Parent lead hidden from staff" : "👁️ Parent lead restored to active list");
+}
+
+async function deleteCurrentLead() {
+  if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can delete leads."); return; }
+  const id = document.getElementById("lmId").value;
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  if (!l) return;
+  if (!confirm(`Permanently DELETE parent lead "${l.name}" (${l.phone})? This cannot be undone.`)) return;
+  crmData.leads = crmData.leads.filter(x => String(x.id) !== String(id));
+  saveLocalCrm();
+  closeModal("leadModal");
+  refreshCrmUI();
+  await postToBackend({ action: "deleteLead", id: l.id, deletedBy: currentUser.name });
+  toast("🗑️ Parent lead permanently deleted!");
+}
+
+async function quickUnhide(type, id) {
+  if (currentUser?.role !== "director") return;
+  if (type === "tutor") {
+    const t = crmData.tutors.find(x => String(x.id) === String(id));
+    if (!t) return;
+    t.hidden = false;
+    saveLocalCrm(); refreshCrmUI();
+    await postToBackend({ action: "updateTutor", data: t });
+    toast("👁️ Tutor restored!");
+  } else {
+    const l = crmData.leads.find(x => String(x.id) === String(id));
+    if (!l) return;
+    l.hidden = false;
+    saveLocalCrm(); refreshCrmUI();
+    await postToBackend({ action: "updateLead", data: l });
+    toast("👁️ Parent lead restored!");
+  }
+}
+
+async function quickDelete(type, id) {
+  if (currentUser?.role !== "director") return;
+  if (type === "tutor") {
+    const t = crmData.tutors.find(x => String(x.id) === String(id));
+    if (!t || !confirm(`Permanently DELETE tutor "${t.name}"?`)) return;
+    crmData.tutors = crmData.tutors.filter(x => String(x.id) !== String(id));
+    saveLocalCrm(); refreshCrmUI();
+    await postToBackend({ action: "deleteTutor", id: t.id, deletedBy: currentUser.name });
+    toast("🗑️ Tutor permanently deleted!");
+  } else {
+    const l = crmData.leads.find(x => String(x.id) === String(id));
+    if (!l || !confirm(`Permanently DELETE parent lead "${l.name}"?`)) return;
+    crmData.leads = crmData.leads.filter(x => String(x.id) !== String(id));
+    saveLocalCrm(); refreshCrmUI();
+    await postToBackend({ action: "deleteLead", id: l.id, deletedBy: currentUser.name });
+    toast("🗑️ Parent lead permanently deleted!");
+  }
 }
 
 function closeModal(id) { document.getElementById(id).classList.remove("open"); }
@@ -2629,8 +3060,8 @@ function saveStaffPasswords() {
   toast("🔑 Staff passwords updated!");
 }
 function exportCsv() {
-  const headers = ["ID","Name","Phone","Email","Gender","Area","Subjects","Classes","Payment","DocStatus","ValidUntil","AssignedStaff","Status"];
-  const rows = crmData.tutors.map(t => [t.id,t.name,t.phone,t.email,t.gender,t.area,t.subjects,t.classes,t.payment,t.docStatus,getValidityMeta(t).date,t.assignedStaff,t.status]
+  const headers = ["ID","Name","Phone","Email","Gender","Area","Subjects","Classes","Payment","DocStatus","ValidUntil","AssignedStaff","Status","Flag","FlagReason","FlaggedBy","Hidden"];
+  const rows = crmData.tutors.map(t => [t.id,t.name,t.phone,t.email,t.gender,t.area,t.subjects,t.classes,t.payment,t.docStatus,getValidityMeta(t).date,t.assignedStaff,t.status,getNormalizedFlag(t),t.flagReason,t.flaggedBy,isHiddenRecord(t)]
     .map(v => `"${String(v || "").replace(/"/g,'""')}"`).join(","));
   const blob = new Blob([[headers.join(","), ...rows].join("\n")], { type: "text/csv" });
   const a = document.createElement("a");
