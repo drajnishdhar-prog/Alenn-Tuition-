@@ -109,10 +109,10 @@
           },
           {
             "@type": "Question",
-            "name": "What is the tutor registration fee, annual renewal charge, and commission policy at Alenn Tuition Bureau?",
+            "name": "What is the tutor registration fee, refund, annual renewal, and commission policy at Alenn Tuition Bureau?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Tutors pay a ₹400 registration fee valid for 1 year (365 days), with an annual renewal charge of ₹400 after 1 year. For each confirmed tuition assignment, Alenn Tuition Bureau charges a 50% commission from the first month's tuition fee."
+              "text": "Tutors pay a strictly non-refundable ₹400 registration fee whose 1-year (365 days) validity starts from the payment confirmation date, followed by a non-refundable ₹400 annual renewal charge. Alenn Tuition Bureau charges 50% of the first month's tuition fee as commission on each confirmed tuition. Receiving 3 consecutive demo rejections results in service termination without refund."
             }
           }
         ]
@@ -239,6 +239,51 @@
     }
     .card-hidden {
       border: 1.5px dashed #94a3b8; background: #f8fafc; opacity: 0.88;
+    }
+    .card-trusted {
+      border: 1.5px solid #f59e0b; background: #fffdf5;
+    }
+    .card-terminated {
+      border: 1.5px solid #dc2626; background: #fef2f2;
+    }
+    .b-gold { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+    .b-verified { background: #ecfdf5; color: #065f46; border: 1px solid #10b981; }
+    .b-unverified { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
+
+    .verify-box {
+      background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 12px;
+      padding: 11px 12px; margin-bottom: 12px; display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+    }
+    .verify-box.locked {
+      background: #f8fafc; border-color: #cbd5e1;
+    }
+    .trusted-box {
+      background: #fffbeb; border: 1.5px solid #f59e0b; border-radius: 12px;
+      padding: 11px 12px; margin-bottom: 12px; display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+    }
+    .rejection-box {
+      background: #fef2f2; border: 1.5px solid #fecaca; border-radius: 12px;
+      padding: 12px; margin-bottom: 13px;
+    }
+    .assigned-tutor-strip {
+      background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px;
+      padding: 10px 12px; margin: 8px 0 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    }
+    .area-finder-box {
+      background: #f8fafc; border: 1.5px solid #dbeafe; border-radius: 14px;
+      padding: 14px; margin-top: 12px;
+    }
+    .area-quick-list {
+      max-height: 155px; overflow-y: auto; margin-top: 10px;
+      display: flex; flex-wrap: wrap; gap: 6px; padding: 6px;
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    }
+    .crm-count-bar {
+      font-size: 12.5px; font-weight: 700; color: var(--muted);
+      margin: 0 2px 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
     }
     .stat-box {
       background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
@@ -691,14 +736,43 @@
       </div>
     </div>
 
-    <!-- 65+ LOCALITIES -->
+    <!-- COMPACT VARANASI CLUSTER & SEARCH FINDER (65+ LOCALITIES) -->
     <div class="card">
       <div style="text-align:center;">
-        <span class="sec-tag">Varanasi Service Coverage</span>
-        <h3 style="margin:6px 0 4px;">Home Tutors Available Across 65+ Localities of Varanasi</h3>
-        <p style="font-size:12.5px;color:var(--muted);">Tap your locality below to open the inquiry form with your area pre-filled instantly.</p>
+        <span class="sec-tag">Varanasi Service Coverage • 65+ Areas</span>
+        <h3 style="margin:6px 0 4px;">Find a Verified Home Tutor in Your Varanasi Area</h3>
+        <p style="font-size:12.5px;color:var(--muted);">Select your Varanasi zone or search your locality to open the Free Demo form pre-filled.</p>
       </div>
-      <div id="homeLocalityChips" class="chip-wrap" style="justify-content:center;margin-top:12px;"></div>
+
+      <div class="area-finder-box">
+        <div class="grid-2" style="margin-bottom:10px;">
+          <select id="homeZoneSelect" class="input" onchange="renderHomeAreaCluster()">
+            <option value="ALL">🗺️ All Varanasi Zones (69 Localities)</option>
+            <option value="SOUTH">📍 South — BHU, Lanka, Durgakund & Samne Ghat</option>
+            <option value="CENTRAL">📍 Central — Sigra, Mahmoorganj, DLW & Bhelupur</option>
+            <option value="NORTH">📍 North — Cantt, Shivpur, Pandeypur & Sarnath</option>
+            <option value="WEST">📍 West / Outer — Rohania, Lohta & Babatpur</option>
+          </select>
+          <input id="homeAreaSearch" class="input" placeholder="🔍 Type area (e.g., Assi, Sigra, Shivpur)..." oninput="renderHomeAreaCluster()" />
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <select id="homeAreaSelect" class="input" style="flex:1;min-width:200px;"></select>
+          <button type="button" class="btn btn-primary btn-sm" style="padding:11px 16px;" onclick="bookFromAreaDropdown()">🎯 Book Free Demo in Area →</button>
+        </div>
+
+        <div id="homeAreaMatches" class="area-quick-list" style="display:none;"></div>
+
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;justify-content:center;">
+          <span style="font-size:11.5px;font-weight:700;color:var(--muted);">Popular:</span>
+          <button type="button" class="chip" onclick="openInquiry('Locality: Lanka / BHU Gate','Lanka / BHU Gate')">Lanka / BHU</button>
+          <button type="button" class="chip" onclick="openInquiry('Locality: Sigra','Sigra')">Sigra</button>
+          <button type="button" class="chip" onclick="openInquiry('Locality: Durgakund','Durgakund')">Durgakund</button>
+          <button type="button" class="chip" onclick="openInquiry('Locality: Mahmoorganj','Mahmoorganj')">Mahmoorganj</button>
+          <button type="button" class="chip" onclick="openInquiry('Locality: Ravindrapuri','Ravindrapuri')">Ravindrapuri</button>
+          <button type="button" class="chip" onclick="openInquiry('Locality: Shivpur','Shivpur')">Shivpur</button>
+        </div>
+      </div>
     </div>
 
     <!-- SCHOOLS & FAQS -->
@@ -709,7 +783,7 @@
       <h4 style="margin-bottom:10px;">❓ Frequently Asked Questions</h4>
       <details class="faq-item"><summary>Is the first demo class really free?</summary><p>Yes, your first trial demo class with our verified tutor is 100% free with zero obligation.</p></details>
       <details class="faq-item"><summary>How do you verify home tutors in Varanasi?</summary><p>Every tutor submits Aadhaar (Front & Back), a clear selfie photo, academic marksheets (10th/12th/Graduation/PG), and local Varanasi address proof, renewed every 365 days.</p></details>
-      <details class="faq-item"><summary>What are the tutor registration, renewal & commission terms?</summary><p>Tutor registration fee is ₹400 (valid for 1 year / 365 days), annual renewal charge is ₹400 after 1 year, and Alenn Tuition Bureau charges 50% of the first month's tuition fee as commission on each confirmed tuition assignment.</p></details>
+      <details class="faq-item"><summary>What are the tutor registration, refund, renewal & commission terms?</summary><p>The tutor registration fee is ₹400 (strictly non-refundable; 1-year / 365-day validity starts from the payment confirmation date), annual renewal charge is ₹400 (non-refundable), and Alenn Tuition Bureau charges 50% of the first month's tuition fee as commission on each confirmed tuition. Services are terminated without refund after 3 consecutive demo rejections.</p></details>
       <details class="faq-item"><summary>Do you provide female home tutors in Varanasi?</summary><p>Yes, we have verified female and male tutors available across all 65+ Varanasi areas including Lanka, BHU, Sigra, Durgakund, Mahmoorganj, Ravindrapuri, Shivpur, Pandeypur, and Sarnath.</p></details>
     </div>
   </section>
@@ -737,7 +811,6 @@
       </div>
     </div>
 
-    <!-- Subject-wise NEET Strategy -->
     <div class="sec-head">
       <span class="sec-tag">NEET UG Subject-Wise Mastery • Varanasi</span>
       <h3>Complete PCB Preparation Built for Maximum NEET Rank</h3>
@@ -777,7 +850,6 @@
       </div>
     </div>
 
-    <!-- NEET Programs -->
     <div class="card">
       <span class="badge b-amber">🎯 TAILORED NEET UG PROGRAMS IN VARANASI</span>
       <h3 style="margin:8px 0 10px;">Choose the Right NEET 1-on-1 Batch for Your Stage</h3>
@@ -801,7 +873,6 @@
       </div>
     </div>
 
-    <!-- Comparison Table -->
     <div class="card">
       <h3>Why 1-on-1 NEET Home Tuition Beats Crowded Coaching in Varanasi</h3>
       <table class="cmp-table">
@@ -818,7 +889,6 @@
       </table>
     </div>
 
-    <!-- Local SEO Areas for NEET -->
     <div class="card">
       <h4>📍 Popular Varanasi Areas for NEET UG Home Tutors</h4>
       <p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Tap your locality to request a nearby verified NEET Physics, Chemistry or Biology tutor (Male/Female):</p>
@@ -840,7 +910,6 @@
       </div>
     </div>
 
-    <!-- NEET FAQs -->
     <div class="card">
       <h3 style="margin-bottom:10px;">❓ NEET UG Home Tuition FAQs — Varanasi</h3>
       <details class="faq-item"><summary>Can I hire a home tutor only for NEET Physics or Organic Chemistry?</summary><p>Yes! Many NEET aspirants who already attend coaching hire our dedicated 1-on-1 Physics or Chemistry tutors in Varanasi specifically to fix numerical speed, backlogs, and tricky concepts.</p></details>
@@ -880,7 +949,6 @@
       </div>
     </div>
 
-    <!-- Subject-wise JEE Breakdown -->
     <div class="sec-head">
       <span class="sec-tag">IIT-JEE Mains & Advanced Curriculum • Varanasi</span>
       <h3>Concept-First PCM Mentorship for Top Engineering Ranks</h3>
@@ -920,7 +988,6 @@
       </div>
     </div>
 
-    <!-- JEE Programs -->
     <div class="card">
       <span class="badge b-purple">🚀 PERSONALIZED IIT-JEE PROGRAMS IN VARANASI</span>
       <h3 style="margin:8px 0 10px;">Structured Mentorship for Every IIT-JEE Aspirant</h3>
@@ -944,7 +1011,6 @@
       </div>
     </div>
 
-    <!-- Local SEO Areas for JEE -->
     <div class="card">
       <h4>📍 Popular Varanasi Localities for IIT-JEE Home Tutors</h4>
       <p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Tap your locality to book a verified IIT-JEE Physics, Chemistry or Maths tutor near you:</p>
@@ -966,7 +1032,6 @@
       </div>
     </div>
 
-    <!-- IIT-JEE FAQs -->
     <div class="card">
       <h3 style="margin-bottom:10px;">❓ IIT-JEE Home Tuition FAQs — Varanasi</h3>
       <details class="faq-item"><summary>Do you have IIT-BHU and experienced JEE Advanced tutors in Varanasi?</summary><p>Yes, being located right near BHU / Lanka, we have a verified network of experienced IIT-BHU mentors, B.Tech/M.Sc. specialists, and senior JEE faculty for both Mains and Advanced.</p></details>
@@ -1074,24 +1139,30 @@
         <label>Phone / WhatsApp Number <span class="req">*</span></label>
         <input id="inqPhone" type="tel" class="input" required placeholder="e.g., 9876543210" />
       </div>
-      <div class="field">
-        <label>Class / Target Exam <span class="req">*</span></label>
-        <select id="inqClass" class="input" required>
-          <option value="">Select class or exam...</option>
-          <option>NEET UG (Class 11 / 12 / Dropper)</option>
-          <option>IIT-JEE Mains & Adv (11 / 12 / Dropper)</option>
-          <option>NEET UG / IIT-JEE Quick Revision & Crash Course</option>
-          <option>Class 12 (Board)</option>
-          <option>Class 11</option>
-          <option>Class 10 (Board)</option>
-          <option>Class 9</option>
-          <option>Class 6 to 8 (Middle School)</option>
-          <option>Class 1 to 5 (Primary)</option>
-          <option>Pre-Primary (Nursery / LKG / UKG)</option>
-          <option>CUET / NDA / BHU CHS Entrance</option>
-          <option>Commerce / B.Com / B.Sc. / Other</option>
-          <option>Olympiad / NTSE</option>
-        </select>
+      <div class="grid-2">
+        <div class="field">
+          <label>Class / Target Exam <span class="req">*</span></label>
+          <select id="inqClass" class="input" required>
+            <option value="">Select class or exam...</option>
+            <option>NEET UG (Class 11 / 12 / Dropper)</option>
+            <option>IIT-JEE Mains & Adv (11 / 12 / Dropper)</option>
+            <option>NEET UG / IIT-JEE Quick Revision & Crash Course</option>
+            <option>Class 12 (Board)</option>
+            <option>Class 11</option>
+            <option>Class 10 (Board)</option>
+            <option>Class 9</option>
+            <option>Class 6 to 8 (Middle School)</option>
+            <option>Class 1 to 5 (Primary)</option>
+            <option>Pre-Primary (Nursery / LKG / UKG)</option>
+            <option>CUET / NDA / BHU CHS Entrance</option>
+            <option>Commerce / B.Com / B.Sc. / Other</option>
+            <option>Olympiad / NTSE</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Specific Class / Batch (Optional)</label>
+          <input id="inqSpecificClass" class="input" placeholder="e.g., Class 7, Dropper, UKG, B.Com Sem 2" />
+        </div>
       </div>
       <div class="field">
         <label>Board / Stream <span class="req">*</span></label>
@@ -1208,7 +1279,7 @@
     <div class="card" style="text-align:center;">
       <span class="badge b-green">JOIN VARANASI'S VERIFIED TUTOR NETWORK</span>
       <h2 style="margin:8px 0 4px;">Register as a Home, Group or Online Tutor</h2>
-      <p style="font-size:13px;color:var(--muted);">Your profile syncs automatically into our Teacher CRM (valid for <b>1 Year / 365 days</b>). After submitting, a dedicated next-steps page will open with payment & document upload links.</p>
+      <p style="font-size:13px;color:var(--muted);">Your profile syncs automatically into our Teacher CRM. Your <b>1-Year (365 Days) validity activates once your ₹400 registration payment is confirmed</b>. After submitting, a dedicated next-steps page will open with payment & document upload links.</p>
       <div class="grid-2" style="margin-top:12px;">
         <button class="btn btn-outline" onclick="navigateTo('inquiry')">👨‍👩‍👧 Parent / Student Inquiry</button>
         <button class="btn btn-primary" onclick="navigateTo('tutor')">🎓 Tutor Registration</button>
@@ -1216,24 +1287,28 @@
     </div>
 
     <form id="tutorForm" class="card" onsubmit="submitTutor(event)">
-      <!-- TRANSPARENT TUTOR FEE & COMMISSION POLICY BOX -->
+      <!-- TRANSPARENT TUTOR FEE, REFUND & TERMINATION POLICY BOX -->
       <div class="policy-box">
-        <h4>📌 Transparent Tutor Fee, Renewal & Commission Policy</h4>
+        <h4>📌 Mandatory Tutor Fee, Non-Refundable & Service Policy</h4>
         <div class="policy-grid">
           <div class="policy-pill">
-            <b>₹400 Registration Fee</b>
-            Valid for <b>1 Year (365 Days)</b> including ID & document verification.
+            <b>₹400 Registration Fee (Non-Refundable)</b>
+            Strictly <b>non-refundable</b> once paid. <b>1-Year (365 Days) validity starts from payment confirmation date</b>.
           </div>
           <div class="policy-pill">
-            <b>₹400 Annual Renewal</b>
-            Required after 1 year to keep your verified profile active for new tuitions.
+            <b>₹400 Annual Renewal (Non-Refundable)</b>
+            Required after 365 days to keep your verified profile active for new Varanasi tuitions.
           </div>
           <div class="policy-pill">
             <b>50% First-Month Commission</b>
-            50% of the first month's tuition fee is payable to Alenn Tuition Bureau on every confirmed tuition.
+            50% of the 1st month's tuition fee is payable on every confirmed tuition. From Month 2, 100% belongs to you.
+          </div>
+          <div class="policy-pill" style="border-color:#fca5a5;background:#fef2f2;">
+            <b style="color:#991b1b;">⛔ 3-Rejection Termination Rule</b>
+            <b>3 consecutive demo rejections / unconfirmed tuitions</b> will lead to immediate <b>service termination with no refund</b>.
           </div>
         </div>
-        <p style="font-size:12px;color:#1e3a8a;">All terms are 100% upfront with official digital receipts. From the 2nd month onwards, 100% of the tuition fee belongs to the tutor.</p>
+        <p style="font-size:12px;color:#1e3a8a;">All terms are 100% transparent with official digital receipts. Direct bypassing of the bureau or fake documents leads to immediate blacklisting without refund.</p>
       </div>
 
       <h3 style="margin-bottom:12px;">Tutor Profile Application</h3>
@@ -1298,18 +1373,26 @@
         <textarea id="tutSlots" class="input" rows="3" required placeholder="Mention Home 1-on-1 / Group / Online, preferred teaching areas in Varanasi, and available morning/evening slots..." oninput="updateTutorMailSync()"></textarea>
       </div>
 
-      <!-- MANDATORY POLICY ACKNOWLEDGEMENT CHECKBOX -->
+      <details class="faq-item" style="margin-bottom:12px;background:#fff;border-color:#cbd5e1;">
+        <summary>📜 Read Full Tutor Terms, Non-Refundable Policy & 3-Rejection Clause</summary>
+        <ul class="checklist" style="margin:8px 0 2px;font-size:12.5px;">
+          <li>• <b>Non-Refundable Fee:</b> The ₹400 registration fee and ₹400 annual renewal fee are <b>strictly non-refundable</b> under all circumstances once paid (including voluntary exit, unavailability, or non-confirmation of demos).</li>
+          <li>• <b>Payment-Linked Validity:</b> Your 1-year (365-day) active membership starts strictly from the date your ₹400 fee is paid and verified in our CRM.</li>
+          <li>• <b>3 Consecutive Rejections Rule:</b> If parents/students reject or do not confirm your demo class <b>3 consecutive times</b>, Alenn Tuition Bureau reserves the right to <b>terminate your services immediately without any refund</b>.</li>
+          <li>• <b>50% First-Month Commission & Anti-Bypass:</b> 50% of the first month's tuition fee is payable on each confirmed assignment. Bypassing the bureau or accepting tuition directly from an introduced parent without paying commission leads to permanent blacklisting.</li>
+        </ul>
+      </details>
+
       <label class="agree-row">
         <input id="tutAgreePolicy" type="checkbox" required />
         <span>
-          I agree to Alenn Tuition Bureau's Tutor Policy: <b>₹400 registration fee</b> (valid for 1 year), <b>₹400 annual renewal charge</b> after 1 year, and <b>50% of the first month's tuition fee as commission</b> on every confirmed tuition assigned to me. <span class="req">*</span>
+          I have read and agree to Alenn Tuition Bureau's Tutor Terms & Conditions: <b>₹400 strictly non-refundable registration fee</b> (1-year validity starting from payment date), <b>₹400 non-refundable annual renewal charge</b>, <b>50% first-month tuition commission</b>, and <b>immediate service termination without refund upon 3 consecutive demo rejections</b>. <span class="req">*</span>
         </span>
       </label>
 
       <button id="tutSubmitBtn" type="submit" class="btn btn-green">✅ Submit Application & Proceed to Payment / Docs →</button>
       <p style="font-size:12px;color:var(--muted);text-align:center;margin:8px 0 16px;">Synced directly to Tutor CRM & sent to <b>arrpteacher@gmail.com</b>.</p>
 
-      <!-- QUICK PREVIEW OF VERIFICATION DOCS -->
       <div style="background:#fffbeb;border:1.5px solid #fcd34d;border-radius:16px;padding:14px;">
         <span class="badge b-amber">⚠ NEXT STEPS AFTER SUBMIT</span>
         <span id="mailSyncBadge" class="badge b-blue" style="margin-left:6px;">⚡ 1/11 fields ready</span>
@@ -1331,11 +1414,10 @@
       <div id="tutSuccessSummary" class="summary-grid"></div>
     </div>
 
-    <!-- STEP 1: PAYMENT ON DEDICATED SUCCESS PAGE -->
     <div class="card" style="border:2px solid #93c5fd;">
       <span class="badge b-blue">STEP 1 OF 2 • MANDATORY ACTIVATION FEE</span>
-      <h3 style="margin:8px 0 4px;">Pay ₹400 Tutor Registration Fee (Valid 1 Year / 365 Days)</h3>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">Pay securely via Razorpay (auto-updates CRM) or 0% fee UPI QR via PhonePe, Paytm, or GPay.</p>
+      <h3 style="margin:8px 0 4px;">Pay ₹400 Non-Refundable Registration Fee (Activates 365-Day Validity)</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">Your <b>1-year (365 days) validity starts strictly from the date this ₹400 non-refundable fee is paid & confirmed</b>. Pay securely via Razorpay or 0% fee UPI QR (PhonePe / Paytm / GPay).</p>
 
       <div class="pay-tabs">
         <button type="button" class="pay-tab active" id="sptab-razorpay" onclick="switchSuccessPayTab('razorpay')">💳 Razorpay</button>
@@ -1374,7 +1456,6 @@
       </div>
     </div>
 
-    <!-- STEP 2: MANDATORY DOCUMENT EMAIL ON DEDICATED SUCCESS PAGE -->
     <div class="card" style="background:#fffbeb;border:2px solid #fcd34d;">
       <span class="badge b-amber">STEP 2 OF 2 • MANDATORY DOCUMENT VERIFICATION</span>
       <h3 style="margin:8px 0 4px;">Email Your 4 Verification Documents</h3>
@@ -1443,24 +1524,25 @@
         </div>
       </div>
 
-      <!-- FLAGGED / SUSPICIOUS ALERT BANNER -->
       <div id="flaggedAlertBanner" style="display:none;background:#fef2f2;border:1.5px solid #f87171;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#991b1b;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('flagged')"></div>
-
-      <!-- 5-DAY ADVANCE COMMISSION ALERT BANNER -->
       <div id="commissionAlertBanner" style="display:none;background:#fefce8;border:1.5px solid #facc15;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#854d0e;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('commissions')"></div>
-
-      <!-- 30-DAY RENEWAL ALERT BANNER -->
       <div id="renewalAlertBanner" style="display:none;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:14px;padding:12px 14px;margin-bottom:12px;color:#991b1b;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('renewals')"></div>
 
       <!-- KPI GRID -->
       <div class="grid-4" style="margin-bottom:14px;">
-        <div class="kpi-card"><div id="kpiTutors" class="num">0</div><div class="lbl">Registered Tutors</div></div>
-        <div class="kpi-card"><div id="kpiVerified" class="num" style="color:var(--green)">0</div><div class="lbl">Docs Verified</div></div>
-        <div class="kpi-card"><div id="kpiCommDue" class="num" style="color:#d97706">0</div><div class="lbl">50% Comm Due (≤5d)</div></div>
-        <div class="kpi-card"><div id="kpiLeads" class="num" style="color:#7c3aed">0</div><div class="lbl" id="kpiLeadsLbl">Parent Leads</div></div>
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchCrmTab('tutors')"><div id="kpiTutors" class="num">0</div><div class="lbl">Registered Tutors</div></div>
+        <div class="kpi-card" style="cursor:pointer;border-color:#fde68a;background:#fffdf5;" onclick="switchCrmTab('trusted')"><div id="kpiTrusted" class="num" style="color:#d97706">0</div><div class="lbl">⭐ Trusted Tutors</div></div>
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchCrmTab('commissions')"><div id="kpiCommDue" class="num" style="color:var(--green)">0</div><div class="lbl">50% Comm Due (≤5d)</div></div>
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchCrmTab('leads')"><div id="kpiLeads" class="num" style="color:#7c3aed">0</div><div class="lbl" id="kpiLeadsLbl">Parent Leads</div></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:-6px 0 12px;">
+        <span class="badge b-verified" id="kpiDirVerifiedBadge" style="cursor:pointer;" onclick="quickFilterTutors('dirVerified')">🛡️ Director Verified: 0</span>
+        <span class="badge b-green" id="kpiVerifiedBadge">✔ Docs Verified: 0</span>
+        <span class="badge b-blue" id="kpiPaidBadge">💳 Paid Active: 0</span>
+        <span class="badge b-red" id="kpiTerminatedBadge">⛔ Terminated (3 Rej): 0</span>
       </div>
 
-      <!-- DIRECTOR TEAM OVERVIEW (ONLY VISIBLE TO RAHUL SIR) -->
+      <!-- DIRECTOR TEAM OVERVIEW -->
       <div id="directorTeamCard" class="card" style="display:none;background:#f8fafc;">
         <h4 style="margin-bottom:8px;">👑 Director Master Monitor — Staff Tuition Workload</h4>
         <div id="staffSummaryGrid" class="grid-4"></div>
@@ -1469,6 +1551,7 @@
       <!-- CRM NAVIGATION TABS -->
       <div class="crm-tabs">
         <button class="crm-tab active" id="ctab-tutors" onclick="switchCrmTab('tutors')">🎓 Tutors Directory</button>
+        <button class="crm-tab" id="ctab-trusted" onclick="switchCrmTab('trusted')">⭐ Trusted Tutors</button>
         <button class="crm-tab" id="ctab-leads" onclick="switchCrmTab('leads')">👨‍👩‍👧 <span id="leadsTabText">My Assigned Tuitions</span></button>
         <button class="crm-tab" id="ctab-flagged" onclick="switchCrmTab('flagged')">🚩 <span id="flaggedTabText">Flagged Alerts</span></button>
         <button class="crm-tab" id="ctab-commissions" onclick="switchCrmTab('commissions')">💰 50% Commission Reminders</button>
@@ -1480,7 +1563,7 @@
       <div id="panel-tutors">
         <div class="card">
           <div class="grid-2" style="margin-bottom:8px;">
-            <input id="fSearch" class="input" placeholder="🔍 Search name, subject, phone, area..." oninput="renderTutors()" />
+            <input id="fSearch" class="input" placeholder="🔍 Search name, subject, class, phone, email, ID..." oninput="renderTutors()" />
             <input id="fArea" class="input" placeholder="📍 Filter Varanasi Area (Lanka, Sigra...)" oninput="renderTutors()" />
           </div>
           <div class="grid-4" style="margin-bottom:8px;">
@@ -1496,15 +1579,34 @@
               <option value="Partial">Partial Docs</option>
               <option value="Pending">Pending</option>
             </select>
+            <select id="fVerified" class="input" onchange="renderTutors()">
+              <option value="">🛡️ All Verification</option>
+              <option value="Verified">🛡️ Director Verified Only</option>
+              <option value="Unverified">⏳ Unverified Only</option>
+            </select>
+          </div>
+          <div class="grid-4" style="margin-bottom:8px;">
             <select id="fValidity" class="input" onchange="renderTutors()">
               <option value="">All Validity</option>
               <option value="Active">Active (>30d)</option>
               <option value="RenewSoon">Expiring ≤30d</option>
               <option value="Expired">Expired</option>
+              <option value="UnpaidPending">⏳ Pending Payment</option>
             </select>
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-            <select id="fFlag" class="input" style="width:auto;min-width:170px;" onchange="renderTutors()">
+            <select id="fTrusted" class="input" onchange="renderTutors()">
+              <option value="">⭐ All Categories</option>
+              <option value="Trusted">⭐ Trusted Only</option>
+              <option value="Standard">Standard (Non-Trusted)</option>
+            </select>
+            <select id="fStatus" class="input" onchange="renderTutors()">
+              <option value="">All CRM Status</option>
+              <option value="New">New</option>
+              <option value="Active">Active</option>
+              <option value="Assigned">Assigned</option>
+              <option value="On Hold">On Hold</option>
+              <option value="Terminated (3 Rejections)">⛔ Terminated (3 Rejections)</option>
+            </select>
+            <select id="fFlag" class="input" onchange="renderTutors()">
               <option value="">🚩 All Flags</option>
               <option value="ANY_FLAG">⚠️ Any Flagged Only</option>
               <option value="Payment Due">💸 Payment Due</option>
@@ -1513,40 +1615,83 @@
               <option value="Unresponsive">📵 Unresponsive</option>
               <option value="None">✅ Clean (No Flag)</option>
             </select>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <select id="fSort" class="input" style="width:auto;" onchange="renderTutors()">
+              <option value="verifiedTrusted">Sort: 🛡️ Verified & ⭐ Trusted First</option>
+              <option value="trustedFirst">Sort: ⭐ Trusted First</option>
+              <option value="newest">Sort: Newest Registered</option>
+              <option value="nameAsc">Sort: Name (A–Z)</option>
+              <option value="expiringSoon">Sort: Expiring Soonest</option>
+            </select>
             <label id="fShowHiddenWrap" class="toggle-inline" style="display:none;">
               <input id="fShowHidden" type="checkbox" onchange="renderTutors()" /> 👁️ Show Hidden Tutors
             </label>
-            <button class="btn btn-outline btn-sm" onclick="resetTutorFilters()">✕ Reset Filters</button>
+            <button type="button" class="chip" onclick="quickFilterTutors('dirVerified')">🛡️ Director Verified</button>
+            <button type="button" class="chip" onclick="quickFilterTutors('trusted')">⭐ Trusted</button>
+            <button type="button" class="chip" onclick="quickFilterTutors('paidVerified')">✔ Paid & Docs OK</button>
+            <button type="button" class="chip" onclick="quickFilterTutors('unpaid')">⏳ Unpaid</button>
+            <button type="button" class="chip" onclick="quickFilterTutors('terminated')">⛔ Terminated</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="resetTutorFilters()">✕ Reset Filters</button>
           </div>
         </div>
+        <div id="tutorsCountBar" class="crm-count-bar"></div>
         <div id="tutorsList"></div>
+      </div>
+
+      <!-- TAB: TRUSTED TUTORS CATEGORY -->
+      <div id="panel-trusted" style="display:none;">
+        <div class="card" style="background:#fffdf5;border-color:#f59e0b;">
+          <h4>⭐ Trusted Tutors Category — Priority Verified Network</h4>
+          <p style="font-size:13px;color:#92400e;">High-trust, reliable tutors marked as <b>Trusted</b> by Coordinators or Director Rahul Sir appear here first for faster demo assignments.</p>
+          <div class="grid-2" style="margin-top:10px;">
+            <input id="trustedSearch" class="input" placeholder="🔍 Search trusted tutor, subject, phone..." oninput="renderTrustedTutors()" />
+            <input id="trustedArea" class="input" placeholder="📍 Filter Varanasi Area..." oninput="renderTrustedTutors()" />
+          </div>
+        </div>
+        <div id="trustedTutorsList"></div>
       </div>
 
       <!-- TAB: PARENT LEADS / ASSIGNED TUITIONS -->
       <div id="panel-leads" style="display:none;">
-        <div class="card" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-          <input id="leadSearch" class="input" style="flex:1;min-width:180px;" placeholder="🔍 Search parent, class, subject, area..." oninput="renderLeads()" />
-          <select id="leadFlagFilter" class="input" style="width:auto;" onchange="renderLeads()">
-            <option value="">🚩 All Flags</option>
-            <option value="ANY_FLAG">⚠️ Any Flagged</option>
-            <option value="Payment Due">💸 Payment Due</option>
-            <option value="Suspicious">⚠️ Suspicious</option>
-            <option value="Fraud">🚫 Fraud / Blacklisted</option>
-            <option value="Unresponsive">📵 Unresponsive</option>
-            <option value="None">✅ Clean (No Flag)</option>
-          </select>
-          <select id="leadStaffFilter" class="input" style="width:auto;display:none;" onchange="renderLeads()">
-            <option value="">All Coordinators</option>
-            <option value="Rahul Sir">Rahul Sir</option>
-            <option value="Vaibhav Mishra">Vaibhav Mishra</option>
-            <option value="Amar Srivastava">Amar Srivastava</option>
-            <option value="Rishikesh Pandey">Rishikesh Pandey</option>
-            <option value="Unassigned">Unassigned</option>
-          </select>
-          <label id="leadShowHiddenWrap" class="toggle-inline" style="display:none;">
-            <input id="leadShowHidden" type="checkbox" onchange="renderLeads()" /> 👁️ Show Hidden Leads
-          </label>
+        <div class="card">
+          <div class="grid-2" style="margin-bottom:8px;">
+            <input id="leadSearch" class="input" placeholder="🔍 Search parent, class, subject, tutor, phone..." oninput="renderLeads()" />
+            <input id="leadAreaFilter" class="input" placeholder="📍 Filter Varanasi Area (Lanka, Sigra...)" oninput="renderLeads()" />
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <select id="leadStatusFilter" class="input" style="width:auto;" onchange="renderLeads()">
+              <option value="">All Lead Status</option>
+              <option value="New Lead">New Lead</option>
+              <option value="Demo Scheduled">Demo Scheduled</option>
+              <option value="Demo Completed">Demo Completed</option>
+              <option value="Tuition Confirmed">Tuition Confirmed</option>
+              <option value="Closed / Cancelled">Closed / Cancelled</option>
+            </select>
+            <select id="leadFlagFilter" class="input" style="width:auto;" onchange="renderLeads()">
+              <option value="">🚩 All Flags</option>
+              <option value="ANY_FLAG">⚠️ Any Flagged</option>
+              <option value="Payment Due">💸 Payment Due</option>
+              <option value="Suspicious">⚠️ Suspicious</option>
+              <option value="Fraud">🚫 Fraud / Blacklisted</option>
+              <option value="Unresponsive">📵 Unresponsive</option>
+              <option value="None">✅ Clean (No Flag)</option>
+            </select>
+            <select id="leadStaffFilter" class="input" style="width:auto;display:none;" onchange="renderLeads()">
+              <option value="">All Coordinators</option>
+              <option value="Rahul Sir">Rahul Sir</option>
+              <option value="Vaibhav Mishra">Vaibhav Mishra</option>
+              <option value="Amar Srivastava">Amar Srivastava</option>
+              <option value="Rishikesh Pandey">Rishikesh Pandey</option>
+              <option value="Unassigned">Unassigned</option>
+            </select>
+            <label id="leadShowHiddenWrap" class="toggle-inline" style="display:none;">
+              <input id="leadShowHidden" type="checkbox" onchange="renderLeads()" /> 👁️ Show Hidden Leads
+            </label>
+            <button type="button" class="btn btn-outline btn-sm" onclick="resetLeadFilters()">✕ Reset</button>
+          </div>
         </div>
+        <div id="leadsCountBar" class="crm-count-bar"></div>
         <div id="leadsList"></div>
       </div>
 
@@ -1572,7 +1717,6 @@
         <h4 style="margin:16px 0 8px;color:var(--navy);">👨‍👩‍👧 Flagged Parent Leads</h4>
         <div id="flaggedLeadsList"></div>
 
-        <!-- DIRECTOR-ONLY HIDDEN RECORDS SECTION -->
         <div id="directorHiddenSection" style="display:none;margin-top:18px;">
           <div class="card" style="background:#f8fafc;border:1.5px dashed #64748b;">
             <h4>👑 Director Vault — Hidden Tutors & Parent Leads</h4>
@@ -1582,7 +1726,7 @@
         </div>
       </div>
 
-      <!-- TAB: 50% COMMISSION REMINDERS (5-DAY ADVANCE COORDINATOR TRACKER) -->
+      <!-- TAB: 50% COMMISSION REMINDERS -->
       <div id="panel-commissions" style="display:none;">
         <div class="card" style="background:#fefce8;border-color:#facc15;">
           <h4>💰 50% First-Month Commission Tracker (5-Day Advance Coordinator Reminders)</h4>
@@ -1600,7 +1744,7 @@
         <div id="renewalsList"></div>
       </div>
 
-      <!-- TAB: DIRECTOR SETTINGS (RAHUL SIR ONLY) -->
+      <!-- TAB: DIRECTOR SETTINGS -->
       <div id="panel-settings" style="display:none;">
         <div class="card">
           <h3 style="margin-bottom:8px;">⚙️ Backend Apps Script & Email Webhook Configuration</h3>
@@ -1643,10 +1787,23 @@
     </div>
     <input type="hidden" id="tmId" />
     <div id="tmDocInfo" style="background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:10px;font-size:12.5px;margin-bottom:12px;"></div>
+
+    <!-- DIRECTOR VERIFICATION CHECKBOX (DIRECTOR ONLY EDITABLE) -->
+    <div id="tmVerifyBox" class="verify-box">
+      <div>
+        <b style="font-size:13.5px;color:#065f46;">🛡️ Director Official Verification</b>
+        <div id="tmVerifyHint" style="font-size:11.5px;color:#047857;">Approves tutor for Verified Badge & Verified-Only Lead Assignments.</div>
+      </div>
+      <label class="toggle-inline" style="background:#fff;border-color:#10b981;white-space:nowrap;">
+        <input id="tmIsVerified" type="checkbox" style="width:17px;height:17px;accent-color:#059669;" />
+        <span id="tmVerifyLbl">Verified</span>
+      </label>
+    </div>
+
     <div class="grid-2">
       <div class="field">
-        <label>Payment Status (₹400)</label>
-        <select id="tmPay" class="input"><option>Unpaid</option><option>Paid</option></select>
+        <label>Payment Status (₹400 — Links Validity)</label>
+        <select id="tmPay" class="input" onchange="onTutorPayChange()"><option>Unpaid</option><option>Paid</option></select>
       </div>
       <div class="field">
         <label>Document Verification (Manual Override)</label>
@@ -1658,14 +1815,52 @@
         </select>
       </div>
     </div>
+    <div id="tmPayValidityHint" style="font-size:12px;color:#1e40af;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:7px 10px;margin:-4px 0 10px;"></div>
     <div class="grid-2">
       <div class="field">
         <label>CRM Status</label>
-        <select id="tmStatus" class="input"><option>New</option><option>Active</option><option>Assigned</option><option>On Hold</option></select>
+        <select id="tmStatus" class="input">
+          <option>New</option>
+          <option>Active</option>
+          <option>Assigned</option>
+          <option>On Hold</option>
+          <option>Terminated (3 Rejections)</option>
+        </select>
       </div>
       <div class="field">
-        <label>Valid Until (365-Day Validity)</label>
+        <label>Valid Until (Starts on Paid — 365d)</label>
         <input id="tmValidUntil" type="date" class="input" />
+      </div>
+    </div>
+
+    <!-- TRUSTED TUTOR CATEGORY TOGGLE -->
+    <div class="trusted-box">
+      <div>
+        <b style="font-size:13.5px;color:#92400e;">⭐ Trusted Tutor Category</b>
+        <div style="font-size:11.5px;color:#78350f;">Highlight in Trusted Tab & prioritize at top of Lead Assignment list.</div>
+      </div>
+      <label class="toggle-inline" style="background:#fff;border-color:#f59e0b;white-space:nowrap;">
+        <input id="tmTrusted" type="checkbox" style="width:17px;height:17px;accent-color:#d97706;" /> Mark Trusted
+      </label>
+    </div>
+
+    <!-- 3 CONSECUTIVE DEMO REJECTIONS TRACKER -->
+    <div class="rejection-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+        <label style="font-size:13px;font-weight:800;color:#991b1b;margin:0;">⛔ Consecutive Demo Rejections (3-Strike Rule)</label>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn btn-red btn-sm" onclick="incrementTutorRejection()">+1 Rejection</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="resetTutorRejection()">Reset (0)</button>
+        </div>
+      </div>
+      <select id="tmRejections" class="input" onchange="onRejectionSelectChange()">
+        <option value="0">0 — Clean (No consecutive rejections)</option>
+        <option value="1">1 — 1st Unconfirmed Demo / Rejection</option>
+        <option value="2">2 — 2nd Unconfirmed Demo (Final Warning)</option>
+        <option value="3">3 — 3 Consecutive Rejections (Service Terminated — No Refund)</option>
+      </select>
+      <div id="tmRejectionWarn" style="display:none;font-size:12px;font-weight:700;color:#991b1b;margin-top:6px;">
+        ⛔ 3 consecutive rejections reached! Status auto-set to <b>Terminated (3 Rejections)</b> (No Refund Policy).
       </div>
     </div>
     <div class="field">
@@ -1679,7 +1874,7 @@
       </select>
     </div>
 
-    <!-- RISK & ALERT FLAG SECTION (DIRECTOR + ALL STAFF) -->
+    <!-- RISK & ALERT FLAG SECTION -->
     <div class="flag-section-box">
       <div class="field" style="margin-bottom:8px;">
         <label>🚩 Risk / Alert Flag (Visible to All Staff)</label>
@@ -1706,7 +1901,7 @@
       <button class="btn btn-primary" onclick="saveTutorChanges()">💾 Save Changes</button>
     </div>
 
-    <!-- DIRECTOR-ONLY CONTROLS (HIDE / DELETE) -->
+    <!-- DIRECTOR-ONLY CONTROLS -->
     <div id="tmDirectorControls" class="director-danger-box" style="display:none;">
       <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only)</p>
       <div class="grid-2">
@@ -1735,10 +1930,20 @@
         <option value="Rishikesh Pandey">Rishikesh Pandey</option>
       </select>
     </div>
-    <div class="field">
-      <label>Assign Registered Tutor from Directory</label>
+
+    <!-- VERIFIED-ONLY ASSIGNMENT FILTER + QUICK TUTOR SEARCH -->
+    <div class="field" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+        <label style="margin:0;color:#065f46;">Assign Registered Tutor <span id="lmTutorCount" style="font-size:11px;font-weight:700;color:#047857;"></span></label>
+        <label class="toggle-inline" style="background:#fff;border-color:#10b981;font-size:11.5px;padding:4px 8px;">
+          <input id="lmVerifiedOnly" type="checkbox" checked onchange="populateLeadTutorDropdown()" style="accent-color:#059669;" />
+          🛡️ Verified Tutors Only
+        </label>
+      </div>
+      <input id="lmTutorSearch" class="input" style="margin-bottom:8px;padding:8px 10px;font-size:13px;" placeholder="🔍 Filter tutor by name, subject, area..." oninput="populateLeadTutorDropdown()" />
       <select id="lmTutor" class="input"></select>
     </div>
+
     <div class="field">
       <label>Tuition Status</label>
       <select id="lmStatus" class="input" onchange="onLeadStatusChange()">
@@ -1767,7 +1972,7 @@
       </select>
     </div>
 
-    <!-- RISK & ALERT FLAG SECTION (DIRECTOR + ALL STAFF) -->
+    <!-- RISK & ALERT FLAG SECTION -->
     <div class="flag-section-box">
       <div class="field" style="margin-bottom:8px;">
         <label>🚩 Parent / Lead Flag (Visible to All Staff)</label>
@@ -1791,7 +1996,7 @@
     </div>
     <button class="btn btn-primary" onclick="saveLeadChanges()">💾 Save Tuition Assignment</button>
 
-    <!-- DIRECTOR-ONLY CONTROLS (HIDE / DELETE) -->
+    <!-- DIRECTOR-ONLY CONTROLS -->
     <div id="lmDirectorControls" class="director-danger-box" style="display:none;">
       <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only)</p>
       <div class="grid-2">
@@ -1888,19 +2093,35 @@ const VIEW_SEO = {
   }
 };
 
+const LOCALITY_CLUSTERS = {
+  SOUTH: [
+    "Akhari / Bypass","Assi / Nagwa","Awleshpur","Bhadaini","Bhagwanpur","Chhittupur",
+    "Dafi","Durgakund","Kandwa","Karaundi","Lanka / BHU Gate","Mahamana Puri Colony",
+    "Naria","Ramnagar","Ravindrapuri","Samne Ghat","Sundarpur","Susuwahi"
+  ],
+  CENTRAL: [
+    "Annapurna Nagar","Bhelupur","Brij Enclave Colony","DLW / BLW","Gandhi Nagar (Sigra)",
+    "Godowlia","Gurubagh","Hydel Colony","Indira Nagar Colony","Kakarmatta","Kamachha",
+    "Khojwa","Lahartara","Luxa","Mahmoorganj","Manduadih / Banaras Station","Marhauli",
+    "Rathyatra","Shivala","Sigra","Sonarpura","Tulsipur"
+  ],
+  NORTH: [
+    "Ardali Bazar / Orderly Bazar","Ashapur","Benia Bagh","Bhojubeer","Cantonment / Cantt",
+    "Chaukaghat","Gilat Bazar","Kabir Chaura","Kajjakpura","Kashi Station Area","Lahurabir",
+    "Ledhupur","Maidagin","Maldahiya","Nadesar","Paharia","Panchkoshi Road","Pandeypur",
+    "Phulwaria","Sarnath","Shivpur","Taktakpur","Visheshwarganj"
+  ],
+  WEST: [
+    "Babatpur","Harhua","Lohta","Mohan Sarai","Parao","Rohania"
+  ]
+};
+
 const LOCALITIES = [
-  "Akhari / Bypass","Annapurna Nagar","Ardali Bazar / Orderly Bazar","Ashapur","Assi / Nagwa",
-  "Awleshpur","Babatpur","Benia Bagh","Bhadaini","Bhagwanpur","Bhelupur","Bhojubeer",
-  "Brij Enclave Colony","Cantonment / Cantt","Chaukaghat","Chhittupur","Dafi","DLW / BLW",
-  "Durgakund","Gandhi Nagar (Sigra)","Gilat Bazar","Godowlia","Gurubagh","Harhua",
-  "Hydel Colony","Indira Nagar Colony","Kabir Chaura","Kajjakpura","Kakarmatta","Kamachha",
-  "Kandwa","Karaundi","Kashi Station Area","Khojwa","Lahartara","Lahurabir","Lanka / BHU Gate",
-  "Ledhupur","Lohta","Luxa","Mahamana Puri Colony","Mahmoorganj","Maidagin","Maldahiya",
-  "Manduadih / Banaras Station","Marhauli","Mohan Sarai","Nadesar","Naria","Paharia",
-  "Panchkoshi Road","Pandeypur","Parao","Phulwaria","Ramnagar","Rathyatra","Ravindrapuri",
-  "Rohania","Samne Ghat","Sarnath","Shivala","Shivpur","Sigra","Sonarpura","Sundarpur",
-  "Susuwahi","Taktakpur","Tulsipur","Visheshwarganj"
-];
+  ...LOCALITY_CLUSTERS.SOUTH,
+  ...LOCALITY_CLUSTERS.CENTRAL,
+  ...LOCALITY_CLUSTERS.NORTH,
+  ...LOCALITY_CLUSTERS.WEST
+].sort((a, b) => a.localeCompare(b));
 
 let activePayTab = "razorpay";
 let activeSuccessPayTab = "razorpay";
@@ -1908,6 +2129,7 @@ let currentUser = null;
 let crmData = { tutors: [], leads: [] };
 let lastSubmittedTutor = null;
 let lastSubmittedLead = null;
+let activeLeadModalData = null;
 
 function getScriptUrl() {
   const saved = localStorage.getItem("alenn_script_url");
@@ -1952,8 +2174,59 @@ function addDaysISO(baseDateStr, days) {
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
 }
+function isPaidTutor(t) {
+  return String(t?.payment || "").trim().toLowerCase() === "paid";
+}
+function isTutorVerified(t) {
+  if (!t) return false;
+  if (t.is_verified === true) return true;
+  const s = String(t.is_verified ?? "").trim().toLowerCase();
+  return s === "true" || s === "yes" || s === "verified" || s === "1";
+}
+function isTrustedRecord(rec) {
+  if (!rec) return false;
+  if (rec.trusted === true) return true;
+  const s = String(rec.trusted || "").trim().toLowerCase();
+  return s === "true" || s === "yes" || s === "trusted" || s === "1";
+}
+function getRejectionCount(t) {
+  const n = parseInt(t?.unconfirmedCount, 10);
+  return isNaN(n) || n < 0 ? 0 : n;
+}
+function isTerminatedTutor(t) {
+  return getRejectionCount(t) >= 3 || String(t?.status || "").toLowerCase().includes("terminated");
+}
+function getTutorLabel(t) {
+  return `${t.name} (${t.subjects} • ${t.area})`;
+}
+function resolveAssignedTutor(l) {
+  if (!l || (!l.assignedTutor && !l.assignedTutorId)) return null;
+  let match = null;
+  if (l.assignedTutorId) {
+    match = crmData.tutors.find(t => String(t.id) === String(l.assignedTutorId));
+  }
+  if (!match && l.assignedTutor) {
+    match = crmData.tutors.find(t => getTutorLabel(t) === l.assignedTutor);
+  }
+  if (!match && l.assignedTutor) {
+    const rawName = String(l.assignedTutor).split("(")[0].trim().toLowerCase();
+    if (rawName) {
+      match = crmData.tutors.find(t => String(t.name || "").trim().toLowerCase() === rawName);
+    }
+  }
+  return {
+    id: l.assignedTutorId || match?.id || "",
+    label: l.assignedTutor || (match ? getTutorLabel(match) : ""),
+    name: match?.name || String(l.assignedTutor || "").split("(")[0].trim() || "Assigned Tutor",
+    phone: match?.phone || l.assignedTutorPhone || "",
+    verified: match ? isTutorVerified(match) : false
+  };
+}
 function getValidityMeta(t) {
-  const validUntil = t.validUntil || addDaysISO(t.createdAt, 365);
+  if (!isPaidTutor(t)) {
+    return { state: "UnpaidPending", days: 99999, date: "", cls: "b-gray", label: "Validity starts on ₹400 Payment" };
+  }
+  const validUntil = t.validUntil || addDaysISO(t.paidDate || t.createdAt, 365);
   const diffDays = Math.ceil((new Date(validUntil) - new Date()) / 86400000);
   if (diffDays <= 0) return { state: "Expired", days: diffDays, date: validUntil, cls: "b-red", label: `Expired (${validUntil})` };
   if (diffDays <= 30) return { state: "RenewSoon", days: diffDays, date: validUntil, cls: "b-amber", label: `Renew in ${diffDays}d (${validUntil})` };
@@ -2044,8 +2317,8 @@ function openInquiry(source, area) {
 function openPolicy(type) {
   const map = {
     privacy: "<h3>Privacy Policy</h3><p style='margin-top:8px;font-size:13.5px;'>Alenn Tuition Bureau collects parent and tutor details strictly for matching verified tutors in Varanasi. Tutor verification documents sent to hometuition34@gmail.com are accessible only to authorized coordinators and the Director.</p>",
-    terms: "<h3>Terms & Conditions</h3><ul class='checklist' style='margin-top:10px;'><li>✅ <b>Free Demo:</b> First trial demo class for parents/students is 100% free.</li><li>✅ <b>Tutor Registration Fee:</b> ₹400 registration fee with <b>1-year (365 days) validity</b> covering onboarding and document verification.</li><li>✅ <b>Annual Renewal Charge:</b> ₹400 annual renewal fee after 1 year to continue receiving Varanasi tuition assignments.</li><li>✅ <b>50% First-Month Commission Policy:</b> For every confirmed tuition assigned through Alenn Tuition Bureau, the tutor pays <b>50% of the first month's tuition fee</b> as placement commission. From the 2nd month onwards, 100% of the monthly fee goes to the tutor.</li><li>✅ <b>Conduct:</b> Tutors must maintain punctuality, professionalism, and verified ID records.</li></ul>",
-    refund: "<h3>Refund & Cancellation Policy</h3><p style='margin-top:8px;font-size:13.5px;'>Tutor registration (₹400) and annual renewal (₹400) fees are non-refundable once profile verification is initiated. Monthly tuition fee and first-month commission adjustments are handled transparently via official digital receipts.</p>",
+    terms: "<h3>Terms & Conditions — Alenn Tuition Bureau</h3><ul class='checklist' style='margin-top:10px;'><li>✅ <b>Free Demo (Parents/Students):</b> The first trial demo class with a verified tutor is 100% free with zero obligation.</li><li>✅ <b>Non-Refundable Tutor Registration Fee (₹400):</b> Every tutor pays a <b>strictly non-refundable ₹400 registration fee</b> covering profile onboarding and document verification. Your <b>1-year (365 days) validity starts strictly from the date payment is received and confirmed</b>.</li><li>✅ <b>Non-Refundable Annual Renewal Fee (₹400):</b> After 365 days from payment confirmation, a <b>non-refundable ₹400 annual renewal fee</b> is required to keep your profile active for new Varanasi tuition assignments.</li><li>✅ <b>50% First-Month Commission Policy:</b> For every confirmed tuition assigned through Alenn Tuition Bureau, the tutor pays <b>50% of the first month's tuition fee</b> as placement commission. From the 2nd month onwards, 100% of the monthly tuition fee belongs to the tutor.</li><li>⛔ <b>3 Consecutive Rejections — Service Termination Policy:</b> If a registered tutor receives <b>3 consecutive demo rejections / unconfirmed tuitions</b> from parents or students, Alenn Tuition Bureau reserves the right to <b>terminate and deactivate the tutor's services immediately with NO refund</b> of registration or renewal fees.</li><li>🚫 <b>Anti-Bypass & Professional Conduct:</b> Tutors must maintain punctuality, authentic ID/degree documents, and professional conduct. Directly contacting or teaching an introduced parent/student while bypassing bureau commission results in immediate permanent blacklisting without refund.</li></ul>",
+    refund: "<h3>Refund & Cancellation Policy</h3><ul class='checklist' style='margin-top:10px;'><li>🚫 <b>Strictly Non-Refundable Registration & Renewal Fees:</b> The ₹400 Tutor Registration Fee and ₹400 Annual Renewal Fee are <b>strictly non-refundable and non-transferable under all circumstances</b> once paid.</li><li>⛔ <b>No Refund on Service Termination:</b> No refund shall be issued if a tutor's services are terminated due to <b>3 consecutive demo rejections / unconfirmed tuitions</b>, voluntary withdrawal, unavailability, misconduct, document discrepancies, or bypassing bureau commission.</li><li>📘 <b>Parent / Student Tuition Fee Adjustments:</b> First trial demo is free. If a tuition is discontinued after confirmation, pro-rata settlement between parent, tutor, and bureau is handled transparently based on actual classes conducted, backed by official digital receipts.</li><li>📞 <b>Support & Dispute Resolution:</b> For any billing or receipt query, contact +91 99196 66650 / WhatsApp +91 99199 91185.</li></ul>",
     service: "<h3>Service Delivery Policy</h3><p style='margin-top:8px;font-size:13.5px;'>Demo classes are typically arranged within 24–48 hours across 65+ Varanasi localities in Home 1-on-1, Small Group, or Online mode.</p>"
   };
   document.getElementById("policyContent").innerHTML = map[type] || map.privacy;
@@ -2058,13 +2331,50 @@ window.addEventListener("popstate", () => {
   navigateTo(found || "home", true);
 });
 
-/* ================= LOCALITY SEARCH PICKER ================= */
-function renderHomeLocalityChips() {
-  const wrap = document.getElementById("homeLocalityChips");
-  wrap.innerHTML = LOCALITIES.map(loc =>
-    `<button type="button" class="chip" onclick="openInquiry('Locality: ${esc(loc)}','${esc(loc)}')">Home Tutor in ${esc(loc)}</button>`
-  ).join("");
+/* ================= COMPACT HOME AREA CLUSTER & LOCALITY PICKER ================= */
+function renderHomeAreaCluster() {
+  const zone = document.getElementById("homeZoneSelect")?.value || "ALL";
+  const q = (document.getElementById("homeAreaSearch")?.value || "").trim().toLowerCase();
+  const baseList = zone === "ALL" ? LOCALITIES : (LOCALITY_CLUSTERS[zone] || LOCALITIES);
+  const filtered = q ? baseList.filter(loc => loc.toLowerCase().includes(q)) : baseList;
+
+  const sel = document.getElementById("homeAreaSelect");
+  if (sel) {
+    if (filtered.length) {
+      sel.innerHTML = `<option value="">📍 Choose Locality (${filtered.length} matching)...</option>` +
+        filtered.map(loc => `<option value="${esc(loc)}">${esc(loc)}</option>`).join("");
+      if (filtered.length === 1) sel.value = filtered[0];
+    } else {
+      sel.innerHTML = `<option value="${esc(document.getElementById("homeAreaSearch").value.trim())}">✏️ Use "${esc(document.getElementById("homeAreaSearch").value.trim())}"</option>`;
+    }
+  }
+
+  const quickBox = document.getElementById("homeAreaMatches");
+  if (quickBox) {
+    if (q || zone !== "ALL") {
+      quickBox.style.display = "flex";
+      quickBox.innerHTML = filtered.length
+        ? filtered.map(loc => `<button type="button" class="chip" onclick="openInquiry('Locality: ${esc(loc)}','${esc(loc)}')">📍 ${esc(loc)}</button>`).join("")
+        : `<span style="font-size:12px;color:var(--muted);padding:4px;">No exact match — click "Book Free Demo in Area" to enter your locality manually.</span>`;
+    } else {
+      quickBox.style.display = "none";
+      quickBox.innerHTML = "";
+    }
+  }
 }
+
+function bookFromAreaDropdown() {
+  const selVal = document.getElementById("homeAreaSelect")?.value || "";
+  const searchVal = (document.getElementById("homeAreaSearch")?.value || "").trim();
+  const chosen = selVal || searchVal;
+  if (!chosen) {
+    toast("📍 Please select or type your Varanasi locality first.");
+    document.getElementById("homeAreaSelect")?.focus();
+    return;
+  }
+  openInquiry("Locality: " + chosen, chosen);
+}
+
 function openLocDrop(inputId, dropId) { filterLocDrop(inputId, dropId); document.getElementById(dropId).classList.add("open"); }
 function filterLocDrop(inputId, dropId) {
   const q = document.getElementById(inputId).value.trim().toLowerCase();
@@ -2184,6 +2494,12 @@ async function postToBackend(payload) {
 
 async function submitInquiry(e) {
   e.preventDefault();
+  const rawPhone = document.getElementById("inqPhone").value.trim();
+  if (!cleanWaPhone(rawPhone)) {
+    toast("⚠ Please enter a valid 10-digit Phone / WhatsApp number.");
+    document.getElementById("inqPhone").focus();
+    return;
+  }
   const btn = document.getElementById("inqSubmitBtn");
   btn.disabled = true; btn.textContent = "⏳ Submitting Inquiry...";
 
@@ -2194,6 +2510,7 @@ async function submitInquiry(e) {
     name: document.getElementById("inqName").value.trim(),
     phone: document.getElementById("inqPhone").value.trim(),
     classExam: document.getElementById("inqClass").value,
+    specificClass: document.getElementById("inqSpecificClass").value.trim(),
     board: document.getElementById("inqBoard").value,
     subjects: document.getElementById("inqSubjects").value.trim(),
     area: document.getElementById("inqArea").value.trim(),
@@ -2204,6 +2521,8 @@ async function submitInquiry(e) {
     notes: document.getElementById("inqNotes").value.trim(),
     assignedStaff: "Unassigned",
     assignedTutor: "",
+    assignedTutorId: "",
+    assignedTutorPhone: "",
     status: "New Lead",
     confirmedDate: "",
     monthlyFee: "",
@@ -2222,16 +2541,15 @@ async function submitInquiry(e) {
   btn.disabled = false; btn.textContent = "🚀 Submit Tutor Inquiry (Free Demo)";
   document.getElementById("inquiryForm").reset();
 
-  // Populate dedicated Inquiry Success Page
   document.getElementById("inqSuccessSummary").innerHTML = `
     <div><b>Name:</b> ${esc(lead.name)}</div>
     <div><b>Phone:</b> ${esc(lead.phone)}</div>
-    <div><b>Class / Exam:</b> ${esc(lead.classExam)}</div>
+    <div><b>Class / Exam:</b> ${esc(lead.classExam)}${lead.specificClass ? ` (${esc(lead.specificClass)})` : ""}</div>
     <div><b>Subjects:</b> ${esc(lead.subjects)}</div>
     <div><b>Varanasi Area:</b> ${esc(lead.area)}</div>
     <div><b>Mode:</b> ${esc(lead.mode)}</div>
   `;
-  const waText = `Hello Alenn Tuition Bureau, I just submitted a Free Demo inquiry.\nName: ${lead.name}\nPhone: ${lead.phone}\nClass/Exam: ${lead.classExam}\nSubjects: ${lead.subjects}\nArea: ${lead.area}\nMode: ${lead.mode}`;
+  const waText = `Hello Alenn Tuition Bureau, I just submitted a Free Demo inquiry.\nName: ${lead.name}\nPhone: ${lead.phone}\nClass/Exam: ${lead.classExam}${lead.specificClass ? " (" + lead.specificClass + ")" : ""}\nSubjects: ${lead.subjects}\nArea: ${lead.area}\nMode: ${lead.mode}`;
   document.getElementById("inqSuccessWaBtn").href = "https://wa.me/919919991185?text=" + encodeURIComponent(waText);
 
   navigateTo("inquiry-success");
@@ -2277,7 +2595,7 @@ Subjects: ${v.subjects || ""}
 Base Varanasi Area: ${v.area || ""}
 Preferred Areas & Slots: ${v.slots || ""}
 
-Policy Accepted: ₹400 Registration Fee (1-Year Validity), ₹400 Annual Renewal Charge, and 50% First-Month Commission on confirmed tuitions.`;
+Policy Accepted: ₹400 Non-Refundable Registration Fee (1-Year Validity from payment confirmation date), ₹400 Non-Refundable Annual Renewal Charge, 50% First-Month Commission on confirmed tuitions, and Service Termination without refund after 3 consecutive demo rejections.`;
 }
 function openPrefilledDocEmail(useSubmitted) {
   const v = (useSubmitted && lastSubmittedTutor) ? lastSubmittedTutor : getTutorFormValues();
@@ -2288,26 +2606,35 @@ function copyTutorBackupText(useSubmitted) { copyText(buildDocEmailText(useSubmi
 
 async function submitTutor(e) {
   e.preventDefault();
+  const v = getTutorFormValues();
+  if (!cleanWaPhone(v.phone)) {
+    toast("⚠ Please enter a valid 10-digit WhatsApp / Mobile number.");
+    document.getElementById("tutPhone").focus();
+    return;
+  }
   if (!document.getElementById("tutAgreePolicy").checked) {
-    toast("Please accept the ₹400 fee, renewal & 50% commission policy first.");
+    toast("Please accept the non-refundable ₹400 fee, 50% commission & 3-rejection termination policy first.");
     return;
   }
   const btn = document.getElementById("tutSubmitBtn");
   btn.disabled = true; btn.textContent = "⏳ Registering Profile...";
-  const v = getTutorFormValues();
   const today = new Date().toISOString().slice(0, 10);
   const tutor = {
     id: "TUT-" + Date.now(),
     createdAt: today,
-    validUntil: addDaysISO(today, 365),
+    paidDate: "",
+    validUntil: "",
     ...v,
-    policyAccepted: "Yes (₹400 Reg/Renew + 50% 1st Month Comm)",
+    policyAccepted: "Yes (₹400 Non-Refundable Reg/Renew + 50% 1st Month Comm + 3-Rejection Termination)",
     payment: "Unpaid",
     docStatus: "Pending",
     docCount: 0,
     docFiles: "",
+    is_verified: false,
     status: "New",
     assignedStaff: "Unassigned",
+    trusted: false,
+    unconfirmedCount: 0,
     notes: "",
     flag: "None",
     flagReason: "",
@@ -2324,7 +2651,6 @@ async function submitTutor(e) {
   document.getElementById("tutorForm").reset();
   updateTutorMailSync();
 
-  // Populate dedicated Tutor Success Page
   document.getElementById("tutSuccessSummary").innerHTML = `
     <div><b>Tutor ID:</b> ${esc(tutor.id)}</div>
     <div><b>Name:</b> ${esc(tutor.name)}</div>
@@ -2415,26 +2741,47 @@ async function syncFromSheet() {
     const res = await fetch(getScriptUrl() + "?action=getAll");
     const json = await res.json();
     if (json && Array.isArray(json.tutors)) {
+      const prevTutorMap = new Map(crmData.tutors.map(x => [String(x.id), x]));
+      const prevLeadMap = new Map(crmData.leads.map(x => [String(x.id), x]));
       crmData.tutors = json.tutors
         .filter(t => t && (String(t.name || "").trim() || String(t.phone || "").trim()))
-        .map((t, idx) => ({
-          ...t,
-          id: String(t.id || ("TUT-ROW-" + idx)),
-          flag: t.flag || "None",
-          flagReason: t.flagReason || "",
-          flaggedBy: t.flaggedBy || "",
-          hidden: isHiddenRecord(t)
-        }));
+        .map((t, idx) => {
+          const tid = String(t.id || ("TUT-ROW-" + idx));
+          const prev = prevTutorMap.get(tid);
+          const hasSheetTrusted = t.trusted !== undefined && t.trusted !== "";
+          const hasSheetVerified = t.is_verified !== undefined && t.is_verified !== "";
+          const hasSheetRej = t.unconfirmedCount !== undefined && t.unconfirmedCount !== "";
+          const hasSheetPaidDate = t.paidDate !== undefined && t.paidDate !== "";
+          return {
+            ...t,
+            id: tid,
+            paidDate: hasSheetPaidDate ? t.paidDate : (prev?.paidDate || ""),
+            is_verified: hasSheetVerified ? isTutorVerified(t) : (prev ? isTutorVerified(prev) : false),
+            trusted: hasSheetTrusted ? isTrustedRecord(t) : (prev ? isTrustedRecord(prev) : false),
+            unconfirmedCount: hasSheetRej ? getRejectionCount(t) : (prev ? getRejectionCount(prev) : 0),
+            flag: t.flag || "None",
+            flagReason: t.flagReason || "",
+            flaggedBy: t.flaggedBy || "",
+            hidden: isHiddenRecord(t)
+          };
+        });
       crmData.leads = (json.leads || [])
         .filter(l => l && (String(l.name || "").trim() || String(l.phone || "").trim()))
-        .map((l, idx) => ({
-          ...l,
-          id: String(l.id || ("LD-ROW-" + idx)),
-          flag: l.flag || "None",
-          flagReason: l.flagReason || "",
-          flaggedBy: l.flaggedBy || "",
-          hidden: isHiddenRecord(l)
-        }));
+        .map((l, idx) => {
+          const lid = String(l.id || ("LD-ROW-" + idx));
+          const prev = prevLeadMap.get(lid);
+          return {
+            ...l,
+            id: lid,
+            specificClass: l.specificClass || prev?.specificClass || "",
+            assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
+            assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
+            flag: l.flag || "None",
+            flagReason: l.flagReason || "",
+            flaggedBy: l.flaggedBy || "",
+            hidden: isHiddenRecord(l)
+          };
+        });
       saveLocalCrm();
       statusEl.textContent = `✔ Live synced with Google Sheets (${crmData.tutors.length} Tutors, ${crmData.leads.length} Leads)`;
       refreshCrmUI();
@@ -2448,7 +2795,7 @@ async function syncFromSheet() {
 
 function switchCrmTab(tab) {
   if (tab === "settings" && currentUser?.role !== "director") tab = "tutors";
-  ["tutors","leads","flagged","commissions","renewals","settings"].forEach(t => {
+  ["tutors","trusted","leads","flagged","commissions","renewals","settings"].forEach(t => {
     document.getElementById("ctab-" + t)?.classList.toggle("active", t === tab);
     const panel = document.getElementById("panel-" + t);
     if (panel) panel.style.display = (t === tab) ? "block" : "none";
@@ -2461,7 +2808,11 @@ function refreshCrmUI() {
   const activeLeads = crmData.leads.filter(l => !isHiddenRecord(l));
 
   const myLeads = isDir ? activeLeads : activeLeads.filter(l => l.assignedStaff === currentUser.name || l.assignedStaff === "Unassigned" || !l.assignedStaff);
+  const dirVerifiedCount = activeTutors.filter(t => isTutorVerified(t)).length;
   const verifiedCount = activeTutors.filter(t => String(t.docStatus || "").includes("Verified")).length;
+  const trustedCount = activeTutors.filter(t => isTrustedRecord(t)).length;
+  const paidCount = activeTutors.filter(t => isPaidTutor(t)).length;
+  const terminatedCount = activeTutors.filter(t => isTerminatedTutor(t)).length;
   const renewList = activeTutors.filter(t => ["RenewSoon","Expired"].includes(getValidityMeta(t).state));
   const dueCommList = myLeads.filter(l => {
     const cm = getCommissionMeta(l);
@@ -2473,9 +2824,19 @@ function refreshCrmUI() {
   const totalFlagged = flaggedTutorsCount + flaggedLeadsCount;
 
   document.getElementById("kpiTutors").textContent = activeTutors.length;
-  document.getElementById("kpiVerified").textContent = verifiedCount;
+  document.getElementById("kpiTrusted").textContent = trustedCount;
   document.getElementById("kpiCommDue").textContent = dueCommList.length;
   document.getElementById("kpiLeads").textContent = myLeads.length;
+  const dvb = document.getElementById("kpiDirVerifiedBadge");
+  if (dvb) dvb.textContent = `🛡️ Director Verified: ${dirVerifiedCount}`;
+  const vb = document.getElementById("kpiVerifiedBadge");
+  if (vb) vb.textContent = `✔ Docs Verified: ${verifiedCount}`;
+  const pb = document.getElementById("kpiPaidBadge");
+  if (pb) pb.textContent = `💳 Paid Active: ${paidCount}`;
+  const tb = document.getElementById("kpiTerminatedBadge");
+  if (tb) tb.textContent = `⛔ Terminated (3 Rej): ${terminatedCount}`;
+  const trustedTabBtn = document.getElementById("ctab-trusted");
+  if (trustedTabBtn) trustedTabBtn.textContent = `⭐ Trusted (${trustedCount})`;
 
   const flagBanner = document.getElementById("flaggedAlertBanner");
   if (totalFlagged > 0) {
@@ -2511,6 +2872,7 @@ function refreshCrmUI() {
   }
 
   renderTutors();
+  renderTrustedTutors();
   renderLeads();
   renderFlaggedSection();
   renderCommissions();
@@ -2518,39 +2880,82 @@ function refreshCrmUI() {
 }
 
 function resetTutorFilters() {
-  ["fSearch","fArea","fGender","fPay","fDoc","fValidity","fFlag"].forEach(id => {
+  ["fSearch","fArea","fGender","fPay","fDoc","fVerified","fValidity","fTrusted","fStatus","fFlag"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = "";
   });
+  const sortEl = document.getElementById("fSort");
+  if (sortEl) sortEl.value = "verifiedTrusted";
   const chk = document.getElementById("fShowHidden");
   if (chk) chk.checked = false;
   renderTutors();
 }
+function quickFilterTutors(preset) {
+  switchCrmTab("tutors");
+  resetTutorFilters();
+  if (preset === "dirVerified") document.getElementById("fVerified").value = "Verified";
+  else if (preset === "trusted") document.getElementById("fTrusted").value = "Trusted";
+  else if (preset === "paidVerified") {
+    document.getElementById("fPay").value = "Paid";
+    document.getElementById("fDoc").value = "Verified";
+  }
+  else if (preset === "unpaid") document.getElementById("fPay").value = "Unpaid";
+  else if (preset === "terminated") document.getElementById("fStatus").value = "Terminated (3 Rejections)";
+  renderTutors();
+}
+function resetLeadFilters() {
+  ["leadSearch","leadAreaFilter","leadStatusFilter","leadFlagFilter","leadStaffFilter"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  const chk = document.getElementById("leadShowHidden");
+  if (chk) chk.checked = false;
+  renderLeads();
+}
 
 function docBadgeHtml(t) {
   const s = String(t.docStatus || "Pending");
-  if (s.includes("Manual")) return `<span class="badge b-green">✔ Verified (Manual)</span>`;
-  if (s.includes("Auto-Verified")) return `<span class="badge b-green">🤖 Auto-Verified (${t.docCount || 4} Docs)</span>`;
+  if (s.includes("Manual")) return `<span class="badge b-green">✔ Docs Verified (Manual)</span>`;
+  if (s.includes("Auto-Verified")) return `<span class="badge b-green">🤖 Docs Auto-Verified (${t.docCount || 4})</span>`;
   if (s.includes("Partial")) return `<span class="badge b-amber">⚠ Partial Docs (${t.docCount || "?"}/4)</span>`;
   return `<span class="badge b-amber">📄 Docs: Pending</span>`;
 }
 
+function verifyBadgeHtml(t) {
+  return isTutorVerified(t)
+    ? `<span class="badge b-verified">🛡️ Director Verified</span>`
+    : `<span class="badge b-unverified">⏳ Unverified</span>`;
+}
+
 function tutorCardHtml(t) {
   const vm = getValidityMeta(t);
-  const payCls = t.payment === "Paid" ? "b-green" : "b-red";
+  const paid = isPaidTutor(t);
+  const verified = isTutorVerified(t);
+  const trusted = isTrustedRecord(t);
+  const rej = getRejectionCount(t);
+  const terminated = isTerminatedTutor(t);
+  const payCls = paid ? "b-green" : "b-red";
   const safePhone = cleanWaPhone(t.phone);
-  const extraCls = isHiddenRecord(t) ? "card-hidden" : (hasActiveFlag(t) ? "card-flagged" : "");
+  const extraCls = isHiddenRecord(t)
+    ? "card-hidden"
+    : (terminated ? "card-terminated" : (hasActiveFlag(t) ? "card-flagged" : (trusted ? "card-trusted" : "")));
+  const rejBadge = terminated
+    ? `<span class="badge b-red">⛔ Terminated (${Math.max(rej, 3)}/3 Rejections)</span>`
+    : (rej > 0 ? `<span class="badge b-amber">⚠️ Rejections: ${rej}/3</span>` : "");
   return `
     <div class="card ${extraCls}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
         <div>
-          <h3 style="font-size:17px;text-transform:uppercase;">${esc(t.name || "Unnamed Tutor")}</h3>
+          <h3 style="font-size:17px;text-transform:uppercase;">${verified ? "🛡️ " : ""}${trusted ? "⭐ " : ""}${esc(t.name || "Unnamed Tutor")}</h3>
           <div style="display:flex;flex-wrap:wrap;gap:5px;margin:6px 0;">
+            ${verifyBadgeHtml(t)}
+            ${trusted ? `<span class="badge b-gold">⭐ Trusted Tutor</span>` : ""}
+            ${rejBadge}
             ${flagBadgeHtml(t)}
-            <span class="badge ${payCls}">${t.payment === "Paid" ? "✔ Paid (₹400)" : "⏳ Unpaid"}</span>
+            <span class="badge ${payCls}">${paid ? "✔ Paid (₹400)" : "⏳ Unpaid"}</span>
             ${docBadgeHtml(t)}
             <span class="badge ${vm.cls}">📅 ${esc(vm.label)}</span>
-            <span class="badge b-blue">Status: ${esc(t.status || "New")}</span>
+            <span class="badge ${terminated ? "b-red" : "b-blue"}">Status: ${esc(t.status || "New")}</span>
             ${t.assignedStaff && t.assignedStaff !== "Unassigned" ? `<span class="badge b-purple">👤 ${esc(t.assignedStaff)}</span>` : ""}
           </div>
         </div>
@@ -2582,23 +2987,52 @@ function renderTutors() {
   const gender = document.getElementById("fGender").value;
   const pay = document.getElementById("fPay").value;
   const doc = document.getElementById("fDoc").value;
+  const verF = document.getElementById("fVerified")?.value || "";
   const val = document.getElementById("fValidity").value;
+  const trustedF = document.getElementById("fTrusted")?.value || "";
+  const statusF = document.getElementById("fStatus")?.value || "";
   const flagF = document.getElementById("fFlag")?.value || "";
+  const sortF = document.getElementById("fSort")?.value || "verifiedTrusted";
 
-  const list = crmData.tutors.filter(t => {
-    if (isHiddenRecord(t) && !showHidden) return false;
+  const visiblePool = crmData.tutors.filter(t => !(isHiddenRecord(t) && !showHidden));
+  const list = visiblePool.filter(t => {
     const vm = getValidityMeta(t);
-    const hay = `${t.name} ${t.subjects} ${t.classes} ${t.area} ${t.phone} ${t.qualification} ${t.flag} ${t.flagReason}`.toLowerCase();
+    const verified = isTutorVerified(t);
+    const trusted = isTrustedRecord(t);
+    const terminated = isTerminatedTutor(t);
+    const hay = `${t.id} ${t.name} ${t.subjects} ${t.classes} ${t.area} ${t.phone} ${t.email} ${t.qualification} ${t.slots} ${t.notes} ${t.flag} ${t.flagReason} ${verified ? "verified" : "unverified"} ${trusted ? "trusted" : ""} ${terminated ? "terminated rejected" : ""}`.toLowerCase();
     if (q && !hay.includes(q)) return false;
     if (area && !String(t.area || "").toLowerCase().includes(area)) return false;
     if (gender && t.gender !== gender) return false;
-    if (pay && (t.payment || "Unpaid") !== pay) return false;
+    if (pay && (isPaidTutor(t) ? "Paid" : "Unpaid") !== pay) return false;
     if (doc && !String(t.docStatus || "Pending").includes(doc)) return false;
+    if (verF === "Verified" && !verified) return false;
+    if (verF === "Unverified" && verified) return false;
     if (val && vm.state !== val) return false;
+    if (trustedF === "Trusted" && !trusted) return false;
+    if (trustedF === "Standard" && trusted) return false;
+    if (statusF) {
+      if (statusF === "Terminated (3 Rejections)") {
+        if (!terminated) return false;
+      } else if ((t.status || "New") !== statusF) return false;
+    }
     if (flagF === "ANY_FLAG" && !hasActiveFlag(t)) return false;
     else if (flagF && flagF !== "ANY_FLAG" && getNormalizedFlag(t) !== flagF) return false;
     return true;
   });
+
+  if (sortF === "verifiedTrusted") {
+    list.sort((a, b) => (isTerminatedTutor(a) - isTerminatedTutor(b)) || (isTutorVerified(b) - isTutorVerified(a)) || (isTrustedRecord(b) - isTrustedRecord(a)));
+  } else if (sortF === "trustedFirst") {
+    list.sort((a, b) => (isTrustedRecord(b) - isTrustedRecord(a)) || (isTerminatedTutor(a) - isTerminatedTutor(b)));
+  } else if (sortF === "nameAsc") {
+    list.sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
+  } else if (sortF === "expiringSoon") {
+    list.sort((a, b) => (getValidityMeta(a).days ?? 99999) - (getValidityMeta(b).days ?? 99999));
+  }
+
+  const bar = document.getElementById("tutorsCountBar");
+  if (bar) bar.innerHTML = `<span>Showing <b>${list.length}</b> of ${visiblePool.length} tutor(s)</span>`;
 
   const container = document.getElementById("tutorsList");
   if (!list.length) {
@@ -2609,10 +3043,67 @@ function renderTutors() {
   container.innerHTML = list.map(tutorCardHtml).join("");
 }
 
+function renderTrustedTutors() {
+  const q = (document.getElementById("trustedSearch")?.value || "").trim().toLowerCase();
+  const area = (document.getElementById("trustedArea")?.value || "").trim().toLowerCase();
+  const list = crmData.tutors.filter(t => {
+    if (isHiddenRecord(t)) return false;
+    if (!isTrustedRecord(t)) return false;
+    const hay = `${t.name} ${t.subjects} ${t.classes} ${t.area} ${t.phone} ${t.qualification} ${t.notes}`.toLowerCase();
+    if (q && !hay.includes(q)) return false;
+    if (area && !String(t.area || "").toLowerCase().includes(area)) return false;
+    return true;
+  });
+  const el = document.getElementById("trustedTutorsList");
+  if (!el) return;
+  if (!list.length) {
+    el.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);">No tutors marked as <b>⭐ Trusted</b> yet. Open any tutor's <b>⚙ Manage</b> modal and enable <b>Mark Trusted</b>.</div>`;
+    return;
+  }
+  el.innerHTML = list.map(tutorCardHtml).join("");
+}
+
+function openAssignedTutorWa(leadId) {
+  const l = crmData.leads.find(x => String(x.id) === String(leadId));
+  if (!l) return;
+  const tut = resolveAssignedTutor(l);
+  if (!tut || !cleanWaPhone(tut.phone)) {
+        toast("⚠ No valid phone number found for assigned tutor.");
+    return;
+  }
+  const msg = `Hello ${tut.name || "Sir/Ma'am"}, this is ${currentUser?.name || "Coordinator"} from Alenn Tuition Bureau regarding the tuition lead for ${l.name} (${l.classExam}, ${l.subjects}) in ${l.area}.`;
+  openWaChat(tut.phone, msg);
+}
+
 function leadCardHtml(l) {
   const cm = getCommissionMeta(l);
   const safePhone = cleanWaPhone(l.phone);
+  const tut = resolveAssignedTutor(l);
+  const tutPhone = tut ? cleanWaPhone(tut.phone) : "";
+  const hasTutor = !!(tut && (tut.name || tut.label));
   const extraCls = isHiddenRecord(l) ? "card-hidden" : (hasActiveFlag(l) ? "card-flagged" : "");
+
+  const tutorStripHtml = hasTutor ? `
+    <div class="assigned-tutor-strip">
+      <div style="min-width:0;">
+        <div style="font-size:12.5px;font-weight:800;color:#166534;display:flex;align-items:center;flex-wrap:wrap;gap:5px;">
+          <span>🎓 ${esc(tut.name || tut.label)}</span>
+          ${tut.verified
+            ? `<span class="badge b-green">✔ Verified Tutor</span>`
+            : `<span class="badge b-amber">⏳ Unverified</span>`}
+        </div>
+        <div style="font-size:11.5px;color:#475569;margin-top:2px;">
+          ${tutPhone ? `📞 +91 ${esc(tutPhone)}` : `⚠ Tutor phone not linked — re-select tutor in Assign modal`}
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        ${tutPhone
+          ? `<a class="btn btn-outline btn-sm" href="tel:+91${tutPhone}" style="color:#166534;border-color:#86efac;">📞 Call Tutor</a>`
+          : `<button type="button" class="btn btn-outline btn-sm" onclick="toast('⚠ No phone number linked for assigned tutor')" style="color:#64748b;">📞 Call Tutor</button>`}
+        <button type="button" class="btn btn-green btn-sm" onclick="openAssignedTutorWa('${esc(l.id)}')">💬 WA Tutor</button>
+      </div>
+    </div>` : "";
+
   return `
     <div class="card ${extraCls}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
@@ -2622,7 +3113,9 @@ function leadCardHtml(l) {
             ${flagBadgeHtml(l)}
             <span class="badge b-blue">${esc(l.status || "New Lead")}</span>
             <span class="badge b-purple">👤 Coordinator: ${esc(l.assignedStaff || "Unassigned")}</span>
-            ${l.assignedTutor ? `<span class="badge b-green">🎓 Tutor: ${esc(l.assignedTutor)}</span>` : `<span class="badge b-amber">🎓 Tutor Not Assigned</span>`}
+            ${hasTutor
+              ? `<span class="badge b-green">🎓 Tutor Assigned</span>`
+              : `<span class="badge b-amber">🎓 Tutor Not Assigned</span>`}
             ${cm ? `<span class="badge ${cm.cls}">${esc(cm.label)}</span>` : ""}
           </div>
         </div>
@@ -2632,12 +3125,15 @@ function leadCardHtml(l) {
         <div><b>Exam/Class:</b> ${esc(l.classExam)} (${esc(l.board)})</div>
         <div><b>Subjects:</b> ${esc(l.subjects)} | <b>Mode:</b> ${esc(l.mode)} | <b>Pref:</b> ${esc(l.genderPref)}</div>
         <div><b>Phone:</b> ${esc(l.phone)} | <b>Timing:</b> ${esc(l.timing)} ${l.monthlyFee ? `| <b>Fee:</b> ₹${esc(l.monthlyFee)}/mo (50% Comm: ₹${Math.round(Number(l.monthlyFee)*0.5)})` : ""}</div>
+        ${tutorStripHtml}
         ${flagNoteHtml(l)}
-        ${l.notes ? `<div style="font-size:12px;color:#64748b;margin-top:3px;">📝 ${esc(l.notes)}</div>` : ""}
+        ${l.notes ? `<div style="font-size:12px;color:#64748b;margin-top:5px;">📝 ${esc(l.notes)}</div>` : ""}
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px;">
-        <a class="btn btn-outline btn-sm" href="${safePhone ? 'tel:+91' + safePhone : 'javascript:toast(\"No phone number\")'}" style="width:100%">📞 Call</a>
-        <button type="button" class="btn btn-outline btn-sm" onclick="openWaChat('${esc(l.phone)}')" style="width:100%;color:var(--green)">💬 WhatsApp</button>
+        ${safePhone
+          ? `<a class="btn btn-outline btn-sm" href="tel:+91${safePhone}" style="width:100%">📞 Call Parent</a>`
+          : `<button type="button" class="btn btn-outline btn-sm" onclick="toast('No phone number')" style="width:100%">📞 Call Parent</button>`}
+        <button type="button" class="btn btn-outline btn-sm" onclick="openWaChat('${esc(l.phone)}')" style="width:100%;color:var(--green)">💬 WA Parent</button>
         <button type="button" class="btn btn-primary btn-sm" style="width:100%" onclick="openLeadModal('${esc(l.id)}')">🎯 Assign / Update</button>
       </div>
     </div>`;
@@ -2647,23 +3143,35 @@ function renderLeads() {
   const isDir = currentUser?.role === "director";
   const showHidden = isDir && document.getElementById("leadShowHidden")?.checked;
   const q = document.getElementById("leadSearch").value.trim().toLowerCase();
+  const areaF = (document.getElementById("leadAreaFilter")?.value || "").trim().toLowerCase();
+  const statusF = document.getElementById("leadStatusFilter")?.value || "";
   const sf = document.getElementById("leadStaffFilter").value;
   const flagF = document.getElementById("leadFlagFilter")?.value || "";
 
-  const list = crmData.leads.filter(l => {
+  const visiblePool = crmData.leads.filter(l => {
     if (isHiddenRecord(l) && !showHidden) return false;
     const owner = l.assignedStaff || "Unassigned";
     if (!isDir && owner !== currentUser.name && owner !== "Unassigned") return false;
+    return true;
+  });
+
+  const list = visiblePool.filter(l => {
+    const owner = l.assignedStaff || "Unassigned";
     if (isDir && sf && owner !== sf) return false;
+    if (areaF && !String(l.area || "").toLowerCase().includes(areaF)) return false;
+    if (statusF && (l.status || "New Lead") !== statusF) return false;
     if (flagF === "ANY_FLAG" && !hasActiveFlag(l)) return false;
     else if (flagF && flagF !== "ANY_FLAG" && getNormalizedFlag(l) !== flagF) return false;
-    const hay = `${l.name} ${l.classExam} ${l.subjects} ${l.area} ${l.phone} ${l.assignedTutor} ${l.flag} ${l.flagReason}`.toLowerCase();
+    const hay = `${l.id} ${l.name} ${l.classExam} ${l.board} ${l.subjects} ${l.area} ${l.phone} ${l.mode} ${l.assignedTutor} ${l.assignedTutorPhone || ""} ${l.assignedStaff} ${l.notes} ${l.flag} ${l.flagReason}`.toLowerCase();
     return !q || hay.includes(q);
   });
 
+  const bar = document.getElementById("leadsCountBar");
+  if (bar) bar.innerHTML = `<span>Showing <b>${list.length}</b> of ${visiblePool.length} lead(s)</span>`;
+
   const el = document.getElementById("leadsList");
   if (!list.length) {
-    el.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);">No tuition leads in this view yet.</div>`;
+    el.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);">No tuition leads match current filters.</div>`;
     return;
   }
 
@@ -2760,6 +3268,8 @@ function renderCommissions() {
 
   el.innerHTML = confirmedLeads.map(l => {
     const cm = getCommissionMeta(l);
+    const tut = resolveAssignedTutor(l);
+    const tutPhone = tut ? cleanWaPhone(tut.phone) : "";
     const staffName = l.assignedStaff || "Coordinator";
     const commStr = cm.commAmt ? `₹${cm.commAmt} (50% of ₹${l.monthlyFee})` : "50% of 1st month's fee";
     const staffWaMsg = encodeURIComponent(`Reminder for ${staffName} (Alenn Tuition Bureau): First month is completing on ${cm.dueDate || "soon"} for ${l.name} (${l.area}, ${l.subjects}). Tutor: ${l.assignedTutor || "Assigned Tutor"}. Please coordinate with the tutor and parents to collect our ${commStr} commission.`);
@@ -2776,7 +3286,7 @@ function renderCommissions() {
           ${cm.commAmt ? `<span class="badge b-green">50% Comm: ₹${cm.commAmt}</span>` : ""}
         </div>
         <div style="font-size:12.5px;color:#334155;margin:6px 0 10px;">
-          <div><b>Tutor:</b> ${esc(l.assignedTutor || "Not selected")}</div>
+          <div><b>Tutor:</b> ${esc(l.assignedTutor || "Not selected")} ${tutPhone ? `(<a href="tel:+91${tutPhone}" style="color:var(--primary);font-weight:700;">📞 ${esc(tutPhone)}</a>)` : ""}</div>
           <div><b>Confirmed On:</b> ${esc(l.confirmedDate || l.createdAt)} | <b>Subjects:</b> ${esc(l.subjects)}</div>
         </div>
         <div class="grid-2">
@@ -2824,23 +3334,133 @@ function renderRenewals() {
   }).join("");
 }
 
-/* ================= MODALS (TUTOR & LEAD MANAGEMENT + FLAGS + DIRECTOR CONTROLS) ================= */
+/* ================= MODALS (TUTOR & LEAD MANAGEMENT + VERIFICATION + FLAGS + DIRECTOR CONTROLS) ================= */
+function getDirVerifyCheckbox() {
+  return document.getElementById("tmDirectorVerified")
+    || document.getElementById("tmDirVerified")
+    || document.getElementById("tmVerified");
+}
+function getLeadVerifiedFilterCheckbox() {
+  return document.getElementById("lmVerifiedOnly")
+    || document.getElementById("lmOnlyVerified")
+    || document.getElementById("lmTutorVerifiedOnly");
+}
+function isDirVerifiedFlag(t) {
+  if (typeof isDirectorVerified === "function") return isDirectorVerified(t);
+  if (!t) return false;
+  if (t.directorVerified === true) return true;
+  const s = String(t.directorVerified || "").trim().toLowerCase();
+  return s === "true" || s === "yes" || s === "verified" || s === "1";
+}
+function isVerifiedTutorCheck(t) {
+  if (typeof isTutorVerified === "function") return isTutorVerified(t);
+  return isDirVerifiedFlag(t) || String(t?.docStatus || "").includes("Verified");
+}
+
+function updatePayValidityHint() {
+  const pay = document.getElementById("tmPay").value;
+  const validInput = document.getElementById("tmValidUntil");
+  const hint = document.getElementById("tmPayValidityHint");
+  if (!hint) return;
+  if (pay === "Paid") {
+    validInput.disabled = false;
+    hint.style.background = "#dcfce7";
+    hint.style.borderColor = "#86efac";
+    hint.style.color = "#166534";
+    hint.innerHTML = validInput.value
+      ? `✅ <b>Payment Linked:</b> 365-day validity active till <b>${esc(validInput.value)}</b>.`
+      : `✅ <b>Payment Linked:</b> 365-day validity will activate on Save.`;
+  } else {
+    validInput.disabled = true;
+    hint.style.background = "#f8fafc";
+    hint.style.borderColor = "#cbd5e1";
+    hint.style.color = "#475569";
+    hint.innerHTML = `⏳ <b>Pending Payment:</b> 365-day validity starts automatically once Payment Status is changed to <b>Paid</b>.`;
+  }
+}
+function onTutorPayChange() {
+  const pay = document.getElementById("tmPay").value;
+  const validInput = document.getElementById("tmValidUntil");
+  const today = new Date().toISOString().slice(0, 10);
+  if (pay === "Paid") {
+    if (!validInput.value) {
+      validInput.value = addDaysISO(today, 365);
+      toast("✅ Paid! 365-day validity auto-set till " + validInput.value);
+    }
+    const statusSel = document.getElementById("tmStatus");
+    if (statusSel.value === "New") statusSel.value = "Active";
+  } else {
+    validInput.value = "";
+  }
+  updatePayValidityHint();
+}
+function onRejectionSelectChange() {
+  const val = parseInt(document.getElementById("tmRejections").value, 10) || 0;
+  const warn = document.getElementById("tmRejectionWarn");
+  if (val >= 3) {
+    document.getElementById("tmStatus").value = "Terminated (3 Rejections)";
+    if (warn) warn.style.display = "block";
+  } else {
+    if (warn) warn.style.display = "none";
+    if (document.getElementById("tmStatus").value === "Terminated (3 Rejections)") {
+      document.getElementById("tmStatus").value = "Active";
+    }
+  }
+}
+function incrementTutorRejection() {
+  const sel = document.getElementById("tmRejections");
+  const next = Math.min(3, (parseInt(sel.value, 10) || 0) + 1);
+  sel.value = String(next);
+  onRejectionSelectChange();
+  if (next >= 3) toast("⛔ 3 consecutive rejections! Status auto-set to Terminated.");
+  else toast(`⚠ Consecutive rejections set to ${next}/3. Tap Save Changes.`);
+}
+function resetTutorRejection() {
+  document.getElementById("tmRejections").value = "0";
+  onRejectionSelectChange();
+  toast("✔ Consecutive rejections reset to 0.");
+}
+
 function openTutorModal(id) {
   const t = crmData.tutors.find(x => String(x.id) === String(id));
   if (!t) { toast("Tutor record not found"); return; }
   const isDir = currentUser?.role === "director";
   const vm = getValidityMeta(t);
+  const rej = Math.min(3, getRejectionCount(t));
+  const dirVer = isDirVerifiedFlag(t);
+
   document.getElementById("tmId").value = t.id;
   document.getElementById("tmTitle").textContent = "Manage: " + (t.name || "Tutor");
-  document.getElementById("tmDocInfo").innerHTML = `<b>Validity:</b> ${vm.label}<br><b>Auto-Scanned Docs:</b> ${esc(t.docFiles || "No email attachments detected yet")}`;
-  document.getElementById("tmPay").value = t.payment || "Unpaid";
+  document.getElementById("tmDocInfo").innerHTML =
+    `<b>Validity:</b> ${esc(vm.label)}${t.paidDate ? ` (Paid on ${esc(t.paidDate)})` : ""}<br>` +
+    `<b>Director Verification:</b> ${dirVer ? `🛡️ Verified${t.directorVerifiedBy ? " by " + esc(t.directorVerifiedBy) : ""}` : "⏳ Pending Director Approval"}<br>` +
+    `<b>Auto-Scanned Docs:</b> ${esc(t.docFiles || "No email attachments detected yet")}`;
+
+  document.getElementById("tmPay").value = isPaidTutor(t) ? "Paid" : "Unpaid";
   document.getElementById("tmDoc").value = t.docStatus || "Pending";
   document.getElementById("tmStatus").value = t.status || "New";
-  document.getElementById("tmValidUntil").value = vm.date;
+  document.getElementById("tmValidUntil").value = isPaidTutor(t) ? vm.date : "";
   document.getElementById("tmStaff").value = t.assignedStaff || "Unassigned";
+  document.getElementById("tmTrusted").checked = isTrustedRecord(t);
+  document.getElementById("tmRejections").value = String(rej);
   document.getElementById("tmFlag").value = getNormalizedFlag(t);
   document.getElementById("tmFlagReason").value = t.flagReason || "";
   document.getElementById("tmNotes").value = t.notes || "";
+
+  const dirVerEl = getDirVerifyCheckbox();
+  if (dirVerEl) {
+    dirVerEl.checked = dirVer;
+    dirVerEl.disabled = !isDir;
+  }
+  const dirVerHint = document.getElementById("tmDirectorVerifyHint") || document.getElementById("tmVerifyHint");
+  if (dirVerHint) {
+    dirVerHint.textContent = isDir
+      ? "Director Rahul Sir can mark or revoke official tutor verification."
+      : "Only Director Rahul Sir can change Director Verification status.";
+  }
+
+  updatePayValidityHint();
+  onRejectionSelectChange();
 
   const dirBox = document.getElementById("tmDirectorControls");
   dirBox.style.display = isDir ? "block" : "none";
@@ -2849,25 +3469,61 @@ function openTutorModal(id) {
   }
   document.getElementById("tutorModal").classList.add("open");
 }
+
 function renewTutor365() {
-  document.getElementById("tmValidUntil").value = addDaysISO(new Date().toISOString().slice(0,10), 365);
-  toast("Validity extended by +365 days! Tap Save Changes.");
+  const today = new Date().toISOString().slice(0, 10);
+  const cur = document.getElementById("tmValidUntil").value;
+  const base = (cur && cur > today) ? cur : today;
+  const nextDate = addDaysISO(base, 365);
+  document.getElementById("tmPay").value = "Paid";
+  document.getElementById("tmValidUntil").value = nextDate;
+  if (document.getElementById("tmStatus").value === "New") document.getElementById("tmStatus").value = "Active";
+  updatePayValidityHint();
+  toast("🔄 Marked Paid & Validity extended +365d till " + nextDate + "! Tap Save Changes.");
 }
+
 async function saveTutorChanges() {
   const id = document.getElementById("tmId").value;
   const t = crmData.tutors.find(x => String(x.id) === String(id));
   if (!t) return;
+  const isDir = currentUser?.role === "director";
+  const today = new Date().toISOString().slice(0, 10);
   const newFlag = document.getElementById("tmFlag").value;
-  t.payment = document.getElementById("tmPay").value;
+  const newPay = document.getElementById("tmPay").value;
+  const rejCount = parseInt(document.getElementById("tmRejections").value, 10) || 0;
+
+  t.payment = newPay;
+  if (newPay === "Paid") {
+    if (!t.paidDate) t.paidDate = today;
+    t.validUntil = document.getElementById("tmValidUntil").value || addDaysISO(today, 365);
+  } else {
+    t.validUntil = "";
+  }
   t.docStatus = document.getElementById("tmDoc").value;
-  t.status = document.getElementById("tmStatus").value;
-  t.validUntil = document.getElementById("tmValidUntil").value;
+  t.unconfirmedCount = rejCount;
+  t.status = rejCount >= 3 ? "Terminated (3 Rejections)" : document.getElementById("tmStatus").value;
+  t.trusted = document.getElementById("tmTrusted").checked;
   t.assignedStaff = document.getElementById("tmStaff").value;
+
+  const dirVerEl = getDirVerifyCheckbox();
+  if (isDir && dirVerEl) {
+    const wasDirVer = isDirVerifiedFlag(t);
+    t.directorVerified = !!dirVerEl.checked;
+    if (t.directorVerified && !wasDirVer) {
+      t.directorVerifiedBy = currentUser.name;
+      t.directorVerifiedAt = today;
+    } else if (!t.directorVerified) {
+      t.directorVerifiedBy = "";
+      t.directorVerifiedAt = "";
+    }
+  }
+
   t.flag = newFlag;
   t.flagReason = newFlag === "None" ? "" : document.getElementById("tmFlagReason").value.trim();
   t.flaggedBy = newFlag === "None" ? "" : (currentUser?.name || "");
   t.notes = document.getElementById("tmNotes").value.trim();
   t.verifiedBy = currentUser.name;
+
   saveLocalCrm();
   closeModal("tutorModal");
   refreshCrmUI();
@@ -2910,6 +3566,44 @@ function onLeadStatusChange() {
   }
 }
 
+function populateLeadTutorOptions(preferredLabel, preferredTutorId) {
+  const tutSel = document.getElementById("lmTutor");
+  if (!tutSel) return;
+  const onlyVerified = !!getLeadVerifiedFilterCheckbox()?.checked;
+  const targetLabel = preferredLabel !== undefined ? preferredLabel : (tutSel.value || "");
+  const targetId = preferredTutorId !== undefined
+    ? preferredTutorId
+    : (tutSel.options[tutSel.selectedIndex]?.dataset?.tid || "");
+
+  const eligibleTutors = crmData.tutors
+    .filter(t => {
+      if (isHiddenRecord(t)) return false;
+      const isCurrentlyAssigned = (targetId && String(t.id) === String(targetId))
+        || (targetLabel && `${t.name} (${t.subjects} • ${t.area})` === targetLabel);
+      if (onlyVerified && !isVerifiedTutorCheck(t) && !isCurrentlyAssigned) return false;
+      return true;
+    })
+    .slice()
+    .sort((a, b) =>
+      (isTerminatedTutor(a) - isTerminatedTutor(b)) ||
+      (isVerifiedTutorCheck(b) - isVerifiedTutorCheck(a)) ||
+      (isTrustedRecord(b) - isTrustedRecord(a))
+    );
+
+  tutSel.innerHTML = `<option value="">-- Select Registered Tutor (${eligibleTutors.length} shown) --</option>` +
+    eligibleTutors.map(t => {
+      const label = `${t.name} (${t.subjects} • ${t.area})`;
+      const verTag = isVerifiedTutorCheck(t) ? "🛡️ [VERIFIED] " : "";
+      const trustTag = isTrustedRecord(t) ? "⭐ [TRUSTED] " : "";
+      const termWarn = isTerminatedTutor(t) ? " [⛔ TERMINATED - 3 REJECTIONS]" : "";
+      const flagWarn = hasActiveFlag(t) ? ` [🚩 ${getNormalizedFlag(t)}]` : "";
+      const isSelected = (targetId && String(t.id) === String(targetId)) || (targetLabel && targetLabel === label);
+      return `<option value="${esc(label)}" data-tid="${esc(t.id)}" data-phone="${esc(t.phone || "")}" ${isSelected ? "selected" : ""}>${esc(verTag + trustTag + label + termWarn + flagWarn)}</option>`;
+    }).join("");
+}
+const renderLeadTutorOptions = populateLeadTutorOptions;
+const filterLeadTutorDropdown = populateLeadTutorOptions;
+
 function openLeadModal(id) {
   const l = crmData.leads.find(x => String(x.id) === String(id));
   if (!l) { toast("Lead record not found"); return; }
@@ -2922,13 +3616,11 @@ function openLeadModal(id) {
   staffSel.disabled = !isDir && l.assignedStaff && l.assignedStaff !== "Unassigned";
   document.getElementById("lmLockHint").textContent = staffSel.disabled ? "(Only Director can transfer)" : "";
 
-  const tutSel = document.getElementById("lmTutor");
-  tutSel.innerHTML = `<option value="">-- Select Registered Tutor --</option>` +
-    crmData.tutors.filter(t => !isHiddenRecord(t)).map(t => {
-      const label = `${t.name} (${t.subjects} • ${t.area})`;
-      const flagWarn = hasActiveFlag(t) ? ` [🚩 ${getNormalizedFlag(t)}]` : "";
-      return `<option value="${esc(label)}" ${l.assignedTutor === label ? "selected" : ""}>${esc(label + flagWarn)}</option>`;
-    }).join("");
+  const vfEl = getLeadVerifiedFilterCheckbox();
+  if (vfEl) {
+    vfEl.onchange = () => populateLeadTutorOptions();
+  }
+  populateLeadTutorOptions(l.assignedTutor || "", l.assignedTutorId || "");
 
   document.getElementById("lmStatus").value = l.status || "New Lead";
   document.getElementById("lmConfirmedDate").value = l.confirmedDate || (l.status === "Tuition Confirmed" ? (l.createdAt || new Date().toISOString().slice(0,10)) : "");
@@ -2952,8 +3644,15 @@ async function saveLeadChanges() {
   if (!l) return;
   const isDir = currentUser.role === "director";
   const newFlag = document.getElementById("lmFlag").value;
-  l.assignedStaff = isDir ? document.getElementById("lmStaff").value : (l.assignedStaff && l.assignedStaff !== "Unassigned" ? l.assignedStaff : currentUser.name);
-  l.assignedTutor = document.getElementById("lmTutor").value;
+  const tutSel = document.getElementById("lmTutor");
+  const selOpt = tutSel.options[tutSel.selectedIndex];
+
+  l.assignedStaff = isDir
+    ? document.getElementById("lmStaff").value
+    : (l.assignedStaff && l.assignedStaff !== "Unassigned" ? l.assignedStaff : currentUser.name);
+  l.assignedTutor = tutSel.value;
+  l.assignedTutorId = selOpt?.dataset?.tid || "";
+  l.assignedTutorPhone = selOpt?.dataset?.phone || "";
   l.status = document.getElementById("lmStatus").value;
   l.confirmedDate = document.getElementById("lmConfirmedDate").value || (l.status === "Tuition Confirmed" ? new Date().toISOString().slice(0, 10) : "");
   l.monthlyFee = document.getElementById("lmMonthlyFee").value.trim();
@@ -2962,6 +3661,7 @@ async function saveLeadChanges() {
   l.flagReason = newFlag === "None" ? "" : document.getElementById("lmFlagReason").value.trim();
   l.flaggedBy = newFlag === "None" ? "" : (currentUser?.name || "");
   l.notes = document.getElementById("lmNotes").value.trim();
+
   saveLocalCrm();
   closeModal("leadModal");
   refreshCrmUI();
@@ -3060,8 +3760,8 @@ function saveStaffPasswords() {
   toast("🔑 Staff passwords updated!");
 }
 function exportCsv() {
-  const headers = ["ID","Name","Phone","Email","Gender","Area","Subjects","Classes","Payment","DocStatus","ValidUntil","AssignedStaff","Status","Flag","FlagReason","FlaggedBy","Hidden"];
-  const rows = crmData.tutors.map(t => [t.id,t.name,t.phone,t.email,t.gender,t.area,t.subjects,t.classes,t.payment,t.docStatus,getValidityMeta(t).date,t.assignedStaff,t.status,getNormalizedFlag(t),t.flagReason,t.flaggedBy,isHiddenRecord(t)]
+  const headers = ["ID","Name","Phone","Email","Gender","Area","Subjects","Classes","Payment","PaidDate","DocStatus","DirectorVerified","ValidUntil","Trusted","UnconfirmedDemos","AssignedStaff","Status","Flag","FlagReason","FlaggedBy","Hidden"];
+  const rows = crmData.tutors.map(t => [t.id,t.name,t.phone,t.email,t.gender,t.area,t.subjects,t.classes,t.payment,t.paidDate,t.docStatus,isDirVerifiedFlag(t) ? "Yes" : "No",getValidityMeta(t).date,isTrustedRecord(t) ? "Yes" : "No",getRejectionCount(t),t.assignedStaff,t.status,getNormalizedFlag(t),t.flagReason,t.flaggedBy,isHiddenRecord(t)]
     .map(v => `"${String(v || "").replace(/"/g,'""')}"`).join(","));
   const blob = new Blob([[headers.join(","), ...rows].join("\n")], { type: "text/csv" });
   const a = document.createElement("a");
@@ -3069,7 +3769,8 @@ function exportCsv() {
 }
 
 /* INIT */
-renderHomeLocalityChips();
+if (typeof renderHomeAreaCluster === "function") renderHomeAreaCluster();
+else if (typeof renderHomeLocalityChips === "function") renderHomeLocalityChips();
 updateTutorMailSync();
 getScriptUrl(); // ensures old cached URL auto-migrates to new script URL
 if (window.location.hash) {
@@ -3079,3 +3780,4 @@ if (window.location.hash) {
 </script>
 </body>
 </html>
+
