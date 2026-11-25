@@ -285,6 +285,7 @@
     }
     .drawer-item:hover { border-color: var(--primary); background: #eff6ff; }
     .drawer-item.crm-item { background: #fefce8; border-color: #fde047; color: #854d0e; }
+    .drawer-item.portal-item { background: #f0fdf4; border-color: #86efac; color: #166534; }
 
     /* Container & Views */
     .wrap { max-width: 960px; width: 100%; margin: 0 auto; padding: 14px; }
@@ -409,6 +410,56 @@
     .stat-box b { display: block; font-size: 15px; color: #fff; }
     .stat-box span { font-size: 11px; color: #e2e8f0; }
 
+    /* Tutor Self-Update Portal Helpers */
+    .tp-switch-banner {
+      background: linear-gradient(135deg, #f0fdf4, #eff6ff);
+      border: 1.5px solid #86efac; border-radius: 14px;
+      padding: 13px 15px; margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    }
+    .tp-readonly-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 8px; background: #f8fafc; border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px; margin: 10px 0 12px; font-size: 12.5px;
+    }
+    .tp-saved-banner {
+      background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 14px;
+      padding: 14px; margin-bottom: 14px; color: #065f46; display: none;
+    }
+
+    /* Tutor Portal 3-Rejection Tracker & Assigned Tuitions Styles */
+    .tp-strike-box {
+      border-radius: 14px; padding: 13px 14px; margin-bottom: 14px; border: 1.5px solid #cbd5e1; background: #f8fafc;
+    }
+    .tp-strike-box.strike-0 { background: #f0fdf4; border-color: #86efac; color: #166534; }
+    .tp-strike-box.strike-1 { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
+    .tp-strike-box.strike-2 { background: #fff7ed; border-color: #f97316; color: #9a3412; }
+    .tp-strike-box.strike-3 { background: #fef2f2; border-color: #dc2626; color: #991b1b; }
+    .tp-strike-bar { display: flex; gap: 6px; margin: 8px 0 6px; }
+    .tp-strike-pill {
+      flex: 1; text-align: center; padding: 6px 4px; border-radius: 8px; font-size: 11.5px; font-weight: 800;
+      background: rgba(255,255,255,.8); border: 1px solid rgba(15,23,42,.12); color: #64748b;
+    }
+    .tp-strike-pill.hit-warn { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
+    .tp-strike-pill.hit-last { background: #ffedd5; border-color: #ea580c; color: #9a3412; }
+    .tp-strike-pill.hit-term { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+
+    .tp-tuition-card {
+      background: #fff; border: 1.5px solid #bfdbfe; border-radius: 14px; padding: 14px; margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(15,23,42,.04);
+    }
+    .tp-tuition-card.closed { border-color: #cbd5e1; background: #f8fafc; }
+    .tp-report-box {
+      background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 11px; margin-top: 10px;
+    }
+    .crm-tutor-report-box {
+      background: #eff6ff; border: 1.5px solid #93c5fd; border-radius: 12px; padding: 10px 12px; margin: 8px 0 10px;
+      font-size: 12.5px; color: #1e3a8a;
+    }
+    .crm-tutor-report-box.pending { background: #fffbeb; border-color: #f59e0b; color: #78350f; }
+    .crm-tutor-report-box.verified { background: #f0fdf4; border-color: #86efac; color: #166534; }
+    .crm-tutor-report-box.disputed { background: #fef2f2; border-color: #f87171; color: #991b1b; }
+
     .sec-head { text-align: center; margin: 22px 0 14px; }
     .sec-tag {
       display: inline-block; background: #eff6ff; color: var(--primary); font-size: 11px;
@@ -424,12 +475,30 @@
       overflow-wrap: break-word; word-wrap: break-word;
     }
     #policyContent { overflow-wrap: break-word; word-wrap: break-word; }
-    #policyContent h3 { font-size: 20px; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
-    #policyContent p { line-height: 1.65; color: #1e293b; }
-    #policyContent .checklist { gap: 12px; margin: 14px 0 6px; }
+    #policyContent h3 { font-size: 20px; color: var(--navy); margin-bottom: 6px; line-height: 1.3; }
+    #policyContent p { line-height: 1.65; color: #1e293b; font-size: 13.5px; }
+    #policyContent .checklist { gap: 12px; margin: 12px 0 10px; }
     #policyContent .checklist li {
       background: #f8fafc; border: 1px solid var(--border); border-radius: 12px;
       padding: 12px 14px; line-height: 1.65;
+    }
+    .policy-nav {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .policy-meta {
+      font-size: 12px; color: var(--muted); margin-bottom: 12px; font-weight: 600;
+    }
+    .policy-section-title {
+      font-size: 15px; font-weight: 800; color: var(--primary-dark);
+      margin: 16px 0 6px; display: flex; align-items: center; gap: 6px;
+    }
+    .policy-callout {
+      background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px;
+      padding: 12px 14px; margin-top: 14px; font-size: 13px; color: #1e3a8a; line-height: 1.6;
+    }
+    .policy-callout.warn {
+      background: #fef2f2; border-color: #fca5a5; color: #991b1b;
     }
 
     .faq-item {
@@ -465,13 +534,32 @@
 
     /* Forms */
     .field { margin-bottom: 13px; min-width: 0; }
-    .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: #1e293b; }
+    .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: #1e293b; line-height: 1.35; overflow-wrap: break-word; }
     .req { color: var(--red); }
     .input, select.input, textarea.input {
       width: 100%; max-width: 100%; min-width: 0; padding: 11px 13px; border: 1.5px solid #cbd5e1; border-radius: 12px;
       font-size: 14px; background: #fff; color: var(--text); outline: none;
     }
     .input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+
+    /* Prevent Date & Fee Inputs from Overlapping/Merging on Mobile, iPad Safari & Narrow Previews */
+    input[type="date"].input {
+      display: block; width: 100%; max-width: 100%; min-width: 0; min-height: 44px;
+      -webkit-appearance: none; appearance: none; line-height: 1.3; padding: 10px 11px; overflow: hidden;
+    }
+    .modal .grid-2.modal-field-row {
+      gap: 12px; align-items: end;
+    }
+    .modal .grid-2.modal-field-row > .field {
+      min-width: 0; max-width: 100%; overflow: hidden;
+    }
+    @media (max-width: 560px) {
+      .modal .grid-2.modal-field-row,
+      .tp-report-box .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
 
     /* Policy Highlight Box inside Tutor Form */
     .policy-box {
@@ -641,6 +729,7 @@
     <button class="drawer-item" onclick="navigateTo('school')">📚 Nur–8, Humanities, Psychology & Dance</button>
     <button class="drawer-item" onclick="openInquiry('Menu Free Demo')">👨‍👩‍👧 Parent / Student Inquiry (Free Demo)</button>
     <button class="drawer-item" onclick="navigateTo('tutor')">🎓 Register as Home Tutor</button>
+    <button class="drawer-item portal-item" onclick="navigateTo('tutor-portal')">✏️ Update Existing Tutor Profile</button>
     <button class="drawer-item" onclick="scrollToSection('paymentHub')">💳 Pay Registration / Tuition Fee</button>
     <button class="drawer-item" onclick="scrollToSection('officeSection')">📍 Office Location & Google Reviews</button>
     <button class="drawer-item crm-item" onclick="navigateTo('crm')">🔐 Staff CRM Portal (Teacher Search)</button>
@@ -778,10 +867,11 @@
       <span class="sec-tag">Dedicated Registration Portals</span>
       <h3 style="margin:8px 0 6px;">Ready to Book a Free Demo or Join as a Verified Tutor?</h3>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Clean, distraction-free registration pages with instant Varanasi locality search & direct CRM sync.</p>
-      <div class="grid-2">
+      <div class="grid-2" style="margin-bottom:10px;">
         <button class="btn btn-primary" onclick="openInquiry('Dedicated Portal CTA')">👨‍👩‍👧 Parent / Student Inquiry →</button>
         <button class="btn btn-green" onclick="navigateTo('tutor')">🎓 Open Tutor Registration →</button>
       </div>
+      <button class="btn btn-outline" onclick="navigateTo('tutor-portal')">✏️ Already a Registered Tutor? View or Update Your Profile →</button>
     </div>
 
     <!-- ==================== PAYMENT HUB ==================== -->
@@ -1670,6 +1760,15 @@
       </div>
     </div>
 
+    <!-- QUICK LINK FOR ALREADY REGISTERED TUTORS -->
+    <div class="tp-switch-banner">
+      <div style="min-width:0;flex:1 1 220px;">
+        <div style="font-size:13.5px;font-weight:800;color:#166534;">✏️ Already Registered with Alenn Tuition Bureau?</div>
+        <div style="font-size:12px;color:#334155;">No need to fill the form again! Update your timing, expected fees (Monthly / Per-Class), Varanasi area, or subjects directly.</div>
+      </div>
+      <button type="button" class="btn btn-green btn-sm" onclick="navigateTo('tutor-portal')">Update My Profile →</button>
+    </div>
+
     <form id="tutorForm" class="card" onsubmit="submitTutor(event)">
       <!-- TRANSPARENT TUTOR FEE, REFUND & TERMINATION POLICY BOX -->
       <div class="policy-box">
@@ -1820,6 +1919,7 @@
     <div class="card">
       <h4>👤 Registered Profile Summary</h4>
       <div id="tutSuccessSummary" class="summary-grid"></div>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">💡 <b>Tip:</b> Save your <b>Tutor ID</b>, Phone & Email. Anytime you want to change your timing, fees, area, or subjects in the future, use <b>Update Existing Tutor Profile</b>—no need to re-register.</p>
     </div>
 
     <div class="card" style="border:2px solid #93c5fd;">
@@ -1884,7 +1984,172 @@
 
     <div class="grid-2">
       <button class="btn btn-outline" onclick="navigateTo('home')">← Back to Home</button>
-      <button class="btn btn-outline" onclick="navigateTo('tutor')">➕ Register Another Tutor</button>
+      <button class="btn btn-primary" onclick="navigateTo('tutor-portal')">✏️ View / Update My Profile</button>
+    </div>
+  </section>
+
+  <!-- ==================== VIEW: TUTOR SELF-SERVICE PROFILE PORTAL ==================== -->
+  <section id="view-tutor-portal" class="view">
+    <button class="btn btn-outline btn-sm" onclick="navigateTo('home')" style="margin-bottom:10px;">← Back to Home</button>
+
+    <!-- STEP 1: SECURE TUTOR LOOKUP -->
+    <div id="tpLookupBox" class="card" style="max-width:540px;margin:8px auto;">
+      <span class="badge b-green">✏️ REGISTERED TUTOR SELF-SERVICE PORTAL</span>
+      <h2 style="margin:8px 0 4px;">View & Update Your Tutor Profile</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Already registered? Verify your registered phone number and email (or Tutor ID) below to check your live verification status, <b>assigned tuitions, demo/fee reports, 3-rejection status</b>, and update your <b>timing, expected fees (Monthly / Per-Class), Varanasi area, subjects, classes, or availability</b> anytime—no need to re-register.</p>
+
+      <form id="tpLookupForm" onsubmit="lookupTutorProfile(event)">
+        <div class="field">
+          <label>Registered WhatsApp / Mobile Number <span class="req">*</span></label>
+          <input id="tpPhone" type="tel" class="input" required placeholder="e.g., 9876543210" />
+        </div>
+        <div class="field">
+          <label>Registered Email ID <i>or</i> Tutor ID <span class="req">*</span></label>
+          <input id="tpVerifyKey" class="input" required placeholder="e.g., yourname@gmail.com or TUT-173..." />
+        </div>
+        <button id="tpLookupBtn" type="submit" class="btn btn-primary">🔍 Verify & Open My Profile</button>
+      </form>
+
+      <div id="tpLookupMsg" style="display:none;margin-top:12px;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#991b1b;"></div>
+
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);">
+        <span>Not registered yet?</span>
+        <button type="button" class="btn btn-outline btn-sm" onclick="navigateTo('tutor')">🎓 New Tutor Registration →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: LIVE PROFILE STATUS, ASSIGNMENTS & EDITOR -->
+    <div id="tpEditorBox" style="display:none;">
+      <div class="card" style="border:2px solid #bfdbfe;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;">
+          <div>
+            <span class="badge b-blue">👤 LIVE TUTOR PROFILE</span>
+            <h2 id="tpProfileName" style="margin:6px 0 2px;font-size:20px;">Tutor Name</h2>
+            <p id="tpProfileSub" style="font-size:12.5px;color:var(--muted);"></p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="tpLogout()">🔄 Switch / Close Profile</button>
+        </div>
+
+        <div id="tpStatusBadges" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;"></div>
+        <div id="tpCurrentSummary" class="tp-readonly-grid"></div>
+
+        <div id="tpPendingActions" style="display:none;margin-top:8px;"></div>
+      </div>
+
+      <!-- 3-REJECTION TERMINATION RULE & STRIKE TRACKER -->
+      <div id="tpStrikeTracker"></div>
+
+      <!-- MY ASSIGNED TUITIONS & LIVE REPORTING -->
+      <div id="tpAssignedTuitionsSection" class="card" style="border:2px solid #93c5fd;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <div>
+            <span class="badge b-blue">📘 MY ALLOTTED TUITIONS & REPORTING</span>
+            <h3 style="margin:6px 0 2px;font-size:18px;">Assigned Tuitions <span id="tpTuitionsCountBadge" class="badge b-green" style="vertical-align:middle;">0</span></h3>
+            <p style="font-size:12.5px;color:var(--muted);">View all tuitions allotted to you, update demo visit status, report fee collection, or close a discontinued tuition directly to Coordinator CRM.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="refreshSelfTutorTuitions()">🔄 Refresh</button>
+        </div>
+        <div class="chip-wrap" style="margin-top:0;margin-bottom:12px;">
+          <button type="button" class="chip active" id="tpTutFilt-all" onclick="setSelfTuitionFilter('all')">All Tuitions</button>
+          <button type="button" class="chip" id="tpTutFilt-active" onclick="setSelfTuitionFilter('active')">🟢 Active / Ongoing</button>
+          <button type="button" class="chip" id="tpTutFilt-closed" onclick="setSelfTuitionFilter('closed')">📁 Closed / Discontinued</button>
+        </div>
+        <div id="tpAssignedTuitionsList"></div>
+      </div>
+
+      <!-- LOCKED NOTICE (If Terminated / Fraud) -->
+      <div id="tpLockedNotice" class="card card-terminated" style="display:none;">
+        <h3 style="color:#991b1b;font-size:16px;margin-bottom:6px;">⛔ Profile Editing Locked</h3>
+        <p id="tpLockedText" style="font-size:13px;color:#7f1d1d;margin-bottom:10px;"></p>
+        <a class="btn btn-green btn-sm" href="https://wa.me/919919991185?text=Hello%20Alenn%20Tuition%20Bureau,%20I%20need%20help%20with%20my%20tutor%20profile%20status." target="_blank" rel="noopener">💬 Contact Coordinator on WhatsApp</a>
+      </div>
+
+      <!-- SAVED CONFIRMATION BANNER -->
+      <div id="tpSavedBanner" class="tp-saved-banner"></div>
+
+      <!-- EDITABLE PROFILE FORM -->
+      <form id="tpForm" class="card" onsubmit="saveSelfTutorProfile(event)">
+        <div style="margin-bottom:12px;">
+          <span class="badge b-green">✏️ UPDATE YOUR PREFERENCES</span>
+          <h3 style="margin:6px 0 2px;">Edit Availability, Fees, Area & Subjects</h3>
+          <p style="font-size:12.5px;color:var(--muted);">Changes update your existing CRM profile directly without affecting your payment, 365-day validity, or verification status.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Expected Fees Range (Monthly / Per-Class) <span class="req">*</span></label>
+            <select id="tpFeesRange" class="input" required>
+              <option value="">Select expected fees...</option>
+              <option value="Below ₹3,000">Below ₹3,000 / month</option>
+              <option value="₹3,000 – ₹5,000">₹3,000 – ₹5,000 / month</option>
+              <option value="₹5,000 – ₹8,000">₹5,000 – ₹8,000 / month</option>
+              <option value="₹8,000+">₹8,000+ / month (NEET/JEE)</option>
+              <option value="₹400 – ₹500 / class">₹400 – ₹500 / class</option>
+              <option value="₹500 – ₹800 / class">₹500 – ₹800 / class (NEET/JEE)</option>
+              <option value="₹800 – ₹900+ / class">₹800 – ₹900+ / class (Senior Specialist)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Preferred Timing Slot <span class="req">*</span></label>
+            <select id="tpPrefTiming" class="input" required>
+              <option value="Flexible / All Time">Flexible / All Time</option>
+              <option value="Morning">Morning (6 AM – 11 AM)</option>
+              <option value="Afternoon">Afternoon (12 PM – 4 PM)</option>
+              <option value="Evening">Evening (4 PM – 9 PM)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field loc-box">
+          <label>Your Base Area in Varanasi <span class="req">*</span></label>
+          <input id="tpArea" class="input" required autocomplete="off" placeholder="🔍 Search your base locality (e.g., Lanka, Sigra, Pandeypur)..."
+            onfocus="openLocDrop('tpArea','tpLocDrop')" oninput="filterLocDrop('tpArea','tpLocDrop')" onkeydown="handleLocKey(event,'tpArea','tpLocDrop')" />
+          <div id="tpLocDrop" class="loc-drop"></div>
+        </div>
+
+        <div class="field">
+          <label>Classes / Levels You Teach <span class="req">*</span></label>
+          <input id="tpClasses" class="input" required placeholder="e.g., NEET UG, IIT-JEE, Class 11–12, 9–10, Humanities, Dance" />
+        </div>
+
+        <div class="field">
+          <label>Subjects / Skills You Teach <span class="req">*</span></label>
+          <input id="tpSubjects" class="input" required placeholder="e.g., Physics, Chemistry, Maths, Biology, Psychology, Dance" />
+        </div>
+
+        <div class="field">
+          <label>Preferred Areas, Mode (1-on-1 / Group / Online) & Detailed Time Slots <span class="req">*</span></label>
+          <textarea id="tpSlots" class="input" rows="3" required placeholder="Mention Home 1-on-1 / Group / Online, preferred Varanasi areas, and exact available morning/evening slots..."></textarea>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Conveyance / Vehicle</label>
+            <select id="tpVehicle" class="input">
+              <option>Yes, I have a Two-Wheeler</option>
+              <option>Yes, I have a Four-Wheeler</option>
+              <option>Public Transport / Local Walking</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Teaching Experience</label>
+            <input id="tpExp" class="input" placeholder="e.g., 5 years in NEET/JEE/CBSE" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Highest Qualification</label>
+          <input id="tpQual" class="input" placeholder="e.g., B.Tech IIT BHU, M.Sc. Physics" />
+        </div>
+
+        <div class="field">
+          <label>Quick Note for Coordinator (Optional)</label>
+          <input id="tpUpdateNote" class="input" placeholder="e.g., Switched to per-class fee; free evenings 5–8 PM near Lanka/Sigra" />
+        </div>
+
+        <button id="tpSaveBtn" type="submit" class="btn btn-green">💾 Save & Update My Profile</button>
+        <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px;">Need to change your registered phone number or name? Message our coordinator on WhatsApp <b>+91 99199 91185</b>.</p>
+      </form>
     </div>
   </section>
 
@@ -1932,6 +2197,8 @@
         </div>
       </div>
 
+      <!-- TUTOR REPORT VERIFICATION ALERT BANNER -->
+      <div id="tutorReportAlertBanner" style="display:none;background:#eff6ff;border:1.5px solid #3b82f6;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#1e3a8a;font-size:13px;font-weight:700;cursor:pointer;" onclick="filterPendingTutorReports()"></div>
       <div id="flaggedAlertBanner" style="display:none;background:#fef2f2;border:1.5px solid #f87171;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#991b1b;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('flagged')"></div>
       <div id="commissionAlertBanner" style="display:none;background:#fefce8;border:1.5px solid #facc15;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#854d0e;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('commissions')"></div>
       <div id="renewalAlertBanner" style="display:none;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:14px;padding:12px 14px;margin-bottom:12px;color:#991b1b;font-size:13px;font-weight:700;cursor:pointer;" onclick="switchCrmTab('renewals')"></div>
@@ -2116,6 +2383,9 @@
               <option value="Rishikesh Pandey">Rishikesh Pandey</option>
               <option value="Unassigned">Unassigned</option>
             </select>
+            <label class="toggle-inline">
+              <input id="leadPendingReportsOnly" type="checkbox" onchange="renderLeads()" /> 📋 Pending Tutor Reports
+            </label>
             <label id="leadShowHiddenWrap" class="toggle-inline" style="display:none;">
               <input id="leadShowHidden" type="checkbox" onchange="renderLeads()" /> 👁️ Show Hidden Leads
             </label>
@@ -2233,7 +2503,7 @@
       </label>
     </div>
 
-    <div class="grid-2">
+    <div class="grid-2 modal-field-row">
       <div class="field">
         <label>Payment Status (₹400 — Links Validity)</label>
         <select id="tmPay" class="input" onchange="onTutorPayChange()"><option>Unpaid</option><option>Paid</option></select>
@@ -2249,7 +2519,7 @@
       </div>
     </div>
     <div id="tmPayValidityHint" style="font-size:12px;color:#1e40af;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:7px 10px;margin:-4px 0 10px;"></div>
-    <div class="grid-2">
+    <div class="grid-2 modal-field-row">
       <div class="field">
         <label>CRM Status</label>
         <select id="tmStatus" class="input">
@@ -2266,7 +2536,7 @@
       </div>
     </div>
 
-    <div class="grid-2">
+    <div class="grid-2 modal-field-row">
       <div class="field">
         <label>💰 Fees Range</label>
         <select id="tmFeesRange" class="input">
@@ -2401,21 +2671,27 @@
       </div>
       <input id="lmTutorSearch" class="input" style="margin-bottom:8px;padding:8px 10px;font-size:13px;" placeholder="🔍 Live search tutor by name, subject, area, timing..." oninput="populateLeadTutorDropdown()" />
       <div id="lmTutorLiveResults" class="live-tutor-results"></div>
-      <select id="lmTutor" class="input"></select>
+      <select id="lmTutor" class="input" onchange="onLeadTutorChange()"></select>
     </div>
 
-    <div class="field">
-      <label>Tuition Status</label>
-      <select id="lmStatus" class="input" onchange="onLeadStatusChange()">
-        <option>New Lead</option>
-        <option>Demo Scheduled</option>
-        <option>Demo Completed</option>
-        <option>Tuition Confirmed</option>
-        <option>Payment Pending</option>
-        <option>Closed / Cancelled</option>
-      </select>
+    <div class="grid-2 modal-field-row">
+      <div class="field">
+        <label>Tuition Status</label>
+        <select id="lmStatus" class="input" onchange="onLeadStatusChange()">
+          <option>New Lead</option>
+          <option>Demo Scheduled</option>
+          <option>Demo Completed</option>
+          <option>Tuition Confirmed</option>
+          <option>Payment Pending</option>
+          <option>Closed / Cancelled</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Tutor Allotted Date</label>
+        <input id="lmAssignedDate" type="date" class="input" />
+      </div>
     </div>
-    <div class="grid-2">
+    <div class="grid-2 modal-field-row">
       <div class="field">
         <label>Tuition Confirmed Date</label>
         <input id="lmConfirmedDate" type="date" class="input" />
@@ -2433,6 +2709,58 @@
         <option value="Collected">✅ Collected (50% Settled)</option>
         <option value="Waived">🏳️ Waived (No Commission)</option>
       </select>
+    </div>
+
+    <!-- TUTOR SELF-REPORT & PARENT-CALL VERIFICATION SECTION -->
+    <div id="lmTutorReportBox" style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:12px;margin-bottom:13px;">
+      <div style="font-size:13px;font-weight:800;color:#1e3a8a;margin-bottom:6px;">📋 Tutor Self-Report & Parent-Call Verification</div>
+      <div id="lmTutorReportSummary" style="font-size:12px;color:#334155;background:#fff;border:1px solid #bfdbfe;border-radius:9px;padding:8px 10px;margin-bottom:10px;">No tutor report submitted yet.</div>
+      <div class="grid-2 modal-field-row">
+        <div class="field" style="margin-bottom:8px;">
+          <label>Demo / Visit Status</label>
+          <select id="lmTutorDemoReport" class="input">
+            <option value="">Not Reported Yet</option>
+            <option value="Not Visited Yet">Not Visited Yet</option>
+            <option value="Visited & Demo Given">Visited & Demo Given</option>
+            <option value="Did Not Visit / Parent Unavailable">Did Not Visit / Parent Unavailable</option>
+            <option value="Demo Confirmed - Classes Started">Demo Confirmed — Classes Started</option>
+            <option value="Demo Rejected / Not Confirmed">Demo Rejected / Not Confirmed</option>
+          </select>
+        </div>
+        <div class="field" style="margin-bottom:8px;">
+          <label>Tuition Running / Closed Status</label>
+          <select id="lmTutorTuitionStatus" class="input">
+            <option value="">Not Reported Yet</option>
+            <option value="Demo In Progress">Demo In Progress</option>
+            <option value="Continuing / Active">Continuing / Active</option>
+            <option value="Closed / Discontinued">Closed / Discontinued</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2 modal-field-row">
+        <div class="field" style="margin-bottom:8px;">
+          <label>Tutor Fee Receipt Status</label>
+          <select id="lmTutorFeeStatus" class="input">
+            <option value="">Not Reported Yet</option>
+            <option value="Not Due Yet">Not Due Yet</option>
+            <option value="Fee Received from Parent">Fee Received from Parent</option>
+            <option value="Fee Not Received / Pending">Fee Not Received / Pending</option>
+          </select>
+        </div>
+        <div class="field" style="margin-bottom:8px;">
+          <label>Parent-Call Verification Status</label>
+          <select id="lmTutorReportVerified" class="input">
+            <option value="Not Applicable">Not Applicable</option>
+            <option value="Pending Verification">⏳ Pending Parent Verification</option>
+            <option value="Verified with Parent">✅ Verified with Parent (Confirmed)</option>
+            <option value="Disputed / Mismatch">⚠️ Disputed / Mismatch Found</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>Parent Verification Remark (After Calling Parent)</label>
+        <input id="lmTutorReportVerifyNote" class="input" placeholder="e.g., Called parent — confirmed classes active / closed on date / fee paid..." />
+      </div>
     </div>
 
     <!-- RISK & ALERT FLAG SECTION -->
@@ -2484,11 +2812,13 @@
     <a href="javascript:navigateTo('school')">Nur–8, Humanities & Dance</a>
     <a href="javascript:openInquiry('Footer Free Demo')">Book Free Demo</a>
     <a href="javascript:navigateTo('tutor')">Tutor Registration</a>
+    <a href="javascript:navigateTo('tutor-portal')" style="color:#86efac;">✏️ Update Tutor Profile</a>
     <a href="javascript:navigateTo('crm')" style="color:#fde047;">🔐 Staff CRM Login</a>
     <a href="javascript:openPolicy('privacy')">Privacy Policy</a>
     <a href="javascript:openPolicy('terms')">Terms & Conditions</a>
     <a href="javascript:openPolicy('refund')">Refund & Cancellation</a>
     <a href="javascript:openPolicy('service')">Service Delivery Policy</a>
+    <a href="javascript:openPolicy('disclaimer')">Disclaimer</a>
   </div>
   <p>Call: <a href="tel:+919919666650">+91 99196 66650</a> • WhatsApp: <a href="https://wa.me/919919991185">+91 99199 91185</a> • <a href="https://share.google/z2l7px6tb2f9FLRxZ" target="_blank">Google Business Profile & Reviews ↗</a></p>
   <p style="margin-top:6px;">Form Inquiries: <a href="mailto:arrpteacher@gmail.com">arrpteacher@gmail.com</a> • Tutor Document Verification: <a href="mailto:hometuition34@gmail.com">hometuition34@gmail.com</a></p>
@@ -2565,6 +2895,10 @@ const VIEW_SEO = {
     title: "Tutor Registration in Varanasi | Join Alenn Tuition Bureau Verified Network",
     hash: "#tutor-registration"
   },
+  "tutor-portal": {
+    title: "Update Tutor Profile | Registered Tutors Portal — Alenn Tuition Bureau Varanasi",
+    hash: "#update-tutor-profile"
+  },
   crm: {
     title: "Staff CRM Portal | Alenn Tuition Bureau Varanasi",
     hash: "#staff-crm"
@@ -2616,6 +2950,9 @@ let crmData = { tutors: [], leads: [] };
 let lastSubmittedTutor = null;
 let lastSubmittedLead = null;
 let activeLeadModalData = null;
+let activeSelfTutor = null;
+let portalLeadsPool = [];
+let selfTuitionFilter = "all";
 
 function getScriptUrl() {
   const saved = localStorage.getItem("alenn_script_url");
@@ -2661,7 +2998,13 @@ function addDaysISO(baseDateStr, days) {
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
 }
+function nowStampStr() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
 function esc(s) { return String(s || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function safeDomId(id) { return String(id || "").replace(/[^a-zA-Z0-9_-]/g, "_"); }
 
 function isPaidTutor(t) {
   return String(t?.payment || "").trim().toLowerCase() === "paid";
@@ -2750,6 +3093,48 @@ function resolveAssignedTutor(l) {
     verified: match ? isTutorVerified(match) : false
   };
 }
+function hasTutorReport(l) {
+  if (!l) return false;
+  return !!(
+    String(l.tutorDemoReport || "").trim() ||
+    String(l.tutorTuitionStatus || "").trim() ||
+    String(l.tutorFeeStatus || "").trim() ||
+    String(l.tutorReportNote || "").trim()
+  );
+}
+function isPendingTutorReport(l) {
+  return hasTutorReport(l) && String(l.tutorReportVerified || "Pending Verification").trim() === "Pending Verification";
+}
+function isTuitionClosedForTutor(l) {
+  if (!l) return false;
+  return l.status === "Closed / Cancelled"
+    || l.tutorTuitionStatus === "Closed / Discontinued"
+    || l.tutorDemoReport === "Demo Rejected / Not Confirmed";
+}
+function getTuitionsForTutor(t, leadsList) {
+  if (!t || !Array.isArray(leadsList)) return [];
+  const tId = String(t.id || "").trim();
+  const tPhone = cleanWaPhone(t.phone);
+  const tName = String(t.name || "").trim().toLowerCase();
+  const tLabel = getTutorLabel(t).toLowerCase();
+
+  return leadsList.filter(l => {
+    if (!l || isHiddenRecord(l)) return false;
+    const lTid = String(l.assignedTutorId || "").trim();
+    const lTphone = cleanWaPhone(l.assignedTutorPhone);
+    const lTlabel = String(l.assignedTutor || "").trim().toLowerCase();
+
+    if (tId && lTid && lTid === tId) return true;
+    if (tPhone && lTphone && lTphone === tPhone) return true;
+    if (!lTid && lTlabel) {
+      if (lTlabel === tLabel) return true;
+      const rawName = lTlabel.split("(")[0].trim();
+      if (tName && rawName === tName) return true;
+    }
+    return false;
+  });
+}
+
 function getValidityMeta(t) {
   if (!isPaidTutor(t)) {
     return { state: "UnpaidPending", days: 99999, date: "", cls: "b-gray", label: "Validity starts on ₹400 Payment" };
@@ -2950,6 +3335,7 @@ function navigateTo(view, skipHash) {
     try { history.pushState(null, "", seo.hash); } catch {}
   }
   if (view === "crm") checkCrmSession();
+  if (view === "tutor-portal") initTutorPortalView();
 }
 function scrollToSection(id) {
   navigateTo("home");
@@ -2975,14 +3361,204 @@ function openInquiry(source, area, subjects) {
   if (subjects && document.getElementById("inqSubjects")) document.getElementById("inqSubjects").value = subjects;
 }
 function openPolicy(type) {
-  const map = {
-    privacy: "<h3>Privacy Policy</h3><p style='margin-top:8px;font-size:13.5px;'>Alenn Tuition Bureau collects parent and tutor details strictly for matching verified tutors in Varanasi. Tutor verification documents sent to hometuition34@gmail.com are accessible only to authorized coordinators and the Director.</p>",
-    terms: "<h3>Terms & Conditions — Alenn Tuition Bureau</h3><ul class='checklist' style='margin-top:10px;'><li>✅ <b>Free Demo (Parents/Students):</b> The first trial demo class with a verified tutor is 100% free with zero obligation.</li><li>✅ <b>Non-Refundable Tutor Registration Fee (₹400):</b> Every tutor pays a <b>strictly non-refundable ₹400 registration fee</b> covering profile onboarding and document verification. Your <b>1-year (365 days) validity starts strictly from the date payment is received and confirmed</b>.</li><li>✅ <b>Non-Refundable Annual Renewal Fee (₹400):</b> After 365 days from payment confirmation, a <b>non-refundable ₹400 annual renewal fee</b> is required to keep your profile active for new Varanasi tuition assignments.</li><li>✅ <b>50% First-Month Commission Policy:</b> For every confirmed tuition assigned through Alenn Tuition Bureau, the tutor pays <b>50% of the first month's tuition fee</b> as placement commission. From the 2nd month onwards, 100% of the monthly tuition fee belongs to the tutor.</li><li>⛔ <b>3 Consecutive Rejections — Service Termination Policy:</b> If a registered tutor receives <b>3 consecutive demo rejections / unconfirmed tuitions</b> from parents or students, Alenn Tuition Bureau reserves the right to <b>terminate and deactivate the tutor's services immediately with NO refund</b> of registration or renewal fees.</li><li>🚫 <b>Anti-Bypass & Professional Conduct:</b> Tutors must maintain punctuality, authentic ID/degree documents, and professional conduct. Directly contacting or teaching an introduced parent/student while bypassing bureau commission results in immediate permanent blacklisting without refund.</li></ul>",
-    refund: "<h3>Refund & Cancellation Policy</h3><ul class='checklist' style='margin-top:10px;'><li>🚫 <b>Strictly Non-Refundable Registration & Renewal Fees:</b> The ₹400 Tutor Registration Fee and ₹400 Annual Renewal Fee are <b>strictly non-refundable and non-transferable under all circumstances</b> once paid.</li><li>⛔ <b>No Refund on Service Termination:</b> No refund shall be issued if a tutor's services are terminated due to <b>3 consecutive demo rejections / unconfirmed tuitions</b>, voluntary withdrawal, unavailability, misconduct, document discrepancies, or bypassing bureau commission.</li><li>📘 <b>Parent / Student Tuition Fee Adjustments:</b> First trial demo is free. If a tuition is discontinued after confirmation, pro-rata settlement between parent, tutor, and bureau is handled transparently based on actual classes conducted, backed by official digital receipts.</li><li>📞 <b>Support & Dispute Resolution:</b> For any billing or receipt query, contact +91 99196 66650 / WhatsApp +91 99199 91185.</li></ul>",
-    service: "<h3>Service Delivery Policy</h3><p style='margin-top:8px;font-size:13.5px;'>Demo classes are typically arranged within 24–48 hours across 69+ Varanasi localities in Home 1-on-1, Small Group, or Online mode.</p>"
+  const activeKey = ["privacy", "terms", "refund", "service", "disclaimer"].includes(type) ? type : "privacy";
+  const navBar = `
+    <div class="policy-nav">
+      <button type="button" class="chip ${activeKey === "privacy" ? "active" : ""}" onclick="openPolicy('privacy')">🔒 Privacy Policy</button>
+      <button type="button" class="chip ${activeKey === "terms" ? "active" : ""}" onclick="openPolicy('terms')">📜 Terms & Conditions</button>
+      <button type="button" class="chip ${activeKey === "refund" ? "active" : ""}" onclick="openPolicy('refund')">💳 Refund & Cancellation</button>
+      <button type="button" class="chip ${activeKey === "service" ? "active" : ""}" onclick="openPolicy('service')">🚀 Service Delivery</button>
+      <button type="button" class="chip ${activeKey === "disclaimer" ? "active" : ""}" onclick="openPolicy('disclaimer')">⚠️ Legal Disclaimer</button>
+    </div>
+  `;
+
+  const titles = {
+    privacy: "Privacy Policy — Alenn Tuition Bureau Varanasi",
+    terms: "Terms & Conditions — Alenn Tuition Bureau Varanasi",
+    refund: "Refund & Cancellation Policy — Alenn Tuition Bureau Varanasi",
+    service: "Service Delivery Policy — Alenn Tuition Bureau Varanasi",
+    disclaimer: "Legal Disclaimer — Alenn Tuition Bureau Varanasi"
   };
-  document.getElementById("policyContent").innerHTML = map[type] || map.privacy;
+
+  const map = {
+    privacy: `
+      ${navBar}
+      <h3>🔒 Privacy Policy — Alenn Tuition Bureau</h3>
+      <div class="policy-meta">Effective Date: January 2026 • Last Updated: November 2026 • Applies to mytuitiontutor.com & Varanasi Operations</div>
+      <p>Alenn Tuition Bureau ("we", "our", "Bureau"), located at Chhittupur Road, Near BHU / Bhagwanpur, Varanasi, Uttar Pradesh 221005, respects the privacy of parents, students, and registered tutors. This Privacy Policy explains how we collect, use, store, share, and protect your personal information.</p>
+
+      <div class="policy-section-title">1. Information We Collect</div>
+      <ul class="checklist">
+        <li>👨‍👩‍👧 <b>Parent & Student Inquiries:</b> Name, phone/WhatsApp number, Varanasi locality/address, student class/board/exam target, subjects required, preferred timing, tuition mode, tutor gender preference, and budget range.</li>
+        <li>🎓 <b>Tutor Registration & Verification Records:</b> Full name, phone/WhatsApp number, email address, gender, educational qualifications, teaching experience, conveyance details, preferred Varanasi localities, expected fees, plus mandatory verification documents (Aadhaar Front & Back, recent selfie photo, 10th/12th/Graduation/PG marksheets, and current local Varanasi residence proof) submitted to <b>hometuition34@gmail.com</b>.</li>
+        <li>💳 <b>Payment & Billing Records:</b> Transaction reference IDs, payment screenshots, payment dates, and receipt details for registration fees, annual renewals, tuition fees, or placement commissions. We do <b>not</b> store your debit/credit card numbers, CVV, or UPI PINs on our servers.</li>
+      </ul>
+
+      <div class="policy-section-title">2. How We Use Your Information</div>
+      <ul class="checklist">
+        <li>🎯 <b>Tutor-Parent Matching:</b> To shortlist, verify, and connect parents/students with suitable home, small-group, or online tutors across 69+ Varanasi localities.</li>
+        <li>🛡️ <b>Identity & Safety Verification:</b> To verify tutor identity, educational credentials, and local residence before approving profiles for verified assignments.</li>
+        <li>📲 <b>Operational Communication:</b> To schedule demo classes, verify ongoing tuition/fee status, send 365-day renewal reminders, share official digital receipts, and resolve support queries via phone, WhatsApp, or email.</li>
+      </ul>
+
+      <div class="policy-section-title">3. Third-Party Sharing & Confidentiality</div>
+      <ul class="checklist">
+        <li>🚫 <b>Zero Data Selling:</b> We never sell, rent, or trade parent, student, or tutor phone numbers, emails, or documents to third-party marketers or external spam agencies.</li>
+        <li>🤝 <b>Limited Purpose Sharing:</b> Only necessary matching information (such as student class, subjects, locality, timing, and contact coordination) is shared between a matched parent and a verified tutor for conducting demo or regular classes.</li>
+        <li>🔐 <b>Trusted Service Infrastructure:</b> We use secure third-party infrastructure strictly for service delivery and payments—including <b>Razorpay</b> and official UPI apps (PhonePe, Paytm, GPay) for payment processing, and restricted <b>Google Workspace / CRM</b> systems accessible only to authorized coordinators and the Director.</li>
+        <li>⚖️ <b>Legal Disclosure:</b> Information may be disclosed if strictly required by law, court order, or government/police authority in India for fraud investigation or safety compliance.</li>
+      </ul>
+
+      <div class="policy-section-title">4. Data Retention & Security</div>
+      <ul class="checklist">
+        <li>📅 <b>Retention Period:</b> Active tutor profiles and verification documents are retained during the 365-day active membership period and for up to <b>3 years</b> thereafter for renewal continuity, dispute resolution, accounting, and anti-fraud/blacklisting compliance. Parent inquiry records are retained for coordination, billing receipts, and service history.</li>
+        <li>🔒 <b>Access Control:</b> Tutor ID/address documents sent to <b>hometuition34@gmail.com</b> are strictly restricted to authorized Bureau management and are never publicly published on our website.</li>
+      </ul>
+
+      <div class="policy-section-title">5. Your Privacy Rights & Grievance Contact</div>
+      <ul class="checklist">
+        <li>✏️ <b>Access & Correction:</b> Registered tutors can view and update their availability, fees, subjects, and base area anytime via our <b>Update Tutor Profile</b> portal. Parents and tutors can also request corrections to phone/name records via WhatsApp or email.</li>
+        <li>🗑️ <b>Deletion / Opt-Out Request:</b> You may request deactivation or deletion of your non-statutory profile data by emailing <b>arrpteacher@gmail.com</b> or messaging <b>+91 99199 91185</b> (excluding records legally required for billing, fraud prevention, or active dispute records).</li>
+      </ul>
+
+      <div class="policy-callout">
+        <b>📞 Privacy & Grievance Officer:</b> Director, Alenn Tuition Bureau — Chhittupur Road, Near BHU / Bhagwanpur, Varanasi, UP 221005 • Phone: <b>+91 99196 66650</b> • WhatsApp: <b>+91 99199 91185</b> • Email: <b>arrpteacher@gmail.com</b>
+      </div>
+    `,
+
+    terms: `
+      ${navBar}
+      <h3>📜 Terms & Conditions — Alenn Tuition Bureau</h3>
+      <div class="policy-meta">Effective Date: January 2026 • Last Updated: November 2026 • Binding on All Parents, Students & Registered Tutors</div>
+      <p>By submitting a Parent/Student inquiry, registering as a Tutor, making any payment, or using <b>mytuitiontutor.com</b>, you acknowledge that you have read, understood, and agreed to the following legally binding Terms & Conditions.</p>
+
+      <div class="policy-section-title">1. Terms for Parents & Students</div>
+      <ul class="checklist">
+        <li>✅ <b>100% Free First Trial Demo:</b> Parents and students receive <b>one free trial demo class</b> with a verified tutor with zero obligation. Regular classes begin only after mutual confirmation of schedule and agreed monthly or per-class fees.</li>
+        <li>📘 <b>Transparent Fee Agreement & Receipts:</b> Tuition fees (monthly or per-class) are confirmed before regular classes begin. Parents are advised to keep records of classes conducted and request official digital receipts for any payments made directly to Alenn Tuition Bureau.</li>
+        <li>🏠 <b>Safe Study Environment:</b> For home tuition, parents/guardians must provide a safe, respectful, and distraction-free study space and ensure adult presence/supervision at home for minor students.</li>
+      </ul>
+
+      <div class="policy-section-title">2. Mandatory Terms for Registered Tutors</div>
+      <ul class="checklist">
+        <li>🆔 <b>Single Unique Tutor ID & Accurate Profile:</b> Each tutor is assigned one unique Tutor ID across our network. Tutors must submit genuine Aadhaar, recent selfie, academic marksheets, and local Varanasi address proof to <b>hometuition34@gmail.com</b>. Submitting forged or misleading documents results in immediate permanent blacklisting without refund.</li>
+        <li>💳 <b>Non-Refundable Registration Fee (₹400):</b> Every tutor pays a <b>strictly non-refundable ₹400 registration fee</b> covering profile onboarding and verification. Your <b>1-year (365 days) active membership validity starts strictly from the date payment is received and confirmed</b> in our CRM.</li>
+        <li>🔄 <b>Non-Refundable Annual Renewal (₹400):</b> After 365 days from payment confirmation, a <b>non-refundable ₹400 annual renewal charge</b> is required to continue receiving new Varanasi tuition assignments.</li>
+        <li>💰 <b>50% First-Month Commission Policy:</b> For every confirmed tuition assigned through Alenn Tuition Bureau, the tutor agrees to pay <b>50% of the first month's tuition fee</b> as placement commission (tracked on a 30-day cycle with coordinator coordination starting Day 25). From the 2nd month onwards, <b>100% of the monthly tuition fee belongs to the tutor</b>.</li>
+        <li>⛔ <b>3 Consecutive Demo Rejections — Service Termination Rule:</b> If a registered tutor receives <b>3 consecutive demo rejections / unconfirmed tuitions</b> from parents or students, Alenn Tuition Bureau reserves the right to <b>terminate and deactivate the tutor's services immediately with NO refund</b> of registration or renewal fees.</li>
+        <li>📋 <b>Mandatory Status Reporting:</b> Tutors must promptly and honestly report demo outcomes, regular class status, fee receipt, or tuition discontinuation through the Tutor Self-Service Portal or directly to their coordinator.</li>
+        <li>🚫 <b>Strict Anti-Bypass & Non-Solicitation:</b> Tutors are strictly prohibited from directly negotiating hidden side deals, collecting undisclosed fees, or teaching an introduced parent/student (or their referred siblings/relatives from the same lead) while bypassing the Bureau's 50% first-month commission. Any bypass attempt leads to permanent blacklisting, forfeiture of membership without refund, and legal recovery action.</li>
+      </ul>
+
+      <div class="policy-section-title">3. Payment Dispute Resolution</div>
+      <ul class="checklist">
+        <li>⚖️ <b>Amicable Resolution First:</b> Any dispute regarding tuition fee calculation, attendance count, demo confirmation, or commission must be reported to our coordinator within <b>7 days</b> of the issue arising at <b>+91 99196 66650</b> or <b>arrpteacher@gmail.com</b>. The Bureau will verify attendance logs and call both parent and tutor to facilitate a fair written resolution within <b>7–10 business days</b>.</li>
+        <li>🧾 <b>Verification Requirement:</b> All payment claims must be supported by UPI UTR numbers, Razorpay receipts, or bank transaction proof.</li>
+      </ul>
+
+      <div class="policy-section-title">4. Limitation of Liability & Independent Status</div>
+      <ul class="checklist">
+        <li>🤝 <b>Facilitator Role:</b> Alenn Tuition Bureau operates strictly as an educational coordination and tutor-matching bureau. Registered tutors are independent educational professionals, not salaried employees or legal agents of the Bureau.</li>
+        <li>🛡️ <b>Liability Cap:</b> While we conduct document verification (Aadhaar, marksheets, selfie, and local residence check), Alenn Tuition Bureau shall not be held liable for indirect, incidental, or consequential damages, personal disputes outside scheduled classes, or specific exam rank outcomes. In all circumstances, the Bureau's maximum aggregate financial liability shall not exceed the actual service/registration fee directly received by Alenn Tuition Bureau for the specific transaction in question.</li>
+      </ul>
+
+      <div class="policy-section-title">5. Governing Law & Jurisdiction</div>
+      <ul class="checklist">
+        <li>🏛️ <b>Exclusive Varanasi Jurisdiction:</b> These Terms & Conditions are governed by the laws of India. Any unresolved legal dispute arising out of or relating to our services shall be subject to the <b>exclusive jurisdiction of the competent courts in Varanasi, Uttar Pradesh</b>.</li>
+        <li>🔄 <b>Policy Updates:</b> Alenn Tuition Bureau reserves the right to revise these terms at any time. Continued use of our services constitutes acceptance of the updated terms.</li>
+      </ul>
+    `,
+
+    refund: `
+      ${navBar}
+      <h3>💳 Refund & Cancellation Policy — Alenn Tuition Bureau</h3>
+      <div class="policy-meta">Effective Date: January 2026 • Last Updated: November 2026 • Clear Rules for Tutors & Parents</div>
+      <p>We believe in 100% upfront financial clarity so both tutors and parents know exactly how registration fees, cancellations, and mid-month discontinuations are handled.</p>
+
+      <div class="policy-section-title">1. Tutor Registration & Annual Renewal Fees (Non-Refundable)</div>
+      <ul class="checklist">
+        <li>🚫 <b>Strictly Non-Refundable & Non-Transferable:</b> The <b>₹400 Tutor Registration Fee</b> and <b>₹400 Annual Renewal Fee</b> cover profile onboarding, document scanning, CRM activation, and 365-day lead eligibility. Once paid, these fees are <b>strictly non-refundable and non-transferable under all circumstances</b>.</li>
+        <li>⛔ <b>No Refund Upon Termination or Withdrawal:</b> No partial or full refund shall be issued if a tutor's account is terminated due to <b>3 consecutive demo rejections / unconfirmed tuitions</b>, voluntary withdrawal, unavailability for assigned timings/areas, incomplete verification documents, misconduct, or bypassing bureau commission.</li>
+        <li>📅 <b>No Guarantee of Fixed Income:</b> Registration provides verified eligibility for matching leads across Varanasi based on subject demand, locality, fees, and demo performance; it does not constitute a salaried employment guarantee.</li>
+      </ul>
+
+      <div class="policy-section-title">2. Parent / Student Tuition Cancellation & Pro-Rata Settlement</div>
+      <ul class="checklist">
+        <li>✅ <b>Free Demo Cancellation:</b> The first trial demo class is 100% free. Parents may cancel or decline continuation after the demo at zero cost.</li>
+        <li>📊 <b>Pro-Rata Refund / Fee Adjustment (Post-Confirmation):</b> If a parent has paid tuition fees in advance directly to Alenn Tuition Bureau and decides to discontinue classes mid-month (or if the tutor becomes unavailable and a replacement is declined), the settlement is calculated transparently on a <b>pro-rata basis strictly for the actual number of classes conducted</b>.</li>
+        <li>🔄 <b>Adjustment or Refund Option:</b> Any unused balance after deducting completed classes (and applicable agreed notice/administrative adjustments, if any) can either be <b>adjusted immediately toward a replacement verified tutor</b> at no extra charge, or refunded to the parent's original payment source/UPI within <b>7–10 working days</b> after coordinator verification of attendance with both parent and tutor.</li>
+        <li>🕒 <b>Prior Notice Etiquette:</b> Parents are requested to inform the coordinator at least <b>3–5 days in advance</b> before discontinuing an active monthly tuition so attendance and fee records can be settled cleanly without confusion.</li>
+      </ul>
+
+      <div class="policy-section-title">3. Duplicate or Failed Online Transactions</div>
+      <ul class="checklist">
+        <li>🔁 <b>Duplicate Payment Refund:</b> In the rare event of a technical error causing a double deduction via Razorpay or UPI for the same registration or tuition bill, share both transaction IDs/screenshots on WhatsApp <b>+91 99199 91185</b> within <b>7 days</b>. After bank/gateway reconciliation, the verified duplicate amount will be refunded to the original payment method within <b>5–7 working days</b>.</li>
+      </ul>
+
+      <div class="policy-callout warn">
+        <b>📌 Mandatory Notice:</b> Always share your payment screenshot with UTR / Razorpay Payment ID on WhatsApp <b>+91 99199 91185</b> to receive your official digital receipt and lock in your exact payment date.
+      </div>
+    `,
+
+    service: `
+      ${navBar}
+      <h3>🚀 Service Delivery Policy — Alenn Tuition Bureau</h3>
+      <div class="policy-meta">Effective Date: January 2026 • Last Updated: November 2026 • Covers Home 1-on-1, Group & Online Tutoring</div>
+      <p>Alenn Tuition Bureau delivers structured, verified tutor matching across 69+ localities in Varanasi and online. Below is our exact step-by-step service delivery timeline and operating protocol.</p>
+
+      <div class="policy-section-title">1. Step-by-Step Tutor Matching Process</div>
+      <ul class="checklist">
+        <li>1️⃣ <b>Requirement Submission:</b> Parent/student submits class, board/exam (NEET, IIT-JEE, CBSE, ICSE/ISC, IB, UP Board, Commerce, Humanities, Psychology, or Dance/Extracurricular), Varanasi locality, timing, and budget via website, call, or WhatsApp.</li>
+        <li>2️⃣ <b>Coordinator Verification Call:</b> Our assigned Varanasi coordinator calls within <b>1–4 working hours</b> (between 7:00 AM and 9:30 PM, Monday–Sunday) to confirm exact syllabus needs, weak topics, and tutor gender preference.</li>
+        <li>3️⃣ <b>Verified Tutor Shortlisting:</b> We match from our Aadhaar, selfie, degree, and address-verified tutor directory based on subject specialization, locality proximity, and slot availability.</li>
+        <li>4️⃣ <b>100% Free Trial Demo Class:</b> The verified tutor conducts a free trial session. Regular classes begin only after the parent confirms satisfaction with teaching quality and mutually agrees on the fee structure.</li>
+      </ul>
+
+      <div class="policy-section-title">2. Standard Delivery Timelines</div>
+      <ul class="checklist">
+        <li>⚡ <b>Major Varanasi Localities (24–48 Hours):</b> Demo classes are typically arranged within <b>24 to 48 hours</b> across prime areas including Lanka, BHU, Durgakund, Sigra, Mahmoorganj, Ravindrapuri, Bhagwanpur, Sundarpur, DLW/BLW, Pandeypur, Paharia, Shivpur, Kajjakpura, and Sarnath.</li>
+        <li>🗺️ <b>Specialized / Outer Localities (48–72 Hours):</b> For highly niche subjects (e.g., IB/IGCSE, senior IIT-JEE Advanced/NEET dropper specialists, Psychology, Dance), strict female-tutor requests, or outer Varanasi zones (Rohania, Lohta, Babatpur, Harhua, Ramnagar), matching may take <b>48 to 72 hours</b> to ensure quality rather than rushing an unsuited match.</li>
+      </ul>
+
+      <div class="policy-section-title">3. Tuition Delivery Modes & Conditions</div>
+      <ul class="checklist">
+        <li>🏠 <b>Home Tuition (1-on-1 at Student's Residence):</b> Tutor visits the student's home at agreed days/timings. Standard schedules range from 3 to 6 classes per week (typically 60–90 minutes per class, as agreed before confirmation).</li>
+        <li>👥 <b>Small Group Batch:</b> Focused small-group sessions arranged at agreed venue/timing with individualized doubt attention.</li>
+        <li>💻 <b>Online 1-on-1 Live Classes:</b> Interactive live sessions via Google Meet/Zoom with digital whiteboard, PDF notes, and weekly tests—available across Varanasi and pan-India. Students/parents must maintain a stable internet connection and device.</li>
+      </ul>
+
+      <div class="policy-section-title">4. Demo Rescheduling, Attendance & Tutor Replacement</div>
+      <ul class="checklist">
+        <li>🔄 <b>Demo Rescheduling:</b> Either the parent or the tutor must inform the coordinator at least <b>3–4 hours before</b> a scheduled demo class if rescheduling is needed. Repeated last-minute cancellations or unexcused no-shows may result in lead closure or tutor penalty tracking.</li>
+        <li>🔁 <b>Free Verified Tutor Replacement:</b> If a parent is not satisfied after the first free demo—or faces genuine teaching/punctuality concerns during regular classes—Alenn Tuition Bureau arranges a <b>verified replacement tutor at zero extra registration cost</b> within 24–72 hours.</li>
+        <li>📞 <b>Ongoing Coordinator Support:</b> Our Varanasi team actively tracks first-month confirmation, attendance/fee updates, and parent feedback from <b>7:00 AM – 9:30 PM (All 7 Days)</b> at <b>+91 99196 66650</b> / WhatsApp <b>+91 99199 91185</b>.</li>
+      </ul>
+    `,
+
+    disclaimer: `
+      ${navBar}
+      <h3>⚠️ Legal Disclaimer — Alenn Tuition Bureau</h3>
+      <div class="policy-meta">Effective Date: January 2026 • Last Updated: November 2026 • mytuitiontutor.com</div>
+      <p>The information and tutor-matching services provided on <b>mytuitiontutor.com</b> and by Alenn Tuition Bureau are subject to the following disclaimers for complete clarity to parents, students, and tutors:</p>
+
+      <ul class="checklist" style="margin-top:12px;">
+        <li>🎓 <b>No Guaranteed Exam Ranks or Marks:</b> While we connect students with qualified, experienced 1-on-1 tutors for NEET UG, IIT-JEE (Mains & Advanced), CBSE/ICSE/IB/UP Board exams, CUET, NDA, and BHU CHS, actual academic scores, percentages, and entrance ranks depend heavily on the individual student's consistency, self-study, attendance, and exam-day performance. Alenn Tuition Bureau does <b>not</b> guarantee specific ranks, 650+ NEET scores, 99+ JEE percentiles, or admission into any institution.</li>
+        <li>🛡️ <b>Scope of Tutor Verification & Parental Supervision:</b> Our verification process checks tutor-submitted Aadhaar copies, recent selfie photos, academic marksheets, and local Varanasi address proofs in good faith. However, verification relies on authentic submission by applicants and does not replace police clearance certificates or parental judgment. Parents/guardians are strongly advised to remain present at home and exercise standard household supervision during home tuition sessions, especially for minor children.</li>
+        <li>🤝 <b>Independent Tutor Relationship:</b> All tutors listed or assigned through Alenn Tuition Bureau work as independent educators and are not employees, partners, or legal representatives of the Bureau.</li>
+        <li>💰 <b>Indicative Fee Ranges:</b> Monthly packages (₹2,000–₹12,000+/month) and per-class specialist rates (₹400–₹900+/class) mentioned on the website are indicative market ranges in Varanasi. Final tuition fees depend on student class, exam complexity, tutor qualification/experience, weekly frequency, and travel distance, and are always confirmed transparently before regular classes start.</li>
+        <li>🔗 <b>Third-Party Services & External Links:</b> Our website integrates links to external platforms such as <b>Razorpay</b>, UPI apps (PhonePe, Paytm, GPay), WhatsApp, and Google Maps/Google Business Profile. Alenn Tuition Bureau is not responsible for server downtime, gateway delays, or independent privacy practices of these third-party providers.</li>
+        <li>📝 <b>Accuracy of Educational Content:</b> Course outlines, NCERT/PYQ focus areas, and school names (e.g., DPS, Sunbeam, St. John's, CHS) are referenced purely to indicate curriculum alignment. Alenn Tuition Bureau is an independent private tuition service and is <b>not</b> officially affiliated with, endorsed by, or partnered with NTA, CBSE, CISCE, IB, BHU, IIT-BHU, or any school mentioned on this website.</li>
+      </ul>
+
+      <div class="policy-callout">
+        <b>Need Clarification?</b> Reach our Varanasi office directly at <b>+91 99196 66650</b>, WhatsApp <b>+91 99199 91185</b>, or email <b>arrpteacher@gmail.com</b> before booking or registering.
+      </div>
+    `
+  };
+
+  document.getElementById("policyContent").innerHTML = map[activeKey] || map.privacy;
   navigateTo("policy", true);
+  document.title = titles[activeKey] || titles.privacy;
 }
 
 window.addEventListener("popstate", () => {
@@ -3211,10 +3787,19 @@ async function submitInquiry(e) {
     assignedTutor: "",
     assignedTutorId: "",
     assignedTutorPhone: "",
+    assignedDate: "",
     status: "New Lead",
     confirmedDate: "",
     monthlyFee: "",
     commissionStatus: "Payment Pending",
+    tutorDemoReport: "",
+    tutorTuitionStatus: "",
+    tutorFeeStatus: "",
+    tutorReportNote: "",
+    tutorReportUpdatedAt: "",
+    tutorReportVerified: "Not Applicable",
+    tutorReportVerifyNote: "",
+    tutorReportVerifiedBy: "",
     flag: "None",
     flagReason: "",
     flaggedBy: "",
@@ -3269,8 +3854,8 @@ function updateTutorMailSync() {
   const badge = document.getElementById("mailSyncBadge");
   if (badge) badge.textContent = `⚡ ${filled}/${vals.length} fields ready`;
 }
-function buildDocEmailText(useSubmitted) {
-  const v = (useSubmitted && lastSubmittedTutor) ? lastSubmittedTutor : getTutorFormValues();
+function buildDocEmailText(useSubmitted, overrideTutor) {
+  const v = overrideTutor || ((useSubmitted && lastSubmittedTutor) ? lastSubmittedTutor : getTutorFormValues());
   return `Hello Alenn Tuition Bureau Verification Team,
 
 Please find attached my 4 mandatory verification documents (Aadhaar Front/Back, Recent Selfie Photo, Marksheets, Local Varanasi Address Proof).
@@ -3291,10 +3876,10 @@ Preferred Areas & Slots: ${v.slots || ""}
 
 Policy Accepted: ₹400 Non-Refundable Registration Fee (1-Year Validity from payment confirmation date), ₹400 Non-Refundable Annual Renewal Charge, 50% First-Month Commission on confirmed tuitions, and Service Termination without refund after 3 consecutive demo rejections.`;
 }
-function openPrefilledDocEmail(useSubmitted) {
-  const v = (useSubmitted && lastSubmittedTutor) ? lastSubmittedTutor : getTutorFormValues();
+function openPrefilledDocEmail(useSubmitted, overrideTutor) {
+  const v = overrideTutor || ((useSubmitted && lastSubmittedTutor) ? lastSubmittedTutor : getTutorFormValues());
   const sub = `[TUTOR-VERIFY | Phone:${v.phone || "NA"} | ${v.name || "Applicant"}] Documents for Alenn Tuition Bureau`;
-  window.location.href = `mailto:hometuition34@gmail.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(buildDocEmailText(useSubmitted))}`;
+  window.location.href = `mailto:hometuition34@gmail.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(buildDocEmailText(useSubmitted, overrideTutor))}`;
 }
 function copyTutorBackupText(useSubmitted) { copyText(buildDocEmailText(useSubmitted), "Pre-filled profile text copied!"); }
 
@@ -3360,6 +3945,624 @@ async function submitTutor(e) {
 
   navigateTo("tutor-success");
   toast("✅ Profile Registered! Complete Payment & Docs below.");
+}
+
+/* ================= TUTOR SELF-SERVICE PROFILE, ASSIGNMENTS & REPORTING PORTAL ================= */
+function initTutorPortalView() {
+  const msgEl = document.getElementById("tpLookupMsg");
+  if (msgEl) msgEl.style.display = "none";
+
+  if (activeSelfTutor) {
+    renderSelfTutorPortal();
+    return;
+  }
+
+  document.getElementById("tpLookupBox").style.display = "block";
+  document.getElementById("tpEditorBox").style.display = "none";
+  const savedBanner = document.getElementById("tpSavedBanner");
+  if (savedBanner) savedBanner.style.display = "none";
+
+  if (lastSubmittedTutor) {
+    const pEl = document.getElementById("tpPhone");
+    const kEl = document.getElementById("tpVerifyKey");
+    if (pEl && !pEl.value) pEl.value = lastSubmittedTutor.phone || "";
+    if (kEl && !kEl.value) kEl.value = lastSubmittedTutor.email || lastSubmittedTutor.id || "";
+  }
+}
+
+async function fetchPortalData() {
+  loadLocalCrm();
+  try {
+    const res = await fetch(getScriptUrl() + "?action=getAll");
+    const json = await res.json();
+    if (json && Array.isArray(json.tutors)) {
+      const prevTutorMap = new Map((crmData.tutors || []).map(x => [String(x.id), x]));
+      const prevLeadMap = new Map((crmData.leads || []).map(x => [String(x.id), x]));
+
+      const sheetTutors = json.tutors
+        .filter(t => t && (String(t.name || "").trim() || String(t.phone || "").trim()))
+        .map((t, idx) => {
+          const tid = String(t.id || ("TUT-ROW-" + idx));
+          const prev = prevTutorMap.get(tid);
+          const verifiedVal = isDirVerifiedFlag(t);
+          return {
+            ...t,
+            id: tid,
+            is_verified: verifiedVal,
+            directorVerified: verifiedVal,
+            trusted: isTrustedRecord(t),
+            unconfirmedCount: getRejectionCount(t),
+            flag: t.flag || "None",
+            flagReason: t.flagReason || "",
+            flaggedBy: t.flaggedBy || "",
+            hidden: isHiddenRecord(t),
+            feesRange: t.feesRange || prev?.feesRange || "",
+            preferredTiming: t.preferredTiming || prev?.preferredTiming || ""
+          };
+        });
+      const seenTIds = new Set(sheetTutors.map(x => String(x.id)));
+      const localUnsyncedTutors = (crmData.tutors || []).filter(t => t && !seenTIds.has(String(t.id)));
+
+      const sheetLeads = (json.leads || [])
+        .filter(l => l && (String(l.name || "").trim() || String(l.phone || "").trim()))
+        .map((l, idx) => {
+          const lid = String(l.id || ("LD-ROW-" + idx));
+          const prev = prevLeadMap.get(lid);
+          return {
+            ...l,
+            id: lid,
+            specificClass: l.specificClass || prev?.specificClass || "",
+            assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
+            assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
+            assignedDate: l.assignedDate || prev?.assignedDate || "",
+            commissionStatus: normalizeCommStatus(l.commissionStatus || prev?.commissionStatus),
+            tutorDemoReport: l.tutorDemoReport || prev?.tutorDemoReport || "",
+            tutorTuitionStatus: l.tutorTuitionStatus || prev?.tutorTuitionStatus || "",
+            tutorFeeStatus: l.tutorFeeStatus || prev?.tutorFeeStatus || "",
+            tutorReportNote: l.tutorReportNote || prev?.tutorReportNote || "",
+            tutorReportUpdatedAt: l.tutorReportUpdatedAt || prev?.tutorReportUpdatedAt || "",
+            tutorReportVerified: l.tutorReportVerified || prev?.tutorReportVerified || "Not Applicable",
+            tutorReportVerifyNote: l.tutorReportVerifyNote || prev?.tutorReportVerifyNote || "",
+            tutorReportVerifiedBy: l.tutorReportVerifiedBy || prev?.tutorReportVerifiedBy || "",
+            flag: l.flag || "None",
+            flagReason: l.flagReason || "",
+            flaggedBy: l.flaggedBy || "",
+            hidden: isHiddenRecord(l)
+          };
+        });
+      const seenLIds = new Set(sheetLeads.map(x => String(x.id)));
+      const localUnsyncedLeads = (crmData.leads || []).filter(l => l && !seenLIds.has(String(l.id)));
+
+      return {
+        tutors: [...localUnsyncedTutors, ...sheetTutors],
+        leads: [...localUnsyncedLeads, ...sheetLeads]
+      };
+    }
+  } catch (err) {
+    /* Fallback cleanly to cached data when offline */
+  }
+  return { tutors: crmData.tutors || [], leads: crmData.leads || [] };
+}
+
+async function lookupTutorProfile(e) {
+  e.preventDefault();
+  const phoneClean = cleanWaPhone(document.getElementById("tpPhone").value);
+  const keyRaw = document.getElementById("tpVerifyKey").value.trim().toLowerCase();
+  const msgEl = document.getElementById("tpLookupMsg");
+  const btn = document.getElementById("tpLookupBtn");
+
+  if (!phoneClean) {
+    msgEl.style.display = "block";
+    msgEl.innerHTML = "⚠ Please enter a valid <b>10-digit WhatsApp / Mobile number</b>.";
+    return;
+  }
+  if (!keyRaw) {
+    msgEl.style.display = "block";
+    msgEl.innerHTML = "⚠ Please enter your registered <b>Email ID</b> or <b>Tutor ID</b>.";
+    return;
+  }
+
+  msgEl.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "⏳ Verifying Profile & Loading Tuitions...";
+
+  const { tutors: pool, leads: allLeads } = await fetchPortalData();
+  const matches = pool.filter(t => {
+    const tPhone = cleanWaPhone(t.phone);
+    if (tPhone !== phoneClean) return false;
+    const tEmail = String(t.email || "").trim().toLowerCase();
+    const tId = String(t.id || "").trim().toLowerCase();
+    return (tEmail && tEmail === keyRaw) || (tId && tId === keyRaw);
+  });
+
+  btn.disabled = false;
+  btn.textContent = "🔍 Verify & Open My Profile";
+
+  if (!matches.length) {
+    msgEl.style.display = "block";
+    msgEl.innerHTML = `❌ No registered tutor profile matched this <b>Phone + Email / Tutor ID</b> combination.<br>Please double-check your registered details, or message our Varanasi coordinator on WhatsApp <b>+91 99199 91185</b> for help.`;
+    return;
+  }
+
+  const match = matches.find(t => !isHiddenRecord(t)) || matches[0];
+  if (isHiddenRecord(match)) {
+    msgEl.style.display = "block";
+    msgEl.innerHTML = `⚠️ Your profile is currently archived/inactive in our directory. Please contact our coordinator on WhatsApp <b>+91 99199 91185</b> to reactivate it.`;
+    return;
+  }
+
+  activeSelfTutor = { ...match };
+  portalLeadsPool = allLeads;
+  selfTuitionFilter = "all";
+  document.getElementById("tpSavedBanner").style.display = "none";
+  renderSelfTutorPortal();
+  toast("✅ Profile verified! Live status & allotted tuitions loaded.");
+}
+
+function setSelectValueWithFallback(selId, val) {
+  const sel = document.getElementById(selId);
+  if (!sel) return;
+  const target = String(val || "").trim();
+  if (!target) {
+    sel.value = "";
+    return;
+  }
+  const exists = Array.from(sel.options).some(o => o.value === target);
+  if (!exists) {
+    const opt = document.createElement("option");
+    opt.value = target;
+    opt.textContent = target;
+    sel.appendChild(opt);
+  }
+  sel.value = target;
+}
+
+function renderSelfStrikeTracker(t) {
+  const box = document.getElementById("tpStrikeTracker");
+  if (!box || !t) return;
+  const rej = Math.min(3, getRejectionCount(t));
+  const terminated = isTerminatedTutor(t);
+  const level = terminated ? 3 : rej;
+
+  let title = "";
+  let desc = "";
+  if (level === 0) {
+    title = "✅ Good Standing — 0 / 3 Consecutive Demo Rejections";
+    desc = "Policy Reminder: 3 consecutive demo rejections / unconfirmed tuitions lead to immediate service termination with no refund. Keep delivering great demo classes!";
+  } else if (level === 1) {
+    title = "⚠️ 1st Demo Rejection Recorded (1 / 3)";
+    desc = "You have 1 consecutive unconfirmed/rejected demo on record. 2 more consecutive rejections will trigger automatic service termination with no refund.";
+  } else if (level === 2) {
+    title = "🚨 LAST CHANCE — 2nd Demo Rejection Recorded (2 / 3)";
+    desc = "Final Warning: This is your LAST CHANCE. 1 more consecutive demo rejection / unconfirmed tuition will lead to immediate service termination with NO refund.";
+  } else {
+    title = "⛔ SERVICE TERMINATED — 3 / 3 Consecutive Demo Rejections";
+    desc = "Your profile has reached 3 consecutive demo rejections / unconfirmed tuitions and has been terminated under the non-refundable 3-Rejection Termination Rule.";
+  }
+
+  box.innerHTML = `
+    <div class="tp-strike-box strike-${level}">
+      <div style="font-size:13.5px;font-weight:800;">${title}</div>
+      <div class="tp-strike-bar">
+        <div class="tp-strike-pill ${level >= 1 ? "hit-warn" : ""}">1st Rejection ${level >= 1 ? "⚠️" : ""}</div>
+        <div class="tp-strike-pill ${level >= 2 ? "hit-last" : ""}">2nd (Last Chance) ${level >= 2 ? "🚨" : ""}</div>
+        <div class="tp-strike-pill ${level >= 3 ? "hit-term" : ""}">3rd (Terminated) ${level >= 3 ? "⛔" : ""}</div>
+      </div>
+      <div style="font-size:12px;line-height:1.5;">${desc}</div>
+    </div>
+  `;
+}
+
+function setSelfTuitionFilter(filt) {
+  selfTuitionFilter = filt;
+  ["all", "active", "closed"].forEach(k => {
+    document.getElementById("tpTutFilt-" + k)?.classList.toggle("active", k === filt);
+  });
+  renderSelfAssignedTuitions();
+}
+
+async function refreshSelfTutorTuitions() {
+  if (!activeSelfTutor) return;
+  toast("⏳ Syncing your live profile & allotted tuitions...");
+  const { tutors, leads } = await fetchPortalData();
+  const freshTutor = tutors.find(x => String(x.id) === String(activeSelfTutor.id))
+    || tutors.find(x => cleanWaPhone(x.phone) === cleanWaPhone(activeSelfTutor.phone));
+  if (freshTutor) activeSelfTutor = { ...freshTutor };
+  portalLeadsPool = leads;
+  renderSelfTutorPortal();
+  toast("✅ Live profile & allotted tuitions refreshed!");
+}
+
+function renderSelfAssignedTuitions() {
+  const listEl = document.getElementById("tpAssignedTuitionsList");
+  const cntBadge = document.getElementById("tpTuitionsCountBadge");
+  if (!listEl || !activeSelfTutor) return;
+
+  const allMyTuitions = getTuitionsForTutor(activeSelfTutor, portalLeadsPool);
+  if (cntBadge) cntBadge.textContent = String(allMyTuitions.length);
+
+  const filtered = allMyTuitions.filter(l => {
+    const closed = isTuitionClosedForTutor(l);
+    if (selfTuitionFilter === "active") return !closed;
+    if (selfTuitionFilter === "closed") return closed;
+    return true;
+  });
+
+  if (!allMyTuitions.length) {
+    listEl.innerHTML = `
+      <div style="text-align:center;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:16px;color:var(--muted);font-size:13px;">
+        📭 No tuitions have been allotted to your profile yet.<br>
+        <span style="font-size:12px;">Once our coordinator allots a demo or home tuition to you, it will appear right here with its allotment date and live status updater.</span>
+      </div>`;
+    return;
+  }
+
+  if (!filtered.length) {
+    listEl.innerHTML = `
+      <div style="text-align:center;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:14px;color:var(--muted);font-size:13px;">
+        No ${selfTuitionFilter === "active" ? "active" : "closed"} tuitions right now.
+      </div>`;
+    return;
+  }
+
+  const demoOpts = [
+    "",
+    "Not Visited Yet",
+    "Visited & Demo Given",
+    "Did Not Visit / Parent Unavailable",
+    "Demo Confirmed - Classes Started",
+    "Demo Rejected / Not Confirmed"
+  ];
+  const runOpts = [
+    "",
+    "Demo In Progress",
+    "Continuing / Active",
+    "Closed / Discontinued"
+  ];
+  const feeOpts = [
+    "",
+    "Not Due Yet",
+    "Fee Received from Parent",
+    "Fee Not Received / Pending"
+  ];
+
+  listEl.innerHTML = filtered.map(l => {
+    const domKey = safeDomId(l.id);
+    const closed = isTuitionClosedForTutor(l);
+    const allottedDate = l.assignedDate || l.confirmedDate || l.createdAt || "N/A";
+    const verStatus = String(l.tutorReportVerified || "Not Applicable");
+
+    let verBadge = "";
+    if (verStatus === "Verified with Parent") {
+      verBadge = `<span class="badge b-green">✅ Verified by Admin with Parent</span>`;
+    } else if (verStatus === "Pending Verification") {
+      verBadge = `<span class="badge b-amber">⏳ Report Sent — Pending Admin Verification</span>`;
+    } else if (verStatus === "Disputed / Mismatch") {
+      verBadge = `<span class="badge b-red">⚠️ Admin Flagged Mismatch — Contact Coordinator</span>`;
+    }
+
+    const demoVal = l.tutorDemoReport || "";
+    const runVal = l.tutorTuitionStatus || (closed ? "Closed / Discontinued" : "");
+    const feeVal = l.tutorFeeStatus || "";
+
+    return `
+      <div class="tp-tuition-card ${closed ? "closed" : ""}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;">
+          <div>
+            <h4 style="font-size:15.5px;color:var(--navy);">${esc(l.classExam)}${l.specificClass ? ` (${esc(l.specificClass)})` : ""} — ${esc(l.area)}</h4>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">
+              <b>Lead ID:</b> ${esc(l.id)} • <b>Allotted Date:</b> ${esc(allottedDate)}
+            </div>
+          </div>
+          <span class="badge ${closed ? "b-gray" : "b-blue"}">CRM: ${esc(l.status || "Demo Scheduled")}</span>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin:8px 0;">
+          ${l.tutorTuitionStatus ? `<span class="badge ${l.tutorTuitionStatus === "Closed / Discontinued" ? "b-red" : "b-green"}">📘 ${esc(l.tutorTuitionStatus)}</span>` : ""}
+          ${l.tutorDemoReport ? `<span class="badge b-purple">🎯 ${esc(l.tutorDemoReport)}</span>` : ""}
+          ${l.tutorFeeStatus ? `<span class="badge ${l.tutorFeeStatus.includes("Received") && !l.tutorFeeStatus.includes("Not") ? "b-green" : "b-amber"}">💰 ${esc(l.tutorFeeStatus)}</span>` : ""}
+          ${verBadge}
+        </div>
+
+        <div style="font-size:12.5px;color:#334155;line-height:1.55;">
+          <div><b>Student / Parent:</b> ${esc(l.name)} | <b>Subjects:</b> ${esc(l.subjects)} (${esc(l.board)})</div>
+          <div><b>Mode:</b> ${esc(l.mode)} | <b>Timing:</b> ${esc(l.timing)}${l.monthlyFee ? ` | <b>Agreed Fee:</b> ₹${esc(l.monthlyFee)}/mo` : (l.budget && l.budget !== "Discuss on Call" ? ` | <b>Budget:</b> ${esc(l.budget)}` : "")}</div>
+          ${l.assignedStaff && l.assignedStaff !== "Unassigned" ? `<div><b>Coordinator:</b> ${esc(l.assignedStaff)}</div>` : ""}
+          ${l.tutorReportUpdatedAt ? `<div style="font-size:11.5px;color:#64748b;margin-top:2px;">🕒 Last Reported: ${esc(l.tutorReportUpdatedAt)}</div>` : ""}
+          ${l.tutorReportVerifyNote ? `<div style="font-size:12px;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:5px 8px;margin-top:5px;"><b>Admin Remark:</b> ${esc(l.tutorReportVerifyNote)}</div>` : ""}
+        </div>
+
+        <div class="tp-report-box">
+          <div style="font-size:12.5px;font-weight:800;color:var(--navy);margin-bottom:8px;">📝 Report Demo, Tuition & Fee Status to Coordinator</div>
+          <div class="grid-2">
+            <div class="field" style="margin-bottom:8px;">
+              <label style="font-size:12px;">Demo / Visit Update</label>
+              <select id="tpRepDemo-${domKey}" class="input" style="padding:8px 10px;font-size:12.5px;">
+                ${demoOpts.map(o => `<option value="${esc(o)}" ${o === demoVal ? "selected" : ""}>${esc(o || "-- Select Demo / Visit --")}</option>`).join("")}
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label style="font-size:12px;">Tuition Running / Close Status</label>
+              <select id="tpRepRun-${domKey}" class="input" style="padding:8px 10px;font-size:12.5px;">
+                ${runOpts.map(o => `<option value="${esc(o)}" ${o === runVal ? "selected" : ""}>${esc(o || "-- Select Running / Closed --")}</option>`).join("")}
+              </select>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field" style="margin-bottom:8px;">
+              <label style="font-size:12px;">Fee Received Status</label>
+              <select id="tpRepFee-${domKey}" class="input" style="padding:8px 10px;font-size:12.5px;">
+                ${feeOpts.map(o => `<option value="${esc(o)}" ${o === feeVal ? "selected" : ""}>${esc(o || "-- Select Fee Status --")}</option>`).join("")}
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label style="font-size:12px;">Remarks / Closure Reason</label>
+              <input id="tpRepNote-${domKey}" class="input" style="padding:8px 10px;font-size:12.5px;" value="${esc(l.tutorReportNote || "")}" placeholder="e.g., Demo done, class active, fee received, closed..." />
+            </div>
+          </div>
+          <div class="grid-2">
+            <button type="button" id="tpRepBtn-${domKey}" class="btn btn-primary btn-sm" style="width:100%;" onclick="submitSelfTuitionReport('${esc(l.id)}')">💾 Update Status to CRM</button>
+            ${!closed
+              ? `<button type="button" class="btn btn-red btn-sm" style="width:100%;" onclick="quickCloseSelfTuition('${esc(l.id)}')">🛑 Mark Tuition Closed</button>`
+              : `<button type="button" class="btn btn-outline btn-sm" style="width:100%;" onclick="reopenSelfTuition('${esc(l.id)}')">🔄 Mark Continuing Again</button>`}
+          </div>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+async function submitSelfTuitionReport(leadId, forcedRunStatus) {
+  const lead = portalLeadsPool.find(x => String(x.id) === String(leadId));
+  if (!lead || !activeSelfTutor) {
+    toast("⚠ Tuition record not found.");
+    return;
+  }
+  const domKey = safeDomId(leadId);
+  const demoSel = document.getElementById("tpRepDemo-" + domKey);
+  const runSel = document.getElementById("tpRepRun-" + domKey);
+  const feeSel = document.getElementById("tpRepFee-" + domKey);
+  const noteEl = document.getElementById("tpRepNote-" + domKey);
+  const btn = document.getElementById("tpRepBtn-" + domKey);
+
+  const demoVal = demoSel ? demoSel.value : (lead.tutorDemoReport || "");
+  const runVal = forcedRunStatus !== undefined ? forcedRunStatus : (runSel ? runSel.value : (lead.tutorTuitionStatus || ""));
+  const feeVal = feeSel ? feeSel.value : (lead.tutorFeeStatus || "");
+  const noteVal = noteEl ? noteEl.value.trim() : (lead.tutorReportNote || "");
+
+  if (!demoVal && !runVal && !feeVal && !noteVal) {
+    toast("⚠ Please select at least one status or enter a remark before updating.");
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ Syncing..."; }
+
+  const stamp = nowStampStr();
+  const updatedLead = {
+    ...lead,
+    tutorDemoReport: demoVal,
+    tutorTuitionStatus: runVal,
+    tutorFeeStatus: feeVal,
+    tutorReportNote: noteVal,
+    tutorReportUpdatedAt: stamp,
+    tutorReportVerified: "Pending Verification"
+  };
+
+  // Sync in portal pool & local CRM cache
+  const pIdx = portalLeadsPool.findIndex(x => String(x.id) === String(leadId));
+  if (pIdx >= 0) portalLeadsPool[pIdx] = updatedLead;
+
+  loadLocalCrm();
+  const cIdx = crmData.leads.findIndex(x => String(x.id) === String(leadId));
+  if (cIdx >= 0) crmData.leads[cIdx] = { ...crmData.leads[cIdx], ...updatedLead };
+  else crmData.leads.unshift(updatedLead);
+  saveLocalCrm();
+
+  await postToBackend({
+    action: "updateLead",
+    source: "tutor_portal_report",
+    tutorId: activeSelfTutor.id,
+    tutorName: activeSelfTutor.name,
+    data: updatedLead
+  });
+
+  renderSelfAssignedTuitions();
+  toast("✅ Tuition report synced to CRM! Coordinator can now verify with the parent.");
+}
+
+async function quickCloseSelfTuition(leadId) {
+  const lead = portalLeadsPool.find(x => String(x.id) === String(leadId));
+  if (!lead) return;
+  if (!confirm(`Mark tuition for "${lead.name}" (${lead.area}) as CLOSED / DISCONTINUED? Our coordinator will verify this with the parent.`)) return;
+  const domKey = safeDomId(leadId);
+  const runSel = document.getElementById("tpRepRun-" + domKey);
+  if (runSel) runSel.value = "Closed / Discontinued";
+  await submitSelfTuitionReport(leadId, "Closed / Discontinued");
+}
+
+async function reopenSelfTuition(leadId) {
+  const domKey = safeDomId(leadId);
+  const runSel = document.getElementById("tpRepRun-" + domKey);
+  if (runSel) runSel.value = "Continuing / Active";
+  await submitSelfTuitionReport(leadId, "Continuing / Active");
+}
+
+function renderSelfTutorPortal() {
+  const t = activeSelfTutor;
+  if (!t) return;
+
+  document.getElementById("tpLookupBox").style.display = "none";
+  document.getElementById("tpEditorBox").style.display = "block";
+
+  const vm = getValidityMeta(t);
+  const paid = isPaidTutor(t);
+  const verified = isTutorVerified(t);
+  const terminated = isTerminatedTutor(t);
+  const isFraud = getNormalizedFlag(t) === "Fraud";
+  const isLocked = terminated || isFraud;
+
+  document.getElementById("tpProfileName").textContent = (verified ? "🛡️ " : "") + (t.name || "Registered Tutor");
+  document.getElementById("tpProfileSub").textContent =
+    `Tutor ID: ${t.id || "N/A"} • Phone: ${t.phone || "N/A"} • Email: ${t.email || "N/A"}`;
+
+  const payBadge = paid
+    ? `<span class="badge b-green">✔ ₹400 Fee Paid</span>`
+    : `<span class="badge b-red">⏳ Registration Fee Unpaid</span>`;
+  const statusBadge = `<span class="badge ${isLocked ? "b-red" : "b-blue"}">Profile Status: ${esc(t.status || "New")}</span>`;
+
+  document.getElementById("tpStatusBadges").innerHTML = `
+    ${verifyBadgeHtml(t)}
+    ${payBadge}
+    ${docBadgeHtml(t)}
+    <span class="badge ${vm.cls}">📅 ${esc(vm.label)}</span>
+    ${statusBadge}
+  `;
+
+  document.getElementById("tpCurrentSummary").innerHTML = `
+    <div><b>💰 Expected Fees:</b><br>${esc(t.feesRange || "Not Set")}</div>
+    <div><b>🕒 Preferred Timing:</b><br>${esc(t.preferredTiming || "Flexible / All Time")}</div>
+    <div><b>📍 Base Area:</b><br>${esc(t.area || "Not Set")}</div>
+    <div><b>📘 Classes:</b><br>${esc(t.classes || "Not Set")}</div>
+    <div><b>📚 Subjects:</b><br>${esc(t.subjects || "Not Set")}</div>
+    <div><b>🏍️ Conveyance:</b><br>${esc(t.vehicle || "Not Set")}</div>
+  `;
+
+  // Render 3-Rejection Tracker & Assigned Tuitions
+  renderSelfStrikeTracker(t);
+  renderSelfAssignedTuitions();
+
+  // Show helpful payment/document action links if still pending or expiring soon
+  const pendingBox = document.getElementById("tpPendingActions");
+  const docsVerified = String(t.docStatus || "").includes("Verified");
+  const needPay = !paid || vm.state === "Expired" || vm.state === "RenewSoon";
+  if (!isLocked && (needPay || !docsVerified)) {
+    pendingBox.style.display = "block";
+    pendingBox.innerHTML = `
+      <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#78350f;">
+        <b>⚡ Quick Profile Actions:</b>
+        <div class="grid-2" style="margin-top:8px;">
+          ${needPay ? `<button type="button" class="btn btn-primary btn-sm" style="width:100%" onclick="scrollToSection('paymentHub')">💳 ${paid ? "Renew ₹400 (365d)" : "Pay ₹400 Registration Fee"}</button>` : ""}
+          ${!docsVerified ? `<button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="openSelfDocEmail()">📧 Email Verification Docs</button>` : ""}
+        </div>
+      </div>`;
+  } else {
+    pendingBox.style.display = "none";
+    pendingBox.innerHTML = "";
+  }
+
+  // Handle locked accounts cleanly
+  const lockBox = document.getElementById("tpLockedNotice");
+  const formEl = document.getElementById("tpForm");
+  if (isLocked) {
+    lockBox.style.display = "block";
+    document.getElementById("tpLockedText").textContent = terminated
+      ? "Your profile is currently marked as Terminated under the 3 consecutive demo rejections policy. Self-service edits are disabled. Please contact our coordinator for clarification."
+      : "Self-service editing is currently disabled for this profile. Please contact our coordinator on WhatsApp for assistance.";
+    formEl.style.display = "none";
+    return;
+  }
+
+  lockBox.style.display = "none";
+  formEl.style.display = "block";
+
+  // Pre-fill editable fields with current live values
+  setSelectValueWithFallback("tpFeesRange", t.feesRange || "");
+  setSelectValueWithFallback("tpPrefTiming", t.preferredTiming || "Flexible / All Time");
+  document.getElementById("tpArea").value = t.area || "";
+  document.getElementById("tpClasses").value = t.classes || "";
+  document.getElementById("tpSubjects").value = t.subjects || "";
+  document.getElementById("tpSlots").value = t.slots || "";
+  setSelectValueWithFallback("tpVehicle", t.vehicle || "Yes, I have a Two-Wheeler");
+  document.getElementById("tpExp").value = t.experience || "";
+  document.getElementById("tpQual").value = t.qualification || "";
+  document.getElementById("tpUpdateNote").value = "";
+}
+
+function openSelfDocEmail() {
+  if (!activeSelfTutor) return;
+  openPrefilledDocEmail(false, activeSelfTutor);
+}
+
+async function saveSelfTutorProfile(e) {
+  e.preventDefault();
+  if (!activeSelfTutor) {
+    toast("⚠ Please verify your profile first.");
+    return;
+  }
+
+  const btn = document.getElementById("tpSaveBtn");
+  btn.disabled = true;
+  btn.textContent = "⏳ Saving Updated Profile...";
+
+  const today = new Date().toISOString().slice(0, 10);
+  const newFees = document.getElementById("tpFeesRange").value;
+  const newTiming = document.getElementById("tpPrefTiming").value;
+  const newArea = document.getElementById("tpArea").value.trim();
+  const newClasses = document.getElementById("tpClasses").value.trim();
+  const newSubjects = document.getElementById("tpSubjects").value.trim();
+  const newSlots = document.getElementById("tpSlots").value.trim();
+  const newVehicle = document.getElementById("tpVehicle").value;
+  const newExp = document.getElementById("tpExp").value.trim();
+  const newQual = document.getElementById("tpQual").value.trim();
+  const updateNote = document.getElementById("tpUpdateNote").value.trim();
+
+  // Preserve all admin-controlled fields while updating only tutor-editable fields
+  const updated = {
+    ...activeSelfTutor,
+    feesRange: newFees,
+    preferredTiming: newTiming,
+    area: newArea,
+    classes: newClasses,
+    subjects: newSubjects,
+    slots: newSlots,
+    vehicle: newVehicle,
+    experience: newExp,
+    qualification: newQual,
+    lastSelfUpdated: today
+  };
+
+  const logTag = updateNote
+    ? `[Self-Update ${today}]: ${updateNote}`
+    : `[Self-Update ${today}]: Fees=${newFees || "NA"}, Timing=${newTiming || "NA"}, Area=${newArea}`;
+  updated.notes = updated.notes ? `${updated.notes} | ${logTag}` : logTag;
+
+  activeSelfTutor = updated;
+
+  // Update local cache so CRM & instant reload reflect changes immediately
+  loadLocalCrm();
+  const idx = crmData.tutors.findIndex(x => String(x.id) === String(updated.id));
+  if (idx >= 0) crmData.tutors[idx] = { ...crmData.tutors[idx], ...updated };
+  else crmData.tutors.unshift(updated);
+  saveLocalCrm();
+
+  const res = await postToBackend({ action: "updateTutor", data: updated });
+
+  btn.disabled = false;
+  btn.textContent = "💾 Save & Update My Profile";
+
+  renderSelfTutorPortal();
+
+  const waUpdateMsg = `Hello Alenn Tuition Bureau, I have updated my Tutor Profile (${updated.id}).\nName: ${updated.name}\nPhone: ${updated.phone}\nNew Fees Range: ${updated.feesRange || "Flexible"}\nNew Timing: ${updated.preferredTiming}\nBase Area: ${updated.area}\nSubjects: ${updated.subjects}\nClasses: ${updated.classes}\nSlots: ${updated.slots}`;
+  const banner = document.getElementById("tpSavedBanner");
+  banner.style.display = "block";
+  banner.innerHTML = `
+    <div style="font-weight:800;font-size:14px;margin-bottom:4px;">✅ Profile Updated Successfully${res?.status === "offline_queued" ? " (Saved Locally)" : " & Synced to Coordinator CRM"}!</div>
+    <div style="font-size:12.5px;margin-bottom:10px;">Your updated fees (<b>${esc(updated.feesRange || "Flexible")}</b>), timing (<b>${esc(updated.preferredTiming)}</b>), area (<b>${esc(updated.area)}</b>), and subjects are now live for future tuition matching.</div>
+    <a class="btn btn-green btn-sm" href="https://wa.me/919919991185?text=${encodeURIComponent(waUpdateMsg)}" target="_blank" rel="noopener">💬 Notify Coordinator on WhatsApp (Optional)</a>
+  `;
+  banner.scrollIntoView({ behavior: "smooth", block: "center" });
+  toast("✅ Tutor profile updated & synced!");
+}
+
+function tpLogout() {
+  activeSelfTutor = null;
+  portalLeadsPool = [];
+  selfTuitionFilter = "all";
+  document.getElementById("tpLookupForm")?.reset();
+  document.getElementById("tpSavedBanner").style.display = "none";
+  document.getElementById("tpLookupMsg").style.display = "none";
+  document.getElementById("tpEditorBox").style.display = "none";
+  document.getElementById("tpLookupBox").style.display = "block";
+  toast("Profile closed safely");
 }
 
 /* ================= CRM AUTH & SYNC ================= */
@@ -3476,7 +4679,16 @@ async function syncFromSheet() {
             specificClass: l.specificClass || prev?.specificClass || "",
             assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
             assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
+            assignedDate: l.assignedDate || prev?.assignedDate || "",
             commissionStatus: normalizeCommStatus(l.commissionStatus || prev?.commissionStatus),
+            tutorDemoReport: l.tutorDemoReport || prev?.tutorDemoReport || "",
+            tutorTuitionStatus: l.tutorTuitionStatus || prev?.tutorTuitionStatus || "",
+            tutorFeeStatus: l.tutorFeeStatus || prev?.tutorFeeStatus || "",
+            tutorReportNote: l.tutorReportNote || prev?.tutorReportNote || "",
+            tutorReportUpdatedAt: l.tutorReportUpdatedAt || prev?.tutorReportUpdatedAt || "",
+            tutorReportVerified: l.tutorReportVerified || prev?.tutorReportVerified || "Not Applicable",
+            tutorReportVerifyNote: l.tutorReportVerifyNote || prev?.tutorReportVerifyNote || "",
+            tutorReportVerifiedBy: l.tutorReportVerifiedBy || prev?.tutorReportVerifiedBy || "",
             flag: l.flag || "None",
             flagReason: l.flagReason || "",
             flaggedBy: l.flaggedBy || "",
@@ -3503,6 +4715,14 @@ function switchCrmTab(tab) {
   });
 }
 
+function filterPendingTutorReports() {
+  switchCrmTab("leads");
+  resetLeadFilters();
+  const chk = document.getElementById("leadPendingReportsOnly");
+  if (chk) chk.checked = true;
+  renderLeads();
+}
+
 function refreshCrmUI() {
   const isDir = currentUser?.role === "director";
   const activeTutors = crmData.tutors.filter(t => !isHiddenRecord(t));
@@ -3520,6 +4740,7 @@ function refreshCrmUI() {
     return cm && (cm.state === "DueSoon" || cm.state === "Overdue" || cm.state === "PartiallyCollected");
   });
 
+  const pendingReportLeads = myLeads.filter(isPendingTutorReport);
   const flaggedTutorsCount = activeTutors.filter(t => hasActiveFlag(t)).length;
   const flaggedLeadsCount = myLeads.filter(l => hasActiveFlag(l)).length;
   const totalFlagged = flaggedTutorsCount + flaggedLeadsCount;
@@ -3538,6 +4759,16 @@ function refreshCrmUI() {
   if (tb) tb.textContent = `⛔ Terminated (3 Rej): ${terminatedCount}`;
   const trustedTabBtn = document.getElementById("ctab-trusted");
   if (trustedTabBtn) trustedTabBtn.textContent = `⭐ Trusted (${trustedCount})`;
+
+  const repBanner = document.getElementById("tutorReportAlertBanner");
+  if (repBanner) {
+    if (pendingReportLeads.length > 0) {
+      repBanner.style.display = "block";
+      repBanner.textContent = `📋 Tutor Status Update Alert: ${pendingReportLeads.length} tuition(s) updated by tutors (demo / fee / closed) awaiting parent-call verification. Tap to review →`;
+    } else {
+      repBanner.style.display = "none";
+    }
+  }
 
   const flagBanner = document.getElementById("flaggedAlertBanner");
   if (totalFlagged > 0) {
@@ -3611,6 +4842,8 @@ function resetLeadFilters() {
   });
   const chk = document.getElementById("leadShowHidden");
   if (chk) chk.checked = false;
+  const repChk = document.getElementById("leadPendingReportsOnly");
+  if (repChk) repChk.checked = false;
   renderLeads();
 }
 
@@ -3798,6 +5031,25 @@ function openAssignedTutorWa(leadId) {
   openWaChat(tut.phone, msg);
 }
 
+async function quickVerifyTutorReport(leadId, verdict) {
+  const l = crmData.leads.find(x => String(x.id) === String(leadId));
+  if (!l) return;
+  l.tutorReportVerified = verdict;
+  l.tutorReportVerifiedBy = currentUser?.name || "Staff";
+  if (verdict === "Verified with Parent") {
+    if (l.tutorTuitionStatus === "Closed / Discontinued") {
+      l.status = "Closed / Cancelled";
+    } else if (l.tutorDemoReport === "Demo Confirmed - Classes Started" && (l.status === "New Lead" || l.status === "Demo Scheduled" || l.status === "Demo Completed")) {
+      l.status = "Tuition Confirmed";
+      if (!l.confirmedDate) l.confirmedDate = new Date().toISOString().slice(0, 10);
+    }
+  }
+  saveLocalCrm();
+  refreshCrmUI();
+  await postToBackend({ action: "updateLead", data: l });
+  toast(verdict === "Verified with Parent" ? "✅ Tutor report verified with parent!" : "⚠️ Tutor report marked as Disputed / Mismatch.");
+}
+
 function leadCardHtml(l) {
   const cm = getCommissionMeta(l);
   const safePhone = cleanWaPhone(l.phone);
@@ -3814,6 +5066,7 @@ function leadCardHtml(l) {
           ${tut.verified
             ? `<span class="badge b-green">✔ Verified Tutor</span>`
             : `<span class="badge b-amber">⏳ Unverified</span>`}
+          ${l.assignedDate ? `<span class="badge b-gray">📅 Allotted: ${esc(l.assignedDate)}</span>` : ""}
         </div>
         <div style="font-size:11.5px;color:#475569;margin-top:2px;">
           ${tutPhone ? `📞 +91 ${esc(tutPhone)}` : `⚠ Tutor phone not linked — re-select tutor in Assign modal`}
@@ -3826,6 +5079,37 @@ function leadCardHtml(l) {
         <button type="button" class="btn btn-green btn-sm" onclick="openAssignedTutorWa('${esc(l.id)}')">💬 WA Tutor</button>
       </div>
     </div>` : "";
+
+  let tutorReportBoxHtml = "";
+  if (hasTutorReport(l)) {
+    const vSt = String(l.tutorReportVerified || "Pending Verification");
+    const boxCls = vSt === "Verified with Parent" ? "verified" : (vSt === "Disputed / Mismatch" ? "disputed" : "pending");
+    const vTag = vSt === "Verified with Parent"
+      ? `<span class="badge b-green">✅ Verified w/ Parent${l.tutorReportVerifiedBy ? " (" + esc(l.tutorReportVerifiedBy) + ")" : ""}</span>`
+      : (vSt === "Disputed / Mismatch"
+          ? `<span class="badge b-red">⚠️ Disputed / Mismatch</span>`
+          : `<span class="badge b-amber">⏳ Pending Parent-Call Verification</span>`);
+
+    tutorReportBoxHtml = `
+      <div class="crm-tutor-report-box ${boxCls}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
+          <b>📋 Tutor Portal Report ${l.tutorReportUpdatedAt ? `(${esc(l.tutorReportUpdatedAt)})` : ""}</b>
+          ${vTag}
+        </div>
+        <div style="line-height:1.5;">
+          ${l.tutorDemoReport ? `<b>Demo:</b> ${esc(l.tutorDemoReport)} &nbsp;` : ""}
+          ${l.tutorTuitionStatus ? `| <b>Tuition:</b> ${esc(l.tutorTuitionStatus)} &nbsp;` : ""}
+          ${l.tutorFeeStatus ? `| <b>Fee:</b> ${esc(l.tutorFeeStatus)}` : ""}
+        </div>
+        ${l.tutorReportNote ? `<div style="margin-top:3px;">💬 <b>Tutor Remark:</b> ${esc(l.tutorReportNote)}</div>` : ""}
+        ${l.tutorReportVerifyNote ? `<div style="margin-top:3px;">☎️ <b>Parent Verification Note:</b> ${esc(l.tutorReportVerifyNote)}</div>` : ""}
+        ${vSt === "Pending Verification" ? `
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+            <button type="button" class="btn btn-green btn-sm" onclick="quickVerifyTutorReport('${esc(l.id)}','Verified with Parent')">✅ Verified with Parent</button>
+            <button type="button" class="btn btn-red btn-sm" onclick="quickVerifyTutorReport('${esc(l.id)}','Disputed / Mismatch')">⚠️ Mark Disputed</button>
+          </div>` : ""}
+      </div>`;
+  }
 
   return `
     <div class="card ${extraCls}">
@@ -3849,6 +5133,7 @@ function leadCardHtml(l) {
         <div><b>Subjects:</b> ${esc(l.subjects)} | <b>Mode:</b> ${esc(l.mode)} | <b>Pref:</b> ${esc(l.genderPref)}</div>
         <div><b>Phone:</b> ${esc(l.phone)} | <b>Timing:</b> ${esc(l.timing)} ${l.budget && l.budget !== 'Discuss on Call' ? `| <b>Budget:</b> ${esc(l.budget)}` : ""} ${l.monthlyFee ? `| <b>Fee:</b> ₹${esc(l.monthlyFee)}/mo (50% Comm: ₹${Math.round(Number(l.monthlyFee)*0.5)})` : ""}</div>
         ${tutorStripHtml}
+        ${tutorReportBoxHtml}
         ${flagNoteHtml(l)}
         ${l.notes ? `<div style="font-size:12px;color:#64748b;margin-top:5px;">📝 ${esc(l.notes)}</div>` : ""}
       </div>
@@ -3865,6 +5150,7 @@ function leadCardHtml(l) {
 function renderLeads() {
   const isDir = currentUser?.role === "director";
   const showHidden = isDir && document.getElementById("leadShowHidden")?.checked;
+  const onlyPendingReports = !!document.getElementById("leadPendingReportsOnly")?.checked;
   const q = document.getElementById("leadSearch").value.trim().toLowerCase();
   const areaF = (document.getElementById("leadAreaFilter")?.value || "").trim().toLowerCase();
   const statusF = document.getElementById("leadStatusFilter")?.value || "";
@@ -3883,9 +5169,10 @@ function renderLeads() {
     if (isDir && sf && owner !== sf) return false;
     if (areaF && !String(l.area || "").toLowerCase().includes(areaF)) return false;
     if (statusF && (l.status || "New Lead") !== statusF) return false;
+    if (onlyPendingReports && !isPendingTutorReport(l)) return false;
     if (flagF === "ANY_FLAG" && !hasActiveFlag(l)) return false;
     else if (flagF && flagF !== "ANY_FLAG" && getNormalizedFlag(l) !== flagF) return false;
-    const hay = `${l.id} ${l.name} ${l.classExam} ${l.specificClass || ""} ${l.board} ${l.subjects} ${l.area} ${l.phone} ${l.mode} ${l.budget || ""} ${l.assignedTutor} ${l.assignedTutorPhone || ""} ${l.assignedStaff} ${l.notes} ${l.flag} ${l.flagReason}`.toLowerCase();
+    const hay = `${l.id} ${l.name} ${l.classExam} ${l.specificClass || ""} ${l.board} ${l.subjects} ${l.area} ${l.phone} ${l.mode} ${l.budget || ""} ${l.assignedTutor} ${l.assignedTutorPhone || ""} ${l.assignedStaff} ${l.tutorDemoReport || ""} ${l.tutorTuitionStatus || ""} ${l.tutorFeeStatus || ""} ${l.tutorReportNote || ""} ${l.notes} ${l.flag} ${l.flagReason}`.toLowerCase();
     return !q || hay.includes(q);
   });
 
@@ -4285,6 +5572,14 @@ async function deleteCurrentTutor() {
   toast("🗑️ Tutor permanently deleted!");
 }
 
+function onLeadTutorChange() {
+  const tutSel = document.getElementById("lmTutor");
+  const assignDateEl = document.getElementById("lmAssignedDate");
+  if (tutSel && tutSel.value && assignDateEl && !assignDateEl.value) {
+    assignDateEl.value = new Date().toISOString().slice(0, 10);
+  }
+}
+
 function onLeadStatusChange() {
   const st = document.getElementById("lmStatus").value;
   const dt = document.getElementById("lmConfirmedDate");
@@ -4364,6 +5659,7 @@ function populateLeadTutorDropdown(preferredLabel, preferredTutorId) {
 
   if (tokens.length && eligibleTutors.length === 1 && !tutSel.value) {
     tutSel.selectedIndex = 1;
+    onLeadTutorChange();
   }
 }
 const populateLeadTutorOptions = populateLeadTutorDropdown;
@@ -4394,6 +5690,8 @@ function openLeadModal(id) {
   populateLeadTutorDropdown(l.assignedTutor || "", l.assignedTutorId || "");
 
   document.getElementById("lmStatus").value = l.status || "New Lead";
+  const assignDateEl = document.getElementById("lmAssignedDate");
+  if (assignDateEl) assignDateEl.value = l.assignedDate || (l.assignedTutor ? (l.confirmedDate || l.createdAt || "") : "");
   document.getElementById("lmConfirmedDate").value = l.confirmedDate || ((l.status === "Tuition Confirmed" || l.status === "Payment Pending") ? (l.createdAt || new Date().toISOString().slice(0, 10)) : "");
   document.getElementById("lmMonthlyFee").value = l.monthlyFee || "";
   const normComm = normalizeCommStatus(l.commissionStatus);
@@ -4401,6 +5699,26 @@ function openLeadModal(id) {
   if (commSel) {
     commSel.value = Array.from(commSel.options).some(o => o.value === normComm) ? normComm : (commSel.options[0]?.value || "Payment Pending");
   }
+
+  // Populate Tutor Self-Report & Parent-Call Verification fields
+  const repSummary = document.getElementById("lmTutorReportSummary");
+  if (repSummary) {
+    if (hasTutorReport(l)) {
+      repSummary.innerHTML = `
+        <b>Last Tutor Update:</b> ${esc(l.tutorReportUpdatedAt || "Recorded")}<br>
+        <b>Tutor Remark:</b> ${esc(l.tutorReportNote || "No additional note")}
+      `;
+    } else {
+      repSummary.textContent = "No report submitted by the tutor from Tutor Portal yet. You can also update these fields directly after calling the parent.";
+    }
+  }
+  setSelectValueWithFallback("lmTutorDemoReport", l.tutorDemoReport || "");
+  setSelectValueWithFallback("lmTutorTuitionStatus", l.tutorTuitionStatus || "");
+  setSelectValueWithFallback("lmTutorFeeStatus", l.tutorFeeStatus || "");
+  setSelectValueWithFallback("lmTutorReportVerified", l.tutorReportVerified || (hasTutorReport(l) ? "Pending Verification" : "Not Applicable"));
+  const verNoteEl = document.getElementById("lmTutorReportVerifyNote");
+  if (verNoteEl) verNoteEl.value = l.tutorReportVerifyNote || "";
+
   document.getElementById("lmFlag").value = getNormalizedFlag(l);
   document.getElementById("lmFlagReason").value = l.flagReason || "";
   document.getElementById("lmNotes").value = l.notes || "";
@@ -4421,17 +5739,43 @@ async function saveLeadChanges() {
   const newFlag = document.getElementById("lmFlag").value;
   const tutSel = document.getElementById("lmTutor");
   const selOpt = tutSel.options[tutSel.selectedIndex];
+  const today = new Date().toISOString().slice(0, 10);
+
+  const prevTutorId = l.assignedTutorId || "";
+  const nextTutorLabel = tutSel.value;
+  const nextTutorId = selOpt?.dataset?.tid || "";
 
   l.assignedStaff = isDir
     ? document.getElementById("lmStaff").value
     : (l.assignedStaff && l.assignedStaff !== "Unassigned" ? l.assignedStaff : currentUser.name);
-  l.assignedTutor = tutSel.value;
-  l.assignedTutorId = selOpt?.dataset?.tid || "";
+  l.assignedTutor = nextTutorLabel;
+  l.assignedTutorId = nextTutorId;
   l.assignedTutorPhone = selOpt?.dataset?.phone || "";
+  const assignDateEl = document.getElementById("lmAssignedDate");
+  if (nextTutorLabel) {
+    l.assignedDate = (assignDateEl && assignDateEl.value) ? assignDateEl.value : (l.assignedDate || today);
+    if (prevTutorId && nextTutorId && prevTutorId !== nextTutorId && assignDateEl && !assignDateEl.value) {
+      l.assignedDate = today;
+    }
+  } else {
+    l.assignedDate = "";
+  }
+
   l.status = document.getElementById("lmStatus").value;
-  l.confirmedDate = document.getElementById("lmConfirmedDate").value || ((l.status === "Tuition Confirmed" || l.status === "Payment Pending") ? new Date().toISOString().slice(0, 10) : "");
+  l.confirmedDate = document.getElementById("lmConfirmedDate").value || ((l.status === "Tuition Confirmed" || l.status === "Payment Pending") ? today : "");
   l.monthlyFee = document.getElementById("lmMonthlyFee").value.trim();
   l.commissionStatus = normalizeCommStatus(document.getElementById("lmCommStatus").value);
+
+  // Save Tutor Report & Parent Verification details
+  l.tutorDemoReport = document.getElementById("lmTutorDemoReport")?.value || "";
+  l.tutorTuitionStatus = document.getElementById("lmTutorTuitionStatus")?.value || "";
+  l.tutorFeeStatus = document.getElementById("lmTutorFeeStatus")?.value || "";
+  l.tutorReportVerified = document.getElementById("lmTutorReportVerified")?.value || "Not Applicable";
+  l.tutorReportVerifyNote = document.getElementById("lmTutorReportVerifyNote")?.value.trim() || "";
+  if (l.tutorReportVerified === "Verified with Parent" || l.tutorReportVerified === "Disputed / Mismatch") {
+    l.tutorReportVerifiedBy = currentUser?.name || "Staff";
+  }
+
   l.flag = newFlag;
   l.flagReason = newFlag === "None" ? "" : document.getElementById("lmFlagReason").value.trim();
   l.flaggedBy = newFlag === "None" ? "" : (currentUser?.name || "");
@@ -4441,7 +5785,7 @@ async function saveLeadChanges() {
   closeModal("leadModal");
   refreshCrmUI();
   await postToBackend({ action: "updateLead", data: l });
-  toast("✅ Tuition assignment & flag saved!");
+  toast("✅ Tuition assignment & verification saved!");
 }
 
 async function toggleHideCurrentLead() {
@@ -4560,3 +5904,4 @@ if (window.location.hash) {
 </script>
 </body>
 </html>
+
