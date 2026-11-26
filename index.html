@@ -718,6 +718,70 @@
       font-size: 13px; font-weight: 700; display: none; box-shadow: 0 8px 20px rgba(0,0,0,.25);
       max-width: 92vw; text-align: center;
     }
+
+    /* ===== PARENT PORTAL, TEACHER HISTORY & DUAL-TRANSPARENCY STYLES ===== */
+    .drawer-item.parent-item { background: #eff6ff; border-color: #93c5fd; color: #1e40af; }
+    .pp-card {
+      background: #fff; border: 1.5px solid #bfdbfe; border-radius: 16px;
+      padding: 16px; margin-bottom: 14px; box-shadow: 0 4px 14px rgba(15,23,42,.05);
+    }
+    .pp-section {
+      background: #f8fafc; border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px; margin-top: 10px;
+    }
+    .pp-tutor-box {
+      background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px;
+      padding: 12px; margin-top: 10px;
+    }
+    .pp-coord-box {
+      background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px;
+      padding: 10px 12px; margin-top: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    }
+    .pp-timeline {
+      border-left: 2.5px solid #93c5fd; margin: 10px 0 4px 8px; padding-left: 12px;
+    }
+    .pp-timeline-item {
+      position: relative; background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px; margin-bottom: 9px; font-size: 12.5px;
+    }
+    .pp-timeline-item::before {
+      content: ""; position: absolute; left: -19px; top: 13px; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--primary); border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #bfdbfe;
+    }
+    .pp-timeline-item.declined::before { background: var(--red); box-shadow: 0 0 0 2px #fecaca; }
+    .pp-timeline-item.onhold::before { background: var(--accent); box-shadow: 0 0 0 2px #fde68a; }
+    .pp-timeline-item.confirmed::before { background: var(--green); box-shadow: 0 0 0 2px #bbf7d0; }
+    .pp-hist-fb-form {
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: 9px;
+      padding: 9px; margin-top: 8px;
+    }
+    .pp-feedback-box {
+      background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: 12px;
+      padding: 12px; margin-top: 10px;
+    }
+    .pp-pay-box {
+      background: #f0f9ff; border: 1.5px solid #7dd3fc; border-radius: 12px;
+      padding: 12px; margin-top: 10px;
+    }
+    .crm-parent-fb-box {
+      background: #fefce8; border: 1.5px solid #facc15; border-radius: 12px;
+      padding: 10px 12px; margin: 8px 0 10px; font-size: 12.5px; color: #713f12;
+    }
+    .crm-parent-fb-box.urgent {
+      background: #fef2f2; border-color: #f87171; color: #991b1b;
+    }
+    .doc-check-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px;
+      background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
+      padding: 9px; margin-bottom: 10px;
+    }
+    .doc-check-item {
+      display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+      color: #1e293b; cursor: pointer;
+    }
+    .doc-check-item input { width: 15px; height: 15px; accent-color: var(--green); }
   </style>
 </head>
 <body>
@@ -753,6 +817,7 @@
     <button class="drawer-item" onclick="navigateTo('board10')">📘 Class 9–10 Boards (CBSE/ICSE/IB/UP)</button>
     <button class="drawer-item" onclick="navigateTo('school')">📚 Nur–8, Humanities, Psychology & Dance</button>
     <button class="drawer-item" onclick="openInquiry('Menu Free Demo')">👨‍👩‍👧 Parent / Student Inquiry (Free Demo)</button>
+    <button class="drawer-item parent-item" onclick="navigateTo('parent-portal')">🏡 Parent Portal (Track Demo, Feedback & Fees)</button>
     <button class="drawer-item" onclick="navigateTo('tutor')">🎓 Register as Home Tutor</button>
     <button class="drawer-item portal-item" onclick="navigateTo('tutor-portal')">✏️ Update Existing Tutor Profile</button>
     <button class="drawer-item" onclick="scrollToSection('paymentHub')">💳 Pay Registration / Tuition Fee</button>
@@ -897,6 +962,7 @@
         <button class="btn btn-green" onclick="navigateTo('tutor')">🎓 Open Tutor Registration →</button>
       </div>
       <button class="btn btn-outline" onclick="navigateTo('tutor-portal')">✏️ Already a Registered Tutor? View or Update Your Profile →</button>
+      <button class="btn btn-outline" style="margin-top:8px;border-color:#93c5fd;background:#eff6ff;" onclick="navigateTo('parent-portal')">🏡 Already Submitted an Inquiry? Open Parent Portal (Track Tutors, Feedback & Fees) →</button>
     </div>
 
     <!-- ==================== PAYMENT HUB ==================== -->
@@ -1765,6 +1831,7 @@
         <a id="inqSuccessWaBtn" class="btn btn-green" href="https://wa.me/919919991185" target="_blank" rel="noopener">💬 Fast-Track on WhatsApp</a>
         <a class="btn btn-primary" href="tel:+919919666650">📞 Call +91 99196 66650</a>
       </div>
+      <button class="btn btn-navy" style="margin-bottom:10px;" onclick="openMyParentPortalFromSuccess()">🏡 Track Demo, Assigned Tutors & Fees in Parent Portal →</button>
       <div class="grid-2">
         <button class="btn btn-outline" onclick="navigateTo('home')">← Back to Home</button>
         <button class="btn btn-outline" onclick="openInquiry('New Inquiry')">➕ Book Another Demo</button>
@@ -2178,6 +2245,56 @@
     </div>
   </section>
 
+  <!-- ==================== VIEW: PARENT DASHBOARD PORTAL ==================== -->
+  <section id="view-parent-portal" class="view">
+    <button class="btn btn-outline btn-sm" onclick="navigateTo('home')" style="margin-bottom:10px;">← Back to Home</button>
+
+    <!-- STEP 1: SECURE PARENT LOOKUP -->
+    <div id="ppLookupBox" class="card" style="max-width:540px;margin:8px auto;">
+      <span class="badge b-blue">🏡 PARENT & STUDENT DASHBOARD • VARANASI</span>
+      <h2 style="margin:8px 0 4px;">Track Inquiry, Assigned Tutors, Feedback & Fees</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Enter your registered WhatsApp/Mobile number and Parent Name (or Lead ID) to view your live inquiry status, assigned Tutor & Demo schedule, complete date-wise & time-wise past tutor history, give feedback for each teacher, and pay tuition fees online.</p>
+
+      <form id="ppLookupForm" onsubmit="lookupParentPortal(event)">
+        <div class="field">
+          <label>Registered Parent Phone / WhatsApp Number <span class="req">*</span></label>
+          <input id="ppPhone" type="tel" class="input" required placeholder="e.g., 9876543210" />
+        </div>
+        <div class="field">
+          <label>Parent / Student Name <i>or</i> Lead ID <span class="req">*</span></label>
+          <input id="ppVerifyKey" class="input" required placeholder="e.g., First name or LD-173..." />
+        </div>
+        <button id="ppLookupBtn" type="submit" class="btn btn-primary">🔍 Open My Parent Dashboard</button>
+      </form>
+
+      <div id="ppLookupMsg" style="display:none;margin-top:12px;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#991b1b;"></div>
+
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);">
+        <span>Need to book a new free demo?</span>
+        <button type="button" class="btn btn-outline btn-sm" onclick="openInquiry('Parent Portal New Demo')">➕ Book Free Demo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: LIVE PARENT DASHBOARD -->
+    <div id="ppDashboardBox" style="display:none;">
+      <div class="card" style="background:linear-gradient(135deg,#0b1530,#1d4ed8);color:#fff;border:none;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">
+          <div>
+            <span class="badge b-amber">🏡 VERIFIED PARENT DASHBOARD</span>
+            <h2 id="ppParentTitle" style="margin:6px 0 2px;font-size:20px;">Welcome, Parent</h2>
+            <p id="ppParentSub" style="font-size:12.5px;color:#dbeafe;"></p>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="refreshParentPortal()">🔄 Refresh</button>
+            <button type="button" class="btn btn-red btn-sm" onclick="ppLogout()">Switch / Exit</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="ppInquiriesList"></div>
+    </div>
+  </section>
+
   <!-- ==================== VIEW: STAFF CRM PORTAL ==================== -->
   <section id="view-crm" class="view">
     <button class="btn btn-outline btn-sm" onclick="navigateTo('home')" style="margin-bottom:10px;">← Back to Website</button>
@@ -2216,11 +2333,15 @@
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
             <button class="btn btn-ghost btn-sm" onclick="syncFromSheet()">🔄 Sync Sheet</button>
+            <button id="btnScanDocs" class="btn btn-ghost btn-sm" onclick="scanVerificationDocsNow()">📧 Scan Gmail Docs</button>
             <button id="btnExportCsv" class="btn btn-ghost btn-sm" onclick="exportCsv()">⬇ Export CSV</button>
             <button class="btn btn-red btn-sm" onclick="logoutCrm()">Logout</button>
           </div>
         </div>
       </div>
+
+      <!-- PARENT FEEDBACK & FEE CLAIM ALERT BANNER -->
+      <div id="parentFeedbackAlertBanner" style="display:none;background:#fefce8;border:1.5px solid #f59e0b;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#78350f;font-size:13px;font-weight:700;cursor:pointer;" onclick="filterParentFeedbackLeads()"></div>
 
       <!-- TUTOR REPORT VERIFICATION ALERT BANNER -->
       <div id="tutorReportAlertBanner" style="display:none;background:#eff6ff;border:1.5px solid #3b82f6;border-radius:14px;padding:12px 14px;margin-bottom:10px;color:#1e3a8a;font-size:13px;font-weight:700;cursor:pointer;" onclick="filterPendingTutorReports()"></div>
@@ -2385,6 +2506,8 @@
               <option value="New Lead">New Lead</option>
               <option value="Demo Scheduled">Demo Scheduled</option>
               <option value="Demo Completed">Demo Completed</option>
+              <option value="Demo On Hold">Demo On Hold</option>
+              <option value="Demo Declined / Rejected">Demo Declined / Rejected</option>
               <option value="Tuition Confirmed">Tuition Confirmed</option>
               <option value="Payment Pending">Payment Pending</option>
               <option value="Closed / Cancelled">Closed / Cancelled</option>
@@ -2410,6 +2533,9 @@
             </select>
             <label class="toggle-inline">
               <input id="leadPendingReportsOnly" type="checkbox" onchange="renderLeads()" /> 📋 Pending Tutor Reports
+            </label>
+            <label class="toggle-inline">
+              <input id="leadParentFeedbackOnly" type="checkbox" onchange="renderLeads()" /> 🏡 Parent Feedback / Claims
             </label>
             <label id="leadShowHiddenWrap" class="toggle-inline" style="display:none;">
               <input id="leadShowHidden" type="checkbox" onchange="renderLeads()" /> 👁️ Show Hidden Leads
@@ -2494,6 +2620,12 @@
           <div id="staffPassEditor"></div>
           <button class="btn btn-navy" style="margin-top:10px;" onclick="saveStaffPasswords()">🔑 Update Staff Passwords</button>
         </div>
+        <div class="card">
+          <h3 style="margin-bottom:8px;">📞 Coordinator WhatsApp & Call Numbers (For Parent Portal & Auto Alerts)</h3>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">Used for 1-tap Call/WhatsApp buttons in Parent & Tutor Portals and for routing instant WhatsApp alerts to assigned coordinators and Director Rahul Sir.</p>
+          <div id="staffPhoneEditor"></div>
+          <button type="button" class="btn btn-primary" style="margin-top:10px;" onclick="saveStaffPhones()">💾 Save Coordinator Numbers</button>
+        </div>
 
         <div class="card" style="border:1.5px solid #fca5a5;background:#fffbfb;">
           <h3 style="margin-bottom:8px;">🛡️ Director Security PIN (Hide & Permanent Delete Lock)</h3>
@@ -2554,6 +2686,19 @@
       </div>
     </div>
     <div id="tmPayValidityHint" style="font-size:12px;color:#1e40af;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:7px 10px;margin:-4px 0 10px;"></div>
+    <!-- 4-DOCUMENT CHECKLIST (AUTO-SYNCED PARTIAL/COMPLETE + MANUAL OVERRIDE) -->
+    <div style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:5px;">
+        <label style="font-size:12.5px;font-weight:800;color:var(--navy);margin:0;">📑 4 Mandatory Documents Checklist (Auto / Manual)</label>
+        <button type="button" class="btn btn-outline btn-sm" style="padding:4px 8px;font-size:11px;color:var(--green);" onclick="requestMissingDocsWa()">📲 Request Missing Docs (WA)</button>
+      </div>
+      <div class="doc-check-grid">
+        <label class="doc-check-item"><input type="checkbox" id="tmDocAadhaar" onchange="syncDocStatusFromChecks()" /> 🪪 Aadhaar (Front/Back)</label>
+        <label class="doc-check-item"><input type="checkbox" id="tmDocSelfie" onchange="syncDocStatusFromChecks()" /> 🤳 Selfie Photo</label>
+        <label class="doc-check-item"><input type="checkbox" id="tmDocMarksheet" onchange="syncDocStatusFromChecks()" /> 📜 Marksheets</label>
+        <label class="doc-check-item"><input type="checkbox" id="tmDocAddress" onchange="syncDocStatusFromChecks()" /> 🏠 Local Address Proof</label>
+      </div>
+    </div>
     <div class="grid-2 modal-field-row">
       <div class="field">
         <label>CRM Status</label>
@@ -2716,6 +2861,8 @@
           <option>New Lead</option>
           <option>Demo Scheduled</option>
           <option>Demo Completed</option>
+          <option>Demo On Hold</option>
+          <option>Demo Declined / Rejected</option>
           <option>Tuition Confirmed</option>
           <option>Payment Pending</option>
           <option>Closed / Cancelled</option>
@@ -2725,6 +2872,20 @@
         <label>Tutor Allotted Date</label>
         <input id="lmAssignedDate" type="date" class="input" />
       </div>
+    </div>
+    <div class="grid-2 modal-field-row">
+      <div class="field">
+        <label>📅 Scheduled Demo Date</label>
+        <input id="lmDemoDate" type="date" class="input" />
+      </div>
+      <div class="field">
+        <label>🕒 Scheduled Demo Time</label>
+        <input id="lmDemoTime" class="input" placeholder="e.g., 5:30 PM" />
+      </div>
+    </div>
+    <div class="field">
+      <label>⏰ Confirmed Regular Tutor Timing (Visible to Parent & Tutor)</label>
+      <input id="lmClassTiming" class="input" placeholder="e.g., Mon–Sat, 6:00 PM – 7:30 PM" />
     </div>
     <div class="grid-2 modal-field-row">
       <div class="field">
@@ -2744,6 +2905,23 @@
         <option value="Collected">✅ Collected (50% Settled)</option>
         <option value="Waived">🏳️ Waived (No Commission)</option>
       </select>
+    </div>
+
+    <!-- PARENT PORTAL FEEDBACK & PAYMENT CLAIM SECTION -->
+    <div id="lmParentFeedbackBox" style="background:#fefce8;border:1.5px solid #facc15;border-radius:12px;padding:12px;margin-bottom:13px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;">
+        <b style="font-size:13px;color:#854d0e;">🏡 Parent Portal Feedback & Fee Updates</b>
+        <span id="lmParentFbBadge" class="badge b-gray">No Feedback Yet</span>
+      </div>
+      <div id="lmParentFeedbackSummary" style="font-size:12px;color:#334155;background:#fff;border:1px solid #fde68a;border-radius:9px;padding:8px 10px;margin-bottom:8px;">No parent feedback submitted yet.</div>
+      <div class="field" style="margin-bottom:8px;">
+        <label>Coordinator Transparent Remark (Visible to Parent & Tutor)</label>
+        <input id="lmCoordinatorFeedback" class="input" placeholder="e.g., Verified tutor assigned; demo confirmed for 5:30 PM..." />
+      </div>
+      <label class="toggle-inline" style="background:#fff;border-color:#86efac;width:100%;">
+        <input id="lmParentFbSeen" type="checkbox" style="accent-color:#16a34a;" />
+        <span>✅ Mark Parent Feedback / Payment Claim as Reviewed</span>
+      </label>
     </div>
 
     <!-- TUTOR SELF-REPORT & PARENT-CALL VERIFICATION SECTION -->
@@ -2837,7 +3015,22 @@
       <label>Follow-up Notes</label>
       <textarea id="lmNotes" class="input" rows="2"></textarea>
     </div>
-    <button class="btn btn-primary" onclick="saveLeadChanges()">💾 Save Tuition Assignment</button>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
+      <label class="agree-row" style="padding:8px 11px;margin:0;background:#f0fdf4;border-color:#86efac;">
+        <input id="lmAutoNotifyParentWa" type="checkbox" />
+        <span><b>📲 Open WhatsApp Alert to Parent after saving</b> (Sends Tutor, Demo Date/Time & Parent Portal link)</span>
+      </label>
+      <label class="agree-row" style="padding:8px 11px;margin:0;background:#eff6ff;border-color:#93c5fd;">
+        <input id="lmAutoNotifyCoordWa" type="checkbox" />
+        <span><b>📲 Open WhatsApp Alert to Assigned Coordinator after saving</b></span>
+      </label>
+    </div>
+    <button type="button" class="btn btn-primary" style="margin-bottom:8px;" onclick="saveLeadChanges()">💾 Save Tuition Assignment</button>
+    <div class="grid-2" style="margin-bottom:6px;">
+      <button type="button" class="btn btn-green btn-sm" style="width:100%;" onclick="notifyParentAssignmentWa()">📲 WA Parent (Tutor/Demo)</button>
+      <button type="button" class="btn btn-outline btn-sm" style="width:100%;color:#0369a1;border-color:#7dd3fc;" onclick="notifyParentFeeReminderWa()">💳 WA Parent (Fee Alert)</button>
+    </div>
+    <button type="button" class="btn btn-outline btn-sm" style="width:100%;margin-bottom:4px;" onclick="notifyCoordinatorLeadWa()">👤 Send Lead Alert to Assigned Coordinator (WhatsApp)</button>
 
     <!-- DIRECTOR-ONLY CONTROLS (PIN PROTECTED) -->
     <div id="lmDirectorControls" class="director-danger-box" style="display:none;">
@@ -2953,6 +3146,7 @@
     <a href="javascript:openInquiry('Footer Free Demo')">Book Free Demo</a>
     <a href="javascript:navigateTo('tutor')">Tutor Registration</a>
     <a href="javascript:navigateTo('tutor-portal')" style="color:#86efac;">✏️ Update Tutor Profile</a>
+    <a href="javascript:navigateTo('parent-portal')" style="color:#93c5fd;">🏡 Parent Portal</a>
     <a href="javascript:navigateTo('crm')" style="color:#fde047;">🔐 Staff CRM Login</a>
     <a href="javascript:openPolicy('privacy')">Privacy Policy</a>
     <a href="javascript:openPolicy('terms')">Terms & Conditions</a>
@@ -3997,6 +4191,18 @@ async function submitInquiry(e) {
     assignedTutorPhone: "",
     assignedDate: "",
     assignmentHistory: [],
+    demoDate: "",
+    demoTime: "",
+    classTiming: "",
+    coordinatorFeedback: "",
+    parentRating: "",
+    parentDemoVerdict: "",
+    parentPreferredTutorTiming: "",
+    parentFeedback: "",
+    parentFeedbackUpdatedAt: "",
+    parentFeedbackReviewed: true,
+    parentPaymentStatus: "",
+    parentPaymentNote: "",
     status: "New Lead",
     confirmedDate: "",
     monthlyFee: "",
@@ -4204,6 +4410,10 @@ async function fetchPortalData() {
             flag: t.flag || "None",
             flagReason: t.flagReason || "",
             flaggedBy: t.flaggedBy || "",
+            docAadhaar: t.docAadhaar !== undefined && t.docAadhaar !== "" ? (t.docAadhaar === true || String(t.docAadhaar).toLowerCase() === "true") : prev?.docAadhaar,
+            docSelfie: t.docSelfie !== undefined && t.docSelfie !== "" ? (t.docSelfie === true || String(t.docSelfie).toLowerCase() === "true") : prev?.docSelfie,
+            docMarksheet: t.docMarksheet !== undefined && t.docMarksheet !== "" ? (t.docMarksheet === true || String(t.docMarksheet).toLowerCase() === "true") : prev?.docMarksheet,
+            docAddress: t.docAddress !== undefined && t.docAddress !== "" ? (t.docAddress === true || String(t.docAddress).toLowerCase() === "true") : prev?.docAddress,
             hidden: isHiddenRecord(t),
             feesRange: t.feesRange || prev?.feesRange || "",
             preferredTiming: t.preferredTiming || prev?.preferredTiming || ""
@@ -4228,6 +4438,18 @@ async function fetchPortalData() {
             assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
             assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
             assignedDate: l.assignedDate || prev?.assignedDate || "",
+            demoDate: l.demoDate || prev?.demoDate || "",
+            demoTime: l.demoTime || prev?.demoTime || "",
+            classTiming: l.classTiming || prev?.classTiming || "",
+            coordinatorFeedback: l.coordinatorFeedback || prev?.coordinatorFeedback || "",
+            parentRating: l.parentRating || prev?.parentRating || "",
+            parentDemoVerdict: l.parentDemoVerdict || prev?.parentDemoVerdict || "",
+            parentPreferredTutorTiming: l.parentPreferredTutorTiming || prev?.parentPreferredTutorTiming || "",
+            parentFeedback: l.parentFeedback || prev?.parentFeedback || "",
+            parentFeedbackUpdatedAt: l.parentFeedbackUpdatedAt || prev?.parentFeedbackUpdatedAt || "",
+            parentFeedbackReviewed: l.parentFeedbackReviewed !== undefined && l.parentFeedbackReviewed !== "" ? (l.parentFeedbackReviewed === true || String(l.parentFeedbackReviewed).toLowerCase() === "true") : (prev?.parentFeedbackReviewed ?? true),
+            parentPaymentStatus: l.parentPaymentStatus || prev?.parentPaymentStatus || "",
+            parentPaymentNote: l.parentPaymentNote || prev?.parentPaymentNote || "",
             assignmentHistory: mergedHist,
             commissionStatus: normalizeCommStatus(l.commissionStatus || prev?.commissionStatus),
             tutorDemoReport: l.tutorDemoReport || prev?.tutorDemoReport || "",
@@ -4900,6 +5122,18 @@ async function syncFromSheet() {
             assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
             assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
             assignedDate: l.assignedDate || prev?.assignedDate || "",
+            demoDate: l.demoDate || prev?.demoDate || "",
+            demoTime: l.demoTime || prev?.demoTime || "",
+            classTiming: l.classTiming || prev?.classTiming || "",
+            coordinatorFeedback: l.coordinatorFeedback || prev?.coordinatorFeedback || "",
+            parentRating: l.parentRating || prev?.parentRating || "",
+            parentDemoVerdict: l.parentDemoVerdict || prev?.parentDemoVerdict || "",
+            parentPreferredTutorTiming: l.parentPreferredTutorTiming || prev?.parentPreferredTutorTiming || "",
+            parentFeedback: l.parentFeedback || prev?.parentFeedback || "",
+            parentFeedbackUpdatedAt: l.parentFeedbackUpdatedAt || prev?.parentFeedbackUpdatedAt || "",
+            parentFeedbackReviewed: l.parentFeedbackReviewed !== undefined && l.parentFeedbackReviewed !== "" ? (l.parentFeedbackReviewed === true || String(l.parentFeedbackReviewed).toLowerCase() === "true") : (prev?.parentFeedbackReviewed ?? true),
+            parentPaymentStatus: l.parentPaymentStatus || prev?.parentPaymentStatus || "",
+            parentPaymentNote: l.parentPaymentNote || prev?.parentPaymentNote || "",
             assignmentHistory: mergedHist,
             commissionStatus: normalizeCommStatus(l.commissionStatus || prev?.commissionStatus),
             tutorDemoReport: l.tutorDemoReport || prev?.tutorDemoReport || "",
@@ -6239,12 +6473,18 @@ async function saveLeadChanges() {
       newTutorName: nextTutorLabel,
       newCoordinator: nextStaff,
       assignedDate: prevAssignedDate || l.createdAt || "",
+      demoDate: l.demoDate || "",
+      demoTime: l.demoTime || "",
       endedDate: today,
       confirmedDate: prevConfirmedDate,
       leadStatus: prevStatus,
-      demoStatus: prevDemoReport,
+      demoStatus: prevDemoReport || l.parentDemoVerdict || "",
       tuitionStatus: prevTuitionStatus,
       feeStatus: prevFeeStatus,
+      parentRating: l.parentRating || "",
+      parentDecision: l.parentDemoVerdict || "",
+      parentFeedback: l.parentFeedback || "",
+      parentFeedbackAt: l.parentFeedbackUpdatedAt || "",
       note: combinedNote,
       recordedBy: currentUser?.name || "Staff",
       recordedAt: nowStampStr(),
@@ -6468,6 +6708,990 @@ function exportCsv() {
   const blob = new Blob([[headers.join(","), ...rows].join("\n")], { type: "text/csv" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = "Alenn_Tutors_CRM.csv"; a.click();
+}
+
+
+/* ================= PARENT PORTAL, PER-TEACHER FEEDBACK, WHATSAPP ALERTS & GMAIL DOC SYNC ================= */
+
+VIEW_SEO["parent-portal"] = {
+  title: "Parent Portal — Track Inquiry, Assigned Tutors, Feedback & Fees | Alenn Tuition Bureau Varanasi",
+  hash: "#parent-portal"
+};
+
+const DEFAULT_STAFF_PHONES = {
+  "Rahul Sir": "9919991185",
+  "Vaibhav Mishra": "8081374926",
+  "Amar Srivastava": "9919666650",
+  "Rishikesh Pandey": "9919666650"
+};
+
+function getStaffPhones() {
+  try { return { ...DEFAULT_STAFF_PHONES, ...(JSON.parse(localStorage.getItem("alenn_staff_phones")) || {}) }; }
+  catch { return { ...DEFAULT_STAFF_PHONES }; }
+}
+
+function getCoordinatorContact(staffName) {
+  const phones = getStaffPhones();
+  const clean = cleanWaPhone(phones[staffName] || "9919991185");
+  return {
+    name: staffName && staffName !== "Unassigned" ? staffName : "Alenn Coordinator Desk",
+    phone: clean || "9919991185"
+  };
+}
+
+let activeParentSession = null;
+let parentPortalPayTab = {};
+
+function hasUnreadParentFeedback(l) {
+  if (!l) return false;
+  const histHasUnread = parseAssignmentHistory(l.assignmentHistory).some(h => h && h.parentFeedbackUnread);
+  const hasAny = histHasUnread || !!(
+    String(l.parentFeedback || "").trim() ||
+    String(l.parentDemoVerdict || "").trim() ||
+    String(l.parentPaymentNote || "").trim()
+  );
+  return hasAny && (!l.parentFeedbackReviewed || histHasUnread);
+}
+
+function parseDocChecklist(t) {
+  const files = String(t?.docFiles || "").toLowerCase();
+  const st = String(t?.docStatus || "").toLowerCase();
+  const allAuto = st.includes("verified");
+  return {
+    aadhaar: t?.docAadhaar !== undefined ? !!t.docAadhaar : (allAuto || files.includes("aadhar") || files.includes("adhar") || files.includes("aadhaar") || files.includes("uid")),
+    selfie: t?.docSelfie !== undefined ? !!t.docSelfie : (allAuto || files.includes("selfie") || files.includes("photo") || files.includes("img") || files.includes("pic")),
+    marksheet: t?.docMarksheet !== undefined ? !!t.docMarksheet : (allAuto || files.includes("marksheet") || files.includes("10") || files.includes("12") || files.includes("degree") || files.includes("cert")),
+    address: t?.docAddress !== undefined ? !!t.docAddress : (allAuto || files.includes("address") || files.includes("proff") || files.includes("proof") || files.includes("bill") || files.includes("rent"))
+  };
+}
+
+function syncDocStatusFromChecks() {
+  const checks = [
+    document.getElementById("tmDocAadhaar")?.checked,
+    document.getElementById("tmDocSelfie")?.checked,
+    document.getElementById("tmDocMarksheet")?.checked,
+    document.getElementById("tmDocAddress")?.checked
+  ];
+  const count = checks.filter(Boolean).length;
+  const sel = document.getElementById("tmDoc");
+  if (!sel) return;
+  if (count === 0) sel.value = "Pending";
+  else if (count < 4) sel.value = "Partial Docs";
+  else if (sel.value !== "Auto-Verified (Email)") sel.value = "Verified (Manual Approved)";
+}
+
+function requestMissingDocsWa() {
+  const id = document.getElementById("tmId")?.value;
+  const t = crmData.tutors.find(x => String(x.id) === String(id));
+  if (!t) return;
+  const missing = [];
+  if (!document.getElementById("tmDocAadhaar")?.checked) missing.push("Aadhaar Card (Front & Back)");
+  if (!document.getElementById("tmDocSelfie")?.checked) missing.push("Recent Clear Selfie Photo");
+  if (!document.getElementById("tmDocMarksheet")?.checked) missing.push("10th/12th/Degree Marksheets");
+  if (!document.getElementById("tmDocAddress")?.checked) missing.push("Local Varanasi Address Proof");
+  const msg = missing.length
+    ? `Hello ${t.name}, this is ${currentUser?.name || "Alenn Tuition Bureau"}. Your document verification is currently *Partial/Pending*. Please email the remaining document(s) to hometuition34@gmail.com with your registered phone (${t.phone}) in the subject:\n• ${missing.join("\n• ")}`
+    : `Hello ${t.name}, all 4 verification documents are received for your Alenn Tuition Bureau profile!`;
+  openWaChat(t.phone, msg);
+}
+
+async function scanVerificationDocsNow() {
+  const btn = document.getElementById("btnScanDocs");
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ Scanning Gmail..."; }
+  toast("📧 Scanning verification inbox (hometuition34@gmail.com)...");
+  try {
+    const url = `${getScriptUrl()}?action=scanDocs&secret=${encodeURIComponent(getWebhookSecret())}`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json && (json.status === "ok" || json.updated !== undefined)) {
+      toast(`✅ Gmail scan complete! ${json.updated || 0} tutor(s) updated. Syncing CRM...`);
+    } else {
+      toast("ℹ Scan triggered. Syncing latest Google Sheet...");
+    }
+  } catch (err) {
+    toast("⚠ Syncing latest Google Sheet data...");
+  }
+  await syncFromSheet();
+  if (btn) { btn.disabled = false; btn.textContent = "📧 Scan Gmail Docs"; }
+}
+
+// Hook navigateTo for Parent Portal
+const _origNavigateTo = navigateTo;
+navigateTo = function(view, skipHash) {
+  _origNavigateTo(view, skipHash);
+  if (view === "parent-portal") initParentPortalView();
+};
+
+function openMyParentPortalFromSuccess() {
+  if (lastSubmittedLead) {
+    activeParentSession = null;
+    navigateTo("parent-portal");
+    const pEl = document.getElementById("ppPhone");
+    const kEl = document.getElementById("ppVerifyKey");
+    if (pEl) pEl.value = lastSubmittedLead.phone || "";
+    if (kEl) kEl.value = lastSubmittedLead.id || lastSubmittedLead.name || "";
+  } else {
+    navigateTo("parent-portal");
+  }
+}
+
+function initParentPortalView() {
+  const msgEl = document.getElementById("ppLookupMsg");
+  if (msgEl) msgEl.style.display = "none";
+  if (activeParentSession) {
+    renderParentPortalDashboard();
+    return;
+  }
+  document.getElementById("ppLookupBox").style.display = "block";
+  document.getElementById("ppDashboardBox").style.display = "none";
+}
+
+async function lookupParentPortal(e) {
+  e.preventDefault();
+  const phoneClean = cleanWaPhone(document.getElementById("ppPhone").value);
+  const keyRaw = document.getElementById("ppVerifyKey").value.trim().toLowerCase();
+  const msgEl = document.getElementById("ppLookupMsg");
+  const btn = document.getElementById("ppLookupBtn");
+
+  if (!phoneClean) {
+    msgEl.style.display = "block";
+    msgEl.innerHTML = "⚠ Please enter a valid <b>10-digit WhatsApp / Mobile number</b>.";
+    return;
+  }
+  msgEl.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "⏳ Loading Your Dashboard...";
+
+  const { tutors, leads } = await fetchPortalData();
+  crmData.tutors = tutors;
+  portalLeadsPool = leads;
+
+  const matched = leads.filter(l => {
+    if (!l || isHiddenRecord(l)) return false;
+    if (cleanWaPhone(l.phone) !== phoneClean) return false;
+    const lName = String(l.name || "").trim().toLowerCase();
+    const lId = String(l.id || "").trim().toLowerCase();
+    return !keyRaw || lId === keyRaw || lName.includes(keyRaw) || keyRaw.includes(lName.split(" ")[0]);
+  });
+
+  btn.disabled = false;
+  btn.textContent = "🔍 Open My Parent Dashboard";
+
+  if (!matched.length) {
+    msgEl.style.display = "block";
+    msgEl.innerHTML = "❌ No active inquiry matched this <b>Phone + Name / Lead ID</b>. Please double-check your details or message us on WhatsApp <b>+91 99199 91185</b>.";
+    return;
+  }
+
+  activeParentSession = { phone: phoneClean, verifyKey: keyRaw, name: matched[0].name };
+  renderParentPortalDashboard();
+  toast("✅ Parent Dashboard loaded!");
+}
+
+async function refreshParentPortal() {
+  if (!activeParentSession) return;
+  toast("⏳ Syncing latest demo, tutors & fee status...");
+  const { tutors, leads } = await fetchPortalData();
+  crmData.tutors = tutors;
+  portalLeadsPool = leads;
+  renderParentPortalDashboard();
+  toast("✅ Dashboard refreshed!");
+}
+
+function ppLogout() {
+  activeParentSession = null;
+  document.getElementById("ppLookupForm")?.reset();
+  document.getElementById("ppDashboardBox").style.display = "none";
+  document.getElementById("ppLookupBox").style.display = "block";
+  toast("Parent Portal closed");
+}
+
+function getHistoryOutcomeBadge(h) {
+  const hay = `${h.parentDecision || ""} ${h.demoStatus || ""} ${h.leadStatus || ""} ${h.type || ""}`.toLowerCase();
+  if (hay.includes("reject") || hay.includes("declin") || hay.includes("mana") || hay.includes("not confirm")) {
+    return { cls: "declined", badge: '<span class="badge b-red">❌ Demo Declined / Rejected</span>' };
+  }
+  if (hay.includes("hold")) {
+    return { cls: "onhold", badge: '<span class="badge b-amber">⏸️ Demo On Hold</span>' };
+  }
+  if (hay.includes("confirm") || hay.includes("liked")) {
+    return { cls: "confirmed", badge: '<span class="badge b-green">✅ Confirmed</span>' };
+  }
+  if (hay.includes("completed") || hay.includes("visited")) {
+    return { cls: "", badge: '<span class="badge b-blue">✔ Demo Completed</span>' };
+  }
+  return { cls: "", badge: `<span class="badge b-gray">${esc(h.type || "Past Tutor")}</span>` };
+}
+
+function renderParentPortalDashboard() {
+  if (!activeParentSession) return;
+  document.getElementById("ppLookupBox").style.display = "none";
+  document.getElementById("ppDashboardBox").style.display = "block";
+
+  const myLeads = portalLeadsPool.filter(l => !isHiddenRecord(l) && cleanWaPhone(l.phone) === activeParentSession.phone);
+  document.getElementById("ppParentTitle").textContent = `Welcome, ${activeParentSession.name || "Parent"}`;
+  document.getElementById("ppParentSub").textContent = `Phone: +91 ${activeParentSession.phone} • ${myLeads.length} Active Inquiry Record(s)`;
+
+  const container = document.getElementById("ppInquiriesList");
+  if (!myLeads.length) {
+    container.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);">No active inquiries found for this number.</div>`;
+    return;
+  }
+
+  container.innerHTML = myLeads.map(l => {
+    const domKey = safeDomId(l.id);
+    const coord = getCoordinatorContact(l.assignedStaff);
+    const tut = resolveAssignedTutor(l);
+    const tutPhone = tut ? cleanWaPhone(tut.phone) : "";
+    const hasTutor = !!(tut && (tut.name || tut.label));
+    const hist = parseAssignmentHistory(l.assignmentHistory).filter(h => !h.hidden);
+    const defaultAmt = Number(l.monthlyFee) || 3000;
+    const activeTab = parentPortalPayTab[l.id] || "razorpay";
+
+    const currentTutorHtml = hasTutor ? `
+      <div class="pp-tutor-box">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;">
+          <div style="min-width:0;flex:1 1 210px;">
+            <span class="badge b-green">🎓 CURRENTLY ASSIGNED TUTOR</span>
+            ${tut.verified ? `<span class="badge b-verified">🛡️ Bureau Verified</span>` : ""}
+            <h4 style="margin:6px 0 2px;font-size:16px;color:#065f46;">${esc(tut.name || tut.label)}</h4>
+            <div style="font-size:12.5px;color:#1e293b;line-height:1.55;">
+              <div><b>📅 Demo Schedule:</b> ${esc(l.demoDate || "Date TBD")}${l.demoTime ? ` at <b>${esc(l.demoTime)}</b>` : ""}</div>
+              ${l.classTiming || l.parentPreferredTutorTiming ? `<div><b>⏰ Regular Class Timing:</b> ${esc(l.classTiming || l.parentPreferredTutorTiming)}</div>` : ""}
+              ${l.assignedDate ? `<div><b>📌 Allotted On:</b> ${esc(l.assignedDate)} • <b>Status:</b> ${esc(l.status || "Demo Scheduled")}</div>` : ""}
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            ${tutPhone ? `<a class="btn btn-outline btn-sm" href="tel:+91${tutPhone}" style="color:#166534;border-color:#86efac;">📞 Call Tutor</a>` : ""}
+            ${tutPhone ? `<button type="button" class="btn btn-green btn-sm" onclick="openWaChat('${esc(tutPhone)}','Hello ${esc(tut.name)}, I am ${esc(l.name)} (Alenn Tuition Bureau parent) regarding ${esc(l.subjects)} tuition.')">💬 WA Tutor</button>` : ""}
+          </div>
+        </div>
+      </div>` : `
+      <div class="pp-section" style="background:#fffbeb;border-color:#fde68a;color:#92400e;font-size:12.5px;">
+        ⏳ <b>Matching Verified Tutor:</b> Your coordinator <b>${esc(coord.name)}</b> is shortlisting an Aadhaar & degree verified specialist near <b>${esc(l.area)}</b>.
+      </div>`;
+
+    const timelineHtml = hist.length ? `
+      <div class="pp-section">
+        <div style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:4px;">📜 All Past Assigned Teachers & Demo History (${hist.length} Teacher${hist.length > 1 ? "s" : ""})</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-bottom:6px;">Complete date-wise & time-wise log of every teacher assigned, demo completed, put on hold, or declined — you can submit or update feedback for each teacher below.</div>
+        <div class="pp-timeline">
+          ${hist.map(h => {
+            const hKey = safeDomId(l.id + "_" + (h.id || "item"));
+            const outcome = getHistoryOutcomeBadge(h);
+            return `
+            <div class="pp-timeline-item ${outcome.cls}">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;flex-wrap:wrap;">
+                <div>
+                  <b style="font-size:13.5px;color:var(--navy);">🎓 ${esc(h.tutorName || h.type || "Assigned Teacher")}</b>
+                  <div style="margin-top:3px;display:flex;flex-wrap:wrap;gap:4px;">
+                    ${outcome.badge}
+                    ${h.parentRating ? `<span class="badge b-amber">${esc(h.parentRating)}</span>` : ""}
+                  </div>
+                </div>
+                <span class="badge b-gray">📅 ${esc(h.assignedDate || "N/A")}${h.endedDate ? " → " + esc(h.endedDate) : ""}</span>
+              </div>
+              <div style="color:#334155;margin-top:5px;line-height:1.5;">
+                ${h.demoDate || h.demoTime ? `<div><b>🕒 Demo Date & Time:</b> ${esc(h.demoDate || h.assignedDate || "N/A")} ${h.demoTime ? `at ${esc(h.demoTime)}` : ""}</div>` : ""}
+                <div>
+                  ${h.leadStatus ? `<b>Lead Status:</b> ${esc(h.leadStatus)}` : ""}
+                  ${h.demoStatus ? ` • <b>Demo:</b> ${esc(h.demoStatus)}` : ""}
+                  ${h.coordinator ? ` • <b>Coordinator:</b> ${esc(h.coordinator)}` : ""}
+                </div>
+                ${h.parentFeedback ? `<div style="margin-top:4px;background:#fefce8;border:1px solid #fde68a;border-radius:7px;padding:5px 8px;color:#78350f;"><b>⭐ Your Feedback:</b> "${esc(h.parentFeedback)}" ${h.parentFeedbackAt ? `<span style="font-size:10.5px;color:#92400e;">(${esc(h.parentFeedbackAt)})</span>` : ""}</div>` : ""}
+                ${h.note ? `<div style="margin-top:3px;color:#475569;">📝 <b>Bureau Note:</b> ${esc(h.note)}</div>` : ""}
+              </div>
+              <details style="margin-top:7px;">
+                <summary style="cursor:pointer;font-size:12px;font-weight:800;color:var(--primary);">💬 ${h.parentFeedback ? "Update" : "Give"} Feedback for this Teacher</summary>
+                <div class="pp-hist-fb-form">
+                  <div class="grid-2">
+                    <div class="field" style="margin-bottom:6px;">
+                      <label style="font-size:11.5px;">Rating</label>
+                      <select id="ppHRate-${hKey}" class="input" style="padding:6px 8px;font-size:12px;">
+                        <option value="">-- Rating --</option>
+                        <option value="5 ★ Excellent" ${h.parentRating === "5 ★ Excellent" ? "selected" : ""}>⭐⭐⭐⭐⭐ 5</option>
+                        <option value="4 ★ Good" ${h.parentRating === "4 ★ Good" ? "selected" : ""}>⭐⭐⭐⭐ 4</option>
+                        <option value="3 ★ Average" ${h.parentRating === "3 ★ Average" ? "selected" : ""}>⭐⭐⭐ 3</option>
+                        <option value="2 ★ Needs Improvement" ${h.parentRating === "2 ★ Needs Improvement" ? "selected" : ""}>⭐⭐ 2</option>
+                        <option value="1 ★ Not Satisfied" ${h.parentRating === "1 ★ Not Satisfied" ? "selected" : ""}>⭐ 1</option>
+                      </select>
+                    </div>
+                    <div class="field" style="margin-bottom:6px;">
+                      <label style="font-size:11.5px;">Demo / Teacher Status</label>
+                      <select id="ppHDec-${hKey}" class="input" style="padding:6px 8px;font-size:12px;">
+                        <option value="">-- Select Outcome --</option>
+                        <option value="Demo Declined / Rejected" ${h.parentDecision === "Demo Declined / Rejected" ? "selected" : ""}>❌ Demo Declined / Rejected</option>
+                        <option value="Demo On Hold" ${h.parentDecision === "Demo On Hold" ? "selected" : ""}>⏸️ Put On Hold</option>
+                        <option value="Demo Completed - Not Selected" ${h.parentDecision === "Demo Completed - Not Selected" ? "selected" : ""}>✔ Demo Completed (Not Selected)</option>
+                        <option value="Liked / Good Teacher" ${h.parentDecision === "Liked / Good Teacher" ? "selected" : ""}>👍 Liked / Good Teacher</option>
+                      </select>
+                    </div>
+                  </div>
+                  <input id="ppHFb-${hKey}" class="input" style="padding:7px 9px;font-size:12px;margin-bottom:6px;" value="${esc(h.parentFeedback || "")}" placeholder="Write specific feedback about this teacher (teaching style, timing, reason for decline/hold)..." />
+                  <button type="button" id="ppHBtn-${hKey}" class="btn btn-primary btn-sm" style="width:100%;" onclick="submitPastTeacherFeedback('${esc(l.id)}','${esc(h.id)}')">💾 Save Teacher Feedback & Notify Coordinator</button>
+                </div>
+              </details>
+            </div>`;
+          }).join("")}
+        </div>
+      </div>` : "";
+
+    return `
+      <div class="pp-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;">
+          <div>
+            <span class="badge b-blue">${esc(l.status || "New Lead")}</span>
+            <span class="badge b-gray">Lead ID: ${esc(l.id)}</span>
+            ${l.monthlyFee ? `<span class="badge b-green">💰 Agreed Fee: ₹${esc(l.monthlyFee)}/mo</span>` : ""}
+            <h3 style="margin:6px 0 2px;font-size:17px;color:var(--navy);">${esc(l.classExam)}${l.specificClass ? ` (${esc(l.specificClass)})` : ""} — ${esc(l.subjects)}</h3>
+            <div style="font-size:12.5px;color:var(--muted);">📍 ${esc(l.area)} • ${esc(l.board)} • ${esc(l.mode)} • Submitted: ${esc(l.createdAt)}</div>
+          </div>
+        </div>
+
+        <!-- ASSIGNED COORDINATOR STRIP -->
+        <div class="pp-coord-box">
+          <div style="font-size:12.5px;">
+            <div style="font-weight:800;color:#1e40af;">👤 Assigned Coordinator: ${esc(coord.name)}</div>
+            <div style="color:var(--muted);font-size:11.5px;">Direct 1-tap Call & WhatsApp for demo updates, teacher replacement, or fee receipts</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <a class="btn btn-outline btn-sm" href="tel:+91${coord.phone}">📞 Call Coordinator</a>
+            <button type="button" class="btn btn-green btn-sm" onclick="openWaChat('${esc(coord.phone)}','Hello ${esc(coord.name)}, I am ${esc(l.name)} (Lead ${esc(l.id)}). I wanted an update on my tuition inquiry.')">💬 WA Coordinator</button>
+          </div>
+        </div>
+
+        ${currentTutorHtml}
+
+        ${l.coordinatorFeedback ? `
+          <div class="pp-section" style="background:#eff6ff;border-color:#93c5fd;font-size:12.5px;color:#1e3a8a;">
+            <b>📢 Coordinator Update:</b> ${esc(l.coordinatorFeedback)}
+          </div>` : ""}
+
+        <!-- CURRENT TEACHER FEEDBACK, HOLD / DECLINE / CONFIRM & TIMING CONTROL -->
+        <div class="pp-feedback-box">
+          <div style="font-size:13px;font-weight:800;color:#854d0e;margin-bottom:6px;">⭐ Feedback for Current Teacher, Demo Decision (Confirm / Hold / Decline) & Timing</div>
+          ${l.parentFeedbackUpdatedAt ? `<div style="font-size:11.5px;color:#92400e;margin-bottom:8px;">🕒 Last updated: ${esc(l.parentFeedbackUpdatedAt)} • Rating: <b>${esc(l.parentRating || "N/A")}</b> • Decision: <b>${esc(l.parentDemoVerdict || "N/A")}</b></div>` : ""}
+          <div class="grid-2">
+            <div class="field" style="margin-bottom:8px;">
+              <label style="font-size:12px;">Current Tutor Rating</label>
+              <select id="ppRate-${domKey}" class="input" style="padding:8px;font-size:12.5px;">
+                <option value="">-- Select Rating --</option>
+                <option value="5 ★ Excellent" ${l.parentRating === "5 ★ Excellent" ? "selected" : ""}>⭐⭐⭐⭐⭐ 5 — Excellent</option>
+                <option value="4 ★ Good" ${l.parentRating === "4 ★ Good" ? "selected" : ""}>⭐⭐⭐⭐ 4 — Good</option>
+                <option value="3 ★ Average" ${l.parentRating === "3 ★ Average" ? "selected" : ""}>⭐⭐⭐ 3 — Average</option>
+                <option value="2 ★ Needs Improvement" ${l.parentRating === "2 ★ Needs Improvement" ? "selected" : ""}>⭐⭐ 2 — Needs Improvement</option>
+                <option value="1 ★ Not Satisfied" ${l.parentRating === "1 ★ Not Satisfied" ? "selected" : ""}>⭐ 1 — Not Satisfied</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label style="font-size:12px;">Demo / Continuation Decision</label>
+              <select id="ppVerdict-${domKey}" class="input" style="padding:8px;font-size:12.5px;">
+                <option value="">-- Choose Decision --</option>
+                <option value="Liked Tutor - Confirm Classes" ${l.parentDemoVerdict === "Liked Tutor - Confirm Classes" ? "selected" : ""}>✅ Liked Tutor — Confirm Regular Classes</option>
+                <option value="Classes Going Well" ${l.parentDemoVerdict === "Classes Going Well" ? "selected" : ""}>👍 Regular Classes Going Well</option>
+                <option value="Demo On Hold" ${l.parentDemoVerdict === "Demo On Hold" ? "selected" : ""}>⏸️ Put Demo On Hold (Deciding Later)</option>
+                <option value="Reschedule Demo" ${l.parentDemoVerdict === "Reschedule Demo" ? "selected" : ""}>🔄 Need to Reschedule Demo</option>
+                <option value="Demo Declined / Rejected" ${l.parentDemoVerdict === "Demo Declined / Rejected" ? "selected" : ""}>❌ Decline / Reject This Demo</option>
+                <option value="Need Another Tutor / Replacement" ${l.parentDemoVerdict === "Need Another Tutor / Replacement" ? "selected" : ""}>🔁 Request Another Tutor (Replacement)</option>
+                <option value="Issue / Complaint" ${l.parentDemoVerdict === "Issue / Complaint" ? "selected" : ""}>⚠️ Report Timing / Teaching Issue</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:8px;">
+            <label style="font-size:12px;">⏰ Preferred / Confirmed Tutor Timing (Shared with Tutor & Coordinator)</label>
+            <input id="ppTiming-${domKey}" class="input" style="padding:8px 10px;font-size:12.5px;" value="${esc(l.parentPreferredTutorTiming || l.classTiming || l.timing || "")}" placeholder="e.g., 5:30 PM – 7:00 PM (Mon–Sat)" />
+          </div>
+          <div class="field" style="margin-bottom:8px;">
+            <label style="font-size:12px;">💬 Your Feedback / Remark for Coordinator & Director</label>
+            <textarea id="ppFbText-${domKey}" class="input" rows="2" style="font-size:12.5px;" placeholder="Share honest feedback about teaching clarity, punctuality, demo experience, or reason for hold/decline...">${esc(l.parentFeedback || "")}</textarea>
+          </div>
+          <div class="grid-2">
+            <button type="button" id="ppFbBtn-${domKey}" class="btn btn-primary btn-sm" style="width:100%;" onclick="submitParentFeedback('${esc(l.id)}')">💾 Save Feedback & Alert Team</button>
+            <button type="button" class="btn btn-green btn-sm" style="width:100%;" onclick="sendParentFeedbackWa('${esc(l.id)}')">📲 Send on WhatsApp Now</button>
+          </div>
+        </div>
+
+        ${timelineHtml}
+
+        <!-- DIRECT ONLINE TUITION FEE PAYMENT INSIDE PARENT PORTAL -->
+        <div class="pp-pay-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+            <b style="font-size:13px;color:#0369a1;">💳 Pay Monthly Tuition Fee Online</b>
+            ${l.parentPaymentStatus ? `<span class="badge b-green">${esc(l.parentPaymentStatus)}</span>` : ""}
+          </div>
+          <div class="grid-2" style="margin-bottom:8px;">
+            <div class="field" style="margin-bottom:0;">
+              <label style="font-size:12px;">Tuition Fee Amount (₹)</label>
+              <input id="ppPayAmt-${domKey}" type="number" class="input" style="padding:8px 10px;font-size:13px;" value="${defaultAmt}" min="100" oninput="renderParentPortalQr('${esc(l.id)}')" />
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label style="font-size:12px;">UTR / Month Note (Optional)</label>
+              <input id="ppPayNote-${domKey}" class="input" style="padding:8px 10px;font-size:12.5px;" value="${esc(l.parentPaymentNote || "")}" placeholder="e.g., Nov Fee paid via PhonePe" />
+            </div>
+          </div>
+          <div class="pay-tabs" style="margin:8px 0;">
+            <button type="button" class="pay-tab ${activeTab === "razorpay" ? "active" : ""}" onclick="switchParentPayTab('${esc(l.id)}','razorpay')">💳 Razorpay</button>
+            <button type="button" class="pay-tab ${activeTab === "phonepe" ? "active" : ""}" onclick="switchParentPayTab('${esc(l.id)}','phonepe')">🟣 PhonePe</button>
+            <button type="button" class="pay-tab ${activeTab === "paytm" ? "active" : ""}" onclick="switchParentPayTab('${esc(l.id)}','paytm')">🔵 Paytm</button>
+            <button type="button" class="pay-tab ${activeTab === "gpay" ? "active" : ""}" onclick="switchParentPayTab('${esc(l.id)}','gpay')">🟢 GPay</button>
+          </div>
+          <div id="ppPayRzp-${domKey}" style="display:${activeTab === "razorpay" ? "block" : "none"};margin-bottom:8px;">
+            <a class="btn btn-navy btn-sm" style="width:100%;" href="https://razorpay.me/@rajnishdhardwivedi" target="_blank" rel="noopener">⚡ Pay Tuition Fee via Official Razorpay Checkout</a>
+          </div>
+          <div id="ppPayUpi-${domKey}" style="display:${activeTab === "razorpay" ? "none" : "block"};text-align:center;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;">
+            <img id="ppQrImg-${domKey}" alt="Tuition Fee UPI QR" style="width:170px;height:170px;border-radius:10px;border:1px solid var(--border);padding:4px;" />
+            <div id="ppUpiLabel-${domKey}" style="font-size:12px;font-weight:800;color:var(--primary);margin-top:4px;"></div>
+            <a id="ppUpiLink-${domKey}" class="btn btn-primary btn-sm" style="width:100%;margin-top:6px;" href="#">⚡ Open UPI App & Pay</a>
+          </div>
+          <button type="button" class="btn btn-green btn-sm" style="width:100%;" onclick="reportParentFeePaid('${esc(l.id)}')">✅ Confirm Fee Paid & Notify Coordinator + Director on WhatsApp</button>
+        </div>
+      </div>`;
+  }).join("");
+
+  myLeads.forEach(l => {
+    if ((parentPortalPayTab[l.id] || "razorpay") !== "razorpay") renderParentPortalQr(l.id);
+  });
+}
+
+function switchParentPayTab(leadId, tab) {
+  parentPortalPayTab[leadId] = tab;
+  renderParentPortalDashboard();
+  if (tab !== "razorpay") renderParentPortalQr(leadId);
+}
+
+function renderParentPortalQr(leadId) {
+  const domKey = safeDomId(leadId);
+  const tab = parentPortalPayTab[leadId] || "phonepe";
+  if (tab === "razorpay") return;
+  const cfg = UPI_MAP[tab] || UPI_MAP.phonepe;
+  const amt = Math.max(1, Number(document.getElementById("ppPayAmt-" + domKey)?.value) || 3000);
+  const note = encodeURIComponent(`Tuition Fee (${leadId}) - Alenn Tuition Bureau`);
+  const upiUri = `upi://pay?pa=${encodeURIComponent(cfg.id)}&pn=${encodeURIComponent("RAJNISH DHAR DWIVEDI")}&am=${amt}&cu=INR&tn=${note}`;
+  const img = document.getElementById("ppQrImg-" + domKey);
+  const lbl = document.getElementById("ppUpiLabel-" + domKey);
+  const lnk = document.getElementById("ppUpiLink-" + domKey);
+  if (img) img.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiUri);
+  if (lbl) lbl.textContent = `${cfg.label} • Pay ₹${amt} (${cfg.id})`;
+  if (lnk) lnk.href = upiUri;
+}
+
+async function submitParentFeedback(leadId) {
+  const lead = portalLeadsPool.find(x => String(x.id) === String(leadId));
+  if (!lead) return;
+  const domKey = safeDomId(leadId);
+  const btn = document.getElementById("ppFbBtn-" + domKey);
+  const rate = document.getElementById("ppRate-" + domKey)?.value || "";
+  const verdict = document.getElementById("ppVerdict-" + domKey)?.value || "";
+  const prefTiming = document.getElementById("ppTiming-" + domKey)?.value.trim() || "";
+  const fbText = document.getElementById("ppFbText-" + domKey)?.value.trim() || "";
+
+  if (!rate && !verdict && !prefTiming && !fbText) {
+    toast("⚠ Please enter a rating, decision, timing preference, or feedback message first.");
+    return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ Saving & Alerting Team..."; }
+
+  let nextStatus = lead.status;
+  if (verdict === "Demo On Hold") nextStatus = "Demo On Hold";
+  else if (verdict === "Demo Declined / Rejected") nextStatus = "Demo Declined / Rejected";
+
+  const coord = getCoordinatorContact(lead.assignedStaff);
+  const dir = getCoordinatorContact("Rahul Sir");
+  const updated = {
+    ...lead,
+    status: nextStatus,
+    parentRating: rate,
+    parentDemoVerdict: verdict,
+    parentPreferredTutorTiming: prefTiming,
+    classTiming: prefTiming || lead.classTiming || "",
+    parentFeedback: fbText,
+    parentFeedbackUpdatedAt: nowStampStr(),
+    parentFeedbackReviewed: false
+  };
+
+  const pIdx = portalLeadsPool.findIndex(x => String(x.id) === String(leadId));
+  if (pIdx >= 0) portalLeadsPool[pIdx] = updated;
+  loadLocalCrm();
+  const cIdx = crmData.leads.findIndex(x => String(x.id) === String(leadId));
+  if (cIdx >= 0) crmData.leads[cIdx] = { ...crmData.leads[cIdx], ...updated };
+  saveLocalCrm();
+
+  await postToBackend({
+    action: "updateLead",
+    source: "parent_portal_feedback",
+    notifyCoordinator: true,
+    notifyDirector: true,
+    coordinatorName: coord.name,
+    coordinatorPhone: coord.phone,
+    directorPhone: dir.phone,
+    alertSummary: `Parent ${lead.name} (${lead.area}) updated feedback for ${lead.assignedTutor || "lead"}: ${verdict || rate || "Feedback"} — ${fbText}`,
+    data: prepareLeadPayload(updated)
+  });
+
+  renderParentPortalDashboard();
+  toast("✅ Feedback saved! Assigned Coordinator & Director Rahul Sir have been alerted.");
+}
+
+async function submitPastTeacherFeedback(leadId, histId) {
+  const lead = portalLeadsPool.find(x => String(x.id) === String(leadId));
+  if (!lead) return;
+  const hist = parseAssignmentHistory(lead.assignmentHistory);
+  const entry = hist.find(h => String(h.id) === String(histId));
+  if (!entry) return;
+
+  const hKey = safeDomId(leadId + "_" + histId);
+  const btn = document.getElementById("ppHBtn-" + hKey);
+  const rate = document.getElementById("ppHRate-" + hKey)?.value || "";
+  const dec = document.getElementById("ppHDec-" + hKey)?.value || "";
+  const fb = document.getElementById("ppHFb-" + hKey)?.value.trim() || "";
+
+  if (!rate && !dec && !fb) {
+    toast("⚠ Please select a rating/outcome or write feedback first.");
+    return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ Saving..."; }
+
+  entry.parentRating = rate;
+  entry.parentDecision = dec;
+  entry.parentFeedback = fb;
+  entry.parentFeedbackAt = nowStampStr();
+  entry.parentFeedbackUnread = true;
+
+  const coord = getCoordinatorContact(lead.assignedStaff);
+  const dir = getCoordinatorContact("Rahul Sir");
+  const updated = {
+    ...lead,
+    assignmentHistory: hist,
+    parentFeedbackReviewed: false
+  };
+
+  const pIdx = portalLeadsPool.findIndex(x => String(x.id) === String(leadId));
+  if (pIdx >= 0) portalLeadsPool[pIdx] = updated;
+  loadLocalCrm();
+  const cIdx = crmData.leads.findIndex(x => String(x.id) === String(leadId));
+  if (cIdx >= 0) crmData.leads[cIdx] = { ...crmData.leads[cIdx], ...updated };
+  saveLocalCrm();
+
+  await postToBackend({
+    action: "updateLead",
+    source: "parent_portal_past_teacher_feedback",
+    notifyCoordinator: true,
+    notifyDirector: true,
+    coordinatorName: coord.name,
+    coordinatorPhone: coord.phone,
+    directorPhone: dir.phone,
+    alertSummary: `Parent ${lead.name} submitted feedback for past tutor ${entry.tutorName || "Tutor"}: ${dec || rate} — ${fb}`,
+    data: prepareLeadPayload(updated)
+  });
+
+  renderParentPortalDashboard();
+  toast("✅ Past teacher feedback saved & alerted to Coordinator and Director!");
+}
+
+function sendParentFeedbackWa(leadId) {
+  const lead = portalLeadsPool.find(x => String(x.id) === String(leadId));
+  if (!lead) return;
+  const domKey = safeDomId(leadId);
+  const coord = getCoordinatorContact(lead.assignedStaff);
+  const rate = document.getElementById("ppRate-" + domKey)?.value || lead.parentRating || "Not rated";
+  const verdict = document.getElementById("ppVerdict-" + domKey)?.value || lead.parentDemoVerdict || "General Update";
+  const timing = document.getElementById("ppTiming-" + domKey)?.value.trim() || lead.parentPreferredTutorTiming || "";
+  const fb = document.getElementById("ppFbText-" + domKey)?.value.trim() || lead.parentFeedback || "";
+  const msg = `🏡 *Parent Portal Feedback (Alenn Tuition Bureau)*\nParent: ${lead.name} (${lead.id})\nCurrent Tutor: ${lead.assignedTutor || "Pending"}\nRating: ${rate}\nDecision: ${verdict}\nPreferred Timing: ${timing || "As discussed"}\nFeedback: ${fb || "Please call back."}`;
+  openWaChat(coord.phone, msg);
+}
+
+async function reportParentFeePaid(leadId) {
+  const lead = portalLeadsPool.find(x => String(x.id) === String(leadId));
+  if (!lead) return;
+  const domKey = safeDomId(leadId);
+  const amt = document.getElementById("ppPayAmt-" + domKey)?.value || lead.monthlyFee || "";
+  const note = document.getElementById("ppPayNote-" + domKey)?.value.trim() || "Paid via Online Portal";
+  const stamp = nowStampStr();
+  const coord = getCoordinatorContact(lead.assignedStaff);
+  const dir = getCoordinatorContact("Rahul Sir");
+
+  const updated = {
+    ...lead,
+    parentPaymentStatus: `💳 Fee Reported Paid (₹${amt})`,
+    parentPaymentNote: `${note} (${stamp})`,
+    parentFeedbackReviewed: false
+  };
+  const pIdx = portalLeadsPool.findIndex(x => String(x.id) === String(leadId));
+  if (pIdx >= 0) portalLeadsPool[pIdx] = updated;
+  loadLocalCrm();
+  const cIdx = crmData.leads.findIndex(x => String(x.id) === String(leadId));
+  if (cIdx >= 0) crmData.leads[cIdx] = { ...crmData.leads[cIdx], ...updated };
+  saveLocalCrm();
+
+  await postToBackend({
+    action: "updateLead",
+    source: "parent_portal_payment",
+    notifyCoordinator: true,
+    notifyDirector: true,
+    coordinatorName: coord.name,
+    coordinatorPhone: coord.phone,
+    directorPhone: dir.phone,
+    alertSummary: `💳 Parent ${lead.name} (${lead.id}) reported tuition fee payment of ₹${amt} (${note})`,
+    data: prepareLeadPayload(updated)
+  });
+
+  renderParentPortalDashboard();
+  toast("✅ Payment reported! Opening WhatsApp to share screenshot...");
+  const waMsg = `💳 *Tuition Fee Payment Update (Alenn Tuition Bureau)*\nParent: ${lead.name} (${lead.id})\nAmount Paid: ₹${amt}\nTutor: ${lead.assignedTutor || "Assigned Tutor"}\nNote/UTR: ${note}\nI am attaching my payment screenshot for the official digital receipt.`;
+  openWaChat(coord.phone, waMsg);
+}
+
+// One-Tap WhatsApp Notifications from CRM (Parent Demo/Tutor Alert, Parent Fee Alert, Assigned Coordinator Alert)
+function notifyParentAssignmentWa(overrideLeadId) {
+  const id = overrideLeadId || document.getElementById("lmId")?.value;
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  if (!l) return;
+  const tut = resolveAssignedTutor(l);
+  const coord = getCoordinatorContact(l.assignedStaff || currentUser?.name);
+  const demoDate = (overrideLeadId ? l.demoDate : (document.getElementById("lmDemoDate")?.value || l.demoDate)) || "As discussed";
+  const demoTime = (overrideLeadId ? l.demoTime : (document.getElementById("lmDemoTime")?.value || l.demoTime)) || l.timing || "As discussed";
+  const classTiming = (overrideLeadId ? l.classTiming : (document.getElementById("lmClassTiming")?.value || l.classTiming)) || "";
+  const msg = `Hello ${l.name} ji,\n\n✅ *Tutor Assigned — Alenn Tuition Bureau (Varanasi)*\n• *Lead ID:* ${l.id}\n• *Assigned Tutor:* ${tut?.name || l.assignedTutor || "Verified Specialist"}${tut?.verified ? " (🛡️ ID & Degree Verified)" : ""}\n${tut?.phone ? `• *Tutor Contact:* +91 ${cleanWaPhone(tut.phone)}\n` : ""}• *Subjects:* ${l.subjects}\n• *Demo Date & Time:* ${demoDate} (${demoTime})\n${classTiming ? `• *Regular Timing:* ${classTiming}\n` : ""}• *Your Coordinator:* ${coord.name} (+91 ${coord.phone})\n\n🏡 View full teacher history, share feedback or pay fees on our Parent Portal:\nhttps://mytuitiontutor.com/#parent-portal`;
+  openWaChat(l.phone, msg);
+}
+
+function notifyParentFeeReminderWa(overrideLeadId) {
+  const id = overrideLeadId || document.getElementById("lmId")?.value;
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  if (!l) return;
+  const fee = (overrideLeadId ? l.monthlyFee : (document.getElementById("lmMonthlyFee")?.value || l.monthlyFee)) || "";
+  const coord = getCoordinatorContact(l.assignedStaff || currentUser?.name);
+  const msg = `Hello ${l.name} ji,\n\n💳 *Tuition Fee Payment Reminder — Alenn Tuition Bureau*\n• *Lead ID:* ${l.id}\n• *Tutor:* ${l.assignedTutor || "Assigned Tutor"}\n• *Subjects:* ${l.subjects}\n${fee ? `• *Agreed Monthly Fee:* ₹${fee}\n` : ""}• *Coordinator:* ${coord.name} (+91 ${coord.phone})\n\nYou can pay safely via Razorpay or 0% Fee UPI QR (PhonePe / Paytm / GPay) directly inside your Parent Portal:\nhttps://mytuitiontutor.com/#parent-portal\n\nPlease share the payment screenshot on WhatsApp for your official digital receipt.`;
+  openWaChat(l.phone, msg);
+}
+
+function notifyCoordinatorLeadWa(overrideLeadId) {
+  const id = overrideLeadId || document.getElementById("lmId")?.value;
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  if (!l) return;
+  const staffName = overrideLeadId ? l.assignedStaff : (document.getElementById("lmStaff")?.value || l.assignedStaff);
+  if (!staffName || staffName === "Unassigned") {
+    toast("⚠ Please select an Assigned Coordinator first.");
+    return;
+  }
+  const coord = getCoordinatorContact(staffName);
+  const msg = `🔔 *Coordinator Lead Alert — Alenn Tuition Bureau*\nHi ${coord.name}, a parent lead is assigned to you:\n• *Lead ID:* ${l.id}\n• *Parent:* ${l.name} (+91 ${cleanWaPhone(l.phone)})\n• *Class/Exam:* ${l.classExam} (${l.subjects})\n• *Area:* ${l.area}\n• *Status:* ${l.status}\n• *Assigned Tutor:* ${l.assignedTutor || "Pending"}\n${l.demoDate || l.demoTime ? `• *Demo:* ${l.demoDate || "TBD"} ${l.demoTime || ""}\n` : ""}${l.parentDemoVerdict || l.parentFeedback ? `• *Parent Feedback:* ${l.parentDemoVerdict || ""} ${l.parentFeedback || ""}\n` : ""}Please coordinate with the parent & update CRM.`;
+  openWaChat(coord.phone, msg);
+}
+
+function filterParentFeedbackLeads() {
+  switchCrmTab("leads");
+  resetLeadFilters();
+  const chk = document.getElementById("leadParentFeedbackOnly");
+  if (chk) chk.checked = true;
+  renderLeads();
+}
+
+// Extend CRM UI Refresh cleanly
+const _origRefreshCrmUI = refreshCrmUI;
+refreshCrmUI = function() {
+  _origRefreshCrmUI();
+  const isDir = currentUser?.role === "director";
+  const activeLeads = crmData.leads.filter(l => !isHiddenRecord(l));
+  const myLeads = isDir ? activeLeads : activeLeads.filter(l => l.assignedStaff === currentUser.name || l.assignedStaff === "Unassigned" || !l.assignedStaff);
+  const unreadFb = myLeads.filter(hasUnreadParentFeedback);
+  const fbBanner = document.getElementById("parentFeedbackAlertBanner");
+  if (fbBanner) {
+    if (unreadFb.length > 0) {
+      fbBanner.style.display = "block";
+      fbBanner.textContent = `🏡 Parent Portal Alert: ${unreadFb.length} lead(s) have new Parent Feedback (Demo Hold / Decline / Rating) or Fee Payment claims. Tap to review →`;
+    } else {
+      fbBanner.style.display = "none";
+    }
+  }
+};
+
+const _origResetLeadFilters = resetLeadFilters;
+resetLeadFilters = function() {
+  const chk = document.getElementById("leadParentFeedbackOnly");
+  if (chk) chk.checked = false;
+  _origResetLeadFilters();
+};
+
+// Extend Lead Cards with Demo Schedule, Parent Feedback Box, & 1-tap WhatsApp Fee/Demo/Coordinator Alerts
+const _origLeadCardHtml = leadCardHtml;
+leadCardHtml = function(l) {
+  let html = _origLeadCardHtml(l);
+  const extraBlocks = [];
+
+  if (l.demoDate || l.demoTime || l.classTiming || l.assignedTutor) {
+    extraBlocks.push(`
+      <div style="font-size:12px;color:#1e40af;background:#eff6ff;border:1px solid #bfdbfe;border-radius:9px;padding:7px 9px;margin:6px 0;display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;">
+        <div>
+          ${l.demoDate || l.demoTime ? `<b>📅 Demo:</b> ${esc(l.demoDate || "TBD")} ${l.demoTime ? `@ ${esc(l.demoTime)}` : ""}` : "<b>📅 Demo:</b> Schedule in Assign modal"}
+          ${l.classTiming ? ` | <b>⏰ Timing:</b> ${esc(l.classTiming)}` : ""}
+        </div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-green btn-sm" style="padding:3px 8px;font-size:11px;" onclick="notifyParentAssignmentWa('${esc(l.id)}')">📲 WA Demo</button>
+          <button type="button" class="btn btn-outline btn-sm" style="padding:3px 8px;font-size:11px;color:#0369a1;border-color:#7dd3fc;" onclick="notifyParentFeeReminderWa('${esc(l.id)}')">💳 WA Fee</button>
+          ${l.assignedStaff && l.assignedStaff !== "Unassigned" ? `<button type="button" class="btn btn-outline btn-sm" style="padding:3px 8px;font-size:11px;" onclick="notifyCoordinatorLeadWa('${esc(l.id)}')">👤 WA Coord</button>` : ""}
+        </div>
+      </div>`);
+  }
+
+  const pastFbCount = parseAssignmentHistory(l.assignmentHistory).filter(h => h && h.parentFeedback).length;
+  if (l.parentFeedback || l.parentDemoVerdict || l.parentPaymentStatus || l.parentPreferredTutorTiming || pastFbCount > 0) {
+    const vStr = String(l.parentDemoVerdict || "");
+    const isUrgent = vStr.includes("Replacement") || vStr.includes("Issue") || vStr.includes("Declined") || vStr.includes("Rejected") || vStr.includes("Hold");
+    extraBlocks.push(`
+      <div class="crm-parent-fb-box ${isUrgent ? "urgent" : ""}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;">
+          <b>🏡 Parent Portal Feedback ${l.parentFeedbackUpdatedAt ? `(${esc(l.parentFeedbackUpdatedAt)})` : ""}</b>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;">
+            ${l.parentRating ? `<span class="badge b-amber">${esc(l.parentRating)}</span>` : ""}
+            ${pastFbCount > 0 ? `<span class="badge b-blue">${pastFbCount} Past Teacher FB</span>` : ""}
+          </div>
+        </div>
+        ${l.parentDemoVerdict ? `<div><b>Decision:</b> ${esc(l.parentDemoVerdict)}</div>` : ""}
+        ${l.parentPreferredTutorTiming ? `<div><b>Parent Timing Pref:</b> ${esc(l.parentPreferredTutorTiming)}</div>` : ""}
+        ${l.parentFeedback ? `<div>💬 "${esc(l.parentFeedback)}"</div>` : ""}
+        ${l.parentPaymentStatus ? `<div style="margin-top:3px;"><b>${esc(l.parentPaymentStatus)}</b> — ${esc(l.parentPaymentNote || "")}</div>` : ""}
+      </div>`);
+  }
+
+  if (extraBlocks.length) {
+    const marker = '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.3fr)';
+    if (html.includes(marker)) {
+      html = html.replace(marker, extraBlocks.join("") + marker);
+    }
+  }
+  return html;
+};
+
+// Also display Demo Date/Time & Parent Feedback inside CRM History Entry cards
+const _origHistoryEntryHtml = historyEntryHtml;
+historyEntryHtml = function(leadId, h, allowDirectorActions) {
+  let out = _origHistoryEntryHtml(leadId, h, allowDirectorActions);
+  const extra = [];
+  if (h.demoDate || h.demoTime) {
+    extra.push(`<div><b>🕒 Demo Slot:</b> ${esc(h.demoDate || "N/A")} ${h.demoTime ? `@ ${esc(h.demoTime)}` : ""}</div>`);
+  }
+  if (h.parentDecision || h.parentRating || h.parentFeedback) {
+    extra.push(`<div style="color:#854d0e;background:#fefce8;border:1px solid #fde68a;border-radius:7px;padding:4px 7px;margin-top:3px;"><b>🏡 Parent FB:</b> ${esc(h.parentRating || "")} ${esc(h.parentDecision || "")} ${h.parentFeedback ? `— "${esc(h.parentFeedback)}"` : ""}</div>`);
+  }
+  if (extra.length && out.includes('<div style="margin-top:5px;color:#1e293b;line-height:1.5;">')) {
+    out = out.replace('<div style="margin-top:5px;color:#1e293b;line-height:1.5;">', '<div style="margin-top:5px;color:#1e293b;line-height:1.5;">' + extra.join(""));
+  }
+  return out;
+};
+
+const _origRenderLeads = renderLeads;
+renderLeads = function() {
+  _origRenderLeads();
+  const onlyFb = !!document.getElementById("leadParentFeedbackOnly")?.checked;
+  if (!onlyFb) return;
+  const isDir = currentUser?.role === "director";
+  const filtered = crmData.leads.filter(l => {
+    if (isHiddenRecord(l) && !isDir) return false;
+    const owner = l.assignedStaff || "Unassigned";
+    if (!isDir && owner !== currentUser.name && owner !== "Unassigned") return false;
+    const histFb = parseAssignmentHistory(l.assignmentHistory).some(h => h && (h.parentFeedback || h.parentDecision));
+    return histFb || !!(l.parentFeedback || l.parentDemoVerdict || l.parentPaymentStatus);
+  });
+  const el = document.getElementById("leadsList");
+  const bar = document.getElementById("leadsCountBar");
+  if (bar) bar.innerHTML = `<span>Showing <b>${filtered.length}</b> lead(s) with Parent Feedback / Claims</span>`;
+  if (el) el.innerHTML = filtered.length ? filtered.map(leadCardHtml).join("") : `<div class="card" style="text-align:center;color:var(--muted);">No parent feedback or fee claims recorded yet.</div>`;
+};
+
+// Extend Commissions Tab with 1-tap Parent Fee WhatsApp Reminder
+const _origRenderCommissions = renderCommissions;
+renderCommissions = function() {
+  _origRenderCommissions();
+  const listEl = document.getElementById("commissionsList");
+  if (!listEl) return;
+  listEl.querySelectorAll(".card").forEach(card => {
+    const btn = card.querySelector("button[onclick*='markCommissionCollected'], button[onclick*='openLeadModal']");
+    if (!btn || card.querySelector(".pp-comm-fee-btn")) return;
+    const m = (btn.getAttribute("onclick") || "").match(/'([^']+)'/);
+    if (!m) return;
+    const leadId = m[1];
+    const feeBtn = document.createElement("button");
+    feeBtn.type = "button";
+    feeBtn.className = "btn btn-outline btn-sm pp-comm-fee-btn";
+    feeBtn.style.cssText = "width:100%;margin-top:8px;color:#0369a1;border-color:#7dd3fc;";
+    feeBtn.textContent = "💳 Send Fee Payment Alert to Parent (WhatsApp)";
+    feeBtn.onclick = () => notifyParentFeeReminderWa(leadId);
+    card.appendChild(feeBtn);
+  });
+};
+
+// Extend Tutor Modal with 4-Doc Checklist
+const _origOpenTutorModal = openTutorModal;
+openTutorModal = function(id) {
+  _origOpenTutorModal(id);
+  const t = crmData.tutors.find(x => String(x.id) === String(id));
+  if (!t) return;
+  const chk = parseDocChecklist(t);
+  if (document.getElementById("tmDocAadhaar")) document.getElementById("tmDocAadhaar").checked = chk.aadhaar;
+  if (document.getElementById("tmDocSelfie")) document.getElementById("tmDocSelfie").checked = chk.selfie;
+  if (document.getElementById("tmDocMarksheet")) document.getElementById("tmDocMarksheet").checked = chk.marksheet;
+  if (document.getElementById("tmDocAddress")) document.getElementById("tmDocAddress").checked = chk.address;
+};
+
+const _origSaveTutorChanges = saveTutorChanges;
+saveTutorChanges = async function() {
+  const id = document.getElementById("tmId").value;
+  const t = crmData.tutors.find(x => String(x.id) === String(id));
+  if (t) {
+    t.docAadhaar = !!document.getElementById("tmDocAadhaar")?.checked;
+    t.docSelfie = !!document.getElementById("tmDocSelfie")?.checked;
+    t.docMarksheet = !!document.getElementById("tmDocMarksheet")?.checked;
+    t.docAddress = !!document.getElementById("tmDocAddress")?.checked;
+    t.docCount = [t.docAadhaar, t.docSelfie, t.docMarksheet, t.docAddress].filter(Boolean).length;
+  }
+  await _origSaveTutorChanges();
+};
+
+// Extend Lead Modal with Demo Date/Time, Parent Feedback, Coordinator Remark & Auto WhatsApp Alerts
+const _origOpenLeadModal = openLeadModal;
+openLeadModal = function(id) {
+  _origOpenLeadModal(id);
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  if (!l) return;
+  if (document.getElementById("lmDemoDate")) document.getElementById("lmDemoDate").value = l.demoDate || "";
+  if (document.getElementById("lmDemoTime")) document.getElementById("lmDemoTime").value = l.demoTime || "";
+  if (document.getElementById("lmClassTiming")) document.getElementById("lmClassTiming").value = l.classTiming || l.parentPreferredTutorTiming || "";
+  if (document.getElementById("lmCoordinatorFeedback")) document.getElementById("lmCoordinatorFeedback").value = l.coordinatorFeedback || "";
+  if (document.getElementById("lmParentFbSeen")) document.getElementById("lmParentFbSeen").checked = !!l.parentFeedbackReviewed;
+  if (document.getElementById("lmAutoNotifyParentWa")) document.getElementById("lmAutoNotifyParentWa").checked = false;
+  if (document.getElementById("lmAutoNotifyCoordWa")) document.getElementById("lmAutoNotifyCoordWa").checked = false;
+
+  const sumEl = document.getElementById("lmParentFeedbackSummary");
+  const badgeEl = document.getElementById("lmParentFbBadge");
+  if (sumEl && badgeEl) {
+    if (l.parentFeedback || l.parentDemoVerdict || l.parentPaymentStatus) {
+      badgeEl.className = "badge b-amber";
+      badgeEl.textContent = l.parentRating || l.parentDemoVerdict || "Updated";
+      sumEl.innerHTML = `
+        ${l.parentDemoVerdict ? `<b>Decision:</b> ${esc(l.parentDemoVerdict)}<br>` : ""}
+        ${l.parentPreferredTutorTiming ? `<b>Preferred Tutor Timing:</b> ${esc(l.parentPreferredTutorTiming)}<br>` : ""}
+        ${l.parentFeedback ? `<b>Comment:</b> "${esc(l.parentFeedback)}"<br>` : ""}
+        ${l.parentPaymentStatus ? `<b>Payment Claim:</b> ${esc(l.parentPaymentStatus)} — ${esc(l.parentPaymentNote || "")}` : ""}
+      `;
+    } else {
+      badgeEl.className = "badge b-gray";
+      badgeEl.textContent = "No Feedback Yet";
+      sumEl.textContent = "No feedback submitted from Parent Portal yet.";
+    }
+  }
+};
+
+const _origSaveLeadChanges = saveLeadChanges;
+saveLeadChanges = async function() {
+  const id = document.getElementById("lmId").value;
+  const l = crmData.leads.find(x => String(x.id) === String(id));
+  const shouldNotifyParentWa = !!document.getElementById("lmAutoNotifyParentWa")?.checked;
+  const shouldNotifyCoordWa = !!document.getElementById("lmAutoNotifyCoordWa")?.checked;
+  const nextDemoDate = document.getElementById("lmDemoDate")?.value || "";
+  const nextDemoTime = document.getElementById("lmDemoTime")?.value.trim() || "";
+  const nextClassTiming = document.getElementById("lmClassTiming")?.value.trim() || "";
+  const nextCoordFb = document.getElementById("lmCoordinatorFeedback")?.value.trim() || "";
+  const nextSeen = !!document.getElementById("lmParentFbSeen")?.checked;
+  const prevStaffBefore = l ? (l.assignedStaff || "Unassigned") : "Unassigned";
+  const prevTutorBefore = l ? (l.assignedTutor || "") : "";
+
+  await _origSaveLeadChanges();
+
+  if (l) {
+    l.demoDate = nextDemoDate;
+    l.demoTime = nextDemoTime;
+    l.classTiming = nextClassTiming;
+    l.coordinatorFeedback = nextCoordFb;
+    l.parentFeedbackReviewed = nextSeen;
+    if (nextSeen) {
+      l.assignmentHistory = parseAssignmentHistory(l.assignmentHistory).map(h => ({ ...h, parentFeedbackUnread: false }));
+    }
+    const staffNowChanged = l.assignedStaff && l.assignedStaff !== "Unassigned" && l.assignedStaff !== prevStaffBefore;
+    const tutorNowChanged = l.assignedTutor && l.assignedTutor !== prevTutorBefore;
+    if (tutorNowChanged && prevTutorBefore) {
+      l.parentRating = "";
+      l.parentDemoVerdict = "";
+      l.parentFeedback = "";
+      l.parentFeedbackUpdatedAt = "";
+      l.parentFeedbackReviewed = true;
+    }
+    const coord = getCoordinatorContact(l.assignedStaff);
+    const dir = getCoordinatorContact("Rahul Sir");
+
+    saveLocalCrm();
+    refreshCrmUI();
+    await postToBackend({
+      action: "updateLead",
+      source: "crm_assignment_update",
+      notifyParentWhatsApp: !!tutorNowChanged,
+      notifyCoordinator: !!staffNowChanged || !!tutorNowChanged,
+      notifyDirector: false,
+      coordinatorName: coord.name,
+      coordinatorPhone: coord.phone,
+      directorPhone: dir.phone,
+      data: prepareLeadPayload(l)
+    });
+
+    if (shouldNotifyParentWa) notifyParentAssignmentWa(l.id);
+    if (shouldNotifyCoordWa) notifyCoordinatorLeadWa(l.id);
+  }
+};
+
+// Extend Tutor Self-Service Portal cards for 3-Way Transparency (Demo Date/Time, Parent Timing, Parent Feedback & Coordinator Contact)
+const _origRenderSelfAssignedTuitions = renderSelfAssignedTuitions;
+renderSelfAssignedTuitions = function() {
+  _origRenderSelfAssignedTuitions();
+  if (!activeSelfTutor) return;
+  const listEl = document.getElementById("tpAssignedTuitionsList");
+  if (!listEl) return;
+  const myTuitions = getTuitionsForTutor(activeSelfTutor, portalLeadsPool);
+  myTuitions.forEach(l => {
+    const domKey = safeDomId(l.id);
+    const btn = document.getElementById("tpRepBtn-" + domKey);
+    const card = btn?.closest(".tp-tuition-card");
+    if (!card || card.querySelector(".tp-transparent-strip")) return;
+    const coord = getCoordinatorContact(l.assignedStaff);
+    const strip = document.createElement("div");
+    strip.className = "tp-transparent-strip";
+    strip.style.cssText = "background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:9px 11px;margin:8px 0;font-size:12px;color:#14532d;";
+    strip.innerHTML = `
+      ${l.demoDate || l.demoTime ? `<div><b>📅 Demo Date & Time:</b> ${esc(l.demoDate || "TBD")} ${l.demoTime ? `@ ${esc(l.demoTime)}` : ""}</div>` : ""}
+      ${l.parentPreferredTutorTiming || l.classTiming ? `<div><b>⏰ Parent's Preferred Timing:</b> ${esc(l.parentPreferredTutorTiming || l.classTiming)}</div>` : ""}
+      ${l.parentRating || l.parentDemoVerdict || l.parentFeedback ? `<div><b>⭐ Parent Feedback:</b> ${esc(l.parentRating || "")} ${esc(l.parentDemoVerdict || "")} ${l.parentFeedback ? `— "${esc(l.parentFeedback)}"` : ""}</div>` : ""}
+      ${l.coordinatorFeedback ? `<div><b>📢 Coordinator Guidance:</b> ${esc(l.coordinatorFeedback)}</div>` : ""}
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+        <a class="btn btn-outline btn-sm" href="tel:+91${coord.phone}" style="padding:4px 9px;font-size:11.5px;">📞 Call Coordinator (${esc(coord.name)})</a>
+        <button type="button" class="btn btn-green btn-sm" style="padding:4px 9px;font-size:11.5px;" onclick="openWaChat('${esc(coord.phone)}','Hello ${esc(coord.name)}, I am ${esc(activeSelfTutor.name)} regarding tuition ${esc(l.id)} (${esc(l.name)}).')">💬 WA Coordinator</button>
+      </div>`;
+    const repBox = card.querySelector(".tp-report-box");
+    if (repBox) card.insertBefore(strip, repBox);
+  });
+};
+
+// Extend Director Settings with Coordinator Phone Editor
+const _origPopulateDirectorSettings = populateDirectorSettings;
+populateDirectorSettings = function() {
+  _origPopulateDirectorSettings();
+  const phones = getStaffPhones();
+  const editor = document.getElementById("staffPhoneEditor");
+  if (editor) {
+    editor.innerHTML = Object.keys(DEFAULT_STAFF_PHONES).map(name => `
+      <div class="field">
+        <label>${esc(name)} — Call / WhatsApp Number</label>
+        <input class="input" id="sphone-${safeDomId(name)}" value="${esc(phones[name] || "")}" placeholder="10-digit mobile number" />
+      </div>`).join("");
+  }
+};
+function saveStaffPhones() {
+  const next = {};
+  Object.keys(DEFAULT_STAFF_PHONES).forEach(name => {
+    const val = document.getElementById("sphone-" + safeDomId(name))?.value.trim();
+    next[name] = cleanWaPhone(val) || DEFAULT_STAFF_PHONES[name];
+  });
+  localStorage.setItem("alenn_staff_phones", JSON.stringify(next));
+  toast("📞 Coordinator numbers saved!");
 }
 
 /* ================= INIT ================= */
