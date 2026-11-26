@@ -652,6 +652,31 @@
       background: #f8fafc; border: 1px solid var(--border);
     }
 
+    /* Assignment History & Director PIN Security Styles */
+    .history-box {
+      background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px;
+      padding: 10px 12px; margin: 8px 0 10px; font-size: 12px;
+    }
+    .history-item {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 8px 10px; margin-top: 7px;
+    }
+    .history-item.hist-hidden {
+      border-style: dashed; border-color: #94a3b8; background: #f1f5f9; opacity: 0.85;
+    }
+    .history-actions {
+      display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px;
+    }
+    .history-actions .btn-sm {
+      padding: 4px 8px; font-size: 11px; border-radius: 8px;
+    }
+    .pin-modal-box {
+      border: 2px solid #fca5a5;
+    }
+    .pin-input-lg {
+      text-align: center; font-size: 18px; letter-spacing: 3px; font-weight: 800;
+    }
+
     /* Modal */
     .modal-bg {
       position: fixed; inset: 0; background: rgba(15,23,42,.6); z-index: 200;
@@ -2400,7 +2425,7 @@
       <div id="panel-flagged" style="display:none;">
         <div class="card" style="background:#fef2f2;border-color:#fca5a5;">
           <h4>🚩 Flagged Tutors & Parents Watchlist (High Priority • Verification Pending • Payment Due • Suspicious • Fraud)</h4>
-          <p style="font-size:13px;color:#991b1b;">All coordinators (Vaibhav, Amar, Rishikesh) and Rahul Sir can flag tutors or parents from the <b>Manage / Assign</b> button. Only <b>Director Rahul Sir</b> can Hide/Unhide or Permanently Delete records.</p>
+          <p style="font-size:13px;color:#991b1b;">All coordinators (Vaibhav, Amar, Rishikesh) and Rahul Sir can flag tutors or parents from the <b>Manage / Assign</b> button. Only <b>Director Rahul Sir</b> can Hide/Unhide or Permanently Delete records (PIN protected).</p>
           <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <select id="flaggedTypeFilter" class="input" style="width:auto;" onchange="renderFlaggedSection()">
               <option value="">All Flag Types</option>
@@ -2423,7 +2448,7 @@
         <div id="directorHiddenSection" style="display:none;margin-top:18px;">
           <div class="card" style="background:#f8fafc;border:1.5px dashed #64748b;">
             <h4>👑 Director Vault — Hidden Tutors & Parent Leads</h4>
-            <p style="font-size:12.5px;color:var(--muted);">Hidden records are invisible to all staff coordinators. You can Unhide or Permanently Delete them anytime.</p>
+            <p style="font-size:12.5px;color:var(--muted);">Hidden records are invisible to all staff coordinators. You can Unhide or Permanently Delete them anytime (protected by Director Security PIN).</p>
           </div>
           <div id="hiddenRecordsList"></div>
         </div>
@@ -2468,6 +2493,16 @@
           <p style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">Change login passwords for any coordinator or Director account.</p>
           <div id="staffPassEditor"></div>
           <button class="btn btn-navy" style="margin-top:10px;" onclick="saveStaffPasswords()">🔑 Update Staff Passwords</button>
+        </div>
+
+        <div class="card" style="border:1.5px solid #fca5a5;background:#fffbfb;">
+          <h3 style="margin-bottom:8px;">🛡️ Director Security PIN (Hide & Permanent Delete Lock)</h3>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">Required before Hide/Unhide Tutor, Hide/Unhide Lead, Permanent Delete, or Deleting History logs. Your Director Master Login Password also works as a fallback so you are never locked out.</p>
+          <div class="field">
+            <label>Director Security PIN (Default: 2026)</label>
+            <input id="cfgActionPin" type="password" class="input" placeholder="Enter PIN or security passphrase" />
+          </div>
+          <button type="button" class="btn btn-red" onclick="saveActionPin()">🔒 Update Director Security PIN</button>
         </div>
       </div>
     </div>
@@ -2630,9 +2665,9 @@
       <button class="btn btn-primary" onclick="saveTutorChanges()">💾 Save Changes</button>
     </div>
 
-    <!-- DIRECTOR-ONLY CONTROLS -->
+    <!-- DIRECTOR-ONLY CONTROLS (PIN PROTECTED) -->
     <div id="tmDirectorControls" class="director-danger-box" style="display:none;">
-      <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only)</p>
+      <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only — 🔒 PIN Protected)</p>
       <div class="grid-2">
         <button type="button" id="tmHideBtn" class="btn btn-navy btn-sm" style="width:100%" onclick="toggleHideCurrentTutor()">🙈 Hide Tutor</button>
         <button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="deleteCurrentTutor()">🗑️ Delete Permanently</button>
@@ -2763,6 +2798,21 @@
       </div>
     </div>
 
+    <!-- PAST TUTOR & COORDINATOR ASSIGNMENT HISTORY (NON-OVERWRITING • DIRECTOR CUSTOMIZABLE) -->
+    <div id="lmHistoryBox" class="history-box" style="margin-bottom:13px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;">
+        <b style="font-size:13px;color:var(--navy);">📜 Past Tutor & Coordinator History <span id="lmHistoryCount" class="badge b-blue">0</span></b>
+        <div id="lmHistoryDirectorBar" style="display:none;gap:6px;align-items:center;flex-wrap:wrap;">
+          <label class="toggle-inline" style="padding:3px 7px;font-size:11px;">
+            <input id="lmShowHiddenHistory" type="checkbox" onchange="renderLeadModalHistory()" /> 👁️ Hidden
+          </label>
+          <button type="button" class="btn btn-outline btn-sm" style="padding:4px 8px;font-size:11px;" onclick="openHistoryEditorModal()">➕ Add Entry</button>
+        </div>
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:3px;">Previous tutor & coordinator records are auto-archived here whenever reassigned so history is never overwritten.</div>
+      <div id="lmHistoryList" style="margin-top:6px;"></div>
+    </div>
+
     <!-- RISK & ALERT FLAG SECTION -->
     <div class="flag-section-box">
       <div class="field" style="margin-bottom:8px;">
@@ -2789,13 +2839,103 @@
     </div>
     <button class="btn btn-primary" onclick="saveLeadChanges()">💾 Save Tuition Assignment</button>
 
-    <!-- DIRECTOR-ONLY CONTROLS -->
+    <!-- DIRECTOR-ONLY CONTROLS (PIN PROTECTED) -->
     <div id="lmDirectorControls" class="director-danger-box" style="display:none;">
-      <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only)</p>
+      <p style="font-size:12px;font-weight:800;color:#991b1b;margin-bottom:8px;">👑 Director Controls (Rahul Sir Only — 🔒 PIN Protected)</p>
       <div class="grid-2">
         <button type="button" id="lmHideBtn" class="btn btn-navy btn-sm" style="width:100%" onclick="toggleHideCurrentLead()">🙈 Hide Lead</button>
         <button type="button" class="btn btn-red btn-sm" style="width:100%" onclick="deleteCurrentLead()">🗑️ Delete Permanently</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIRECTOR SECURITY PIN MODAL (DELETE / HIDE PROTECTION) -->
+<div id="securityPinModal" class="modal-bg" onclick="if(event.target===this)closeSecurityPinModal()">
+  <div class="modal pin-modal-box" style="max-width:420px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h3 id="spTitle" style="color:#991b1b;">🔐 Director Security Check</h3>
+      <button type="button" class="btn-menu" onclick="closeSecurityPinModal()">✕</button>
+    </div>
+    <p id="spDesc" style="font-size:13px;color:#334155;margin-bottom:12px;line-height:1.5;"></p>
+    <form onsubmit="submitSecurityPin(event)">
+      <div class="field">
+        <label>Enter Director Security PIN or Master Password <span class="req">*</span></label>
+        <input id="spInput" type="password" class="input pin-input-lg" required autocomplete="off" placeholder="••••" />
+      </div>
+      <div id="spError" style="display:none;color:#991b1b;background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:700;margin-bottom:10px;"></div>
+      <div class="grid-2">
+        <button type="button" class="btn btn-outline" onclick="closeSecurityPinModal()">Cancel</button>
+        <button type="submit" id="spConfirmBtn" class="btn btn-red">🔓 Verify & Proceed</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DIRECTOR-ONLY HISTORY ENTRY EDITOR MODAL -->
+<div id="historyEditModal" class="modal-bg" onclick="if(event.target===this)closeModal('historyEditModal')">
+  <div class="modal" style="max-width:470px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h3 id="heTitle">✏️ Edit Assignment History Entry</h3>
+      <button type="button" class="btn-menu" onclick="closeModal('historyEditModal')">✕</button>
+    </div>
+    <input type="hidden" id="heLeadId" />
+    <input type="hidden" id="heEntryId" />
+    <div class="field">
+      <label>Event Type / Label</label>
+      <input id="heType" class="input" placeholder="e.g., Tutor Reassigned, Coordinator Transferred, Demo Record" />
+    </div>
+    <div class="field">
+      <label>Previous / Recorded Tutor Name</label>
+      <input id="heTutorName" class="input" placeholder="e.g., Sarvjit Kumar Pandey (Maths • Chitaipur)" />
+    </div>
+    <div class="grid-2 modal-field-row">
+      <div class="field">
+        <label>Tutor Phone (Optional)</label>
+        <input id="heTutorPhone" class="input" placeholder="e.g., 9026218370" />
+      </div>
+      <div class="field">
+        <label>Coordinator</label>
+        <select id="heCoordinator" class="input">
+          <option value="Unassigned">Unassigned</option>
+          <option value="Rahul Sir">Rahul Sir</option>
+          <option value="Vaibhav Mishra">Vaibhav Mishra</option>
+          <option value="Amar Srivastava">Amar Srivastava</option>
+          <option value="Rishikesh Pandey">Rishikesh Pandey</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid-2 modal-field-row">
+      <div class="field">
+        <label>Allotted / Start Date</label>
+        <input id="heAssignedDate" type="date" class="input" />
+      </div>
+      <div class="field">
+        <label>Replaced / Recorded Date</label>
+        <input id="heEndedDate" type="date" class="input" />
+      </div>
+    </div>
+    <div class="grid-2 modal-field-row">
+      <div class="field">
+        <label>Lead / Tuition Status</label>
+        <input id="heLeadStatus" class="input" placeholder="e.g., Demo Completed, Tuition Confirmed" />
+      </div>
+      <div class="field">
+        <label>Demo / Visit Status</label>
+        <input id="heDemoStatus" class="input" placeholder="e.g., Demo Rejected / Not Confirmed" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Custom Note / Remark</label>
+      <textarea id="heNote" class="input" rows="2" placeholder="Optional details about why tutor/coordinator changed..."></textarea>
+    </div>
+    <label class="agree-row" style="padding:9px 12px;margin-bottom:12px;">
+      <input id="heHidden" type="checkbox" />
+      <span><b>🙈 Hide this history entry from Coordinators</b> (Visible only to Director Rahul Sir)</span>
+    </label>
+    <div class="grid-2">
+      <button type="button" class="btn btn-outline" onclick="closeModal('historyEditModal')">Cancel</button>
+      <button type="button" class="btn btn-primary" onclick="saveHistoryEntry()">💾 Save History Entry</button>
     </div>
   </div>
 </div>
@@ -2836,6 +2976,7 @@
 const DEFAULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7WY8EktIWrZ4Hsb0EutM7wx_f4JCFqHIO0dETa3yAoA3oi3Ec6wSxOOXJK6aNnMLA0A/exec";
 const OLD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzptxssoN7rQFFfxsHh9qd4Cr-9MWEvzL7hFNh4QLhhuUE2H_DsyLEAQBPuRYNXBLiX/exec";
 const DEFAULT_SECRET = "ALENN_VNS_2026_SECURE";
+const DEFAULT_ACTION_PIN = "2026";
 
 const DEFAULT_STAFF = {
   rahul:     { id: "rahul",     name: "Rahul Sir",        role: "director", pass: "Rahul@2026" },
@@ -2953,6 +3094,7 @@ let activeLeadModalData = null;
 let activeSelfTutor = null;
 let portalLeadsPool = [];
 let selfTuitionFilter = "all";
+let pendingPinAction = null;
 
 function getScriptUrl() {
   const saved = localStorage.getItem("alenn_script_url");
@@ -2963,6 +3105,7 @@ function getScriptUrl() {
   return saved;
 }
 function getWebhookSecret() { return localStorage.getItem("alenn_secret") || DEFAULT_SECRET; }
+function getActionPin() { return localStorage.getItem("alenn_action_pin") || DEFAULT_ACTION_PIN; }
 function getStaffAccounts() {
   try { return JSON.parse(localStorage.getItem("alenn_staff_accounts")) || DEFAULT_STAFF; }
   catch { return DEFAULT_STAFF; }
@@ -3181,7 +3324,7 @@ function getCommissionMeta(l) {
   return { state: "Upcoming", daysLeft, dueDate, reminderDate, commAmt, cls: "b-blue", label: `📅 50% Comm Due ${dueDate} (Alert ${reminderDate})` };
 }
 
-/* --- FLAG & HIDDEN HELPERS --- */
+/* --- FLAG, HIDDEN & ASSIGNMENT HISTORY HELPERS --- */
 function isHiddenRecord(rec) {
   if (!rec) return false;
   if (rec.hidden === true) return true;
@@ -3214,6 +3357,71 @@ function flagNoteHtml(rec) {
   const by = rec.flaggedBy ? ` by ${esc(rec.flaggedBy)}` : "";
   const reason = rec.flagReason ? `: ${esc(rec.flagReason)}` : "";
   return `<div style="font-size:12px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:5px 8px;margin-top:5px;"><b>🚩 Flagged (${esc(getNormalizedFlag(rec))}${by})</b>${reason}</div>`;
+}
+
+function parseAssignmentHistory(raw) {
+  if (Array.isArray(raw)) return raw.filter(x => x && typeof x === "object");
+  if (typeof raw === "string" && raw.trim()) {
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed.filter(x => x && typeof x === "object") : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+}
+function prepareLeadPayload(lead) {
+  const hist = parseAssignmentHistory(lead?.assignmentHistory);
+  return {
+    ...lead,
+    assignmentHistory: JSON.stringify(hist)
+  };
+}
+function getVisibleHistoryForLead(l, includeHidden) {
+  const all = parseAssignmentHistory(l?.assignmentHistory);
+  const isDir = currentUser?.role === "director";
+  if (isDir && includeHidden) return all;
+  return all.filter(h => !h.hidden);
+}
+
+/* --- DIRECTOR SECURITY PIN PROTECTION (HIDE & PERMANENT DELETE) --- */
+function requestDirectorPin(opts) {
+  if (currentUser?.role !== "director") {
+    toast("⛔ Only Director Rahul Sir can perform this action.");
+    return;
+  }
+  pendingPinAction = opts?.onVerified || null;
+  document.getElementById("spTitle").textContent = opts?.title || "🔐 Director Security Check";
+  document.getElementById("spDesc").innerHTML = opts?.desc || "Please enter your Director Security PIN or Master Password to continue.";
+  document.getElementById("spConfirmBtn").textContent = opts?.confirmLabel || "🔓 Verify & Proceed";
+  const inp = document.getElementById("spInput");
+  const err = document.getElementById("spError");
+  inp.value = "";
+  err.style.display = "none";
+  err.textContent = "";
+  document.getElementById("securityPinModal").classList.add("open");
+  setTimeout(() => inp.focus(), 60);
+}
+function closeSecurityPinModal() {
+  pendingPinAction = null;
+  document.getElementById("securityPinModal").classList.remove("open");
+}
+async function submitSecurityPin(e) {
+  e.preventDefault();
+  const entered = document.getElementById("spInput").value.trim();
+  const err = document.getElementById("spError");
+  const dirPass = getStaffAccounts()?.rahul?.pass || DEFAULT_STAFF.rahul.pass;
+  const actionPin = getActionPin();
+  if (!entered || (entered !== actionPin && entered !== dirPass)) {
+    err.textContent = "❌ Incorrect Director Security PIN / Password. Action cancelled.";
+    err.style.display = "block";
+    document.getElementById("spInput").select();
+    return;
+  }
+  const fn = pendingPinAction;
+  closeSecurityPinModal();
+  if (typeof fn === "function") await fn();
 }
 
 /* ================= DYNAMIC PER-PAGE AI & SEO SCHEMA ================= */
@@ -3788,6 +3996,7 @@ async function submitInquiry(e) {
     assignedTutorId: "",
     assignedTutorPhone: "",
     assignedDate: "",
+    assignmentHistory: [],
     status: "New Lead",
     confirmedDate: "",
     monthlyFee: "",
@@ -3809,7 +4018,7 @@ async function submitInquiry(e) {
   lastSubmittedLead = lead;
   crmData.leads.unshift(lead);
   saveLocalCrm();
-  await postToBackend({ action: "addLead", data: lead });
+  await postToBackend({ action: "addLead", data: prepareLeadPayload(lead) });
 
   btn.disabled = false; btn.textContent = "🚀 Submit Tutor Inquiry (Free Demo)";
   document.getElementById("inquiryForm").reset();
@@ -4008,6 +4217,10 @@ async function fetchPortalData() {
         .map((l, idx) => {
           const lid = String(l.id || ("LD-ROW-" + idx));
           const prev = prevLeadMap.get(lid);
+          const hasSheetHist = l.assignmentHistory !== undefined && l.assignmentHistory !== "";
+          const mergedHist = hasSheetHist
+            ? parseAssignmentHistory(l.assignmentHistory)
+            : parseAssignmentHistory(prev?.assignmentHistory);
           return {
             ...l,
             id: lid,
@@ -4015,6 +4228,7 @@ async function fetchPortalData() {
             assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
             assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
             assignedDate: l.assignedDate || prev?.assignedDate || "",
+            assignmentHistory: mergedHist,
             commissionStatus: normalizeCommStatus(l.commissionStatus || prev?.commissionStatus),
             tutorDemoReport: l.tutorDemoReport || prev?.tutorDemoReport || "",
             tutorTuitionStatus: l.tutorTuitionStatus || prev?.tutorTuitionStatus || "",
@@ -4362,7 +4576,7 @@ async function submitSelfTuitionReport(leadId, forcedRunStatus) {
     source: "tutor_portal_report",
     tutorId: activeSelfTutor.id,
     tutorName: activeSelfTutor.name,
-    data: updatedLead
+    data: prepareLeadPayload(updatedLead)
   });
 
   renderSelfAssignedTuitions();
@@ -4572,7 +4786,9 @@ function loadLocalCrm() {
     const cached = JSON.parse(localStorage.getItem("alenn_crm_cache"));
     if (cached) {
       crmData.tutors = (cached.tutors || []).filter(t => t && (String(t.name || "").trim() || String(t.phone || "").trim()));
-      crmData.leads = (cached.leads || []).filter(l => l && (String(l.name || "").trim() || String(l.phone || "").trim()));
+      crmData.leads = (cached.leads || [])
+        .filter(l => l && (String(l.name || "").trim() || String(l.phone || "").trim()))
+        .map(l => ({ ...l, assignmentHistory: parseAssignmentHistory(l.assignmentHistory) }));
     }
   } catch {}
 }
@@ -4673,6 +4889,10 @@ async function syncFromSheet() {
         .map((l, idx) => {
           const lid = String(l.id || ("LD-ROW-" + idx));
           const prev = prevLeadMap.get(lid);
+          const hasSheetHist = l.assignmentHistory !== undefined && l.assignmentHistory !== "";
+          const mergedHist = hasSheetHist
+            ? parseAssignmentHistory(l.assignmentHistory)
+            : parseAssignmentHistory(prev?.assignmentHistory);
           return {
             ...l,
             id: lid,
@@ -4680,6 +4900,7 @@ async function syncFromSheet() {
             assignedTutorId: l.assignedTutorId || prev?.assignedTutorId || "",
             assignedTutorPhone: l.assignedTutorPhone || prev?.assignedTutorPhone || "",
             assignedDate: l.assignedDate || prev?.assignedDate || "",
+            assignmentHistory: mergedHist,
             commissionStatus: normalizeCommStatus(l.commissionStatus || prev?.commissionStatus),
             tutorDemoReport: l.tutorDemoReport || prev?.tutorDemoReport || "",
             tutorTuitionStatus: l.tutorTuitionStatus || prev?.tutorTuitionStatus || "",
@@ -5046,8 +5267,54 @@ async function quickVerifyTutorReport(leadId, verdict) {
   }
   saveLocalCrm();
   refreshCrmUI();
-  await postToBackend({ action: "updateLead", data: l });
+  await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
   toast(verdict === "Verified with Parent" ? "✅ Tutor report verified with parent!" : "⚠️ Tutor report marked as Disputed / Mismatch.");
+}
+
+function historyEntryHtml(leadId, h, allowDirectorActions) {
+  const isDir = currentUser?.role === "director";
+  const hiddenCls = h.hidden ? "hist-hidden" : "";
+  return `
+    <div class="history-item ${hiddenCls}">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;">
+        <div>
+          <span class="badge b-blue">${esc(h.type || "Past Assignment")}</span>
+          ${h.hidden ? `<span class="badge b-dark">🙈 Hidden</span>` : ""}
+        </div>
+        <span style="font-size:11px;color:#64748b;">${esc(h.endedDate || h.recordedAt || "")}</span>
+      </div>
+      <div style="margin-top:5px;color:#1e293b;line-height:1.5;">
+        ${h.tutorName ? `<div><b>🎓 Tutor:</b> ${esc(h.tutorName)}${h.tutorPhone ? ` (${esc(h.tutorPhone)})` : ""}</div>` : ""}
+        <div><b>👤 Coordinator:</b> ${esc(h.coordinator || "Unassigned")}${h.newCoordinator && h.newCoordinator !== h.coordinator ? ` → ${esc(h.newCoordinator)}` : ""}</div>
+        <div>
+          ${h.assignedDate ? `<b>📅 Allotted:</b> ${esc(h.assignedDate)} ` : ""}
+          ${h.endedDate ? `| <b>Till:</b> ${esc(h.endedDate)} ` : ""}
+          ${h.leadStatus ? `| <b>Status:</b> ${esc(h.leadStatus)}` : ""}
+        </div>
+        ${h.demoStatus ? `<div><b>🎯 Demo:</b> ${esc(h.demoStatus)}${h.tuitionStatus ? ` • ${esc(h.tuitionStatus)}` : ""}${h.feeStatus ? ` • ${esc(h.feeStatus)}` : ""}</div>` : ""}
+        ${h.note ? `<div style="color:#475569;">📝 ${esc(h.note)}</div>` : ""}
+        ${h.recordedBy ? `<div style="font-size:10.5px;color:#94a3b8;margin-top:2px;">Logged by ${esc(h.recordedBy)}${h.recordedAt ? ` on ${esc(h.recordedAt)}` : ""}</div>` : ""}
+      </div>
+      ${isDir && allowDirectorActions ? `
+        <div class="history-actions">
+          <button type="button" class="btn btn-outline btn-sm" onclick="openHistoryEditorModal('${esc(h.id)}','${esc(leadId)}')">✏️ Edit</button>
+          <button type="button" class="btn btn-navy btn-sm" onclick="toggleHideHistoryEntry('${esc(leadId)}','${esc(h.id)}')">${h.hidden ? "👁️ Unhide" : "🙈 Hide"}</button>
+          <button type="button" class="btn btn-red btn-sm" onclick="deleteHistoryEntry('${esc(leadId)}','${esc(h.id)}')">🗑️ Delete</button>
+        </div>` : ""}
+    </div>`;
+}
+
+function leadHistoryCardHtml(l) {
+  const isDir = currentUser?.role === "director";
+  const hist = getVisibleHistoryForLead(l, isDir);
+  if (!hist.length) return "";
+  return `
+    <details class="history-box">
+      <summary style="cursor:pointer;font-weight:800;color:var(--navy);">📜 Past Tutor & Coordinator History (${hist.length} record${hist.length > 1 ? "s" : ""})</summary>
+      <div style="margin-top:6px;">
+        ${hist.map(h => historyEntryHtml(l.id, h, isDir)).join("")}
+      </div>
+    </details>`;
 }
 
 function leadCardHtml(l) {
@@ -5134,6 +5401,7 @@ function leadCardHtml(l) {
         <div><b>Phone:</b> ${esc(l.phone)} | <b>Timing:</b> ${esc(l.timing)} ${l.budget && l.budget !== 'Discuss on Call' ? `| <b>Budget:</b> ${esc(l.budget)}` : ""} ${l.monthlyFee ? `| <b>Fee:</b> ₹${esc(l.monthlyFee)}/mo (50% Comm: ₹${Math.round(Number(l.monthlyFee)*0.5)})` : ""}</div>
         ${tutorStripHtml}
         ${tutorReportBoxHtml}
+        ${leadHistoryCardHtml(l)}
         ${flagNoteHtml(l)}
         ${l.notes ? `<div style="font-size:12px;color:#64748b;margin-top:5px;">📝 ${esc(l.notes)}</div>` : ""}
       </div>
@@ -5172,7 +5440,10 @@ function renderLeads() {
     if (onlyPendingReports && !isPendingTutorReport(l)) return false;
     if (flagF === "ANY_FLAG" && !hasActiveFlag(l)) return false;
     else if (flagF && flagF !== "ANY_FLAG" && getNormalizedFlag(l) !== flagF) return false;
-    const hay = `${l.id} ${l.name} ${l.classExam} ${l.specificClass || ""} ${l.board} ${l.subjects} ${l.area} ${l.phone} ${l.mode} ${l.budget || ""} ${l.assignedTutor} ${l.assignedTutorPhone || ""} ${l.assignedStaff} ${l.tutorDemoReport || ""} ${l.tutorTuitionStatus || ""} ${l.tutorFeeStatus || ""} ${l.tutorReportNote || ""} ${l.notes} ${l.flag} ${l.flagReason}`.toLowerCase();
+    const histHay = getVisibleHistoryForLead(l, isDir)
+      .map(h => `${h.tutorName || ""} ${h.coordinator || ""} ${h.demoStatus || ""} ${h.note || ""}`)
+      .join(" ");
+    const hay = `${l.id} ${l.name} ${l.classExam} ${l.specificClass || ""} ${l.board} ${l.subjects} ${l.area} ${l.phone} ${l.mode} ${l.budget || ""} ${l.assignedTutor} ${l.assignedTutorPhone || ""} ${l.assignedStaff} ${l.tutorDemoReport || ""} ${l.tutorTuitionStatus || ""} ${l.tutorFeeStatus || ""} ${l.tutorReportNote || ""} ${histHay} ${l.notes} ${l.flag} ${l.flagReason}`.toLowerCase();
     return !q || hay.includes(q);
   });
 
@@ -5317,7 +5588,7 @@ async function markCommissionCollected(id) {
   if (l.status === "Payment Pending") l.status = "Tuition Confirmed";
   saveLocalCrm();
   refreshCrmUI();
-  await postToBackend({ action: "updateLead", data: l });
+  await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
   toast("✔ 50% Commission marked as Collected!");
 }
 
@@ -5345,7 +5616,7 @@ function renderRenewals() {
   }).join("");
 }
 
-/* ================= MODALS (TUTOR & LEAD MANAGEMENT + LIVE SEARCH + VERIFICATION + FLAGS) ================= */
+/* ================= MODALS (TUTOR & LEAD MANAGEMENT + HISTORY + PIN SECURITY) ================= */
 function getDirVerifyCheckbox() {
   return document.getElementById("tmIsVerified")
     || document.getElementById("tmDirectorVerified")
@@ -5545,31 +5816,47 @@ async function saveTutorChanges() {
   toast("✅ Tutor updated & synced!");
 }
 
-async function toggleHideCurrentTutor() {
+function toggleHideCurrentTutor() {
   if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can hide tutors."); return; }
   const id = document.getElementById("tmId").value;
   const t = crmData.tutors.find(x => String(x.id) === String(id));
   if (!t) return;
-  t.hidden = !isHiddenRecord(t);
-  saveLocalCrm();
-  closeModal("tutorModal");
-  refreshCrmUI();
-  await postToBackend({ action: "updateTutor", data: t });
-  toast(t.hidden ? "🙈 Tutor hidden from staff directory" : "👁️ Tutor restored to active directory");
+  const willHide = !isHiddenRecord(t);
+  requestDirectorPin({
+    title: willHide ? "🙈 Confirm Hide Tutor" : "👁️ Confirm Unhide Tutor",
+    desc: willHide
+      ? `Hide tutor <b>${esc(t.name)}</b> (${esc(t.phone)}) from the staff directory? Enter your Director Security PIN to confirm.`
+      : `Restore tutor <b>${esc(t.name)}</b> (${esc(t.phone)}) back to the active directory? Enter your Director Security PIN to confirm.`,
+    confirmLabel: willHide ? "🔒 Verify & Hide Tutor" : "🔓 Verify & Unhide Tutor",
+    onVerified: async () => {
+      t.hidden = willHide;
+      saveLocalCrm();
+      closeModal("tutorModal");
+      refreshCrmUI();
+      await postToBackend({ action: "updateTutor", data: t });
+      toast(t.hidden ? "🙈 Tutor hidden from staff directory" : "👁️ Tutor restored to active directory");
+    }
+  });
 }
 
-async function deleteCurrentTutor() {
+function deleteCurrentTutor() {
   if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can delete tutors."); return; }
   const id = document.getElementById("tmId").value;
   const t = crmData.tutors.find(x => String(x.id) === String(id));
   if (!t) return;
-  if (!confirm(`Permanently DELETE tutor "${t.name}" (${t.phone})? This cannot be undone.`)) return;
-  crmData.tutors = crmData.tutors.filter(x => String(x.id) !== String(id));
-  saveLocalCrm();
-  closeModal("tutorModal");
-  refreshCrmUI();
-  await postToBackend({ action: "deleteTutor", id: t.id, deletedBy: currentUser.name });
-  toast("🗑️ Tutor permanently deleted!");
+  requestDirectorPin({
+    title: "🗑️ Permanent Delete Tutor",
+    desc: `Permanently DELETE tutor <b>${esc(t.name)}</b> (${esc(t.phone)})? <b>This cannot be undone.</b> Enter your Director Security PIN to authorize.`,
+    confirmLabel: "🗑️ Verify & Delete Permanently",
+    onVerified: async () => {
+      crmData.tutors = crmData.tutors.filter(x => String(x.id) !== String(id));
+      saveLocalCrm();
+      closeModal("tutorModal");
+      refreshCrmUI();
+      await postToBackend({ action: "deleteTutor", id: t.id, deletedBy: currentUser.name });
+      toast("🗑️ Tutor permanently deleted!");
+    }
+  });
 }
 
 function onLeadTutorChange() {
@@ -5666,10 +5953,170 @@ const populateLeadTutorOptions = populateLeadTutorDropdown;
 const renderLeadTutorOptions = populateLeadTutorDropdown;
 const filterLeadTutorDropdown = populateLeadTutorDropdown;
 
+function renderLeadModalHistory() {
+  const l = activeLeadModalData;
+  const listEl = document.getElementById("lmHistoryList");
+  const cntEl = document.getElementById("lmHistoryCount");
+  const dirBar = document.getElementById("lmHistoryDirectorBar");
+  if (!l || !listEl) return;
+
+  const isDir = currentUser?.role === "director";
+  if (dirBar) dirBar.style.display = isDir ? "flex" : "none";
+
+  const showHidden = isDir && !!document.getElementById("lmShowHiddenHistory")?.checked;
+  const hist = getVisibleHistoryForLead(l, showHidden);
+  if (cntEl) cntEl.textContent = String(hist.length);
+
+  if (!hist.length) {
+    listEl.innerHTML = `<div style="font-size:12px;color:var(--muted);padding:6px 2px;">No previous tutor/coordinator changes recorded yet.</div>`;
+    return;
+  }
+  listEl.innerHTML = hist.map(h => historyEntryHtml(l.id, h, isDir)).join("");
+}
+
+function openHistoryEditorModal(entryId, overrideLeadId) {
+  if (currentUser?.role !== "director") {
+    toast("⛔ Only Director Rahul Sir can customize history entries.");
+    return;
+  }
+  const leadId = overrideLeadId || document.getElementById("lmId")?.value || activeLeadModalData?.id;
+  const l = crmData.leads.find(x => String(x.id) === String(leadId));
+  if (!l) { toast("Lead record not found"); return; }
+
+  const hist = parseAssignmentHistory(l.assignmentHistory);
+  const existing = entryId ? hist.find(h => String(h.id) === String(entryId)) : null;
+
+  document.getElementById("heLeadId").value = l.id;
+  document.getElementById("heEntryId").value = existing ? existing.id : "";
+  document.getElementById("heTitle").textContent = existing ? "✏️ Edit Assignment History Entry" : "➕ Add Manual History Entry";
+  document.getElementById("heType").value = existing ? (existing.type || "Past Assignment") : "Manual History Record";
+  document.getElementById("heTutorName").value = existing ? (existing.tutorName || "") : "";
+  document.getElementById("heTutorPhone").value = existing ? (existing.tutorPhone || "") : "";
+  setSelectValueWithFallback("heCoordinator", existing ? (existing.coordinator || "Unassigned") : (l.assignedStaff || "Rahul Sir"));
+  document.getElementById("heAssignedDate").value = existing ? (existing.assignedDate || "") : "";
+  document.getElementById("heEndedDate").value = existing ? (existing.endedDate || "") : new Date().toISOString().slice(0, 10);
+  document.getElementById("heLeadStatus").value = existing ? (existing.leadStatus || "") : "";
+  document.getElementById("heDemoStatus").value = existing ? (existing.demoStatus || "") : "";
+  document.getElementById("heNote").value = existing ? (existing.note || "") : "";
+  document.getElementById("heHidden").checked = !!(existing && existing.hidden);
+
+  document.getElementById("historyEditModal").classList.add("open");
+}
+
+async function saveHistoryEntry() {
+  if (currentUser?.role !== "director") {
+    toast("⛔ Only Director Rahul Sir can edit history entries.");
+    return;
+  }
+  const leadId = document.getElementById("heLeadId").value;
+  const entryId = document.getElementById("heEntryId").value;
+  const l = crmData.leads.find(x => String(x.id) === String(leadId));
+  if (!l) return;
+
+  const hist = parseAssignmentHistory(l.assignmentHistory);
+  const payload = {
+    id: entryId || ("HIST-" + Date.now() + "-" + Math.floor(Math.random() * 1000)),
+    type: document.getElementById("heType").value.trim() || "Past Assignment",
+    tutorName: document.getElementById("heTutorName").value.trim(),
+    tutorPhone: document.getElementById("heTutorPhone").value.trim(),
+    coordinator: document.getElementById("heCoordinator").value || "Unassigned",
+    assignedDate: document.getElementById("heAssignedDate").value,
+    endedDate: document.getElementById("heEndedDate").value,
+    leadStatus: document.getElementById("heLeadStatus").value.trim(),
+    demoStatus: document.getElementById("heDemoStatus").value.trim(),
+    note: document.getElementById("heNote").value.trim(),
+    hidden: document.getElementById("heHidden").checked,
+    recordedBy: currentUser.name,
+    recordedAt: nowStampStr()
+  };
+
+  if (entryId) {
+    const idx = hist.findIndex(h => String(h.id) === String(entryId));
+    if (idx >= 0) hist[idx] = { ...hist[idx], ...payload };
+    else hist.unshift(payload);
+  } else {
+    hist.unshift(payload);
+  }
+
+  l.assignmentHistory = hist;
+  saveLocalCrm();
+  closeModal("historyEditModal");
+  if (activeLeadModalData && String(activeLeadModalData.id) === String(l.id)) {
+    activeLeadModalData = l;
+    renderLeadModalHistory();
+  }
+  refreshCrmUI();
+  await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
+  toast("✅ History entry saved!");
+}
+
+async function toggleHideHistoryEntry(leadId, entryId) {
+  if (currentUser?.role !== "director") {
+    toast("⛔ Only Director Rahul Sir can hide/unhide history entries.");
+    return;
+  }
+  const l = crmData.leads.find(x => String(x.id) === String(leadId));
+  if (!l) return;
+  const hist = parseAssignmentHistory(l.assignmentHistory);
+  const entry = hist.find(h => String(h.id) === String(entryId));
+  if (!entry) return;
+
+  const willHide = !entry.hidden;
+  requestDirectorPin({
+    title: willHide ? "🙈 Hide History Entry" : "👁️ Unhide History Entry",
+    desc: willHide
+      ? `Hide this history log (<b>${esc(entry.tutorName || entry.type || "Entry")}</b>) from coordinators? Enter Director Security PIN.`
+      : `Make this history log (<b>${esc(entry.tutorName || entry.type || "Entry")}</b>) visible to coordinators again? Enter Director Security PIN.`,
+    confirmLabel: willHide ? "🔒 Verify & Hide" : "🔓 Verify & Unhide",
+    onVerified: async () => {
+      entry.hidden = willHide;
+      l.assignmentHistory = hist;
+      saveLocalCrm();
+      if (activeLeadModalData && String(activeLeadModalData.id) === String(l.id)) {
+        activeLeadModalData = l;
+        renderLeadModalHistory();
+      }
+      refreshCrmUI();
+      await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
+      toast(willHide ? "🙈 History entry hidden from coordinators" : "👁️ History entry restored");
+    }
+  });
+}
+
+function deleteHistoryEntry(leadId, entryId) {
+  if (currentUser?.role !== "director") {
+    toast("⛔ Only Director Rahul Sir can delete history entries.");
+    return;
+  }
+  const l = crmData.leads.find(x => String(x.id) === String(leadId));
+  if (!l) return;
+  const hist = parseAssignmentHistory(l.assignmentHistory);
+  const entry = hist.find(h => String(h.id) === String(entryId));
+  if (!entry) return;
+
+  requestDirectorPin({
+    title: "🗑️ Delete History Entry",
+    desc: `Permanently delete history record <b>${esc(entry.tutorName || entry.type || "Past Assignment")}</b> from <b>${esc(l.name)}</b>? <b>This cannot be undone.</b> Enter Director Security PIN.`,
+    confirmLabel: "🗑️ Verify & Delete Entry",
+    onVerified: async () => {
+      l.assignmentHistory = hist.filter(h => String(h.id) !== String(entryId));
+      saveLocalCrm();
+      if (activeLeadModalData && String(activeLeadModalData.id) === String(l.id)) {
+        activeLeadModalData = l;
+        renderLeadModalHistory();
+      }
+      refreshCrmUI();
+      await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
+      toast("🗑️ History entry permanently deleted!");
+    }
+  });
+}
+
 function openLeadModal(id) {
   const l = crmData.leads.find(x => String(x.id) === String(id));
   if (!l) { toast("Lead record not found"); return; }
   ensureUpdatedCrmDom();
+  l.assignmentHistory = parseAssignmentHistory(l.assignmentHistory);
   activeLeadModalData = l;
   const isDir = currentUser.role === "director";
   document.getElementById("lmId").value = l.id;
@@ -5719,6 +6166,11 @@ function openLeadModal(id) {
   const verNoteEl = document.getElementById("lmTutorReportVerifyNote");
   if (verNoteEl) verNoteEl.value = l.tutorReportVerifyNote || "";
 
+  // Render Past Tutor & Coordinator Assignment History
+  const showHidChk = document.getElementById("lmShowHiddenHistory");
+  if (showHidChk) showHidChk.checked = false;
+  renderLeadModalHistory();
+
   document.getElementById("lmFlag").value = getNormalizedFlag(l);
   document.getElementById("lmFlagReason").value = l.flagReason || "";
   document.getElementById("lmNotes").value = l.notes || "";
@@ -5741,21 +6193,75 @@ async function saveLeadChanges() {
   const selOpt = tutSel.options[tutSel.selectedIndex];
   const today = new Date().toISOString().slice(0, 10);
 
+  // Snapshot previous tutor & coordinator state BEFORE updating so nothing is overwritten
+  const prevStaff = l.assignedStaff || "Unassigned";
+  const prevTutorLabel = l.assignedTutor || "";
   const prevTutorId = l.assignedTutorId || "";
-  const nextTutorLabel = tutSel.value;
-  const nextTutorId = selOpt?.dataset?.tid || "";
+  const prevTutorPhone = l.assignedTutorPhone || (resolveAssignedTutor(l)?.phone || "");
+  const prevAssignedDate = l.assignedDate || "";
+  const prevStatus = l.status || "New Lead";
+  const prevConfirmedDate = l.confirmedDate || "";
+  const prevDemoReport = l.tutorDemoReport || "";
+  const prevTuitionStatus = l.tutorTuitionStatus || "";
+  const prevFeeStatus = l.tutorFeeStatus || "";
+  const prevReportNote = l.tutorReportNote || "";
+  const prevVerifyNote = l.tutorReportVerifyNote || "";
 
-  l.assignedStaff = isDir
+  const nextStaff = isDir
     ? document.getElementById("lmStaff").value
     : (l.assignedStaff && l.assignedStaff !== "Unassigned" ? l.assignedStaff : currentUser.name);
+  const nextTutorLabel = tutSel.value;
+  const nextTutorId = selOpt?.dataset?.tid || "";
+  const nextTutorPhone = selOpt?.dataset?.phone || "";
+
+  const tutorChanged = !!prevTutorLabel && (
+    prevTutorLabel !== nextTutorLabel ||
+    (prevTutorId && nextTutorId && String(prevTutorId) !== String(nextTutorId))
+  );
+  const staffChanged = !!prevStaff && prevStaff !== "Unassigned" && prevStaff !== nextStaff;
+
+  // Auto-archive previous tutor and/or coordinator into assignmentHistory
+  l.assignmentHistory = parseAssignmentHistory(l.assignmentHistory);
+  if (tutorChanged || staffChanged) {
+    let eventType = "Past Assignment";
+    if (tutorChanged && staffChanged) eventType = "Tutor & Coordinator Changed";
+    else if (tutorChanged) eventType = nextTutorLabel ? "Tutor Reassigned" : "Tutor Unassigned";
+    else if (staffChanged) eventType = "Coordinator Transferred";
+
+    const combinedNote = [prevReportNote, prevVerifyNote].filter(Boolean).join(" | ");
+    l.assignmentHistory.unshift({
+      id: "HIST-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
+      type: eventType,
+      tutorName: prevTutorLabel,
+      tutorId: prevTutorId,
+      tutorPhone: prevTutorPhone,
+      coordinator: prevStaff,
+      newTutorName: nextTutorLabel,
+      newCoordinator: nextStaff,
+      assignedDate: prevAssignedDate || l.createdAt || "",
+      endedDate: today,
+      confirmedDate: prevConfirmedDate,
+      leadStatus: prevStatus,
+      demoStatus: prevDemoReport,
+      tuitionStatus: prevTuitionStatus,
+      feeStatus: prevFeeStatus,
+      note: combinedNote,
+      recordedBy: currentUser?.name || "Staff",
+      recordedAt: nowStampStr(),
+      hidden: false
+    });
+  }
+
+  l.assignedStaff = nextStaff;
   l.assignedTutor = nextTutorLabel;
   l.assignedTutorId = nextTutorId;
-  l.assignedTutorPhone = selOpt?.dataset?.phone || "";
+  l.assignedTutorPhone = nextTutorPhone;
   const assignDateEl = document.getElementById("lmAssignedDate");
   if (nextTutorLabel) {
-    l.assignedDate = (assignDateEl && assignDateEl.value) ? assignDateEl.value : (l.assignedDate || today);
-    if (prevTutorId && nextTutorId && prevTutorId !== nextTutorId && assignDateEl && !assignDateEl.value) {
+    if (tutorChanged && assignDateEl && assignDateEl.value === prevAssignedDate) {
       l.assignedDate = today;
+    } else {
+      l.assignedDate = (assignDateEl && assignDateEl.value) ? assignDateEl.value : (l.assignedDate || today);
     }
   } else {
     l.assignedDate = "";
@@ -5766,14 +6272,31 @@ async function saveLeadChanges() {
   l.monthlyFee = document.getElementById("lmMonthlyFee").value.trim();
   l.commissionStatus = normalizeCommStatus(document.getElementById("lmCommStatus").value);
 
-  // Save Tutor Report & Parent Verification details
-  l.tutorDemoReport = document.getElementById("lmTutorDemoReport")?.value || "";
-  l.tutorTuitionStatus = document.getElementById("lmTutorTuitionStatus")?.value || "";
-  l.tutorFeeStatus = document.getElementById("lmTutorFeeStatus")?.value || "";
-  l.tutorReportVerified = document.getElementById("lmTutorReportVerified")?.value || "Not Applicable";
-  l.tutorReportVerifyNote = document.getElementById("lmTutorReportVerifyNote")?.value.trim() || "";
-  if (l.tutorReportVerified === "Verified with Parent" || l.tutorReportVerified === "Disputed / Mismatch") {
-    l.tutorReportVerifiedBy = currentUser?.name || "Staff";
+  // Save Tutor Report & Parent Verification details (auto-clear old tutor's stale report when replaced cleanly)
+  const formDemo = document.getElementById("lmTutorDemoReport")?.value || "";
+  const formRun = document.getElementById("lmTutorTuitionStatus")?.value || "";
+  const formFee = document.getElementById("lmTutorFeeStatus")?.value || "";
+  const formVer = document.getElementById("lmTutorReportVerified")?.value || "Not Applicable";
+  const formVerNote = document.getElementById("lmTutorReportVerifyNote")?.value.trim() || "";
+
+  if (tutorChanged && formDemo === prevDemoReport && formRun === prevTuitionStatus && formFee === prevFeeStatus && formVerNote === prevVerifyNote) {
+    l.tutorDemoReport = "";
+    l.tutorTuitionStatus = "";
+    l.tutorFeeStatus = "";
+    l.tutorReportNote = "";
+    l.tutorReportUpdatedAt = "";
+    l.tutorReportVerified = "Not Applicable";
+    l.tutorReportVerifyNote = "";
+    l.tutorReportVerifiedBy = "";
+  } else {
+    l.tutorDemoReport = formDemo;
+    l.tutorTuitionStatus = formRun;
+    l.tutorFeeStatus = formFee;
+    l.tutorReportVerified = formVer;
+    l.tutorReportVerifyNote = formVerNote;
+    if (l.tutorReportVerified === "Verified with Parent" || l.tutorReportVerified === "Disputed / Mismatch") {
+      l.tutorReportVerifiedBy = currentUser?.name || "Staff";
+    }
   }
 
   l.flag = newFlag;
@@ -5784,72 +6307,118 @@ async function saveLeadChanges() {
   saveLocalCrm();
   closeModal("leadModal");
   refreshCrmUI();
-  await postToBackend({ action: "updateLead", data: l });
-  toast("✅ Tuition assignment & verification saved!");
+  await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
+  toast(tutorChanged || staffChanged
+    ? "✅ Updated! Previous record safely archived in History."
+    : "✅ Tuition assignment & verification saved!");
 }
 
-async function toggleHideCurrentLead() {
+function toggleHideCurrentLead() {
   if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can hide leads."); return; }
   const id = document.getElementById("lmId").value;
   const l = crmData.leads.find(x => String(x.id) === String(id));
   if (!l) return;
-  l.hidden = !isHiddenRecord(l);
-  saveLocalCrm();
-  closeModal("leadModal");
-  refreshCrmUI();
-  await postToBackend({ action: "updateLead", data: l });
-  toast(l.hidden ? "🙈 Parent lead hidden from staff" : "👁️ Parent lead restored to active list");
+  const willHide = !isHiddenRecord(l);
+  requestDirectorPin({
+    title: willHide ? "🙈 Confirm Hide Parent Lead" : "👁️ Confirm Unhide Parent Lead",
+    desc: willHide
+      ? `Hide parent lead <b>${esc(l.name)}</b> (${esc(l.phone)}) from staff view? Enter your Director Security PIN to confirm.`
+      : `Restore parent lead <b>${esc(l.name)}</b> (${esc(l.phone)}) back to active list? Enter your Director Security PIN to confirm.`,
+    confirmLabel: willHide ? "🔒 Verify & Hide Lead" : "🔓 Verify & Unhide Lead",
+    onVerified: async () => {
+      l.hidden = willHide;
+      saveLocalCrm();
+      closeModal("leadModal");
+      refreshCrmUI();
+      await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
+      toast(l.hidden ? "🙈 Parent lead hidden from staff" : "👁️ Parent lead restored to active list");
+    }
+  });
 }
 
-async function deleteCurrentLead() {
+function deleteCurrentLead() {
   if (currentUser?.role !== "director") { toast("Only Director Rahul Sir can delete leads."); return; }
   const id = document.getElementById("lmId").value;
   const l = crmData.leads.find(x => String(x.id) === String(id));
   if (!l) return;
-  if (!confirm(`Permanently DELETE parent lead "${l.name}" (${l.phone})? This cannot be undone.`)) return;
-  crmData.leads = crmData.leads.filter(x => String(x.id) !== String(id));
-  saveLocalCrm();
-  closeModal("leadModal");
-  refreshCrmUI();
-  await postToBackend({ action: "deleteLead", id: l.id, deletedBy: currentUser.name });
-  toast("🗑️ Parent lead permanently deleted!");
+  requestDirectorPin({
+    title: "🗑️ Permanent Delete Parent Lead",
+    desc: `Permanently DELETE parent lead <b>${esc(l.name)}</b> (${esc(l.phone)})? <b>This cannot be undone.</b> Enter your Director Security PIN to authorize.`,
+    confirmLabel: "🗑️ Verify & Delete Permanently",
+    onVerified: async () => {
+      crmData.leads = crmData.leads.filter(x => String(x.id) !== String(id));
+      saveLocalCrm();
+      closeModal("leadModal");
+      refreshCrmUI();
+      await postToBackend({ action: "deleteLead", id: l.id, deletedBy: currentUser.name });
+      toast("🗑️ Parent lead permanently deleted!");
+    }
+  });
 }
 
-async function quickUnhide(type, id) {
+function quickUnhide(type, id) {
   if (currentUser?.role !== "director") return;
   if (type === "tutor") {
     const t = crmData.tutors.find(x => String(x.id) === String(id));
     if (!t) return;
-    t.hidden = false;
-    saveLocalCrm(); refreshCrmUI();
-    await postToBackend({ action: "updateTutor", data: t });
-    toast("👁️ Tutor restored!");
+    requestDirectorPin({
+      title: "👁️ Confirm Unhide Tutor",
+      desc: `Restore hidden tutor <b>${esc(t.name)}</b> (${esc(t.phone)}) to the active directory? Enter your Director Security PIN.`,
+      confirmLabel: "🔓 Verify & Unhide",
+      onVerified: async () => {
+        t.hidden = false;
+        saveLocalCrm(); refreshCrmUI();
+        await postToBackend({ action: "updateTutor", data: t });
+        toast("👁️ Tutor restored!");
+      }
+    });
   } else {
     const l = crmData.leads.find(x => String(x.id) === String(id));
     if (!l) return;
-    l.hidden = false;
-    saveLocalCrm(); refreshCrmUI();
-    await postToBackend({ action: "updateLead", data: l });
-    toast("👁️ Parent lead restored!");
+    requestDirectorPin({
+      title: "👁️ Confirm Unhide Parent Lead",
+      desc: `Restore hidden parent lead <b>${esc(l.name)}</b> (${esc(l.phone)}) to active leads? Enter your Director Security PIN.`,
+      confirmLabel: "🔓 Verify & Unhide",
+      onVerified: async () => {
+        l.hidden = false;
+        saveLocalCrm(); refreshCrmUI();
+        await postToBackend({ action: "updateLead", data: prepareLeadPayload(l) });
+        toast("👁️ Parent lead restored!");
+      }
+    });
   }
 }
 
-async function quickDelete(type, id) {
+function quickDelete(type, id) {
   if (currentUser?.role !== "director") return;
   if (type === "tutor") {
     const t = crmData.tutors.find(x => String(x.id) === String(id));
-    if (!t || !confirm(`Permanently DELETE tutor "${t.name}"?`)) return;
-    crmData.tutors = crmData.tutors.filter(x => String(x.id) !== String(id));
-    saveLocalCrm(); refreshCrmUI();
-    await postToBackend({ action: "deleteTutor", id: t.id, deletedBy: currentUser.name });
-    toast("🗑️ Tutor permanently deleted!");
+    if (!t) return;
+    requestDirectorPin({
+      title: "🗑️ Permanent Delete Tutor",
+      desc: `Permanently DELETE tutor <b>${esc(t.name)}</b> (${esc(t.phone)})? <b>This cannot be undone.</b> Enter Director Security PIN.`,
+      confirmLabel: "🗑️ Verify & Delete Permanently",
+      onVerified: async () => {
+        crmData.tutors = crmData.tutors.filter(x => String(x.id) !== String(id));
+        saveLocalCrm(); refreshCrmUI();
+        await postToBackend({ action: "deleteTutor", id: t.id, deletedBy: currentUser.name });
+        toast("🗑️ Tutor permanently deleted!");
+      }
+    });
   } else {
     const l = crmData.leads.find(x => String(x.id) === String(id));
-    if (!l || !confirm(`Permanently DELETE parent lead "${l.name}"?`)) return;
-    crmData.leads = crmData.leads.filter(x => String(x.id) !== String(id));
-    saveLocalCrm(); refreshCrmUI();
-    await postToBackend({ action: "deleteLead", id: l.id, deletedBy: currentUser.name });
-    toast("🗑️ Parent lead permanently deleted!");
+    if (!l) return;
+    requestDirectorPin({
+      title: "🗑️ Permanent Delete Parent Lead",
+      desc: `Permanently DELETE parent lead <b>${esc(l.name)}</b> (${esc(l.phone)})? <b>This cannot be undone.</b> Enter Director Security PIN.`,
+      confirmLabel: "🗑️ Verify & Delete Permanently",
+      onVerified: async () => {
+        crmData.leads = crmData.leads.filter(x => String(x.id) !== String(id));
+        saveLocalCrm(); refreshCrmUI();
+        await postToBackend({ action: "deleteLead", id: l.id, deletedBy: currentUser.name });
+        toast("🗑️ Parent lead permanently deleted!");
+      }
+    });
   }
 }
 
@@ -5862,6 +6431,8 @@ function closeModal(id) {
 function populateDirectorSettings() {
   document.getElementById("cfgScriptUrl").value = getScriptUrl();
   document.getElementById("cfgSecret").value = getWebhookSecret();
+  const pinEl = document.getElementById("cfgActionPin");
+  if (pinEl) pinEl.value = getActionPin();
   const accs = getStaffAccounts();
   document.getElementById("staffPassEditor").innerHTML = Object.values(accs).map(a => `
     <div class="field">
@@ -5880,6 +6451,15 @@ function saveStaffPasswords() {
   Object.keys(accs).forEach(k => { accs[k].pass = document.getElementById("pass-" + k).value.trim() || accs[k].pass; });
   localStorage.setItem("alenn_staff_accounts", JSON.stringify(accs));
   toast("🔑 Staff passwords updated!");
+}
+function saveActionPin() {
+  const nextPin = (document.getElementById("cfgActionPin")?.value || "").trim();
+  if (nextPin.length < 4) {
+    toast("⚠ Please enter at least 4 characters for the Director Security PIN.");
+    return;
+  }
+  localStorage.setItem("alenn_action_pin", nextPin);
+  toast("🔒 Director Security PIN updated!");
 }
 function exportCsv() {
   const headers = ["ID","Name","Phone","Email","Gender","Area","Subjects","Classes","FeesRange","PreferredTiming","Payment","PaidDate","DocStatus","DirectorVerified","ValidUntil","Trusted","UnconfirmedDemos","AssignedStaff","Status","Flag","FlagReason","FlaggedBy","Hidden"];
@@ -5904,4 +6484,3 @@ if (window.location.hash) {
 </script>
 </body>
 </html>
-
