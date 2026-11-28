@@ -4,29 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Varanasi Home Tuition Guide, All Areas & Subject Tutors | Alenn Tuition Bureau</title>
-  <meta name="description" content="Complete Varanasi home tuition blog & area directory by Alenn Tuition Bureau. Find verified 1-on-1 tutors across 80+ Varanasi localities (including Susuwahi, Ramnagar, Sarnath, Harahua, Rohaniya, Chiraigaon) for Classes 1-12 (CBSE, ICSE, ISC, UP Board), Physics, Chemistry, Maths, Biology, Psychology, History, French, NEET UG, IIT-JEE, UPSC & 1D/2D exams.">
+  <title>Varanasi Home Tuition Guide, All Areas &amp; Subject Tutors | Alenn Tuition Bureau</title>
+  <meta name="description" content="Complete Varanasi home tuition blog &amp; area directory by Alenn Tuition Bureau. Find verified 1-on-1 tutors across 80+ Varanasi localities (including Susuwahi, Ramnagar, Sarnath, Harahua, Rohaniya, Chiraigaon) for Classes 1-12 (CBSE, ICSE, ISC, UP Board), Physics, Chemistry, Maths, Biology, Psychology, History, French, NEET UG, IIT-JEE, UPSC &amp; 1D/2D exams with marking schemes.">
   <meta name="keywords" content="Home Tuition in Varanasi, Alenn Tuition Bureau, Varanasi Tutor Directory, Physics Tutor Varanasi, Chemistry Maths Biology Tutor Varanasi, Psychology History Tutor Varanasi, French Home Tutor Varanasi, NEET UG Home Tutor Varanasi, IIT JEE Tutor Varanasi, UPSC Mentor Varanasi, 1D 2D SSC Banking Tutor Varanasi, Home Tuition Susuwahi Ramnagar Sarnath Harahua Rohaniya Chiraigaon">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://mytuitiontutor.com/varanasi-tuition-blog-hub.html">
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Varanasi Complete Area, Subject & Exam Tuition Hub | Alenn Tuition Bureau">
-  <meta property="og:description" content="Verified home tutors across all 80+ Varanasi areas for CBSE, ICSE, ISC, UP Board (Class 1-12), French, Psychology, History, STEM, NEET UG, IIT-JEE, UPSC & 1D/2D exams. Book a free demo.">
+  <meta property="og:title" content="Varanasi Complete Area, Subject &amp; Exam Tuition Hub | Alenn Tuition Bureau">
+  <meta property="og:description" content="Verified home tutors across all 80+ Varanasi areas for CBSE, ICSE, ISC, UP Board (Class 1-12), French, Psychology, History, STEM, NEET UG, IIT-JEE, UPSC &amp; 1D/2D exams. Book a free demo.">
   <meta property="og:url" content="https://mytuitiontutor.com/varanasi-tuition-blog-hub.html">
   <meta property="og:site_name" content="Alenn Tuition Bureau">
   <meta property="og:locale" content="en_IN">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Alenn Tuition Bureau — Varanasi All Areas & Subject Tutor Guide">
-  <meta name="twitter:description" content="Find verified home tutors in every Varanasi locality including remaining outer areas, for all boards, French, Humanities, Science, NEET, JEE, UPSC & 1D/2D exams.">
+  <meta name="twitter:title" content="Alenn Tuition Bureau — Varanasi All Areas &amp; Subject Tutor Guide">
+  <meta name="twitter:description" content="Find verified home tutors in every Varanasi locality including outer areas, for all boards, French, Humanities, Science, NEET, JEE, UPSC &amp; 1D/2D exams.">
 
-  <!-- Fonts & CDN Libraries (Exact Query-Free URLs) -->
+  <!-- Fonts & Tailwind CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 
   <!-- Comprehensive Structured Data (JSON-LD @graph) for Google, AI Search & Siri -->
   <script type="application/ld+json">
@@ -274,12 +273,19 @@
       font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
     }
     .tab-active {
-      background-color: #1e3a8a;
-      color: #ffffff;
-      border-color: #1e3a8a;
+      background-color: #1e3a8a !important;
+      color: #ffffff !important;
+      border-color: #1e3a8a !important;
+      box-shadow: 0 4px 12px -2px rgba(30, 58, 138, 0.28);
+    }
+    .exam-tab-active {
+      background-color: #fbbf24 !important;
+      color: #0f172a !important;
+      border-color: #fbbf24 !important;
+      box-shadow: 0 4px 14px -2px rgba(251, 191, 36, 0.35);
     }
     .glass-nav {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
     }
     .modal-scroll::-webkit-scrollbar {
@@ -288,6 +294,13 @@
     .modal-scroll::-webkit-scrollbar-thumb {
       background-color: #cbd5e1;
       border-radius: 9999px;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .panel-animate {
+      animation: fadeSlideIn 0.22s ease-out;
     }
   </style>
 </head>
@@ -307,7 +320,7 @@
         </a>
 
         <!-- Desktop Nav Links -->
-        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600" aria-label="Main Navigation">
+        <nav class="hidden xl:flex items-center gap-4 text-xs font-semibold text-slate-600 whitespace-nowrap" aria-label="Main Navigation">
           <a href="#areas" class="hover:text-indigo-800 transition-colors" data-i18n="navAreas">Varanasi Areas</a>
           <a href="#subjects" class="hover:text-indigo-800 transition-colors" data-i18n="navSubjects">Subjects &amp; Tutors</a>
           <a href="#boards" class="hover:text-indigo-800 transition-colors" data-i18n="navBoards">Classes &amp; Boards</a>
@@ -318,25 +331,29 @@
 
         <!-- Actions -->
         <div class="flex items-center gap-2">
-          <button id="langToggleBtn" type="button" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors">
-            हिंदी / EN
+          <button id="langToggleBtn" type="button" class="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer whitespace-nowrap">
+            हिंदी में देखें
           </button>
-          <a href="https://mytuitiontutor.com/" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-indigo-50 text-xs font-semibold text-indigo-800 hover:bg-indigo-100 transition-colors">
-            <i data-lucide="home" class="w-3.5 h-3.5"></i>
+          <button id="parentPortalBtn" type="button" class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-emerald-200 bg-emerald-50 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors cursor-pointer whitespace-nowrap">
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span data-i18n="parentPortal">Parent Portal</span>
+          </button>
+          <a href="https://mytuitiontutor.com/" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-indigo-200 bg-indigo-50 text-xs font-semibold text-indigo-800 hover:bg-indigo-100 transition-colors whitespace-nowrap">
+            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span data-i18n="mainSite">Main Site</span>
           </a>
-          <button id="headerDemoBtn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition-colors">
-            <i data-lucide="phone-call" class="w-4 h-4"></i>
+          <button id="headerDemoBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer whitespace-nowrap">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span data-i18n="bookDemo">Free Demo</span>
           </button>
-          <button id="mobileMenuBtn" type="button" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Toggle Menu">
-            <i data-lucide="menu" class="w-5 h-5"></i>
+          <button id="mobileMenuBtn" type="button" class="xl:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 cursor-pointer" aria-label="Toggle Menu">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
           </button>
         </div>
       </div>
 
       <!-- Mobile Dropdown Menu -->
-      <div id="mobileMenu" class="hidden lg:hidden pb-4 pt-2 border-t border-slate-100">
+      <div id="mobileMenu" class="hidden xl:hidden pb-4 pt-2 border-t border-slate-100">
         <div class="grid grid-cols-2 gap-2 text-sm font-medium text-slate-700">
           <a href="#areas" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-slate-100" data-i18n="navAreas">Varanasi Areas</a>
           <a href="#subjects" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-slate-100" data-i18n="navSubjects">Subjects &amp; Tutors</a>
@@ -344,6 +361,8 @@
           <a href="#exams" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-slate-100" data-i18n="navExams">Competitive Exams</a>
           <a href="#blogs" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-slate-100" data-i18n="navBlogs">Blogs</a>
           <a href="#faq" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-slate-100" data-i18n="navFaq">FAQ</a>
+          <button id="mobileParentPortalBtn" type="button" class="mobile-nav-link text-left px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-semibold cursor-pointer" data-i18n="parentPortal">Parent Portal</button>
+          <a href="https://mytuitiontutor.com/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link px-3 py-2 rounded-lg bg-indigo-50 text-indigo-800 font-semibold" data-i18n="mainSite">Main Site</a>
         </div>
       </div>
     </div>
@@ -363,7 +382,7 @@
         <div class="grid lg:grid-cols-12 gap-10 items-center">
           <div class="lg:col-span-7">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-300/30 text-amber-200 text-xs font-semibold mb-4">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
               <span data-i18n="heroBadge">Complete Varanasi Coverage • AI &amp; Voice Search Ready</span>
             </div>
             <h1 class="speakable-headline text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5" data-i18n="heroTitle">
@@ -377,12 +396,20 @@
             <div class="bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20 max-w-xl">
               <div class="flex flex-col sm:flex-row gap-2">
                 <div class="relative flex-1">
-                  <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                  <input id="heroSearchInput" type="text" placeholder="Search Varanasi area, PIN (e.g. 221011, Ramnagar, French)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                  <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <input id="heroSearchInput" type="text" placeholder="Search area, PIN, subject or exam (e.g. Susuwahi, 221011, French, NEET)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400">
                 </div>
-                <button id="heroSearchBtn" type="button" class="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm transition-colors shrink-0">
+                <button id="heroSearchBtn" type="button" class="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm transition-colors shrink-0 cursor-pointer">
                   <span data-i18n="findTutor">Find Tutor</span>
                 </button>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 mt-2 px-1 text-[11px] text-indigo-200">
+                <span>Quick try:</span>
+                <button type="button" data-quick-search="Susuwahi" class="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer">Susuwahi</button>
+                <button type="button" data-quick-search="Ramnagar" class="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer">Ramnagar</button>
+                <button type="button" data-quick-search="French" class="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer">French</button>
+                <button type="button" data-quick-search="NEET" class="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer">NEET UG</button>
+                <button type="button" data-quick-search="UPSC" class="px-2 py-0.5 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer">UPSC</button>
               </div>
             </div>
 
@@ -420,14 +447,14 @@
               </p>
               <div class="space-y-3 text-sm mb-6">
                 <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
-                  <i data-lucide="map-pin" class="w-4 h-4 text-indigo-700 mt-0.5 shrink-0"></i>
+                  <svg class="w-4 h-4 text-indigo-700 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                   <div>
                     <div class="font-semibold text-slate-800">Alenn Tuition Bureau Office</div>
                     <div class="text-xs text-slate-600">Nirala Nagar, Shivpurawa, Mahmoorganj, Varanasi 221010</div>
                   </div>
                 </div>
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
-                  <i data-lucide="phone" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   <div>
                     <div class="font-semibold text-slate-800">+91 99196 66650</div>
                     <div class="text-xs text-slate-600">Daily 7:00 AM – 9:00 PM (Call &amp; WhatsApp)</div>
@@ -435,7 +462,7 @@
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-3">
-                <button id="heroCardDemoBtn" type="button" class="w-full py-2.5 px-4 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white font-semibold text-sm transition-colors">
+                <button id="heroCardDemoBtn" type="button" class="w-full py-2.5 px-4 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white font-semibold text-sm transition-colors cursor-pointer">
                   <span data-i18n="requestDemo">Book Free Demo</span>
                 </button>
                 <a href="tel:+919919666650" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm text-center transition-colors">
@@ -450,39 +477,77 @@
 
     <!-- SECTION 1: Varanasi Complete & Remaining Areas Hub -->
     <section id="areas" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-indigo-700" data-i18n="areasEyebrow">Complete Local SEO Directory</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1" data-i18n="areasHeading">Varanasi Remaining &amp; Complete Areas Directory</h2>
-          <p class="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl" data-i18n="areasSub">
-            Explore dedicated home tuition guides for newly covered outer colonies, ring-road suburbs, and every central Varanasi neighbourhood with PIN codes.
-          </p>
+      <div class="mb-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-indigo-700" data-i18n="areasEyebrow">Complete Local SEO Directory</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1" data-i18n="areasHeading">Find Home Tutors by Varanasi Area</h2>
+        <p class="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl" data-i18n="areasSub">
+          Select your exact locality below to view ONLY your area&apos;s tutor details (hiding all others), or filter by simple city zones.
+        </p>
+      </div>
+
+      <!-- User-Friendly Area Selector Box (Dropdown + Live Search) -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm mb-6">
+        <div class="grid md:grid-cols-12 gap-3 items-end">
+          <div class="md:col-span-5">
+            <label for="areaQuickSelect" class="block text-xs font-bold text-slate-700 mb-1.5" data-i18n="selectAreaLabel">1. Select Your Exact Area (Shows Only Selected Area)</label>
+            <select id="areaQuickSelect" class="w-full px-3.5 py-2.5 rounded-xl border border-indigo-200 bg-indigo-50/40 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer">
+              <option value="">-- All Varanasi Areas (Show Full List) --</option>
+              <option value="__other__">✏️ Other Varanasi Area (Type Manually)</option>
+            </select>
+          </div>
+          <div class="md:col-span-5">
+            <label for="areaFilterInput" class="block text-xs font-bold text-slate-700 mb-1.5" data-i18n="searchAreaLabel">2. Or Search by Colony Name / PIN Code</label>
+            <div class="relative">
+              <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input id="areaFilterInput" type="text" placeholder="Type colony or PIN (e.g. Susuwahi, Sigra, 221010)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+            </div>
+          </div>
+          <div class="md:col-span-2">
+            <button id="resetAreaFilterBtn" type="button" class="w-full py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-bold transition-colors cursor-pointer">
+              Show All (<span id="resetCountAll">52</span>)
+            </button>
+          </div>
         </div>
-        <div class="relative w-full md:w-80">
-          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-          <input id="areaFilterInput" type="text" placeholder="Filter area or PIN (e.g. Susuwahi, 221008)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+
+        <!-- Simple, Clear Zone Filter Pills -->
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <div class="text-xs font-semibold text-slate-500 mb-2" data-i18n="zoneHelperText">Or pick a Varanasi Zone (click any zone to hide others):</div>
+          <div id="zoneFilterBar" class="flex flex-wrap gap-2">
+            <button type="button" data-zone="all" class="zone-pill tab-active px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 transition-colors cursor-pointer">All Areas (<span id="countAll">52</span>)</button>
+            <button type="button" data-zone="remaining" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-amber-400 bg-amber-50 text-amber-900 hover:bg-amber-100 transition-colors cursor-pointer">Outer &amp; New Areas (<span id="countRemaining">30</span>)</button>
+            <button type="button" data-zone="south" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">BHU &amp; South (<span id="countSouth">15</span>)</button>
+            <button type="button" data-zone="central" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Sigra &amp; Central (<span id="countCentral">10</span>)</button>
+            <button type="button" data-zone="north" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Cantt &amp; North (<span id="countNorth">6</span>)</button>
+            <button type="button" data-zone="east" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Sarnath &amp; East (<span id="countEast">7</span>)</button>
+            <button type="button" data-zone="west" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">BLW &amp; West (<span id="countWest">7</span>)</button>
+            <button type="button" data-zone="ramnagar" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Ramnagar &amp; Ring Road (<span id="countRamnagar">7</span>)</button>
+          </div>
         </div>
       </div>
 
-      <!-- Zone Filter Pills -->
-      <div id="zoneFilterBar" class="flex flex-wrap gap-2 mb-6">
-        <button type="button" data-zone="all" class="zone-pill tab-active px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 transition-colors">All Areas (<span id="countAll">0</span>)</button>
-        <button type="button" data-zone="remaining" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-amber-400 bg-amber-50 text-amber-900 hover:bg-amber-100 transition-colors">★ Remaining &amp; Outer Areas (<span id="countRemaining">0</span>)</button>
-        <button type="button" data-zone="south" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">South &amp; BHU Belt</button>
-        <button type="button" data-zone="central" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Central &amp; Mahmoorganj</button>
-        <button type="button" data-zone="north" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">North, Cantt &amp; Shivpur</button>
-        <button type="button" data-zone="east" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">East, Sarnath &amp; Paharia</button>
-        <button type="button" data-zone="west" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">West, BLW, Lohta &amp; Rohaniya</button>
-        <button type="button" data-zone="ramnagar" class="zone-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Ramnagar &amp; Ring Road</button>
+      <!-- Active Filter Banner -->
+      <div id="areaFilterStatus" class="hidden mb-5 flex flex-wrap items-center justify-between gap-3 px-4 py-3 rounded-xl bg-indigo-50 border border-indigo-200 text-sm text-indigo-950">
+        <div id="areaFilterStatusText" class="font-semibold"></div>
+        <button id="clearAreaBannerBtn" type="button" class="px-3 py-1 rounded-lg bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold transition-colors cursor-pointer">
+          ← Show All Areas
+        </button>
       </div>
+
+      <!-- Focused Single-Area Spotlight Container (Shows ONLY selected area) -->
+      <div id="selectedAreaSpotlight" class="hidden mb-6"></div>
 
       <!-- Area Cards Grid -->
       <div id="areasGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
       <div id="areasEmptyState" class="hidden text-center py-12 bg-white rounded-2xl border border-slate-200">
         <p class="text-slate-600 font-medium mb-3">No matching Varanasi area found in this filter.</p>
-        <button id="customAreaRequestBtn" type="button" class="px-4 py-2 rounded-xl bg-indigo-900 text-white text-sm font-semibold hover:bg-indigo-800">
-          Request Tutor for Any Custom Varanasi Area
-        </button>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button id="customAreaRequestBtn" type="button" class="px-4 py-2 rounded-xl bg-indigo-900 text-white text-sm font-semibold hover:bg-indigo-800 cursor-pointer">
+            Request Tutor for Any Custom Varanasi Area
+          </button>
+          <button id="emptyResetBtn" type="button" class="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 text-sm font-semibold hover:bg-slate-100 cursor-pointer">
+            Reset &amp; Show All Areas
+          </button>
+        </div>
       </div>
     </section>
 
@@ -498,11 +563,11 @@
             </p>
           </div>
           <div id="subjectFilterBar" class="flex flex-wrap gap-2">
-            <button type="button" data-cat="all" class="subj-pill tab-active px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 transition-colors">All Subjects</button>
-            <button type="button" data-cat="science" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Science &amp; STEM</button>
-            <button type="button" data-cat="humanities" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Humanities (Psych/Hist)</button>
-            <button type="button" data-cat="commerce" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Commerce</button>
-            <button type="button" data-cat="languages" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">French &amp; Languages</button>
+            <button type="button" data-cat="all" class="subj-pill tab-active px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 transition-colors cursor-pointer">All Subjects</button>
+            <button type="button" data-cat="science" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Science &amp; STEM</button>
+            <button type="button" data-cat="humanities" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Humanities (Psych/Hist)</button>
+            <button type="button" data-cat="commerce" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">Commerce</button>
+            <button type="button" data-cat="languages" class="subj-pill px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">French &amp; Languages</button>
           </div>
         </div>
 
@@ -510,31 +575,31 @@
       </div>
     </section>
 
-    <!-- SECTION 3: Classes & Boards Curriculum Hub -->
+    <!-- SECTION 3: Classes & Boards Curriculum + Marking Scheme Hub -->
     <section id="boards" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-8">
-        <span class="text-xs font-bold uppercase tracking-wider text-indigo-700" data-i18n="boardsEyebrow">School Curriculum Mastery</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-indigo-700" data-i18n="boardsEyebrow">School Curriculum &amp; Marking Scheme</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1" data-i18n="boardsHeading">Classes 1–12 &amp; All Boards (CBSE, ICSE, ISC, UP Board)</h2>
         <p class="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl" data-i18n="boardsSub">
-          Structured learning roadmaps tailored to every grade level and school board in Varanasi — including 3rd-language French in Classes 6–8 and board-pattern testing in Classes 9–12.
+          Click any class level below to view full syllabus focus, board marking scheme, assessment breakdown, and instant demo booking.
         </p>
       </div>
 
       <!-- Grade Tabs -->
-      <div class="flex flex-wrap gap-2 mb-6" role="tablist">
-        <button type="button" data-grade="primary" class="grade-tab tab-active px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 transition-colors">Primary (Classes 1–5)</button>
-        <button type="button" data-grade="middle" class="grade-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Middle School (Classes 6–8 + French)</button>
-        <button type="button" data-grade="boards910" class="grade-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Secondary Boards (Classes 9–10)</button>
-        <button type="button" data-grade="boards1112" class="grade-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors">Senior Secondary (Classes 11–12)</button>
+      <div id="gradeTabBar" class="flex flex-wrap gap-2.5 mb-6" role="tablist">
+        <button type="button" data-grade="primary" class="grade-tab tab-active px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-300 transition-all cursor-pointer">Primary (Classes 1–5)</button>
+        <button type="button" data-grade="middle" class="grade-tab px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-all cursor-pointer">Middle School (Classes 6–8 + French)</button>
+        <button type="button" data-grade="boards910" class="grade-tab px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-all cursor-pointer">Secondary Boards (Classes 9–10)</button>
+        <button type="button" data-grade="boards1112" class="grade-tab px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-all cursor-pointer">Senior Secondary (Classes 11–12)</button>
       </div>
 
       <!-- Active Grade Detail Panel -->
       <div id="gradeDetailPanel" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm mb-8"></div>
 
-      <!-- Board Comparison Matrix -->
+      <!-- Board Comparison & Marking Scheme Matrix -->
       <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-        <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-          <h3 class="font-bold text-base">Board-Wise Tutoring Approach in Varanasi</h3>
+        <div class="px-6 py-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-2">
+          <h3 class="font-bold text-base">Board-Wise Marking Scheme &amp; Tutoring Approach (Varanasi)</h3>
           <span class="text-xs text-amber-300 font-medium">English &amp; Hindi Medium</span>
         </div>
         <div class="overflow-x-auto">
@@ -542,34 +607,34 @@
             <thead class="bg-slate-50 text-slate-700 border-b border-slate-200">
               <tr>
                 <th class="px-5 py-3.5 font-bold">Board</th>
+                <th class="px-5 py-3.5 font-bold">Official Marking Scheme</th>
                 <th class="px-5 py-3.5 font-bold">Core Textbook &amp; Pattern</th>
-                <th class="px-5 py-3.5 font-bold">Key Focus Areas</th>
                 <th class="px-5 py-3.5 font-bold">Languages &amp; Electives</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
               <tr>
                 <td class="px-5 py-3.5 font-bold text-indigo-900">CBSE</td>
-                <td class="px-5 py-3.5">NCERT + Exemplar, Competency &amp; Case-Study MCQs</td>
-                <td class="px-5 py-3.5">Concept clarity aligned with NEET/JEE &amp; CUET</td>
+                <td class="px-5 py-3.5"><strong>80 Theory + 20 Internal</strong> (70+30 Practical for 11–12 Sci/Psych); 50% Competency/Case-Study Qs</td>
+                <td class="px-5 py-3.5">NCERT + Exemplar, Step-Marking &amp; Competency MCQs</td>
                 <td class="px-5 py-3.5">English, Hindi, French, Sanskrit, Psychology, CS</td>
               </tr>
               <tr class="bg-slate-50/50">
                 <td class="px-5 py-3.5 font-bold text-indigo-900">ICSE (Class 1–10)</td>
-                <td class="px-5 py-3.5">Selina, ML Aggarwal, Detailed Descriptive Papers</td>
-                <td class="px-5 py-3.5">Separate Physics/Chem/Bio from Class 6, Grammar depth</td>
-                <td class="px-5 py-3.5">English Literature/Lang, French, Computer Applications</td>
+                <td class="px-5 py-3.5"><strong>80 External + 20 Internal Project</strong> (Separate Physics, Chem, Bio papers)</td>
+                <td class="px-5 py-3.5">Selina, ML Aggarwal, Detailed Descriptive Answers</td>
+                <td class="px-5 py-3.5">English Lit/Lang, French, Computer Applications (Java)</td>
               </tr>
               <tr>
                 <td class="px-5 py-3.5 font-bold text-indigo-900">ISC (Class 11–12)</td>
+                <td class="px-5 py-3.5"><strong>70 Theory + 30 Practical</strong> (Sci/Psych) or <strong>80 + 20 Project</strong> (Comm/Arts)</td>
                 <td class="px-5 py-3.5">Nootan, OP Malhotra, TS Grewal, Analytical Essays</td>
-                <td class="px-5 py-3.5">High-weightage numericals, Commerce &amp; Humanities depth</td>
                 <td class="px-5 py-3.5">Psychology, History, Economics, Accountancy, French</td>
               </tr>
               <tr class="bg-slate-50/50">
                 <td class="px-5 py-3.5 font-bold text-indigo-900">UP Board</td>
-                <td class="px-5 py-3.5">UPMSP NCERT Pattern (English &amp; Hindi Medium)</td>
-                <td class="px-5 py-3.5">Step-marking answer presentation, Model Papers, PYQs</td>
+                <td class="px-5 py-3.5"><strong>70 Theory + 30 Internal/Practical</strong> (Class 10 has 20 OMR MCQs + 50 Descriptive)</td>
+                <td class="px-5 py-3.5">UPMSP NCERT Pattern, Step-Marking &amp; Model Papers</td>
                 <td class="px-5 py-3.5">Hindi, English, Sanskrit, Maths, Science, Arts &amp; Commerce</td>
               </tr>
             </tbody>
@@ -578,25 +643,25 @@
       </div>
     </section>
 
-    <!-- SECTION 4: Competitive Exams Preparation -->
+    <!-- SECTION 4: Competitive Exams Preparation & Marking Schemes -->
     <section id="exams" class="py-16 bg-slate-900 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
-          <span class="text-xs font-bold uppercase tracking-wider text-amber-300" data-i18n="examsEyebrow">Entrance &amp; Government Exams</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-300" data-i18n="examsEyebrow">Entrance &amp; Government Exams • Marking Scheme Included</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold mt-1" data-i18n="examsHeading">NEET UG, IIT-JEE, UPSC &amp; 1D/2D Competitive Exams</h2>
           <p class="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl" data-i18n="examsSub">
-            Skip crowded coaching batches. Get 1-on-1 personal exam mentorship at home in Varanasi with daily doubt resolution, speed drills, and full mock paper analysis.
+            Click any exam category below to open its complete marking scheme, negative marking rules, preparation pillars, and 1-on-1 home mentor plan.
           </p>
         </div>
 
-        <div class="flex flex-wrap gap-2 mb-6">
-          <button type="button" data-exam="neet" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-amber-400 bg-amber-400 text-slate-950 transition-colors">NEET UG (Medical)</button>
-          <button type="button" data-exam="jee" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-colors">IIT-JEE (Mains &amp; Advanced)</button>
-          <button type="button" data-exam="upsc" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-colors">UPSC CSE / IAS &amp; UPPSC</button>
-          <button type="button" data-exam="oneday" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-colors">1D / 2D Exams (SSC, Bank, CUET, NDA)</button>
+        <div id="examTabBar" class="flex flex-wrap gap-2.5 mb-6" role="tablist">
+          <button type="button" data-exam="neet" class="exam-tab exam-tab-active px-4 py-2.5 rounded-xl text-sm font-bold border border-amber-400 transition-all cursor-pointer">NEET UG (Medical)</button>
+          <button type="button" data-exam="jee" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-all cursor-pointer">IIT-JEE (Mains &amp; Advanced)</button>
+          <button type="button" data-exam="upsc" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-all cursor-pointer">UPSC CSE / IAS &amp; UPPSC</button>
+          <button type="button" data-exam="oneday" class="exam-tab px-4 py-2.5 rounded-xl text-sm font-bold border border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-all cursor-pointer">1D / 2D Exams (SSC, Bank, CUET, NDA)</button>
         </div>
 
-        <div id="examDetailPanel" class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 sm:p-8"></div>
+        <div id="examDetailPanel" class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 sm:p-8"></div>
       </div>
     </section>
 
@@ -606,7 +671,7 @@
         <span class="text-xs font-bold uppercase tracking-wider text-indigo-700" data-i18n="blogsEyebrow">In-Depth Local Guides</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1" data-i18n="blogsHeading">Varanasi Home Tuition Blogs &amp; Parent Guides</h2>
         <p class="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl" data-i18n="blogsSub">
-          Click any article to read the complete guide on choosing tutors in remaining Varanasi localities, board exam strategies, French learning, and competitive exam planning.
+          Click any article to read the complete guide on choosing tutors in Varanasi localities, board exam strategies, French learning, and competitive exam planning.
         </p>
       </div>
 
@@ -648,108 +713,111 @@
           </ul>
         </div>
         <div>
-          <h3 class="text-white font-bold text-sm mb-3">Quick Section Links</h3>
-          <ul class="grid grid-cols-2 gap-2 text-sm text-slate-400">
-            <li><a href="#areas" class="hover:text-white">All Varanasi Areas</a></li>
-            <li><a href="#subjects" class="hover:text-white">Subject Tutors</a></li>
-            <li><a href="#boards" class="hover:text-white">Classes 1–12 Boards</a></li>
-            <li><a href="#exams" class="hover:text-white">NEET / JEE / UPSC</a></li>
-            <li><a href="#blogs" class="hover:text-white">Tuition Blogs</a></li>
-            <li><a href="#faq" class="hover:text-white">FAQs</a></li>
+          <h3 class="text-white font-bold text-sm mb-3">Quick Links</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li><a href="#areas" class="hover:text-white">Varanasi Areas Directory</a></li>
+            <li><a href="#subjects" class="hover:text-white">Subject-Wise Verified Tutors</a></li>
+            <li><a href="#boards" class="hover:text-white">Classes 1–12 &amp; Marking Schemes</a></li>
+            <li><a href="#exams" class="hover:text-white">NEET, IIT-JEE, UPSC &amp; 1D/2D</a></li>
+            <li><button id="footerParentPortalBtn" type="button" class="text-emerald-400 hover:text-emerald-300 cursor-pointer">Parent Portal (Track Demo Status)</button></li>
+            <li><button id="footerDemoBtn" type="button" class="text-amber-300 hover:text-amber-200 cursor-pointer">Book Free Home Demo</button></li>
           </ul>
         </div>
       </div>
-      <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
         <span>© 2026 Alenn Tuition Bureau, Varanasi. All rights reserved.</span>
-        <span>Structured with EducationalOrganization, LocalBusiness, ProfessionalService, FAQPage &amp; Speakable Schema.</span>
+        <span>Partner Wing: G.S. Commerce Study Circle (Accountancy, Economics &amp; Business Studies)</span>
       </div>
     </div>
   </footer>
 
-  <!-- Blog / Area Guide Reader Modal -->
-  <div id="readerModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <!-- Blog / Area Reader Modal -->
+  <div id="readerModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true">
     <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between gap-4 bg-slate-50">
         <div>
-          <span id="readerModalBadge" class="inline-block px-2.5 py-0.5 rounded-md bg-indigo-100 text-indigo-800 text-xs font-bold mb-1">Guide</span>
-          <h3 id="readerModalTitle" class="text-lg font-extrabold text-slate-900">Title</h3>
+          <span id="readerModalBadge" class="text-xs font-bold uppercase tracking-wider text-indigo-700"></span>
+          <h3 id="readerModalTitle" class="text-lg font-extrabold text-slate-900 mt-0.5"></h3>
         </div>
-        <button id="closeReaderModalBtn" type="button" class="p-2 rounded-lg text-slate-500 hover:bg-slate-200" aria-label="Close">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button id="closeReaderModalBtn" type="button" class="p-2 rounded-lg text-slate-500 hover:bg-slate-200 cursor-pointer" aria-label="Close">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
-      <div id="readerModalBody" class="p-6 overflow-y-auto modal-scroll space-y-4 text-sm text-slate-700 leading-relaxed"></div>
+      <div id="readerModalBody" class="p-6 overflow-y-auto modal-scroll text-sm sm:text-base text-slate-700 leading-relaxed space-y-4"></div>
       <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex flex-wrap items-center justify-between gap-3">
-        <span class="text-xs text-slate-500">Alenn Tuition Bureau • +91 99196 66650</span>
-        <button id="readerModalBookBtn" type="button" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold">
-          Book Free Demo for This Topic
+        <span class="text-xs text-slate-500">Alenn Tuition Bureau • Varanasi (+91 99196 66650)</span>
+        <button id="readerModalBookBtn" type="button" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold cursor-pointer">
+          Book Free Demo for This
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Free Demo & WhatsApp Inquiry Modal -->
-  <div id="inquiryModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
+  <!-- Free Demo Inquiry Modal -->
+  <div id="inquiryModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto modal-scroll shadow-2xl">
       <div class="px-6 py-4 bg-indigo-950 text-white flex items-center justify-between">
         <div>
-          <h3 class="font-bold text-lg">Book Free Demo Class</h3>
-          <p class="text-xs text-indigo-200">Direct WhatsApp to Alenn Tuition Bureau (+91 99196 66650)</p>
+          <h3 class="font-extrabold text-lg">Book a Free Home Tuition Demo</h3>
+          <p class="text-xs text-indigo-200">Verified 1-on-1 Tutor in Varanasi • Zero Upfront Fee</p>
         </div>
-        <button id="closeInquiryModalBtn" type="button" class="p-1.5 rounded-lg text-indigo-200 hover:bg-white/10" aria-label="Close">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button id="closeInquiryModalBtn" type="button" class="p-1.5 rounded-lg text-indigo-200 hover:bg-white/10 cursor-pointer" aria-label="Close">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
       <form id="inquiryForm" class="p-6 space-y-4">
-        <div>
-          <label for="inqName" class="block text-xs font-bold text-slate-700 mb-1">Student / Parent Name *</label>
-          <input id="inqName" type="text" required placeholder="e.g., Aarav Sharma" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label for="inqName" class="block text-xs font-bold text-slate-700 mb-1">Parent / Student Name *</label>
+            <input id="inqName" type="text" required placeholder="e.g. Rajesh Singh" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
+          <div>
+            <label for="inqPhone" class="block text-xs font-bold text-slate-700 mb-1">Phone / WhatsApp *</label>
+            <input id="inqPhone" type="tel" required placeholder="10-digit mobile" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
         </div>
         <div class="grid sm:grid-cols-2 gap-3">
           <div>
             <label for="inqArea" class="block text-xs font-bold text-slate-700 mb-1">Varanasi Area / PIN *</label>
-            <input id="inqArea" type="text" required placeholder="e.g., Susuwahi 221011" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+            <input id="inqArea" type="text" required placeholder="e.g. Susuwahi / 221011" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
           </div>
           <div>
             <label for="inqGrade" class="block text-xs font-bold text-slate-700 mb-1">Class / Exam *</label>
             <select id="inqGrade" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600">
-              <option value="Primary (Class 1-5)">Primary (Class 1–5)</option>
-              <option value="Middle School (Class 6-8)">Middle School (Class 6–8)</option>
-              <option value="Class 9-10 Board" selected>Class 9–10 (CBSE/ICSE/UP)</option>
-              <option value="Class 11-12 Board">Class 11–12 (CBSE/ISC/UP)</option>
-              <option value="NEET UG">NEET UG Preparation</option>
-              <option value="IIT-JEE Mains & Advanced">IIT-JEE (Mains &amp; Advanced)</option>
-              <option value="UPSC / UPPSC">UPSC CSE / UPPSC</option>
-              <option value="1D/2D Govt Exam (SSC/Bank/CUET/NDA)">1D / 2D Exam (SSC, Bank, CUET, NDA)</option>
-              <option value="French Language">French Language (School / DELF)</option>
+              <option>Primary (Classes 1–5)</option>
+              <option>Middle School (Classes 6–8)</option>
+              <option>Secondary Boards (Classes 9–10)</option>
+              <option>Senior Secondary (Classes 11–12)</option>
+              <option>NEET UG (Medical)</option>
+              <option>IIT-JEE (Mains &amp; Advanced)</option>
+              <option>UPSC CSE / UPPSC</option>
+              <option>1D / 2D Govt Exams (SSC/Bank/CUET/NDA)</option>
             </select>
           </div>
         </div>
         <div class="grid sm:grid-cols-2 gap-3">
           <div>
-            <label for="inqSubject" class="block text-xs font-bold text-slate-700 mb-1">Subject(s) *</label>
-            <input id="inqSubject" type="text" required placeholder="e.g., Physics, Maths, French" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
+            <label for="inqSubject" class="block text-xs font-bold text-slate-700 mb-1">Subject(s) Needed</label>
+            <input id="inqSubject" type="text" placeholder="e.g. Physics, Maths, French" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600">
           </div>
           <div>
             <label for="inqBoard" class="block text-xs font-bold text-slate-700 mb-1">Board / Medium</label>
             <select id="inqBoard" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600">
-              <option value="CBSE">CBSE</option>
-              <option value="ICSE / ISC">ICSE / ISC</option>
-              <option value="UP Board (English Medium)">UP Board (English Medium)</option>
-              <option value="UP Board (Hindi Medium)">UP Board (Hindi Medium)</option>
-              <option value="Competitive / Other">Competitive / Other</option>
+              <option>CBSE</option>
+              <option>ICSE / ISC</option>
+              <option>UP Board (English Medium)</option>
+              <option>UP Board (Hindi Medium)</option>
+              <option>Competitive / Open</option>
             </select>
           </div>
         </div>
-
-        <div id="inquiryFeedback" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-medium"></div>
-
+        <div id="inquiryFeedback" class="hidden p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 leading-relaxed"></div>
         <div class="flex flex-col sm:flex-row gap-2.5 pt-2">
-          <button type="submit" class="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2">
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            Send on WhatsApp
+          <button id="inquirySubmitBtn" type="submit" class="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2 cursor-pointer">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+            <span>Submit &amp; Open WhatsApp</span>
           </button>
-          <button id="copyInquiryBtn" type="button" class="py-2.5 px-4 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-sm">
+          <button id="copyInquiryBtn" type="button" class="py-2.5 px-4 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-sm cursor-pointer">
             Copy Details
           </button>
         </div>
@@ -757,12 +825,69 @@
     </div>
   </div>
 
+  <!-- Interactive In-Page Parent Portal Modal -->
+  <div id="parentPortalModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto modal-scroll shadow-2xl">
+      <div class="px-6 py-4 bg-emerald-900 text-white flex items-center justify-between">
+        <div>
+          <h3 class="font-extrabold text-lg">Parent Portal — Alenn Tuition Bureau</h3>
+          <p class="text-xs text-emerald-200">Track Demo Status, View Inquiries &amp; Request Support</p>
+        </div>
+        <button id="closeParentPortalBtn" type="button" class="p-1.5 rounded-lg text-emerald-200 hover:bg-white/10 cursor-pointer" aria-label="Close">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-6 space-y-5">
+        <!-- Lookup Form -->
+        <form id="portalLookupForm" class="space-y-3">
+          <label for="portalLookupInput" class="block text-xs font-bold text-slate-700">Enter 10-Digit Mobile Number or Lead ID (e.g. LD-...)</label>
+          <div class="flex gap-2">
+            <input id="portalLookupInput" type="text" required placeholder="e.g. 9876543210 or LD-1732..." class="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+            <button type="submit" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shrink-0 cursor-pointer">
+              Check Status
+            </button>
+          </div>
+        </form>
+
+        <!-- Lookup Result Box -->
+        <div id="portalLookupResult" class="hidden p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 space-y-2"></div>
+
+        <!-- Recent Local Inquiries -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Your Recent Demo Requests (This Device)</h4>
+          <div id="portalRecentList" class="space-y-2 text-xs text-slate-600"></div>
+        </div>
+
+        <!-- Quick Parent Support Actions -->
+        <div class="pt-3 border-t border-slate-200 grid grid-cols-2 gap-2.5">
+          <button id="portalNewDemoBtn" type="button" class="py-2.5 px-3 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-bold cursor-pointer">
+            + Book New Free Demo
+          </button>
+          <button id="portalSupportWaBtn" type="button" class="py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 text-xs font-bold cursor-pointer">
+            Tutor Change / Help (WhatsApp)
+          </button>
+        </div>
+        <div class="text-center pt-1">
+          <a href="https://mytuitiontutor.com/" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-indigo-700 hover:underline">
+            Open Main Website (mytuitiontutor.com) →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
-  <div id="toast" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl text-sm font-medium"></div>
+  <div id="toast" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl text-sm font-medium max-w-sm"></div>
 
   <script>
     // =========================================================================
-    // 1. GROUNDED VARANASI DATA (80+ Localities, 16 Subjects, Boards, Exams, Blogs, FAQs)
+    // 0. LIVE CRM BACKEND CONFIGURATION (Synced with Alenn Master CRM Code.gs)
+    // =========================================================================
+    const CRM_API_URL = "https://script.google.com/macros/s/AKfycbw7WY8EktIWrZ4Hsb0EutM7wx_f4JCFqHIO0dETa3yAoA3oi3Ec6wSxOOXJK6aNnMLA0A/exec";
+    const BUREAU_WHATSAPP = "919919666650";
+
+    // =========================================================================
+    // 1. GROUNDED VARANASI DATA (Areas, Subjects, Boards + Marking Schemes, Exams + Marking Schemes, Blogs, FAQs)
     // =========================================================================
     const I18N = {
       en: {
@@ -773,6 +898,7 @@
         navExams: "Competitive Exams",
         navBlogs: "Blogs",
         navFaq: "FAQ",
+        parentPortal: "Parent Portal",
         mainSite: "Main Site",
         bookDemo: "Free Demo",
         breadcrumbCurrent: "Varanasi All-Area, Subject & Exam Guide",
@@ -788,20 +914,23 @@
         requestDemo: "Book Free Demo",
         callNow: "Call Now",
         areasEyebrow: "Complete Local SEO Directory",
-        areasHeading: "Varanasi Remaining & Complete Areas Directory",
-        areasSub: "Explore dedicated home tuition guides for newly covered outer colonies, ring-road suburbs, and every central Varanasi neighbourhood with PIN codes.",
+        areasHeading: "Find Home Tutors by Varanasi Area",
+        areasSub: "Select your exact locality below to view ONLY your area's tutor details (hiding all others), or filter by simple city zones.",
+        selectAreaLabel: "1. Select Your Exact Area (Shows Only Selected Area)",
+        searchAreaLabel: "2. Or Search by Colony Name / PIN Code",
+        zoneHelperText: "Or pick a Varanasi Zone (click any zone to hide others):",
         subjectsEyebrow: "Subject-Wise Specialist Faculty",
         subjectsHeading: "All Subjects & Verified Tutor Profiles",
         subjectsSub: "Dedicated subject specialists for STEM (Physics, Chemistry, Maths, Biology), Humanities (Psychology, History, Pol. Sci.), Commerce (with G.S. Commerce Study Circle synergy), and Languages including French.",
-        boardsEyebrow: "School Curriculum Mastery",
+        boardsEyebrow: "School Curriculum & Marking Scheme",
         boardsHeading: "Classes 1–12 & All Boards (CBSE, ICSE, ISC, UP Board)",
-        boardsSub: "Structured learning roadmaps tailored to every grade level and school board in Varanasi — including 3rd-language French in Classes 6–8 and board-pattern testing in Classes 9–12.",
-        examsEyebrow: "Entrance & Government Exams",
+        boardsSub: "Click any class level below to view full syllabus focus, board marking scheme, assessment breakdown, and instant demo booking.",
+        examsEyebrow: "Entrance & Government Exams • Marking Scheme Included",
         examsHeading: "NEET UG, IIT-JEE, UPSC & 1D/2D Competitive Exams",
-        examsSub: "Skip crowded coaching batches. Get 1-on-1 personal exam mentorship at home in Varanasi with daily doubt resolution, speed drills, and full mock paper analysis.",
+        examsSub: "Click any exam category below to open its complete marking scheme, negative marking rules, preparation pillars, and 1-on-1 home mentor plan.",
         blogsEyebrow: "In-Depth Local Guides",
         blogsHeading: "Varanasi Home Tuition Blogs & Parent Guides",
-        blogsSub: "Click any article to read the complete guide on choosing tutors in remaining Varanasi localities, board exam strategies, French learning, and competitive exam planning.",
+        blogsSub: "Click any article to read the complete guide on choosing tutors in Varanasi localities, board exam strategies, French learning, and competitive exam planning.",
         faqHeading: "Frequently Asked Questions — Varanasi Home Tuition"
       },
       hi: {
@@ -812,12 +941,13 @@
         navExams: "कॉम्पिटिटिव एग्जाम्स",
         navBlogs: "ब्लॉग्स",
         navFaq: "सवाल-जवाब",
+        parentPortal: "पेरेंट पोर्टल",
         mainSite: "मुख्य वेबसाइट",
         bookDemo: "फ्री डेमो",
         breadcrumbCurrent: "वाराणसी सभी इलाके, विषय और परीक्षा गाइड",
         heroBadge: "संपूर्ण वाराणसी कवरेज • AI और Siri सर्च ऑप्टिमाइज़्ड",
         heroTitle: "वाराणसी के हर इलाके में वेरिफ़ाइड होम ट्यूटर — सभी विषय, बोर्ड्स और कॉम्पिटिटिव एग्जाम्स",
-        heroSubtitle: "सुसुवाही, रामनगर, सारनाथ, हरहुआ, रोहनिया और चिरईगांव जैसे बचे हुए बाहरी इलाकों से लेकर मुख्य वाराणसी तक — Alenn Tuition Bureau आपको कक्षा 1–12 (CBSE, ICSE, ISC, UP Board), फिजिक्स, केमिस्ट्री, मैथ, बायोलॉजी, साइकोलॉजी, हिस्ट्री, फ्रेंच, NEET UG, IIT-JEE, UPSC और 1D/2D परीक्षाओं के लिए भरोसेमंद 1-on-1 टीचर्स उपलब्ध कराता है।",
+        heroSubtitle: "सुसुवाही, रामनगर, सारनाथ, हरहुआ, रोहनिया और चिरईगांव जैसे बाहरी इलाकों से लेकर मुख्य वाराणसी तक — Alenn Tuition Bureau आपको कक्षा 1–12 (CBSE, ICSE, ISC, UP Board), फिजिक्स, केमिस्ट्री, मैथ, बायोलॉजी, साइकोलॉजी, हिस्ट्री, फ्रेंच, NEET UG, IIT-JEE, UPSC और 1D/2D परीक्षाओं के लिए भरोसेमंद 1-on-1 टीचर्स उपलब्ध कराता है।",
         findTutor: "ट्यूटर खोजें",
         statAreas: "वाराणसी इलाके व पिन कोड",
         statSubjects: "मुख्य + फ्रेंच व आर्ट्स",
@@ -827,22 +957,36 @@
         requestDemo: "फ्री डेमो बुक करें",
         callNow: "कॉल करें",
         areasEyebrow: "संपूर्ण लोकल SEO डायरेक्टरी",
-        areasHeading: "वाराणसी के बचे हुए एवं सभी प्रमुख इलाके",
-        areasSub: "वाराणसी की नई/बची हुई कॉलोनियों, रिंग रोड क्षेत्रों और मुख्य मोहल्लों के लिए पिन कोड सहित होम ट्यूशन गाइड।",
+        areasHeading: "वाराणसी के अपने इलाके में होम ट्यूटर चुनें",
+        areasSub: "नीचे अपना सटीक इलाका चुनें — चुनते ही बाकी इलाके हट जाएंगे और केवल आपके इलाके की पूरी जानकारी दिखेगी।",
+        selectAreaLabel: "1. अपना सटीक इलाका चुनें (केवल वही इलाका दिखेगा)",
+        searchAreaLabel: "2. या कॉलोनी का नाम / पिन कोड टाइप करें",
+        zoneHelperText: "या वाराणसी का ज़ोन चुनें (क्लिक करते ही केवल उस ज़ोन के इलाके दिखेंगे):",
         subjectsEyebrow: "विषय-विशेषज्ञ टीचर प्रोफाइल",
         subjectsHeading: "सभी विषय और वेरिफ़ाइड सब्जेक्ट टीचर्स",
         subjectsSub: "फिजिक्स, केमिस्ट्री, मैथ, बायोलॉजी, साइकोलॉजी, हिस्ट्री, कॉमर्स (G.S. Commerce Study Circle सहयोग सहित) और फ्रेंच भाषा के अनुभवी टीचर्स।",
-        boardsEyebrow: "स्कूल करिकुलम विशेषज्ञता",
+        boardsEyebrow: "स्कूल करिकुलम व मार्किंग स्कीम",
         boardsHeading: "कक्षा 1–12 और सभी बोर्ड्स (CBSE, ICSE, ISC, UP Board)",
-        boardsSub: "कक्षा 1–5 प्राइमरी, 6–8 मिडिल स्कूल (फ्रेंच सहित) और 9–12 बोर्ड परीक्षाओं के लिए सटीक पाठ्यक्रम तैयारी।",
-        examsEyebrow: "प्रवेश व सरकारी परीक्षाएं",
+        boardsSub: "किसी भी कक्षा टैब पर क्लिक करें और सिलेबस, बोर्ड मार्किंग स्कीम और फ्री डेमो की जानकारी देखें।",
+        examsEyebrow: "प्रवेश व सरकारी परीक्षाएं • मार्किंग स्कीम सहित",
         examsHeading: "NEET UG, IIT-JEE, UPSC और 1D/2D कॉम्पिटिटिव एग्जाम्स",
-        examsSub: "भीड़-भाड़ वाले बैच से बचें — वाराणसी में घर पर 1-on-1 पर्सनल मेंटर से डेली डाउट क्लियरिंग और मॉक टेस्ट तैयारी करें।",
+        examsSub: "किसी भी परीक्षा पर क्लिक करें और उसकी मार्किंग स्कीम, नेगेटिव मार्किंग नियम और 1-on-1 स्टडी प्लान देखें।",
         blogsEyebrow: "विस्तृत लोकल ब्लॉग्स",
         blogsHeading: "वाराणसी होम ट्यूशन ब्लॉग्स और पेरेंट गाइड",
-        blogsSub: "वाराणसी के बाहरी इलाकों में ट्यूटर चयन, बोर्ड एग्जाम रणनीति, फ्रेंच और कॉम्पिटिटिव एग्जाम गाइड विस्तार से पढ़ें।",
+        blogsSub: "वाराणसी के इलाकों में ट्यूटर चयन, बोर्ड एग्जाम रणनीति, फ्रेंच और कॉम्पिटिटिव एग्जाम गाइड विस्तार से पढ़ें।",
         faqHeading: "अक्सर पूछे जाने वाले सवाल — वाराणसी होम ट्यूशन"
       }
+    };
+
+    const ZONE_LABELS = {
+      all: "All Varanasi Areas",
+      remaining: "Outer & New Areas",
+      south: "BHU & South Belt",
+      central: "Sigra & Central Varanasi",
+      north: "Cantt & North Belt",
+      east: "Sarnath & East Belt",
+      west: "BLW & West Belt",
+      ramnagar: "Ramnagar & Ring Road"
     };
 
     const VARANASI_AREAS = [
@@ -933,48 +1077,72 @@
         title: "Primary School Home Tuition (Classes 1 to 5)",
         subtitle: "Building rock-solid reading, writing, numeracy, and daily study habits at home.",
         boards: "CBSE • ICSE • UP Board (English & Hindi Medium)",
+        markingScheme: [
+          { label: "Periodic Assessments", value: "20% – 30% (Unit Tests & Oral)" },
+          { label: "Term / Half-Yearly & Annual", value: "60% – 70% (Written Concepts)" },
+          { label: "Notebook & Activity", value: "10% – 20% (Neatness & Phonics)" }
+        ],
         points: [
           "Dedicated female & male home tutors for stress-free daily homework and school test preparation.",
           "Phonics, English grammar, Hindi reading/writing, and mental mathematics drills.",
           "EVS & General Science activity-based concept clarity with neat notebook presentation.",
           "Early Olympiad (SOF IMO/NSO) and Sainik School / CHS foundation support."
         ],
+        ctaGrade: "Primary (Classes 1–5)",
         ctaSubject: "All Subjects (Class 1-5)"
       },
       middle: {
         title: "Middle School Curriculum (Classes 6 to 8 + French)",
         subtitle: "Bridging foundational concepts with high-school rigor across Maths, Science, Social Studies & 3rd Languages.",
         boards: "CBSE (NCERT) • ICSE (Separate PCB) • UP Board",
+        markingScheme: [
+          { label: "Term Written Exam", value: "80 Marks (Objective + Descriptive)" },
+          { label: "Internal / Practical / Oral", value: "20 Marks (Lab, Map & 3rd Lang)" },
+          { label: "Key Scoring Edge", value: "Step-Marking in Maths & French Grammar" }
+        ],
         points: [
           "Specialized concept building in Algebra, Geometry, Mensuration, and separate Physics/Chemistry/Biology.",
           "Dedicated 3rd-language French (Apprenons le Français / CBSE-ICSE) and Sanskrit home tutors.",
           "History, Geography, Civics map work and structured long-answer writing practice.",
           "Foundation track for CHS Entrance, NTSE, Olympiads, and smooth transition to Class 9 Boards."
         ],
+        ctaGrade: "Middle School (Classes 6–8)",
         ctaSubject: "Class 6-8 Maths, Science & French"
       },
       boards910: {
         title: "Secondary Board Preparation (Classes 9 & 10)",
         subtitle: "Targeting 95%+ Board scores with weekly chapter tests, PYQs, and competency-based sample papers.",
         boards: "CBSE • ICSE • UP Board",
+        markingScheme: [
+          { label: "CBSE / ICSE Split", value: "80 Marks Theory + 20 Internal" },
+          { label: "UP Board Class 10", value: "70 Theory (20 OMR + 50 Written) + 30 Int." },
+          { label: "Competency Weightage", value: "50% Case-Study / Application Qs (CBSE)" }
+        ],
         points: [
           "Subject-wise specialists for Maths (Standard/Basic), Physics, Chemistry, Biology, Social Science (History/Geo/Civics/Eco) & English.",
           "ICSE Computer Applications (Java) and CBSE Information Technology / French board exam drills.",
-          "Strict time-bound full-syllabus mock papers with board marking-scheme feedback.",
+          "Strict time-bound full-syllabus mock papers with official board step-marking feedback.",
           "Pre-foundation alignment for Class 11–12 NEET, IIT-JEE, or Commerce/Humanities streams."
         ],
+        ctaGrade: "Secondary Boards (Classes 9–10)",
         ctaSubject: "Class 9-10 Board Subjects"
       },
       boards1112: {
         title: "Senior Secondary Board Excellence (Classes 11 & 12)",
         subtitle: "Stream-specialized faculty for Science (PCM/PCB), Commerce, and Humanities across Varanasi.",
         boards: "CBSE • ISC • UP Board",
+        markingScheme: [
+          { label: "Science & Psychology", value: "70 Marks Theory + 30 Practical/Viva" },
+          { label: "Maths, Commerce & Arts", value: "80 Marks Theory + 20 Project/Internal" },
+          { label: "Board + CUET Synergy", value: "NCERT Line-by-Line + Step-Marking Rubrics" }
+        ],
         points: [
           "Science Stream: Physics, Chemistry, Mathematics, Biology, Computer Science (Python/SQL) with practical & viva prep.",
           "Humanities Stream: Psychology (with case studies & practicals), History, Political Science, Geography, Economics & French.",
           "Commerce Stream: Accountancy, Business Studies & Economics backed by G.S. Commerce Study Circle expertise.",
           "Integrated CUET UG domain subject preparation alongside Class 12 Board revision."
         ],
+        ctaGrade: "Senior Secondary (Classes 11–12)",
         ctaSubject: "Class 11-12 Stream Specialist"
       }
     };
@@ -983,45 +1151,73 @@
       neet: {
         title: "NEET UG (Medical) 1-on-1 Home Coaching in Varanasi",
         target: "MBBS / BDS / AYUSH • 720-Mark Strategy",
+        markingScheme: [
+          { label: "Total Marks", value: "720 Marks" },
+          { label: "Questions & Time", value: "180 MCQs • 3 Hours (OMR)" },
+          { label: "Marking Rule", value: "+4 Correct / -1 Incorrect" },
+          { label: "Subject Split", value: "Bio 360 • Chem 180 • Phy 180" }
+        ],
         pillars: [
           { label: "Biology (360 Marks)", desc: "Line-by-line NCERT Botany & Zoology mastery, assertion-reason & statement-based MCQ drills." },
           { label: "Chemistry (180 Marks)", desc: "Named Organic reactions, Inorganic NCERT trends, and rapid Physical Chemistry numericals." },
           { label: "Physics (180 Marks)", desc: "Formula sheets, high-yield Mechanics/Optics/Modern Physics, and error-log tracking." }
         ],
         schedule: "Daily 1.5–2 hr personal mentoring + weekly OMR mock test & rank-booster doubt sessions.",
+        ctaGrade: "NEET UG (Medical)",
         ctaSubject: "NEET UG (Physics, Chemistry, Biology)"
       },
       jee: {
         title: "IIT-JEE (Mains & Advanced) Personal Mentorship",
         target: "IITs / NITs / IIITs • Concept-to-Rank Track",
+        markingScheme: [
+          { label: "JEE Main Marks", value: "300 Marks (PCM 100 each)" },
+          { label: "Questions & Time", value: "75 Qs (MCQ + Numerical) • 3 Hrs" },
+          { label: "Marking Rule", value: "+4 Correct / -1 Incorrect" },
+          { label: "JEE Advanced", value: "2 Papers (3 Hrs each) • Partial Marking" }
+        ],
         pillars: [
           { label: "Mathematics", desc: "Calculus, Coordinate Geometry, Matrices & Vectors with multi-concept Advanced problem sets." },
           { label: "Physics", desc: "Rotational Mechanics, Electromagnetism & Thermodynamics using HC Verma, DC Pandey & PYQs." },
           { label: "Chemistry", desc: "Reaction mechanisms, Coordination Compounds, Electrochemistry & JEE Main NCERT accuracy." }
         ],
         schedule: "Custom study planner synchronized with Class 11–12 Boards or Dropper year targets.",
+        ctaGrade: "IIT-JEE (Mains & Advanced)",
         ctaSubject: "IIT-JEE Mains & Advanced (PCM)"
       },
       upsc: {
         title: "UPSC CSE (IAS/IPS) & UPPSC Personal Mentorship",
         target: "Prelims + Mains + Optional Subject Guidance",
+        markingScheme: [
+          { label: "Prelims (Objective)", value: "GS 200 + CSAT 200 (33% Qualifying)" },
+          { label: "Negative Marking", value: "-1/3 Mark per Wrong Answer" },
+          { label: "Mains (Written)", value: "1750 Marks (9 Papers, 7 Merit)" },
+          { label: "Interview / PT", value: "275 Marks (Total Merit: 2025)" }
+        ],
         pillars: [
           { label: "GS Papers I–IV & NCERT Base", desc: "Structured foundation from Class 6–12 NCERTs, Laxmikanth, Spectrum, and daily current affairs integration." },
           { label: "Optional Subjects", desc: "1-on-1 mentorship for History, Psychology, Geography, Political Science (PSIR) & Sociology optionals." },
           { label: "CSAT & Answer Writing", desc: "Daily 2-question Mains answer evaluation + CSAT Quantitative & Comprehension drills." }
         ],
         schedule: "Ideal for BHU/Varanasi college students and working aspirants needing disciplined home mentoring.",
+        ctaGrade: "UPSC CSE / UPPSC",
         ctaSubject: "UPSC / UPPSC GS & Optional"
       },
       oneday: {
         title: "1D & 2D Competitive Exams (One-Day & Two-Tier Govt Exams)",
         target: "SSC CGL/CHSL • Banking (IBPS/SBI) • Railway RRB • CUET • NDA/CDS • UP Police/SI",
+        markingScheme: [
+          { label: "SSC CGL / CHSL", value: "Tier-1 (200M, -0.50) • Tier-2 (+3/-1)" },
+          { label: "CUET UG", value: "+5 Correct / -1 Wrong (CBT)" },
+          { label: "Banking / RRB", value: "Prelims + Mains • -0.25 to -1/3 Neg." },
+          { label: "NDA / CDS", value: "900M Written + 900M SSB (-1/3 Neg.)" }
+        ],
         pillars: [
           { label: "Quantitative Aptitude & Maths", desc: "Speed arithmetic, Advance Maths (Geometry/Trig/Algebra) & short-trick calculation drills for Tier 1 & Tier 2." },
           { label: "Reasoning & English", desc: "Puzzles, Syllogisms, Seating Arrangement, Error Spotting, Cloze Test & Reading Comprehension." },
           { label: "GS, Static GK & Current Affairs", desc: "Polity, History, Geography, Science & UP Special GK tailored for 1D/2D exam patterns." }
         ],
         schedule: "Focused speed-and-accuracy home tuition with previous year paper (PYP) sprints.",
+        ctaGrade: "1D / 2D Govt Exams (SSC/Bank/CUET/NDA)",
         ctaSubject: "1D/2D Govt Exam (SSC/Bank/CUET/NDA)"
       }
     };
@@ -1106,288 +1302,4 @@
     const FAQS = [
       {
         q: "Does Alenn Tuition Bureau provide home tutors in outer and remaining areas of Varanasi like Susuwahi, Ramnagar, Sarnath, Harahua, Rohaniya, and Chiraigaon?",
-        a: "Yes. Alenn Tuition Bureau covers over 80 localities across all zones of Varanasi, including outer and newly expanded residential areas such as Susuwahi, Chitaipur, Karaundi, Ashokpuram, Ramnagar, Sarnath, Ashapur, Paharia, Shivpur, Harahua, Babatpur, Rohaniya, Lohta, Awaleshpur, Chiraigaon, and Chaubepur."
-      },
-      {
-        q: "Which school boards and classes are covered by Alenn Tuition Bureau in Varanasi?",
-        a: "We provide verified home tutors for Primary (Classes 1 to 5), Middle School (Classes 6 to 8), Secondary Boards (Classes 9 and 10), and Senior Secondary (Classes 11 and 12) across CBSE, ICSE, ISC, and UP Board (both English and Hindi mediums)."
-      },
-      {
-        q: "Can I get specialized subject tutors for Physics, Chemistry, Maths, Biology, Psychology, History, and French in Varanasi?",
-        a: "Yes. We match students with subject-specific specialist tutors for Physics, Chemistry, Mathematics, Biology, Computer Science, Psychology, History, Political Science, Geography, Accountancy, Economics, Business Studies, English, Hindi, Sanskrit, and French (CBSE/ICSE curriculum and DELF A1–B2)."
-      },
-      {
-        q: "Do you offer 1-on-1 home coaching for NEET UG, IIT-JEE, UPSC, and 1D/2D competitive exams in Varanasi?",
-        a: "Yes. Alenn Tuition Bureau arranges dedicated personal mentors for NEET UG, IIT-JEE (Mains and Advanced), UPSC CSE/IAS, UPPSC, and 1D/2D government competitive exams including SSC CGL/CHSL (Tier 1 and Tier 2), IBPS/SBI Banking, Railway RRB, CUET, NDA/CDS, and UP Police/SI."
-      },
-      {
-        q: "How do I book a free demo class with Alenn Tuition Bureau in Varanasi?",
-        a: "You can call or WhatsApp Alenn Tuition Bureau directly at +91 99196 66650 or use the instant Free Demo form on this page. We verify tutor IDs and qualifications before arranging a free trial class at your home in Varanasi."
-      },
-      {
-        q: "Are female home tutors available across Varanasi localities?",
-        a: "Yes, verified male and female home tutors are available across central and residential areas of Varanasi for Primary, Middle School, Board classes, French, Humanities, and Science subjects."
-      }
-    ];
-
-    // =========================================================================
-    // 2. APPLICATION STATE
-    // =========================================================================
-    const state = {
-      lang: "en",
-      areaZone: "all",
-      areaQuery: "",
-      subjectCategory: "all",
-      activeGradeTab: "primary",
-      activeExamTab: "neet",
-      openFaqIndex: 0,
-      modalContext: { area: "", subject: "" }
-    };
-
-    // =========================================================================
-    // 3. RENDER FUNCTIONS
-    // =========================================================================
-    function showToast(msg) {
-      const el = document.getElementById("toast");
-      el.textContent = msg;
-      el.classList.remove("hidden");
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => el.classList.add("hidden"), 3000);
-    }
-
-    function applyLanguage() {
-      const dict = I18N[state.lang];
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) el.textContent = dict[key];
-      });
-      const btn = document.getElementById("langToggleBtn");
-      btn.textContent = state.lang === "en" ? "हिंदी में देखें" : "Switch to English";
-      document.documentElement.lang = state.lang === "en" ? "en" : "hi";
-    }
-
-    function renderAreas() {
-      const grid = document.getElementById("areasGrid");
-      const empty = document.getElementById("areasEmptyState");
-      document.getElementById("countAll").textContent = VARANASI_AREAS.length;
-      document.getElementById("countRemaining").textContent = VARANASI_AREAS.filter((a) => a.isRemaining).length;
-
-      const q = state.areaQuery.trim().toLowerCase();
-      const filtered = VARANASI_AREAS.filter((area) => {
-        const zoneMatch =
-          state.areaZone === "all" ||
-          (state.areaZone === "remaining" ? area.isRemaining : area.zone === state.areaZone);
-        const textMatch =
-          !q ||
-          area.name.toLowerCase().includes(q) ||
-          area.pin.includes(q) ||
-          area.landmarks.toLowerCase().includes(q) ||
-          area.focus.toLowerCase().includes(q);
-        return zoneMatch && textMatch;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = "";
-        empty.classList.remove("hidden");
-        return;
-      }
-      empty.classList.add("hidden");
-
-      grid.innerHTML = filtered.map((area) => `
-        <article class="bg-white rounded-2xl border ${area.isRemaining ? "border-amber-200" : "border-slate-200"} p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div>
-            <div class="flex items-start justify-between gap-2 mb-2">
-              <h3 class="font-bold text-slate-900 text-base leading-snug">${area.name}</h3>
-              <span class="shrink-0 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-bold">PIN ${area.pin}</span>
-            </div>
-            ${area.isRemaining ? '<span class="inline-block px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold mb-2">★ Newly Added / Outer Coverage</span>' : '<span class="inline-block px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-800 text-[10px] font-bold mb-2">Core Varanasi Zone</span>'}
-            <p class="text-xs text-slate-500 mb-2"><strong class="text-slate-700">Nearby:</strong> ${area.landmarks}</p>
-            <p class="text-xs text-slate-700 leading-relaxed mb-4">${area.focus}</p>
-          </div>
-          <div class="flex items-center gap-2 pt-3 border-t border-slate-100">
-            <button type="button" data-open-area="${area.id}" class="flex-1 py-1.5 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors">
-              Area Guide
-            </button>
-            <button type="button" data-book-area="${area.name} (${area.pin})" class="flex-1 py-1.5 px-2.5 rounded-lg bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-semibold transition-colors">
-              Book Tutor
-            </button>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function renderSubjects() {
-      const grid = document.getElementById("subjectsGrid");
-      const filtered = SUBJECTS.filter(
-        (s) => state.subjectCategory === "all" || s.cat === state.subjectCategory
-      );
-
-      grid.innerHTML = filtered.map((subj) => `
-        <article class="bg-slate-50 rounded-2xl border border-slate-200 p-5 hover:border-indigo-300 hover:bg-white transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between gap-2 mb-2">
-              <h3 class="font-extrabold text-slate-900 text-lg">${subj.name}</h3>
-              <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-[11px] font-bold">${subj.badge}</span>
-            </div>
-            <div class="text-xs font-semibold text-emerald-700 mb-2">${subj.grades}</div>
-            <div class="text-xs text-slate-600 bg-white border border-slate-200 rounded-lg px-3 py-2 mb-3">
-              <span class="font-bold text-slate-800">Tutor Profile:</span> ${subj.tutorProfile}
-            </div>
-            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">${subj.highlights}</p>
-          </div>
-          <button type="button" data-book-subject="${subj.name}" class="w-full py-2 px-3 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white text-xs sm:text-sm font-semibold transition-colors">
-            Request ${subj.name} Tutor
-          </button>
-        </article>
-      `).join("");
-    }
-
-    function renderGradePanel() {
-      const data = GRADE_DATA[state.activeGradeTab];
-      const panel = document.getElementById("gradeDetailPanel");
-      panel.innerHTML = `
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="space-y-4 max-w-3xl">
-            <span class="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-900 text-xs font-bold">${data.boards}</span>
-            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">${data.title}</h3>
-            <p class="text-sm sm:text-base text-slate-600">${data.subtitle}</p>
-            <ul class="space-y-2.5 pt-1">
-              ${data.points.map((pt) => `
-                <li class="flex items-start gap-2.5 text-sm text-slate-700">
-                  <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
-                  <span>${pt}</span>
-                </li>
-              `).join("")}
-            </ul>
-          </div>
-          <div class="lg:w-64 shrink-0 bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center">
-            <div class="text-xs font-bold text-slate-500 uppercase mb-1">Free Home Trial</div>
-            <div class="text-lg font-extrabold text-slate-900 mb-3">1-on-1 Verified Tutor</div>
-            <button type="button" data-book-subject="${data.ctaSubject}" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold transition-colors">
-              Book Demo Class
-            </button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderExamPanel() {
-      const data = EXAM_DATA[state.activeExamTab];
-      const panel = document.getElementById("examDetailPanel");
-      panel.innerHTML = `
-        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-6">
-          <div>
-            <span class="inline-block px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold mb-2">${data.target}</span>
-            <h3 class="text-xl sm:text-2xl font-extrabold text-white">${data.title}</h3>
-          </div>
-          <button type="button" data-book-subject="${data.ctaSubject}" class="shrink-0 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm transition-colors">
-            Request Exam Mentor
-          </button>
-        </div>
-        <div class="grid md:grid-cols-3 gap-4 mb-5">
-          ${data.pillars.map((p) => `
-            <div class="bg-slate-900/80 border border-slate-700 rounded-xl p-4">
-              <h4 class="font-bold text-amber-300 text-sm mb-1.5">${p.label}</h4>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${p.desc}</p>
-            </div>
-          `).join("")}
-        </div>
-        <div class="text-xs sm:text-sm text-emerald-300 bg-emerald-950/50 border border-emerald-800/60 rounded-xl px-4 py-3">
-          <strong>Study Plan:</strong> ${data.schedule}
-        </div>
-      `;
-    }
-
-    function renderBlogs() {
-      const grid = document.getElementById("blogsGrid");
-      grid.innerHTML = BLOG_POSTS.map((post) => `
-        <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between text-xs mb-3">
-              <span class="px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-800 font-bold">${post.tag}</span>
-              <span class="text-slate-500">${post.readTime}</span>
-            </div>
-            <h3 class="font-extrabold text-slate-900 text-lg leading-snug mb-2.5">${post.title}</h3>
-            <p class="text-sm text-slate-600 leading-relaxed mb-5">${post.excerpt}</p>
-          </div>
-          <button type="button" data-open-blog="${post.id}" class="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-800 hover:text-indigo-600">
-            Read Full Guide <span aria-hidden="true">→</span>
-          </button>
-        </article>
-      `).join("");
-    }
-
-    function renderFaqs() {
-      const container = document.getElementById("faqList");
-      container.innerHTML = FAQS.map((item, idx) => {
-        const isOpen = state.openFaqIndex === idx;
-        return `
-          <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50">
-            <button type="button" data-faq-index="${idx}" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 bg-white hover:bg-slate-50 transition-colors">
-              <span class="font-bold text-slate-900 text-sm sm:text-base">${item.q}</span>
-              <span class="text-indigo-700 font-extrabold text-lg shrink-0">${isOpen ? "−" : "+"}</span>
-            </button>
-            <div class="${isOpen ? "block" : "hidden"} px-5 py-4 text-sm text-slate-700 leading-relaxed border-t border-slate-100 bg-slate-50">
-              ${item.a}
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    // =========================================================================
-    // 4. MODALS (Reader & Inquiry)
-    // =========================================================================
-    function openAreaModal(areaId) {
-      const area = VARANASI_AREAS.find((a) => a.id === areaId);
-      if (!area) return;
-      state.modalContext = { area: `${area.name} (${area.pin})`, subject: "All Subjects / Boards" };
-      document.getElementById("readerModalBadge").textContent = `Varanasi PIN ${area.pin} • Area Tuition Guide`;
-      document.getElementById("readerModalTitle").textContent = `Home Tuition in ${area.name}, Varanasi`;
-      document.getElementById("readerModalBody").innerHTML = `
-        <p>Looking for a verified 1-on-1 home tutor in <strong>${area.name} (PIN ${area.pin})</strong>, Varanasi? Alenn Tuition Bureau provides background-checked male and female teachers near <strong>${area.landmarks}</strong>.</p>
-        <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
-          <div class="font-bold text-indigo-950 mb-1">Most Requested Programs in ${area.name}:</div>
-          <p class="text-indigo-900">${area.focus}</p>
-        </div>
-        <p><strong>Boards Covered:</strong> CBSE, ICSE, ISC, and UP Board (English &amp; Hindi Medium) for Primary (1–5), Middle School (6–8 including French), Secondary (9–10), and Senior Secondary (11–12).</p>
-        <p><strong>Competitive Exams:</strong> Personal home mentorship available in ${area.name} for NEET UG, IIT-JEE (Mains &amp; Advanced), UPSC/UPPSC, and 1D/2D exams (SSC CGL/CHSL, Banking, Railway, CUET, NDA).</p>
-        <p><strong>How to Start:</strong> Book a free demo class at home via WhatsApp or call <strong>+91 99196 66650</strong>. Pay only after you are fully satisfied with the trial class.</p>
-      `;
-      document.getElementById("readerModal").classList.remove("hidden");
-    }
-
-    function openBlogModal(blogId) {
-      const post = BLOG_POSTS.find((b) => b.id === blogId);
-      if (!post) return;
-      state.modalContext = { area: "Varanasi", subject: post.tag };
-      document.getElementById("readerModalBadge").textContent = `${post.tag} • ${post.readTime}`;
-      document.getElementById("readerModalTitle").textContent = post.title;
-      document.getElementById("readerModalBody").innerHTML = post.body
-        .map((para) => `<p>${para}</p>`)
-        .join("");
-      document.getElementById("readerModal").classList.remove("hidden");
-    }
-
-    function closeReaderModal() {
-      document.getElementById("readerModal").classList.add("hidden");
-    }
-
-    function openInquiryModal(presetArea, presetSubject) {
-      if (presetArea) document.getElementById("inqArea").value = presetArea;
-      if (presetSubject) document.getElementById("inqSubject").value = presetSubject;
-      document.getElementById("inquiryFeedback").classList.add("hidden");
-      document.getElementById("inquiryModal").classList.remove("hidden");
-    }
-
-    function closeInquiryModal() {
-      document.getElementById("inquiryModal").classList.add("hidden");
-    }
-
-    function buildInquiryMessage() {
-      const name = document.getElementById("inqName").value.trim() || "Parent/Student";
-      const area = document.getElementById("inqArea").value.trim() || "Varanasi";
-      const grade = document.getElementById("inqGrade").value;
-      const subject = document.getElementById("inqSubject").value.trim() || "All Subjects";
-      const board = document.getElementById("inqBoard").value;
-      return `Hello Alenn Tuition Bureau! I want to book a Free Demo Home Tuition class in Varanasi.\nName: ${name}\nArea/PIN: ${area}\nClass/Exam: ${grade}\nBoard: ${board}\nSubje
+        a: "Yes. Alenn Tuition Bureau covers over 80 localities across all zones of Varanasi, including outer and newly expanded residential areas such as Susuwahi, Chit
